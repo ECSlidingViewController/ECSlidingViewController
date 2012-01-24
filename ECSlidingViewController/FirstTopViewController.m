@@ -14,6 +14,8 @@
 {
   [super viewWillAppear:animated];
   [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+  self.slidingViewController.underRightViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
 }
 
 - (IBAction)revealMenu:(id)sender

@@ -10,4 +10,16 @@
 
 @implementation SecondTopViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+  self.slidingViewController.underRightViewController = nil;
+}
+
+- (IBAction)revealMenu:(id)sender
+{
+  [self.slidingViewController anchorToRight];
+}
+
 @end

@@ -18,6 +18,7 @@
 - (NSUInteger)autoResizeToFillScreen;
 - (UIView *)topView;
 - (UIView *)underLeftView;
+- (UIView *)underRightView;
 - (void)updateTopViewLeftEdgePosition:(CGFloat)position;
 - (void)addTopViewSnapshot;
 - (void)removeTopViewSnapshot;
@@ -25,6 +26,10 @@
 - (CGFloat)screenWidthForOrientation:(UIInterfaceOrientation)orientation;
 - (BOOL)underLeftShowing;
 - (BOOL)underRightShowing;
+
+- (void)underLeftWillAppear;
+- (void)underRightWillAppear;
+- (void)topDidReset;
 
 @end
 
@@ -43,8 +48,9 @@
 @end
 
 @implementation ECSlidingViewController
-@synthesize underLeftViewController = _underLeftViewController;
-@synthesize topViewController = _topViewController;
+@synthesize underLeftViewController  = _underLeftViewController;
+@synthesize underRightViewController = _underRightViewController;
+@synthesize topViewController        = _topViewController;
 @synthesize anchorRightRevealAmount;
 @synthesize anchorLeftRevealAmount;
 @synthesize topViewSnapshot;
@@ -55,18 +61,54 @@
 
 - (void)setTopViewController:(UIViewController *)theTopViewController
 {
+  [self removeTopViewSnapshot];
+  [_topViewController.view removeFromSuperview];
+  [_topViewController removeFromParentViewController];
+  
   _topViewController = theTopViewController;
   [_topViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
   [_topViewController.view setFrame:self.view.bounds];
+  
+  [self addChildViewController:self.topViewController];
+  [self.topViewController didMoveToParentViewController:self];
+  
   [self.view addSubview:_topViewController.view];
 }
 
 - (void)setUnderLeftViewController:(UIViewController *)theUnderLeftViewController
 {
+  [_underLeftViewController.view removeFromSuperview];
+  [_underLeftViewController removeFromParentViewController];
+  
   _underLeftViewController = theUnderLeftViewController;
-  [_underLeftViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
-  [_underLeftViewController.view setFrame:self.view.bounds];
-  [self.view insertSubview:_underLeftViewController.view atIndex:0];
+  
+  if (_underLeftViewController) {
+    [_underLeftViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
+    [_underLeftViewController.view setFrame:self.view.bounds];
+    
+    [self addChildViewController:self.underLeftViewController];
+    [self.underLeftViewController didMoveToParentViewController:self];
+    
+    [self.view insertSubview:_underLeftViewController.view atIndex:0];
+  }
+}
+
+- (void)setUnderRightViewController:(UIViewController *)theUnderRightViewController
+{
+  [_underRightViewController.view removeFromSuperview];
+  [_underRightViewController removeFromParentViewController];
+  
+  _underRightViewController = theUnderRightViewController;
+  
+  if (_underRightViewController) {
+    [_underRightViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
+    [_underRightViewController.view setFrame:self.view.bounds];
+    
+    [self addChildViewController:self.underRightViewController];
+    [self.underRightViewController didMoveToParentViewController:self];
+    
+    [self.view insertSubview:_underRightViewController.view atIndex:0];
+  }
 }
 
 - (void)viewDidLoad
@@ -78,12 +120,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
-  [self addChildViewController:self.underLeftViewController];
-  [self.underLeftViewController didMoveToParentViewController:self];
-  
-  [self addChildViewController:self.topViewController];
-  [self.topViewController didMoveToParentViewController:self];
 }
 
 - (void)updateTopViewLeftEdgePositionWithRecognizer:(UIPanGestureRecognizer *)recognizer
@@ -95,10 +131,17 @@
     self.initialTouchPositionX = currentTouchPositionX;
     self.initialLeftEdgePosition = self.topView.frame.origin.x;
   } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-    [self updateTopViewLeftEdgePosition:self.initialLeftEdgePosition + currentTouchPositionX - self.initialTouchPositionX];
+    CGFloat newLeftEdge = self.initialLeftEdgePosition + currentTouchPositionX - self.initialTouchPositionX;
+    
+    if ((!self.underLeftViewController && newLeftEdge > 0) || (!self.underRightViewController && newLeftEdge < 0)) {
+      newLeftEdge = 0;
+    }
+    
+    [self updateTopViewLeftEdgePosition:newLeftEdge];
   } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
+    
     if ([self underLeftShowing] && currentVelocityX > 100) {
       [self anchorToRight];
     } else if ([self underRightShowing] && currentVelocityX < 100) {
@@ -111,8 +154,6 @@
 
 - (void)anchorToRight
 {
-  [self addTopViewSnapshot];
-  [self.topView addGestureRecognizer:self.resetTapGesture];
   [UIView animateWithDuration:0.25f animations:^{
     [self updateTopViewLeftEdgePosition:self.anchorRightRevealAmount];
   }];
@@ -120,8 +161,6 @@
 
 - (void)anchorToLeft
 {
-  [self addTopViewSnapshot];
-  [self.topView addGestureRecognizer:self.resetTapGesture];
   [UIView animateWithDuration:0.25f animations:^{
     [self updateTopViewLeftEdgePosition:-self.anchorLeftRevealAmount];
   }];
@@ -131,9 +170,19 @@
 {
   [UIView animateWithDuration:0.25f animations:^{
     [self updateTopViewLeftEdgePosition:0];
+  }];
+}
+
+- (void)replaceTopViewController:(UIViewController *)newTopViewController
+{
+  [UIView animateWithDuration:0.125 animations:^{
+    [self updateTopViewLeftEdgePosition:self.screenWidth];
   } completion:^(BOOL finished) {
-    [self.topView removeGestureRecognizer:self.resetTapGesture];
-    [self removeTopViewSnapshot];
+    self.topViewController = newTopViewController;
+    [self updateTopViewLeftEdgePosition:self.screenWidth];
+    [UIView animateWithDuration:0.125 animations:^{
+      [self updateTopViewLeftEdgePosition:0];
+    }];
   }];
 }
 
@@ -157,11 +206,27 @@
   return self.underLeftViewController.view;
 }
 
+- (UIView *)underRightView
+{
+  return self.underRightViewController.view;
+}
+
 - (void)updateTopViewLeftEdgePosition:(CGFloat)position
 {
   CGRect frame = self.topView.frame;
+  
+  if (frame.origin.x <= 0 && position > 0) {
+    [self underLeftWillAppear];
+  } else if (frame.origin.x >= 0 && position < 0) {
+    [self underRightWillAppear];
+  }
+  
   frame.origin.x = position;
   self.topView.frame = frame;
+  
+  if (position == 0) {
+    [self topDidReset];
+  }
 }
 
 - (void)addTopViewSnapshot
@@ -208,6 +273,28 @@
 - (BOOL)underRightShowing
 {
   return self.topView.frame.origin.x < 0;
+}
+
+- (void)underLeftWillAppear
+{
+  [self addTopViewSnapshot];
+  [self.topView addGestureRecognizer:self.resetTapGesture];
+  [self.view bringSubviewToFront:self.underLeftView];
+  [self.view bringSubviewToFront:self.topView];
+}
+
+- (void)underRightWillAppear
+{
+  [self addTopViewSnapshot];
+  [self.topView addGestureRecognizer:self.resetTapGesture];
+  [self.view bringSubviewToFront:self.underRightView];
+  [self.view bringSubviewToFront:self.topView];
+}
+
+- (void)topDidReset
+{
+  [self.topView removeGestureRecognizer:self.resetTapGesture];
+  [self removeTopViewSnapshot];
 }
 
 @end

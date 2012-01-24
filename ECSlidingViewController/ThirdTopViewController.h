@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
 
 @interface ThirdTopViewController : UIViewController
-
+- (IBAction)revealMenu:(id)sender;
 @end

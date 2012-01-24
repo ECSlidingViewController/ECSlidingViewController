@@ -40,7 +40,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"sup: %@", [self.menuItems objectAtIndex:indexPath.row]);
+  NSString *identifier = [NSString stringWithFormat:@"%@Top", [self.menuItems objectAtIndex:indexPath.row]];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+  UIViewController *newTopViewController = [storyboard instantiateViewControllerWithIdentifier:identifier];
+  [self.slidingViewController replaceTopViewController:newTopViewController];
 }
 
 @end

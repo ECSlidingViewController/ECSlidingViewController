@@ -12,6 +12,7 @@
 @interface ECSlidingViewController : UIViewController
 
 @property (nonatomic, strong) UIViewController *underLeftViewController;
+@property (nonatomic, strong) UIViewController *underRightViewController;
 @property (nonatomic, strong) UIViewController *topViewController;
 @property (nonatomic, unsafe_unretained) CGFloat anchorRightRevealAmount;
 @property (nonatomic, unsafe_unretained) CGFloat anchorLeftRevealAmount;
@@ -20,6 +21,7 @@
 - (void)anchorToRight;
 - (void)anchorToLeft;
 - (void)reset;
+- (void)replaceTopViewController:(UIViewController *)newTopViewController;
 
 @end
 
