@@ -21,7 +21,10 @@
 - (void)anchorToRight;
 - (void)anchorToLeft;
 - (void)reset;
-- (void)replaceTopViewController:(UIViewController *)newTopViewController;
+- (void)slideOffToRightAndReplaceTopViewController:(UIViewController *)newTopViewController onComplete:(void(^)())completeBlock;
+- (void)slideOffToLeftAndReplaceTopViewController:(UIViewController *)newTopViewController onComplete:(void(^)())completeBlock;
+- (void)slideOffToRightOnComplete:(void(^)())completeBlock;
+- (void)slideOffToLeftOnComplete:(void(^)())completeBlock;
 
 @end
 

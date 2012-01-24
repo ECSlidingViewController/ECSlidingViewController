@@ -173,16 +173,49 @@
   }];
 }
 
-- (void)replaceTopViewController:(UIViewController *)newTopViewController
+- (void)slideOffToRightAndReplaceTopViewController:(UIViewController *)newTopViewController onComplete:(void(^)())completeBlock;
 {
-  [UIView animateWithDuration:0.125 animations:^{
-    [self updateTopViewLeftEdgePosition:self.screenWidth];
-  } completion:^(BOOL finished) {
+  [self slideOffToRightOnComplete:^{
     self.topViewController = newTopViewController;
     [self updateTopViewLeftEdgePosition:self.screenWidth];
-    [UIView animateWithDuration:0.125 animations:^{
-      [self updateTopViewLeftEdgePosition:0];
-    }];
+    
+    if (completeBlock) {
+      completeBlock();
+    }
+  }];
+}
+
+- (void)slideOffToLeftAndReplaceTopViewController:(UIViewController *)newTopViewController onComplete:(void(^)())completeBlock;
+{
+  [self slideOffToLeftOnComplete:^{
+    self.topViewController = newTopViewController;
+    [self updateTopViewLeftEdgePosition:self.screenWidth];
+    
+    if (completeBlock) {
+      completeBlock();
+    }
+  }];
+}
+
+- (void)slideOffToRightOnComplete:(void(^)())completeBlock;
+{
+  [UIView animateWithDuration:0.125f animations:^{
+    [self updateTopViewLeftEdgePosition:self.screenWidth];
+  } completion:^(BOOL finished) {
+    if (completeBlock) {
+      completeBlock();
+    }
+  }];
+}
+
+- (void)slideOffToLeftOnComplete:(void(^)())completeBlock;
+{
+  [UIView animateWithDuration:0.125f animations:^{
+    [self updateTopViewLeftEdgePosition:-self.screenWidth];
+  } completion:^(BOOL finished) {
+    if (completeBlock) {
+      completeBlock();
+    }
   }];
 }
 

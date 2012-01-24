@@ -43,7 +43,9 @@
   NSString *identifier = [NSString stringWithFormat:@"%@Top", [self.menuItems objectAtIndex:indexPath.row]];
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
   UIViewController *newTopViewController = [storyboard instantiateViewControllerWithIdentifier:identifier];
-  [self.slidingViewController replaceTopViewController:newTopViewController];
+  [self.slidingViewController slideOffToRightAndReplaceTopViewController:newTopViewController onComplete:^{
+    [self.slidingViewController reset];
+  }];
 }
 
 @end

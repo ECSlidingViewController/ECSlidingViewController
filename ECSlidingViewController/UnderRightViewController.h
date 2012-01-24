@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
 
 @interface UnderRightViewController : UIViewController
 

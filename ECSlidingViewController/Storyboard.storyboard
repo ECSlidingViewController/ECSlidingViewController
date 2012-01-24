@@ -129,14 +129,14 @@
             </objects>
             <point key="canvasLocation" x="216" y="-286"/>
         </scene>
-        <scene sceneID="ALv-FQ-oDv">
+        <scene sceneID="MiN-Hb-WSf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WEj-qL-s8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="UnderRight" id="Qdk-8p-DGY" customClass="UnderRightViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XRA-pX-V7S">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gdY-aH-vcn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="UnderRight" id="9q4-pJ-daA" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Spz-rx-G1t">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" name="controlHighlightColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" red="0.83163265310000001" green="0.83163265310000001" blue="0.83163265310000001" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
             </objects>
@@ -181,9 +181,6 @@
             <relationships>
                 <relationship kind="action" name="revealMenu:"/>
             </relationships>
-        </class>
-        <class className="UnderRightViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UnderRightViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
