@@ -1,0 +1,17 @@
+#Mac OS X Finder and whatnot
+.DS_Store
+.idea
+
+# Sparkle distribution Private Key (Don't check me in!)
+dsa_priv.pem
+
+
+# XCode (and ancestors) per-user config (very noisy, and not relevant)
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
