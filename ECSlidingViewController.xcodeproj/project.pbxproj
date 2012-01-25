@@ -21,6 +21,7 @@
 		2750E7A014CDBC32007727A0 /* UnderRightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2750E79F14CDBC32007727A0 /* UnderRightViewController.m */; };
 		2750E7AE14CF1306007727A0 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2750E7AB14CF1306007727A0 /* ECSlidingViewController.m */; };
 		2750E7AF14CF1306007727A0 /* UIImage+UIImage_ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2750E7AD14CF1306007727A0 /* UIImage+UIImage_ImageWithUIView.m */; };
+		27FC94E014D0C14E0000B18C /* InitialSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FC94DF14D0C14E0000B18C /* InitialSlidingViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		2750E7AB14CF1306007727A0 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		2750E7AC14CF1306007727A0 /* UIImage+UIImage_ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+UIImage_ImageWithUIView.h"; sourceTree = "<group>"; };
 		2750E7AD14CF1306007727A0 /* UIImage+UIImage_ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+UIImage_ImageWithUIView.m"; sourceTree = "<group>"; };
+		27FC94DE14D0C14E0000B18C /* InitialSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialSlidingViewController.h; sourceTree = "<group>"; };
+		27FC94DF14D0C14E0000B18C /* InitialSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialSlidingViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +132,8 @@
 			children = (
 				2750E79514CDB959007727A0 /* FirstTopViewController.h */,
 				2750E79614CDB959007727A0 /* FirstTopViewController.m */,
+				27FC94DE14D0C14E0000B18C /* InitialSlidingViewController.h */,
+				27FC94DF14D0C14E0000B18C /* InitialSlidingViewController.m */,
 				2750E79214CDB93A007727A0 /* MenuViewController.h */,
 				2750E79314CDB93A007727A0 /* MenuViewController.m */,
 				2750E79814CDB99A007727A0 /* SecondTopViewController.h */,
@@ -224,6 +229,7 @@
 				2750E7A014CDBC32007727A0 /* UnderRightViewController.m in Sources */,
 				2750E7AE14CF1306007727A0 /* ECSlidingViewController.m in Sources */,
 				2750E7AF14CF1306007727A0 /* UIImage+UIImage_ImageWithUIView.m in Sources */,
+				27FC94E014D0C14E0000B18C /* InitialSlidingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,6 +333,7 @@
 				2750E78614CDB0DF007727A0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

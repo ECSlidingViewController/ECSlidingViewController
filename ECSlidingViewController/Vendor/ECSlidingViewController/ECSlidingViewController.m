@@ -41,7 +41,7 @@
 - (ECSlidingViewController *)slidingViewController
 {
   UIViewController *viewController = self.parentViewController;
-  while (!(viewController == nil || [viewController isMemberOfClass:[ECSlidingViewController class]])) {
+  while (!(viewController == nil || [viewController isKindOfClass:[ECSlidingViewController class]])) {
     viewController = viewController.parentViewController;
   }
   
