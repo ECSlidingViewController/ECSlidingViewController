@@ -10,4 +10,14 @@
 
 @implementation UnderRightViewController
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+  [self.slidingViewController slideOffToLeftOnComplete:nil];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+  [self.slidingViewController anchorToLeft];
+}
+
 @end

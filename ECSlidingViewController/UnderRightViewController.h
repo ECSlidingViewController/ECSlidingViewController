@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ECSlidingViewController.h"
 
-@interface UnderRightViewController : UIViewController
+@interface UnderRightViewController : UITableViewController <UISearchBarDelegate>
 
 @end
