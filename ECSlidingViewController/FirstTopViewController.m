@@ -13,6 +13,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  
+  self.view.layer.shadowOffset = CGSizeZero;
+  self.view.layer.shadowOpacity = 0.75f;
+  self.view.layer.shadowRadius = 10.0f;
+  self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+  self.view.clipsToBounds = NO;
+  
   [self.view addGestureRecognizer:self.slidingViewController.panGesture];
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
   self.slidingViewController.underRightViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
