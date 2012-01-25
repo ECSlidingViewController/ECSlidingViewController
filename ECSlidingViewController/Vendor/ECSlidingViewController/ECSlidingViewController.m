@@ -312,16 +312,20 @@
 {
   [self addTopViewSnapshot];
   [self.topView addGestureRecognizer:self.resetTapGesture];
-  [self.view bringSubviewToFront:self.underLeftView];
-  [self.view bringSubviewToFront:self.topView];
+  if (self.underRightViewController) {
+    self.underRightView.hidden = YES;
+  }
+  self.underLeftView.hidden = NO;
 }
 
 - (void)underRightWillAppear
 {
   [self addTopViewSnapshot];
   [self.topView addGestureRecognizer:self.resetTapGesture];
-  [self.view bringSubviewToFront:self.underRightView];
-  [self.view bringSubviewToFront:self.topView];
+  if (self.underLeftViewController) {
+    self.underLeftView.hidden = YES;
+  }
+  self.underRightView.hidden = NO;
 }
 
 - (void)topDidReset
