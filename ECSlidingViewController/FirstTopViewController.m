@@ -20,19 +20,20 @@
   self.view.layer.shadowColor = [UIColor blackColor].CGColor;
   self.view.clipsToBounds = NO;
   
-  [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+  [self.slidingViewController enablePanningInDirection:ECSlideLeft forView:self.view peekAmount:40.0f];
+  [self.slidingViewController enablePanningInDirection:ECSlideRight forView:self.view peekAmount:40.0f];
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
   self.slidingViewController.underRightViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
 }
 
 - (IBAction)revealMenu:(id)sender
 {
-  [self.slidingViewController anchorToRight];
+  [self.slidingViewController slideInDirection:ECSlideRight peekAmount:40.0f onComplete:nil];
 }
 
 - (IBAction)revealUnderRight:(id)sender
 {
-  [self.slidingViewController anchorToLeft];
+  [self.slidingViewController slideInDirection:ECSlideLeft peekAmount:40.0f onComplete:nil];
 }
 
 @end

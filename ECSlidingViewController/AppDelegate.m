@@ -17,9 +17,6 @@
   ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
   
-  slidingViewController.anchorRightRevealAmount = 280;
-  slidingViewController.anchorLeftRevealAmount  = 280;
-  
   slidingViewController.underLeftViewController  = [storyboard instantiateViewControllerWithIdentifier:@"Menu"];
   slidingViewController.topViewController        = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
   

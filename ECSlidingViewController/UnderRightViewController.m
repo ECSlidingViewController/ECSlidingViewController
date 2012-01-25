@@ -12,12 +12,12 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-  [self.slidingViewController slideOffToLeftOnComplete:nil];
+  [self.slidingViewController slideInDirection:ECSlideLeft peekAmount:0.0f onComplete:nil];
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-  [self.slidingViewController anchorToLeft];
+  [self.slidingViewController slideInDirection:ECSlideLeft peekAmount:40.0f onComplete:nil];
 }
 
 @end

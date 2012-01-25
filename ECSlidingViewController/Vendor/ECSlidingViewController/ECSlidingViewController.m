@@ -10,23 +10,26 @@
 
 @interface ECSlidingViewController()
 
+@property (nonatomic, unsafe_unretained) CGFloat rightSidePeekAmount;
+@property (nonatomic, unsafe_unretained) CGFloat leftSidePeekAmount;
 @property (nonatomic, strong) UIButton *topViewSnapshot;
-@property (nonatomic, strong) UITapGestureRecognizer *resetTapGesture;
 @property (nonatomic, unsafe_unretained) CGFloat initialTouchPositionX;
-@property (nonatomic, unsafe_unretained) CGFloat initialLeftEdgePosition;
+@property (nonatomic, unsafe_unretained) CGFloat initialHoizontalCenter;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+@property (nonatomic, strong) UITapGestureRecognizer *resetTapGesture;
 
 - (NSUInteger)autoResizeToFillScreen;
 - (UIView *)topView;
 - (UIView *)underLeftView;
 - (UIView *)underRightView;
-- (void)updateTopViewLeftEdgePosition:(CGFloat)position;
+- (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer;
+- (void)updateTopViewHorizontalCenter:(CGFloat)newHorizontalCenter;
 - (void)addTopViewSnapshot;
 - (void)removeTopViewSnapshot;
 - (CGFloat)screenWidth;
 - (CGFloat)screenWidthForOrientation:(UIInterfaceOrientation)orientation;
 - (BOOL)underLeftShowing;
 - (BOOL)underRightShowing;
-
 - (void)underLeftWillAppear;
 - (void)underRightWillAppear;
 - (void)topDidReset;
@@ -48,19 +51,26 @@
 @end
 
 @implementation ECSlidingViewController
+
+// public properties
 @synthesize underLeftViewController  = _underLeftViewController;
 @synthesize underRightViewController = _underRightViewController;
 @synthesize topViewController        = _topViewController;
-@synthesize anchorRightRevealAmount;
-@synthesize anchorLeftRevealAmount;
+
+// category properties
+@synthesize leftSidePeekAmount;
+@synthesize rightSidePeekAmount;
 @synthesize topViewSnapshot;
-@synthesize resetTapGesture;
 @synthesize initialTouchPositionX;
-@synthesize initialLeftEdgePosition;
+@synthesize initialHoizontalCenter;
 @synthesize panGesture;
+@synthesize resetTapGesture;
 
 - (void)setTopViewController:(UIViewController *)theTopViewController
 {
+  self.leftSidePeekAmount  = NSNotFound;
+  self.rightSidePeekAmount = NSNotFound;
+  
   [self removeTopViewSnapshot];
   [_topViewController.view removeFromSuperview];
   [_topViewController removeFromParentViewController];
@@ -114,7 +124,7 @@
 - (void)viewDidLoad
 {
   self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reset)];
-  self.panGesture      = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewLeftEdgePositionWithRecognizer:)];
+  self.panGesture      = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -122,100 +132,73 @@
   [super viewWillAppear:animated];
 }
 
-- (void)updateTopViewLeftEdgePositionWithRecognizer:(UIPanGestureRecognizer *)recognizer
+- (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer
 {
   CGPoint currentTouchPoint     = [recognizer locationInView:self.view];
   CGFloat currentTouchPositionX = currentTouchPoint.x;
   
   if (recognizer.state == UIGestureRecognizerStateBegan) {
     self.initialTouchPositionX = currentTouchPositionX;
-    self.initialLeftEdgePosition = self.topView.frame.origin.x;
+    self.initialHoizontalCenter = self.topView.center.x;
   } else if (recognizer.state == UIGestureRecognizerStateChanged) {
-    CGFloat newLeftEdge = self.initialLeftEdgePosition + currentTouchPositionX - self.initialTouchPositionX;
+    CGFloat panAmount = self.initialTouchPositionX - currentTouchPositionX;
+    CGFloat newCenterPosition = self.initialHoizontalCenter - panAmount;
     
-    if ((!self.underLeftViewController && newLeftEdge > 0) || (!self.underRightViewController && newLeftEdge < 0)) {
-      newLeftEdge = 0;
+    if ((newCenterPosition < self.view.center.x && self.leftSidePeekAmount == NSNotFound) || (newCenterPosition > self.view.center.x && self.rightSidePeekAmount == NSNotFound)) {
+      newCenterPosition = self.view.center.x;
     }
     
-    [self updateTopViewLeftEdgePosition:newLeftEdge];
+    [self updateTopViewHorizontalCenter:newCenterPosition];
   } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
     
     if ([self underLeftShowing] && currentVelocityX > 100) {
-      [self anchorToRight];
+      [self slideInDirection:ECSlideRight peekAmount:self.rightSidePeekAmount onComplete:nil];
     } else if ([self underRightShowing] && currentVelocityX < 100) {
-      [self anchorToLeft];
+      [self slideInDirection:ECSlideLeft peekAmount:self.leftSidePeekAmount onComplete:nil];
     } else {
       [self reset];
     }
   }
 }
 
-- (void)anchorToRight
+- (void)slideInDirection:(ECSlideDirection)slideDirection peekAmount:(CGFloat)peekAmount onComplete:(void(^)())completeBlock;
 {
+  CGFloat newCenter = self.topView.center.x;
+  
+  if (slideDirection == ECSlideLeft) {
+    newCenter = -self.screenWidth + self.view.center.x + peekAmount;
+  } else if (slideDirection == ECSlideRight) {
+    newCenter = self.screenWidth + self.view.center.x - peekAmount;
+  }
+  
   [UIView animateWithDuration:0.25f animations:^{
-    [self updateTopViewLeftEdgePosition:self.anchorRightRevealAmount];
+    [self updateTopViewHorizontalCenter:newCenter];
+  } completion:^(BOOL finished) {
+    if (completeBlock) {
+      completeBlock();
+    }
   }];
 }
 
-- (void)anchorToLeft
+- (void)enablePanningInDirection:(ECSlideDirection)slideDirection forView:(UIView *)view peekAmount:(CGFloat)peekAmount
 {
-  [UIView animateWithDuration:0.25f animations:^{
-    [self updateTopViewLeftEdgePosition:-self.anchorLeftRevealAmount];
-  }];
+  if (slideDirection == ECSlideLeft) {
+    self.leftSidePeekAmount = peekAmount;
+  } else if (slideDirection == ECSlideRight) {
+    self.rightSidePeekAmount = peekAmount;
+  }
+  
+  if (![[view gestureRecognizers] containsObject:self.panGesture]) {
+    [view addGestureRecognizer:self.panGesture];
+  }
 }
 
 - (void)reset
 {
   [UIView animateWithDuration:0.25f animations:^{
-    [self updateTopViewLeftEdgePosition:0];
-  }];
-}
-
-- (void)slideOffToRightAndReplaceTopViewController:(UIViewController *)newTopViewController onComplete:(void(^)())completeBlock;
-{
-  [self slideOffToRightOnComplete:^{
-    self.topViewController = newTopViewController;
-    [self updateTopViewLeftEdgePosition:self.screenWidth];
-    
-    if (completeBlock) {
-      completeBlock();
-    }
-  }];
-}
-
-- (void)slideOffToLeftAndReplaceTopViewController:(UIViewController *)newTopViewController onComplete:(void(^)())completeBlock;
-{
-  [self slideOffToLeftOnComplete:^{
-    self.topViewController = newTopViewController;
-    [self updateTopViewLeftEdgePosition:self.screenWidth];
-    
-    if (completeBlock) {
-      completeBlock();
-    }
-  }];
-}
-
-- (void)slideOffToRightOnComplete:(void(^)())completeBlock;
-{
-  [UIView animateWithDuration:0.125f animations:^{
-    [self updateTopViewLeftEdgePosition:self.screenWidth];
-  } completion:^(BOOL finished) {
-    if (completeBlock) {
-      completeBlock();
-    }
-  }];
-}
-
-- (void)slideOffToLeftOnComplete:(void(^)())completeBlock;
-{
-  [UIView animateWithDuration:0.125f animations:^{
-    [self updateTopViewLeftEdgePosition:-self.screenWidth];
-  } completion:^(BOOL finished) {
-    if (completeBlock) {
-      completeBlock();
-    }
+    [self updateTopViewHorizontalCenter:self.view.center.x];
   }];
 }
 
@@ -244,20 +227,20 @@
   return self.underRightViewController.view;
 }
 
-- (void)updateTopViewLeftEdgePosition:(CGFloat)position
+- (void)updateTopViewHorizontalCenter:(CGFloat)newHorizontalCenter
 {
-  CGRect frame = self.topView.frame;
+  CGPoint center = self.topView.center;
   
-  if (frame.origin.x <= 0 && position > 0) {
+  if (center.x <= self.view.center.x && newHorizontalCenter > self.view.center.x) {
     [self underLeftWillAppear];
-  } else if (frame.origin.x >= 0 && position < 0) {
+  } else if (center.x >= self.view.center.x && newHorizontalCenter < self.view.center.x) {
     [self underRightWillAppear];
   }
   
-  frame.origin.x = position;
-  self.topView.frame = frame;
+  center.x = newHorizontalCenter;
+  self.topView.center = center;
   
-  if (position == 0) {
+  if (newHorizontalCenter == self.view.center.x) {
     [self topDidReset];
   }
 }

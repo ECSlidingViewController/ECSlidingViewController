@@ -9,22 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "UIImage+UIImage_ImageWithUIView.h"
 
+typedef enum {
+  ECSlideLeft,
+  ECSlideRight
+} ECSlideDirection;
+
 @interface ECSlidingViewController : UIViewController
 
 @property (nonatomic, strong) UIViewController *underLeftViewController;
 @property (nonatomic, strong) UIViewController *underRightViewController;
 @property (nonatomic, strong) UIViewController *topViewController;
-@property (nonatomic, unsafe_unretained) CGFloat anchorRightRevealAmount;
-@property (nonatomic, unsafe_unretained) CGFloat anchorLeftRevealAmount;
-@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 
-- (void)anchorToRight;
-- (void)anchorToLeft;
+- (void)slideInDirection:(ECSlideDirection)slideDirection peekAmount:(CGFloat)peekAmount onComplete:(void(^)())completeBlock;
+- (void)enablePanningInDirection:(ECSlideDirection)slideDirection forView:(UIView *)view peekAmount:(CGFloat)peekAmount;
 - (void)reset;
-- (void)slideOffToRightAndReplaceTopViewController:(UIViewController *)newTopViewController onComplete:(void(^)())completeBlock;
-- (void)slideOffToLeftAndReplaceTopViewController:(UIViewController *)newTopViewController onComplete:(void(^)())completeBlock;
-- (void)slideOffToRightOnComplete:(void(^)())completeBlock;
-- (void)slideOffToLeftOnComplete:(void(^)())completeBlock;
 
 @end
 

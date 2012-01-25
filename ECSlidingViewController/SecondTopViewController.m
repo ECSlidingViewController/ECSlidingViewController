@@ -13,13 +13,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self.view addGestureRecognizer:self.slidingViewController.panGesture];
-  self.slidingViewController.underRightViewController = nil;
+  [self.slidingViewController enablePanningInDirection:ECSlideRight forView:self.view peekAmount:40.0f];
 }
 
 - (IBAction)revealMenu:(id)sender
 {
-  [self.slidingViewController anchorToRight];
+  [self.slidingViewController slideInDirection:ECSlideRight peekAmount:40.0f onComplete:nil];
 }
 
 @end
