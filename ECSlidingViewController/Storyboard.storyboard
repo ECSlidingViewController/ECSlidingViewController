@@ -11,7 +11,7 @@
                 <viewController storyboardIdentifier="Menu" id="Wid-ZD-WEx" customClass="MenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="W0P-Wb-YYH">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="35U-4J-jxL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
@@ -46,7 +46,7 @@
                 <viewController storyboardIdentifier="ThirdTop" id="LsE-e5-Jbi" customClass="ThirdTopViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UCM-3d-Qlw">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" id="DZQ-RF-UaR">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -74,7 +74,7 @@
                 <viewController storyboardIdentifier="SecondTop" id="XYc-ji-qQz" customClass="SecondTopViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Z4T-qv-OS6">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" id="rTR-El-PZX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -183,7 +183,7 @@
                 <viewController id="H2v-Ob-DhD" customClass="InitialSlidingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IWW-TW-Yeo">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>

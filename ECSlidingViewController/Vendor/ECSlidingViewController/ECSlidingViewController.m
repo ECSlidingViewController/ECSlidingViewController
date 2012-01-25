@@ -26,6 +26,7 @@
 - (void)updateTopViewHorizontalCenter:(CGFloat)newHorizontalCenter;
 - (void)addTopViewSnapshot;
 - (void)removeTopViewSnapshot;
+- (CGFloat)resettedCenter;
 - (CGFloat)screenWidth;
 - (CGFloat)screenWidthForOrientation:(UIInterfaceOrientation)orientation;
 - (BOOL)underLeftShowing;
@@ -144,8 +145,8 @@
     CGFloat panAmount = self.initialTouchPositionX - currentTouchPositionX;
     CGFloat newCenterPosition = self.initialHoizontalCenter - panAmount;
     
-    if ((newCenterPosition < self.view.center.x && self.leftSidePeekAmount == NSNotFound) || (newCenterPosition > self.view.center.x && self.rightSidePeekAmount == NSNotFound)) {
-      newCenterPosition = self.view.center.x;
+    if ((newCenterPosition < self.resettedCenter && self.leftSidePeekAmount == NSNotFound) || (newCenterPosition > self.resettedCenter && self.rightSidePeekAmount == NSNotFound)) {
+      newCenterPosition = self.resettedCenter;
     }
     
     [self updateTopViewHorizontalCenter:newCenterPosition];
@@ -168,9 +169,9 @@
   CGFloat newCenter = self.topView.center.x;
   
   if (slideDirection == ECSlideLeft) {
-    newCenter = -self.screenWidth + self.view.center.x + peekAmount;
+    newCenter = -self.screenWidth + self.resettedCenter + peekAmount;
   } else if (slideDirection == ECSlideRight) {
-    newCenter = self.screenWidth + self.view.center.x - peekAmount;
+    newCenter = self.screenWidth + self.resettedCenter - peekAmount;
   }
   
   [UIView animateWithDuration:0.25f animations:^{
@@ -198,7 +199,7 @@
 - (void)reset
 {
   [UIView animateWithDuration:0.25f animations:^{
-    [self updateTopViewHorizontalCenter:self.view.center.x];
+    [self updateTopViewHorizontalCenter:self.resettedCenter];
   }];
 }
 
@@ -231,16 +232,16 @@
 {
   CGPoint center = self.topView.center;
   
-  if (center.x <= self.view.center.x && newHorizontalCenter > self.view.center.x) {
+  if (center.x <= self.resettedCenter && newHorizontalCenter > self.resettedCenter) {
     [self underLeftWillAppear];
-  } else if (center.x >= self.view.center.x && newHorizontalCenter < self.view.center.x) {
+  } else if (center.x >= self.resettedCenter && newHorizontalCenter < self.resettedCenter) {
     [self underRightWillAppear];
   }
   
   center.x = newHorizontalCenter;
   self.topView.center = center;
   
-  if (newHorizontalCenter == self.view.center.x) {
+  if (newHorizontalCenter == self.resettedCenter) {
     [self topDidReset];
   }
 }
@@ -259,6 +260,11 @@
   if (self.topViewSnapshot.superview) {
     [self.topViewSnapshot removeFromSuperview];
   }
+}
+
+- (CGFloat)resettedCenter
+{
+  return ceil(self.screenWidth / 2);
 }
 
 - (CGFloat)screenWidth
