@@ -239,7 +239,7 @@
   }
   
   center.x = newHorizontalCenter;
-  self.topView.center = center;
+  self.topView.layer.position = center;
   
   if (newHorizontalCenter == self.resettedCenter) {
     [self topDidReset];
@@ -301,9 +301,7 @@
 {
   [self addTopViewSnapshot];
   [self.topView addGestureRecognizer:self.resetTapGesture];
-  if (self.underRightViewController) {
-    self.underRightView.hidden = YES;
-  }
+  self.underRightView.hidden = YES;
   self.underLeftView.hidden = NO;
 }
 
@@ -311,9 +309,7 @@
 {
   [self addTopViewSnapshot];
   [self.topView addGestureRecognizer:self.resetTapGesture];
-  if (self.underLeftViewController) {
-    self.underLeftView.hidden = YES;
-  }
+  self.underLeftView.hidden = YES;
   self.underRightView.hidden = NO;
 }
 
