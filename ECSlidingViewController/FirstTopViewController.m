@@ -32,9 +32,32 @@
 {
   // if going from portrait to landscape or landscape to portrait
   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation) != UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-    CGRect bounds = self.view.layer.bounds;
-    self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(bounds.origin.y, bounds.origin.x, bounds.size.height, bounds.size.width)].CGPath;
+    // adjust peek amount
+    if ([self.slidingViewController underLeftShowing] && UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+      [self.slidingViewController jumpToPeekAmount:26.0f inDirection:ECSlideRight];
+    } else if ([self.slidingViewController underLeftShowing] && UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
+      [self.slidingViewController jumpToPeekAmount:60.0f inDirection:ECSlideRight];
+    } else if ([self.slidingViewController underRightShowing] && UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+      [self.slidingViewController jumpToPeekAmount:26.0f inDirection:ECSlideLeft];
+    } else if ([self.slidingViewController underRightShowing] && UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
+      [self.slidingViewController jumpToPeekAmount:60.0f inDirection:ECSlideLeft];
+    }
   }
+  
+  self.view.layer.shadowPath = nil;
+  self.view.layer.shouldRasterize = YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+  if ([self.slidingViewController underLeftShowing]) {
+    [self.slidingViewController jumpToPeekAmount:40.0f inDirection:ECSlideRight];
+  } else if ([self.slidingViewController underRightShowing]) {
+    [self.slidingViewController jumpToPeekAmount:40.0f inDirection:ECSlideLeft];
+  }
+  
+  self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
+  self.view.layer.shouldRasterize = NO;
 }
 
 - (IBAction)revealMenu:(id)sender

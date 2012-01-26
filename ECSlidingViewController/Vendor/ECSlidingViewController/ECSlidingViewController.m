@@ -29,8 +29,6 @@
 - (CGFloat)resettedCenter;
 - (CGFloat)screenWidth;
 - (CGFloat)screenWidthForOrientation:(UIInterfaceOrientation)orientation;
-- (BOOL)underLeftShowing;
-- (BOOL)underRightShowing;
 - (void)underLeftWillAppear;
 - (void)underRightWillAppear;
 - (void)topDidReset;
@@ -166,16 +164,8 @@
 
 - (void)slideInDirection:(ECSlideDirection)slideDirection peekAmount:(CGFloat)peekAmount onComplete:(void(^)())completeBlock;
 {
-  CGFloat newCenter = self.topView.center.x;
-  
-  if (slideDirection == ECSlideLeft) {
-    newCenter = -self.screenWidth + self.resettedCenter + peekAmount;
-  } else if (slideDirection == ECSlideRight) {
-    newCenter = self.screenWidth + self.resettedCenter - peekAmount;
-  }
-  
   [UIView animateWithDuration:0.25f animations:^{
-    [self updateTopViewHorizontalCenter:newCenter];
+    [self jumpToPeekAmount:peekAmount inDirection:slideDirection];
   } completion:^(BOOL finished) {
     if (completeBlock) {
       completeBlock();
@@ -196,11 +186,34 @@
   }
 }
 
+- (void)jumpToPeekAmount:(CGFloat)peekAmount inDirection:(ECSlideDirection)slideDirection
+{
+  CGFloat newCenter = self.topView.center.x;
+  
+  if (slideDirection == ECSlideLeft) {
+    newCenter = -self.screenWidth + self.resettedCenter + peekAmount;
+  } else if (slideDirection == ECSlideRight) {
+    newCenter = self.screenWidth + self.resettedCenter - peekAmount;
+  }
+  
+  [self updateTopViewHorizontalCenter:newCenter];
+}
+
 - (void)reset
 {
   [UIView animateWithDuration:0.25f animations:^{
     [self updateTopViewHorizontalCenter:self.resettedCenter];
   }];
+}
+
+- (BOOL)underLeftShowing
+{
+  return self.topView.frame.origin.x > 0;
+}
+
+- (BOOL)underRightShowing
+{
+  return self.topView.frame.origin.x < 0;
 }
 
 - (NSUInteger)autoResizeToFillScreen
@@ -285,16 +298,6 @@
     size.height -= MIN(application.statusBarFrame.size.width, application.statusBarFrame.size.height);
   }
   return size.width;
-}
-
-- (BOOL)underLeftShowing
-{
-  return self.topView.frame.origin.x > 0;
-}
-
-- (BOOL)underRightShowing
-{
-  return self.topView.frame.origin.x < 0;
 }
 
 - (void)underLeftWillAppear

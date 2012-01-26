@@ -22,7 +22,10 @@ typedef enum {
 
 - (void)slideInDirection:(ECSlideDirection)slideDirection peekAmount:(CGFloat)peekAmount onComplete:(void(^)())completeBlock;
 - (void)enablePanningInDirection:(ECSlideDirection)slideDirection forView:(UIView *)view peekAmount:(CGFloat)peekAmount;
+- (void)jumpToPeekAmount:(CGFloat)peekAmount inDirection:(ECSlideDirection)direction;
 - (void)reset;
+- (BOOL)underLeftShowing;
+- (BOOL)underRightShowing;
 
 @end
 
