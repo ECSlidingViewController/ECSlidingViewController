@@ -26,6 +26,7 @@ typedef enum {
 - (void)reset;
 - (BOOL)underLeftShowing;
 - (BOOL)underRightShowing;
+- (BOOL)topViewIsOffScreen;
 
 @end
 

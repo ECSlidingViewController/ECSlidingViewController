@@ -227,6 +227,11 @@
   return self.topView.frame.origin.x < 0;
 }
 
+- (BOOL)topViewIsOffScreen
+{
+  return self.topView.center.x <= -self.resettedCenter || self.topView.center.x >= self.screenWidth + self.resettedCenter;
+}
+
 - (NSUInteger)autoResizeToFillScreen
 {
   return (UIViewAutoresizingFlexibleWidth |

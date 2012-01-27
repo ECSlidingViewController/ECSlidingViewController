@@ -43,10 +43,14 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-  if ([self.slidingViewController underLeftShowing]) {
+  if ([self.slidingViewController underLeftShowing] && ![self.slidingViewController topViewIsOffScreen]) {
     [self.slidingViewController jumpToPeekAmount:self.peekRight inDirection:ECSlideRight];
-  } else if ([self.slidingViewController underRightShowing]) {
+  } else if ([self.slidingViewController underRightShowing] && ![self.slidingViewController topViewIsOffScreen]) {
     [self.slidingViewController jumpToPeekAmount:self.peekLeft inDirection:ECSlideLeft];
+  } else if ([self.slidingViewController underLeftShowing] && [self.slidingViewController topViewIsOffScreen]) {
+    [self.slidingViewController jumpToPeekAmount:0 inDirection:ECSlideRight];
+  } else if ([self.slidingViewController underRightShowing] && [self.slidingViewController topViewIsOffScreen]) {
+    [self.slidingViewController jumpToPeekAmount:0 inDirection:ECSlideLeft];
   }
 }
 
