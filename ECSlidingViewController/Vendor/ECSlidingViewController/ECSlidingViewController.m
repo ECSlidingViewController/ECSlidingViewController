@@ -24,6 +24,8 @@
 - (UIView *)underRightView;
 - (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer;
 - (void)updateTopViewHorizontalCenter:(CGFloat)newHorizontalCenter;
+- (void)topViewHorizontalCenterWillChange:(CGFloat)newHorizontalCenter;
+- (void)topViewHorizontalCenterDidChange:(CGFloat)newHorizontalCenter;
 - (void)addTopViewSnapshot;
 - (void)removeTopViewSnapshot;
 - (CGFloat)resettedCenter;
@@ -126,11 +128,6 @@
   self.panGesture      = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-}
-
 - (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer
 {
   CGPoint currentTouchPoint     = [recognizer locationInView:self.view];
@@ -147,7 +144,9 @@
       newCenterPosition = self.resettedCenter;
     }
     
+    [self topViewHorizontalCenterWillChange:newCenterPosition];
     [self updateTopViewHorizontalCenter:newCenterPosition];
+    [self topViewHorizontalCenterDidChange:newCenterPosition];
   } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
@@ -164,6 +163,16 @@
 
 - (void)slideInDirection:(ECSlideDirection)slideDirection peekAmount:(CGFloat)peekAmount onComplete:(void(^)())completeBlock;
 {
+  CGFloat newCenter = self.topView.center.x;
+  
+  if (slideDirection == ECSlideLeft) {
+    newCenter = -self.screenWidth + self.resettedCenter + peekAmount;
+  } else if (slideDirection == ECSlideRight) {
+    newCenter = self.screenWidth + self.resettedCenter - peekAmount;
+  }
+  
+  [self topViewHorizontalCenterWillChange:newCenter];
+  
   [UIView animateWithDuration:0.25f animations:^{
     [self jumpToPeekAmount:peekAmount inDirection:slideDirection];
   } completion:^(BOOL finished) {
@@ -203,6 +212,8 @@
 {
   [UIView animateWithDuration:0.25f animations:^{
     [self updateTopViewHorizontalCenter:self.resettedCenter];
+  } completion:^(BOOL finished) {
+    [self topViewHorizontalCenterDidChange:self.resettedCenter];
   }];
 }
 
@@ -244,16 +255,23 @@
 - (void)updateTopViewHorizontalCenter:(CGFloat)newHorizontalCenter
 {
   CGPoint center = self.topView.center;
+  center.x = newHorizontalCenter;
+  self.topView.layer.position = center;
+}
+
+- (void)topViewHorizontalCenterWillChange:(CGFloat)newHorizontalCenter
+{
+  CGPoint center = self.topView.center;
   
   if (center.x <= self.resettedCenter && newHorizontalCenter > self.resettedCenter) {
     [self underLeftWillAppear];
   } else if (center.x >= self.resettedCenter && newHorizontalCenter < self.resettedCenter) {
     [self underRightWillAppear];
-  }
-  
-  center.x = newHorizontalCenter;
-  self.topView.layer.position = center;
-  
+  }  
+}
+
+- (void)topViewHorizontalCenterDidChange:(CGFloat)newHorizontalCenter
+{
   if (newHorizontalCenter == self.resettedCenter) {
     [self topDidReset];
   }
@@ -305,6 +323,7 @@
   [self addTopViewSnapshot];
   [self.topView addGestureRecognizer:self.resetTapGesture];
   self.underRightView.hidden = YES;
+  [self.underLeftViewController viewWillAppear:NO];
   self.underLeftView.hidden = NO;
 }
 
@@ -313,6 +332,7 @@
   [self addTopViewSnapshot];
   [self.topView addGestureRecognizer:self.resetTapGesture];
   self.underLeftView.hidden = YES;
+  [self.underRightViewController viewWillAppear:NO];
   self.underRightView.hidden = NO;
 }
 

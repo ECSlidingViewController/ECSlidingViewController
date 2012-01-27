@@ -8,7 +8,20 @@
 
 #import "FirstTopViewController.h"
 
+@interface FirstTopViewController()
+@property (nonatomic, unsafe_unretained) CGFloat peekRight;
+@property (nonatomic, unsafe_unretained) CGFloat peekLeft;
+@end
+
 @implementation FirstTopViewController
+@synthesize peekRight;
+@synthesize peekLeft;
+
+- (void)viewDidLoad
+{
+  self.peekRight = 40.0f;
+  self.peekLeft  = 40.0f;
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -21,53 +34,42 @@
   self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   self.view.clipsToBounds = NO;
   
-  [self.slidingViewController enablePanningInDirection:ECSlideLeft forView:self.view peekAmount:40.0f];
-  [self.slidingViewController enablePanningInDirection:ECSlideRight forView:self.view peekAmount:40.0f];
+  [self.slidingViewController enablePanningInDirection:ECSlideLeft forView:self.view peekAmount:self.peekLeft];
+  [self.slidingViewController enablePanningInDirection:ECSlideRight forView:self.view peekAmount:self.peekRight];
   
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
   self.slidingViewController.underRightViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+  if ([self.slidingViewController underLeftShowing]) {
+    [self.slidingViewController jumpToPeekAmount:self.peekRight inDirection:ECSlideRight];
+  } else if ([self.slidingViewController underRightShowing]) {
+    [self.slidingViewController jumpToPeekAmount:self.peekLeft inDirection:ECSlideLeft];
+  }
+}
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-  // if going from portrait to landscape or landscape to portrait
-  if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation) != UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-    // adjust peek amount
-    if ([self.slidingViewController underLeftShowing] && UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-      [self.slidingViewController jumpToPeekAmount:26.0f inDirection:ECSlideRight];
-    } else if ([self.slidingViewController underLeftShowing] && UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
-      [self.slidingViewController jumpToPeekAmount:60.0f inDirection:ECSlideRight];
-    } else if ([self.slidingViewController underRightShowing] && UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-      [self.slidingViewController jumpToPeekAmount:26.0f inDirection:ECSlideLeft];
-    } else if ([self.slidingViewController underRightShowing] && UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
-      [self.slidingViewController jumpToPeekAmount:60.0f inDirection:ECSlideLeft];
-    }
-  }
-  
   self.view.layer.shadowPath = nil;
   self.view.layer.shouldRasterize = YES;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-  if ([self.slidingViewController underLeftShowing]) {
-    [self.slidingViewController jumpToPeekAmount:40.0f inDirection:ECSlideRight];
-  } else if ([self.slidingViewController underRightShowing]) {
-    [self.slidingViewController jumpToPeekAmount:40.0f inDirection:ECSlideLeft];
-  }
-  
   self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   self.view.layer.shouldRasterize = NO;
 }
 
 - (IBAction)revealMenu:(id)sender
 {
-  [self.slidingViewController slideInDirection:ECSlideRight peekAmount:40.0f onComplete:nil];
+  [self.slidingViewController slideInDirection:ECSlideRight peekAmount:self.peekRight onComplete:nil];
 }
 
 - (IBAction)revealUnderRight:(id)sender
 {
-  [self.slidingViewController slideInDirection:ECSlideLeft peekAmount:40.0f onComplete:nil];
+  [self.slidingViewController slideInDirection:ECSlideLeft peekAmount:self.peekLeft onComplete:nil];
 }
 
 @end
