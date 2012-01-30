@@ -1,11 +1,11 @@
 //
-//  UIImage+UIImage_ImageWithUIView.m
+//  UIImage+ImageWithUIView.m
 //  Taken from http://stackoverflow.com/a/7233268
 //
 
-#import "UIImage+UIImage_ImageWithUIView.h"
+#import "UIImage+ImageWithUIView.h"
 
-@implementation UIImage (UIImage_ImagewithUIView)
+@implementation UIImage (ImageWithUIView)
 #pragma mark -
 #pragma mark TakeScreenShot
 static CGContextRef createBitmapContext(int pixelsWide, int pixelsHigh)

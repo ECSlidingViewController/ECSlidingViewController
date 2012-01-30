@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIImage+UIImage_ImageWithUIView.h"
+#import "UIImage+ImageWithUIView.h"
 
 /** @constant ECSide side of screen */
 typedef enum {
