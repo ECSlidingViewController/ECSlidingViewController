@@ -19,8 +19,8 @@
     self.slidingViewController.underLeftViewController = [storyboard instantiateViewControllerWithIdentifier:@"Menu"];
   }
   self.slidingViewController.underRightViewController = nil;
-  self.slidingViewController.anchorLeftPeekAmount     = NSNotFound;
-  self.slidingViewController.anchorLeftRevealAmount   = NSNotFound;
+  self.slidingViewController.anchorLeftPeekAmount     = 0;
+  self.slidingViewController.anchorLeftRevealAmount   = 0;
   
   [self.view addGestureRecognizer:self.slidingViewController.panGesture];
 }

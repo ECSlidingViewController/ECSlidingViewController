@@ -24,7 +24,7 @@
 {
   [super viewDidLoad];
   
-  [self.slidingViewController setAnchorRightPeekAmount:40.0f];
+  [self.slidingViewController setAnchorRightRevealAmount:280.0f];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex

@@ -30,6 +30,8 @@
 - (void)topViewHorizontalCenterDidChange:(CGFloat)newHorizontalCenter;
 - (void)addTopViewSnapshot;
 - (void)removeTopViewSnapshot;
+- (CGFloat)anchorRightTopViewCenter;
+- (CGFloat)anchorLeftTopViewCenter;
 - (CGFloat)resettedCenter;
 - (CGFloat)screenWidth;
 - (CGFloat)screenWidthForOrientation:(UIInterfaceOrientation)orientation;
@@ -137,11 +139,11 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
   if ([self underRightShowing] && ![self topViewIsOffScreen]) {
-    [self updateTopViewHorizontalCenter:-self.resettedCenter + self.anchorLeftPeekAmount];
+    [self updateTopViewHorizontalCenter:self.anchorLeftTopViewCenter];
   } else if ([self underRightShowing] && [self topViewIsOffScreen]) {
     [self updateTopViewHorizontalCenter:-self.resettedCenter];
   } else if ([self underLeftShowing] && ![self topViewIsOffScreen]) {
-    [self updateTopViewHorizontalCenter:self.screenWidth + self.resettedCenter - self.anchorRightPeekAmount];
+    [self updateTopViewHorizontalCenter:self.anchorRightTopViewCenter];
   } else if ([self underLeftShowing] && [self topViewIsOffScreen]) {
     [self updateTopViewHorizontalCenter:self.screenWidth + self.resettedCenter];
   }
@@ -159,7 +161,7 @@
     CGFloat panAmount = self.initialTouchPositionX - currentTouchPositionX;
     CGFloat newCenterPosition = self.initialHoizontalCenter - panAmount;
     
-    if ((newCenterPosition < self.resettedCenter && self.anchorLeftPeekAmount == NSNotFound) || (newCenterPosition > self.resettedCenter && self.anchorRightPeekAmount == NSNotFound)) {
+    if ((newCenterPosition < self.resettedCenter && self.anchorLeftTopViewCenter == NSNotFound) || (newCenterPosition > self.resettedCenter && self.anchorRightTopViewCenter == NSNotFound)) {
       newCenterPosition = self.resettedCenter;
     }
     
@@ -190,9 +192,9 @@
   CGFloat newCenter = self.topView.center.x;
   
   if (side == ECLeft) {
-    newCenter = -self.resettedCenter + self.anchorLeftPeekAmount;
+    newCenter = self.anchorLeftTopViewCenter;
   } else if (side == ECRight) {
-    newCenter = self.screenWidth + self.resettedCenter - self.anchorRightPeekAmount;
+    newCenter = self.anchorRightTopViewCenter;
   }
   
   [self topViewHorizontalCenterWillChange:newCenter];
@@ -326,6 +328,28 @@
 {
   if (self.topViewSnapshot.superview) {
     [self.topViewSnapshot removeFromSuperview];
+  }
+}
+
+- (CGFloat)anchorRightTopViewCenter
+{
+  if (self.anchorRightPeekAmount) {
+    return self.screenWidth + self.resettedCenter - self.anchorRightPeekAmount;
+  } else if (self.anchorRightRevealAmount) {
+    return self.resettedCenter + self.anchorRightRevealAmount;
+  } else {
+    return NSNotFound;
+  }
+}
+
+- (CGFloat)anchorLeftTopViewCenter
+{
+  if (self.anchorLeftPeekAmount) {
+    return -self.resettedCenter + self.anchorLeftPeekAmount;
+  } else if (self.anchorLeftRevealAmount) {
+    return -self.resettedCenter + (self.screenWidth - self.anchorLeftRevealAmount);
+  } else {
+    return NSNotFound;
   }
 }
 
