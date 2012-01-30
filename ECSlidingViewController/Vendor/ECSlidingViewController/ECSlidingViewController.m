@@ -128,6 +128,8 @@
 
 - (void)viewDidLoad
 {
+  self.shouldAllowUserInteractionsWhenAnchored = NO;
+  self.resetStrategy = ECTapping | ECPanning;
   self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopView)];
   _panGesture          = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
 }
@@ -201,6 +203,12 @@
     }
     [self updateTopViewHorizontalCenter:newCenter];
   } completion:^(BOOL finished){
+    if (resetStrategy & ECPanning) {
+      self.panGesture.enabled = YES;
+    } else {
+      self.panGesture.enabled = NO;
+    }
+    
     if (complete) {
       complete();
     }
@@ -307,7 +315,7 @@
 
 - (void)addTopViewSnapshot
 {
-  if (!self.topViewSnapshot.superview) {
+  if (!self.topViewSnapshot.superview && !self.shouldAllowUserInteractionsWhenAnchored) {
     self.topViewSnapshot = [[UIButton alloc] initWithFrame:self.topView.bounds];
     [self.topViewSnapshot setImage:[UIImage imageWithUIView:self.topView] forState:(UIControlStateNormal | UIControlStateHighlighted | UIControlStateSelected)];
     [self.topView addSubview:self.topViewSnapshot];
@@ -349,7 +357,9 @@
 - (void)underLeftWillAppear
 {
   [self addTopViewSnapshot];
-  [self.topView addGestureRecognizer:self.resetTapGesture];
+  if (resetStrategy & ECTapping) {
+    [self.topView addGestureRecognizer:self.resetTapGesture];
+  }
   self.underRightView.hidden = YES;
   [self.underLeftViewController viewWillAppear:NO];
   self.underLeftView.hidden = NO;
@@ -358,7 +368,9 @@
 - (void)underRightWillAppear
 {
   [self addTopViewSnapshot];
-  [self.topView addGestureRecognizer:self.resetTapGesture];
+  if (resetStrategy & ECTapping) {
+    [self.topView addGestureRecognizer:self.resetTapGesture];
+  }
   self.underLeftView.hidden = YES;
   [self.underRightViewController viewWillAppear:NO];
   self.underRightView.hidden = NO;
@@ -368,6 +380,7 @@
 {
   [self.topView removeGestureRecognizer:self.resetTapGesture];
   [self removeTopViewSnapshot];
+  self.panGesture.enabled = YES;
 }
 
 @end
