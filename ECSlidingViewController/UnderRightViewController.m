@@ -9,19 +9,21 @@
 #import "UnderRightViewController.h"
 
 @interface UnderRightViewController()
-@property (nonatomic, unsafe_unretained) CGFloat peekAmount;
+@property (nonatomic, unsafe_unretained) CGFloat peekLeftAmount;
 @property (nonatomic, unsafe_unretained) BOOL isSearching;
 - (void)updateLayoutForOrientation:(UIInterfaceOrientation)orientation;
 @end
 
 @implementation UnderRightViewController
-@synthesize peekAmount;
+@synthesize peekLeftAmount;
 @synthesize isSearching;
 
 - (void)viewDidLoad
 {
-  self.peekAmount  = 40.0f;
+  [super viewDidLoad];
+  self.peekLeftAmount = 40.0f;
   self.isSearching = NO;
+  [self.slidingViewController setAnchorLeftPeekAmount:self.peekLeftAmount];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -50,8 +52,8 @@
   if (self.isSearching) {
     newLeftEdge = 0;
   } else {
-    newLeftEdge = self.peekAmount;
-    newWidth   -= self.peekAmount;
+    newLeftEdge = self.peekLeftAmount;
+    newWidth   -= self.peekLeftAmount;
   }
   
   frame.origin.x = newLeftEdge;
@@ -62,7 +64,7 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-  [UIView animateWithDuration:0.25f animations:^{
+  [self.slidingViewController anchorTopViewOffScreenTo:ECLeft animations:^{
     CGRect frame = self.view.frame;
     frame.origin.x = 0.0f;
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
@@ -71,25 +73,25 @@
       frame.size.width = [UIScreen mainScreen].bounds.size.width;
     }
     self.view.frame = frame;
+  } onComplete:^{
+    self.isSearching = YES;
   }];
-  [self.slidingViewController slideInDirection:ECSlideLeft peekAmount:-1.0f onComplete:nil];
-  self.isSearching = YES;
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-  [UIView animateWithDuration:0.25f animations:^{
+  [self.slidingViewController anchorTopViewTo:ECLeft animations:^{
     CGRect frame = self.view.frame;
-    frame.origin.x = self.peekAmount;
+    frame.origin.x = self.peekLeftAmount;
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-      frame.size.width = [UIScreen mainScreen].bounds.size.height - self.peekAmount;
+      frame.size.width = [UIScreen mainScreen].bounds.size.height - self.peekLeftAmount;
     } else if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
-      frame.size.width = [UIScreen mainScreen].bounds.size.width - self.peekAmount;
+      frame.size.width = [UIScreen mainScreen].bounds.size.width - self.peekLeftAmount;
     }
     self.view.frame = frame;
+  } onComplete:^{
+    self.isSearching = NO;
   }];
-  [self.slidingViewController slideInDirection:ECSlideLeft peekAmount:self.peekAmount onComplete:nil];
-  self.isSearching = NO;
 }
 
 @end

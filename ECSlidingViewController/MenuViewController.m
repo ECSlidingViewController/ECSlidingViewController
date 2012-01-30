@@ -20,6 +20,13 @@
   self.menuItems = [NSArray arrayWithObjects:@"First", @"Second", @"Third", nil];
 }
 
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  [self.slidingViewController setAnchorRightPeekAmount:40.0f];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
   return self.menuItems.count;
@@ -43,11 +50,12 @@
   NSString *identifier = [NSString stringWithFormat:@"%@Top", [self.menuItems objectAtIndex:indexPath.row]];
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
   UIViewController *newTopViewController = [storyboard instantiateViewControllerWithIdentifier:identifier];
-  [self.slidingViewController slideInDirection:ECSlideRight peekAmount:0.0f onComplete:^{
+  
+  [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
     CGRect frame = self.slidingViewController.topViewController.view.frame;
     self.slidingViewController.topViewController = newTopViewController;
     self.slidingViewController.topViewController.view.frame = frame;
-    [self.slidingViewController reset];
+    [self.slidingViewController resetTopView];
   }];
 }
 

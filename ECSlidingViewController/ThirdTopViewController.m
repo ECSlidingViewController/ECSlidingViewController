@@ -13,14 +13,23 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self.slidingViewController enablePanningInDirection:ECSlideLeft forView:self.view peekAmount:40.0f];
-  [self.slidingViewController enablePanningInDirection:ECSlideRight forView:self.view peekAmount:40.0f];
-  self.slidingViewController.underRightViewController = nil;
+  
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+  
+  if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
+    self.slidingViewController.underLeftViewController  = [storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+  }
+  
+  if (![self.slidingViewController.underRightViewController isKindOfClass:[UnderRightViewController class]]) {
+    self.slidingViewController.underRightViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
+  }
+  
+  [self.view addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (IBAction)revealMenu:(id)sender
 {
-  [self.slidingViewController slideInDirection:ECSlideRight peekAmount:40.0f onComplete:nil];
+  [self.slidingViewController anchorTopViewTo:ECRight animations:nil onComplete:nil];
 }
 
 @end

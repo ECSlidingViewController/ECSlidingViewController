@@ -8,20 +8,7 @@
 
 #import "FirstTopViewController.h"
 
-@interface FirstTopViewController()
-@property (nonatomic, unsafe_unretained) CGFloat peekRight;
-@property (nonatomic, unsafe_unretained) CGFloat peekLeft;
-@end
-
 @implementation FirstTopViewController
-@synthesize peekRight;
-@synthesize peekLeft;
-
-- (void)viewDidLoad
-{
-  self.peekRight = 40.0f;
-  self.peekLeft  = 40.0f;
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -34,24 +21,17 @@
   self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   self.view.clipsToBounds = NO;
   
-  [self.slidingViewController enablePanningInDirection:ECSlideLeft forView:self.view peekAmount:self.peekLeft];
-  [self.slidingViewController enablePanningInDirection:ECSlideRight forView:self.view peekAmount:self.peekRight];
-  
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-  self.slidingViewController.underRightViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-  if ([self.slidingViewController underLeftShowing] && ![self.slidingViewController topViewIsOffScreen]) {
-    [self.slidingViewController jumpToPeekAmount:self.peekRight inDirection:ECSlideRight];
-  } else if ([self.slidingViewController underRightShowing] && ![self.slidingViewController topViewIsOffScreen]) {
-    [self.slidingViewController jumpToPeekAmount:self.peekLeft inDirection:ECSlideLeft];
-  } else if ([self.slidingViewController underLeftShowing] && [self.slidingViewController topViewIsOffScreen]) {
-    [self.slidingViewController jumpToPeekAmount:0 inDirection:ECSlideRight];
-  } else if ([self.slidingViewController underRightShowing] && [self.slidingViewController topViewIsOffScreen]) {
-    [self.slidingViewController jumpToPeekAmount:0 inDirection:ECSlideLeft];
+  
+  if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
+    self.slidingViewController.underLeftViewController  = [storyboard instantiateViewControllerWithIdentifier:@"Menu"];
   }
+  
+  if (![self.slidingViewController.underRightViewController isKindOfClass:[UnderRightViewController class]]) {
+    self.slidingViewController.underRightViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
+  }
+  
+  [self.view addGestureRecognizer:self.slidingViewController.panGesture];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -68,12 +48,12 @@
 
 - (IBAction)revealMenu:(id)sender
 {
-  [self.slidingViewController slideInDirection:ECSlideRight peekAmount:self.peekRight onComplete:nil];
+  [self.slidingViewController anchorTopViewTo:ECRight animations:nil onComplete:nil];
 }
 
 - (IBAction)revealUnderRight:(id)sender
 {
-  [self.slidingViewController slideInDirection:ECSlideLeft peekAmount:self.peekLeft onComplete:nil];
+  [self.slidingViewController anchorTopViewTo:ECLeft animations:nil onComplete:nil];
 }
 
 @end

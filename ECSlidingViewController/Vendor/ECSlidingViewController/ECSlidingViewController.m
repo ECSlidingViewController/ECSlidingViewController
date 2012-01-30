@@ -10,13 +10,15 @@
 
 @interface ECSlidingViewController()
 
-@property (nonatomic, unsafe_unretained) CGFloat rightSidePeekAmount;
-@property (nonatomic, unsafe_unretained) CGFloat leftSidePeekAmount;
 @property (nonatomic, strong) UIButton *topViewSnapshot;
 @property (nonatomic, unsafe_unretained) CGFloat initialTouchPositionX;
 @property (nonatomic, unsafe_unretained) CGFloat initialHoizontalCenter;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *resetTapGesture;
+
+- (BOOL)underLeftShowing;
+- (BOOL)underRightShowing;
+- (BOOL)topViewIsOffScreen;
 
 - (NSUInteger)autoResizeToFillScreen;
 - (UIView *)topView;
@@ -57,31 +59,33 @@
 @synthesize underLeftViewController  = _underLeftViewController;
 @synthesize underRightViewController = _underRightViewController;
 @synthesize topViewController        = _topViewController;
+@synthesize anchorLeftPeekAmount;
+@synthesize anchorRightPeekAmount;
+@synthesize anchorLeftRevealAmount;
+@synthesize anchorRightRevealAmount;
+@synthesize shouldAllowUserInteractionsWhenAnchored;
+@synthesize resetStrategy;
 
 // category properties
-@synthesize leftSidePeekAmount;
-@synthesize rightSidePeekAmount;
 @synthesize topViewSnapshot;
 @synthesize initialTouchPositionX;
 @synthesize initialHoizontalCenter;
-@synthesize panGesture;
+@synthesize panGesture = _panGesture;
 @synthesize resetTapGesture;
 
 - (void)setTopViewController:(UIViewController *)theTopViewController
 {
-  self.leftSidePeekAmount  = NSNotFound;
-  self.rightSidePeekAmount = NSNotFound;
-  
   [self removeTopViewSnapshot];
   [_topViewController.view removeFromSuperview];
   [_topViewController removeFromParentViewController];
   
   _topViewController = theTopViewController;
-  [_topViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
-  [_topViewController.view setFrame:self.view.bounds];
   
   [self addChildViewController:self.topViewController];
   [self.topViewController didMoveToParentViewController:self];
+  
+  [_topViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
+  [_topViewController.view setFrame:self.view.bounds];
   
   [self.view addSubview:_topViewController.view];
 }
@@ -94,11 +98,11 @@
   _underLeftViewController = theUnderLeftViewController;
   
   if (_underLeftViewController) {
-    [_underLeftViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
-    [_underLeftViewController.view setFrame:self.view.bounds];
-    
     [self addChildViewController:self.underLeftViewController];
     [self.underLeftViewController didMoveToParentViewController:self];
+    
+    [_underLeftViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
+    [_underLeftViewController.view setFrame:self.view.bounds];
     
     [self.view insertSubview:_underLeftViewController.view atIndex:0];
   }
@@ -112,11 +116,11 @@
   _underRightViewController = theUnderRightViewController;
   
   if (_underRightViewController) {
-    [_underRightViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
-    [_underRightViewController.view setFrame:self.view.bounds];
-    
     [self addChildViewController:self.underRightViewController];
     [self.underRightViewController didMoveToParentViewController:self];
+    
+    [_underRightViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
+    [_underRightViewController.view setFrame:self.view.bounds];
     
     [self.view insertSubview:_underRightViewController.view atIndex:0];
   }
@@ -124,8 +128,21 @@
 
 - (void)viewDidLoad
 {
-  self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(reset)];
-  self.panGesture      = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
+  self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopView)];
+  _panGesture          = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+  if ([self underRightShowing] && ![self topViewIsOffScreen]) {
+    [self updateTopViewHorizontalCenter:-self.resettedCenter + self.anchorLeftPeekAmount];
+  } else if ([self underRightShowing] && [self topViewIsOffScreen]) {
+    [self updateTopViewHorizontalCenter:-self.resettedCenter];
+  } else if ([self underLeftShowing] && ![self topViewIsOffScreen]) {
+    [self updateTopViewHorizontalCenter:self.screenWidth + self.resettedCenter - self.anchorRightPeekAmount];
+  } else if ([self underLeftShowing] && [self topViewIsOffScreen]) {
+    [self updateTopViewHorizontalCenter:self.screenWidth + self.resettedCenter];
+  }
 }
 
 - (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer
@@ -140,7 +157,7 @@
     CGFloat panAmount = self.initialTouchPositionX - currentTouchPositionX;
     CGFloat newCenterPosition = self.initialHoizontalCenter - panAmount;
     
-    if ((newCenterPosition < self.resettedCenter && self.leftSidePeekAmount == NSNotFound) || (newCenterPosition > self.resettedCenter && self.rightSidePeekAmount == NSNotFound)) {
+    if ((newCenterPosition < self.resettedCenter && self.anchorLeftPeekAmount == NSNotFound) || (newCenterPosition > self.resettedCenter && self.anchorRightPeekAmount == NSNotFound)) {
       newCenterPosition = self.resettedCenter;
     }
     
@@ -152,63 +169,69 @@
     CGFloat currentVelocityX     = currentVelocityPoint.x;
     
     if ([self underLeftShowing] && currentVelocityX > 100) {
-      [self slideInDirection:ECSlideRight peekAmount:self.rightSidePeekAmount onComplete:nil];
+      [self anchorTopViewTo:ECRight animations:nil onComplete:nil];
     } else if ([self underRightShowing] && currentVelocityX < 100) {
-      [self slideInDirection:ECSlideLeft peekAmount:self.leftSidePeekAmount onComplete:nil];
+      [self anchorTopViewTo:ECLeft animations:nil onComplete:nil];
     } else {
-      [self reset];
+      [self resetTopView];
     }
   }
 }
 
-- (void)slideInDirection:(ECSlideDirection)slideDirection peekAmount:(CGFloat)peekAmount onComplete:(void(^)())completeBlock;
+- (UIPanGestureRecognizer *)panGesture
+{
+  return _panGesture;
+}
+
+- (void)anchorTopViewTo:(ECSide)side animations:(void (^)())animations onComplete:(void (^)())complete
 {
   CGFloat newCenter = self.topView.center.x;
   
-  if (slideDirection == ECSlideLeft) {
-    newCenter = -self.screenWidth + self.resettedCenter + peekAmount;
-  } else if (slideDirection == ECSlideRight) {
-    newCenter = self.screenWidth + self.resettedCenter - peekAmount;
+  if (side == ECLeft) {
+    newCenter = -self.resettedCenter + self.anchorLeftPeekAmount;
+  } else if (side == ECRight) {
+    newCenter = self.screenWidth + self.resettedCenter - self.anchorRightPeekAmount;
   }
   
   [self topViewHorizontalCenterWillChange:newCenter];
   
   [UIView animateWithDuration:0.25f animations:^{
-    [self jumpToPeekAmount:peekAmount inDirection:slideDirection];
-  } completion:^(BOOL finished) {
-    if (completeBlock) {
-      completeBlock();
+    if (animations) {
+      animations();
+    }
+    [self updateTopViewHorizontalCenter:newCenter];
+  } completion:^(BOOL finished){
+    if (complete) {
+      complete();
     }
   }];
 }
 
-- (void)enablePanningInDirection:(ECSlideDirection)slideDirection forView:(UIView *)view peekAmount:(CGFloat)peekAmount
-{
-  if (slideDirection == ECSlideLeft) {
-    self.leftSidePeekAmount = peekAmount;
-  } else if (slideDirection == ECSlideRight) {
-    self.rightSidePeekAmount = peekAmount;
-  }
-  
-  if (![[view gestureRecognizers] containsObject:self.panGesture]) {
-    [view addGestureRecognizer:self.panGesture];
-  }
-}
-
-- (void)jumpToPeekAmount:(CGFloat)peekAmount inDirection:(ECSlideDirection)slideDirection
+- (void)anchorTopViewOffScreenTo:(ECSide)side animations:(void(^)())animations onComplete:(void(^)())complete
 {
   CGFloat newCenter = self.topView.center.x;
   
-  if (slideDirection == ECSlideLeft) {
-    newCenter = -self.screenWidth + self.resettedCenter + peekAmount;
-  } else if (slideDirection == ECSlideRight) {
-    newCenter = self.screenWidth + self.resettedCenter - peekAmount;
+  if (side == ECLeft) {
+    newCenter = -self.resettedCenter;
+  } else if (side == ECRight) {
+    newCenter = self.screenWidth + self.resettedCenter;
   }
   
-  [self updateTopViewHorizontalCenter:newCenter];
+  [self topViewHorizontalCenterWillChange:newCenter];
+  
+  [UIView animateWithDuration:0.25f animations:^{
+    if (animations) {
+      animations();
+    }
+    [self updateTopViewHorizontalCenter:newCenter];
+  } completion:^(BOOL finished){
+    if (complete) {
+      complete();
+    }
+  }];
 }
 
-- (void)reset
+- (void)resetTopView
 {
   [UIView animateWithDuration:0.25f animations:^{
     [self updateTopViewHorizontalCenter:self.resettedCenter];
@@ -229,7 +252,7 @@
 
 - (BOOL)topViewIsOffScreen
 {
-  return self.topView.center.x <= -self.resettedCenter || self.topView.center.x >= self.screenWidth + self.resettedCenter;
+  return self.topView.center.x <= -self.resettedCenter + 1 || self.topView.center.x >= self.screenWidth + self.resettedCenter - 1;
 }
 
 - (NSUInteger)autoResizeToFillScreen
