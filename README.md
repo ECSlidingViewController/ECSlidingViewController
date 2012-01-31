@@ -13,7 +13,7 @@ This project is an example app that showcases the uses for `ECSlidingViewControl
 * Configurable anchor positions, with automatic adjustments for orientation change. See "Anchor Position Geometry" section below.
 * There are no assumptions about the size and layout of the views under the top view. That is up to the implementor.
 * The child views can be changed at anytime.
-* See `ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h` for options and configuration.
+* See [ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h](https://github.com/edgecase/ECSlidingViewController/blob/master/ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h) for options and configuration.
 
 ## Requirements
 
