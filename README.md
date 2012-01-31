@@ -80,11 +80,11 @@ There are four properties related to anchor positions. They are a combination of
 
 Below is an example of the anchorRightPeekAmount set:
 
-TODO: insert diagram of rotation with a peek amount set
+![anchorRightPeekAmount example](http://dl.dropbox.com/u/10937237/peek.png)
 
 Below is an example of the anchorRightRevealAmount set:
 
-TODO: insert diagram of rotation with reveal amount set
+![anchorRightRevealAmount example](http://dl.dropbox.com/u/10937237/reveal.png)
 
 ## MIT License
 Copyright (C) 2012 EdgeCase
