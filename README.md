@@ -2,6 +2,8 @@
 
 `ECSlidingViewController` is a view controller container for iOS that presents its child view controllers in two layers. It provides functionality for sliding the top view to reveal the views underneath it. This functionality is inspired by the Path 2.0 and Facebook iPhone apps.
 
+[Video Demo](http://vimeo.com/35959384)
+
 This project is an example app that showcases the uses for `ECSlidingViewController`. This app uses storyboards, but it is not required.
 
 
