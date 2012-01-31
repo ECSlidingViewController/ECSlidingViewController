@@ -15,7 +15,14 @@
   [super viewWillAppear:animated];
   
   if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+    UIStoryboard *storyboard;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+      storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+      storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
+    }
+    
     self.slidingViewController.underLeftViewController = [storyboard instantiateViewControllerWithIdentifier:@"Menu"];
   }
   self.slidingViewController.underRightViewController = nil;

@@ -7,13 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27407EEC14D8787E0035FD7F /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27407EEB14D8787E0035FD7F /* iPad.storyboard */; };
 		2750E77114CDB0DF007727A0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2750E77014CDB0DF007727A0 /* UIKit.framework */; };
 		2750E77314CDB0DF007727A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2750E77214CDB0DF007727A0 /* Foundation.framework */; };
 		2750E77514CDB0DF007727A0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2750E77414CDB0DF007727A0 /* CoreGraphics.framework */; };
 		2750E77B14CDB0DF007727A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2750E77914CDB0DF007727A0 /* InfoPlist.strings */; };
 		2750E77D14CDB0DF007727A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2750E77C14CDB0DF007727A0 /* main.m */; };
 		2750E78114CDB0DF007727A0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2750E78014CDB0DF007727A0 /* AppDelegate.m */; };
-		2750E78814CDB114007727A0 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2750E78714CDB114007727A0 /* Storyboard.storyboard */; };
+		2750E78814CDB114007727A0 /* iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2750E78714CDB114007727A0 /* iPhone.storyboard */; };
 		2750E79414CDB93A007727A0 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2750E79314CDB93A007727A0 /* MenuViewController.m */; };
 		2750E79714CDB959007727A0 /* FirstTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2750E79614CDB959007727A0 /* FirstTopViewController.m */; };
 		2750E79A14CDB99A007727A0 /* SecondTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2750E79914CDB99A007727A0 /* SecondTopViewController.m */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27407EEB14D8787E0035FD7F /* iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPad.storyboard; sourceTree = "<group>"; };
 		2750E76C14CDB0DF007727A0 /* ECSlidingViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECSlidingViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2750E77014CDB0DF007727A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2750E77214CDB0DF007727A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -36,7 +38,7 @@
 		2750E77E14CDB0DF007727A0 /* ECSlidingViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ECSlidingViewController-Prefix.pch"; sourceTree = "<group>"; };
 		2750E77F14CDB0DF007727A0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2750E78014CDB0DF007727A0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2750E78714CDB114007727A0 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		2750E78714CDB114007727A0 /* iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = iPhone.storyboard; sourceTree = "<group>"; };
 		2750E79214CDB93A007727A0 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		2750E79314CDB93A007727A0 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
 		2750E79514CDB959007727A0 /* FirstTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstTopViewController.h; sourceTree = "<group>"; };
@@ -107,7 +109,8 @@
 				2750E77F14CDB0DF007727A0 /* AppDelegate.h */,
 				2750E78014CDB0DF007727A0 /* AppDelegate.m */,
 				2750E77714CDB0DF007727A0 /* Supporting Files */,
-				2750E78714CDB114007727A0 /* Storyboard.storyboard */,
+				2750E78714CDB114007727A0 /* iPhone.storyboard */,
+				27407EEB14D8787E0035FD7F /* iPad.storyboard */,
 			);
 			path = ECSlidingViewController;
 			sourceTree = "<group>";
@@ -213,7 +216,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2750E77B14CDB0DF007727A0 /* InfoPlist.strings in Resources */,
-				2750E78814CDB114007727A0 /* Storyboard.storyboard in Resources */,
+				2750E78814CDB114007727A0 /* iPhone.storyboard in Resources */,
+				27407EEC14D8787E0035FD7F /* iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,7 +306,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECSlidingViewController/ECSlidingViewController-Prefix.pch";
 				INFOPLIST_FILE = "ECSlidingViewController/ECSlidingViewController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -313,7 +319,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECSlidingViewController/ECSlidingViewController-Prefix.pch";
 				INFOPLIST_FILE = "ECSlidingViewController/ECSlidingViewController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

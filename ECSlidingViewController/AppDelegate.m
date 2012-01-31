@@ -15,7 +15,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
+  UIStoryboard *storyboard;
+  
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+    storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+  } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
+  }
   
   slidingViewController.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
   
