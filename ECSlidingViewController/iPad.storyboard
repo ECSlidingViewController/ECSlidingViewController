@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="SIb-O2-Xa4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="SIb-O2-Xa4">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
@@ -84,6 +84,66 @@
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1366" y="-3472"/>
+        </scene>
+        <scene sceneID="9Lf-Ds-7hE">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iCA-AT-FmW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="7TO-m0-aL5" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wly-m0-fDF">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="voj-fx-Y0v"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="3128" y="-4635"/>
+        </scene>
+        <scene sceneID="uTs-LF-eUf">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mkw-MZ-h1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController storyboardIdentifier="NavigationTop" definesPresentationContext="YES" id="1hx-oA-DgE" customClass="NavigationTopViewController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vlA-OI-a5q">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="NXj-9U-Y8g" kind="relationship" relationship="rootViewController" id="bjU-iw-BID"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1366" y="-4635"/>
+        </scene>
+        <scene sceneID="ZSn-tl-r3h">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0q0-M8-OFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="NXj-9U-Y8g" customClass="SampleTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kNR-UP-LbH">
+                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SampleCell" id="tZ1-2i-beG">
+                                <rect key="frame" x="0.0" y="22" width="768" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="748" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="7TO-m0-aL5" kind="push" id="jdF-xA-4Z1"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="NXj-9U-Y8g" id="cYZ-fh-wB2"/>
+                            <outlet property="delegate" destination="NXj-9U-Y8g" id="3LL-BN-9x0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="wWQ-ug-3ai"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="2228" y="-4635"/>
         </scene>
         <scene sceneID="krM-pN-5xZ">
             <objects>
@@ -196,6 +256,15 @@
         </class>
         <class className="MenuViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MenuViewController.h"/>
+        </class>
+        <class className="NavigationTopViewController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NavigationTopViewController.h"/>
+        </class>
+        <class className="SampleTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SampleTableViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="revealMenu:"/>
+            </relationships>
         </class>
         <class className="SecondTopViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SecondTopViewController.h"/>
