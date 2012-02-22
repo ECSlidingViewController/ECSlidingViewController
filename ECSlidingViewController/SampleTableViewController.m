@@ -43,4 +43,9 @@
   [self.slidingViewController anchorTopViewTo:ECRight animations:nil onComplete:nil];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+  return YES;
+}
+
 @end
