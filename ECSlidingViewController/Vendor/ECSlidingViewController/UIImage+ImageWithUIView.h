@@ -1,6 +1,5 @@
 //
 //  UIImage+ImageWithUIView.h
-//  Taken from http://stackoverflow.com/a/7233268
 //
 
 #import <UIKit/UIKit.h>
