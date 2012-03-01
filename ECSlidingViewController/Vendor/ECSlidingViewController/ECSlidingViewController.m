@@ -8,6 +8,12 @@
 
 #import "ECSlidingViewController.h"
 
+NSString *const ECSlidingViewUnderRightWillAppear = @"ECSlidingViewUnderRightWillAppear";
+NSString *const ECSlidingViewUnderLeftWillAppear  = @"ECSlidingViewUnderLeftWillAppear";
+NSString *const ECSlidingViewTopDidAnchorLeft     = @"ECSlidingViewTopDidAnchorLeft";
+NSString *const ECSlidingViewTopDidAnchorRight    = @"ECSlidingViewTopDidAnchorRight";
+NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
+
 @interface ECSlidingViewController()
 
 @property (nonatomic, strong) UIView *topViewSnapshot;
@@ -35,7 +41,6 @@
 - (void)underRightWillAppear;
 - (void)topDidReset;
 - (BOOL)topViewHasFocus;
-- (void)performSelectorOnChildViewControllers:(SEL)selector;
 
 @end
 
@@ -222,6 +227,10 @@
     }
     
     [self addTopViewSnapshot];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      NSString *key = (side == ECLeft) ? ECSlidingViewTopDidAnchorLeft : ECSlidingViewTopDidAnchorRight;
+      [[NSNotificationCenter defaultCenter] postNotificationName:key object:self userInfo:nil];
+    });
   }];
 }
 
@@ -247,6 +256,10 @@
       complete();
     }
     [self addTopViewSnapshot];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      NSString *key = (side == ECLeft) ? ECSlidingViewTopDidAnchorLeft : ECSlidingViewTopDidAnchorRight;
+      [[NSNotificationCenter defaultCenter] postNotificationName:key object:self userInfo:nil];
+    });
   }];
 }
 
@@ -391,7 +404,9 @@
 
 - (void)underLeftWillAppear
 {
-  [self performSelectorOnChildViewControllers:@selector(underLeftWillAppear)];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ECSlidingViewUnderLeftWillAppear object:self userInfo:nil];
+  });
   self.underRightView.hidden = YES;
   [self.underLeftViewController viewWillAppear:NO];
   self.underLeftView.hidden = NO;
@@ -399,7 +414,9 @@
 
 - (void)underRightWillAppear
 {
-  [self performSelectorOnChildViewControllers:@selector(underRightWillAppear)];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ECSlidingViewUnderRightWillAppear object:self userInfo:nil];
+  });
   self.underLeftView.hidden = YES;
   [self.underRightViewController viewWillAppear:NO];
   self.underRightView.hidden = NO;
@@ -407,7 +424,9 @@
 
 - (void)topDidReset
 {
-  [self performSelectorOnChildViewControllers:@selector(topDidReset)];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [[NSNotificationCenter defaultCenter] postNotificationName:ECSlidingViewTopDidReset object:self userInfo:nil];
+  });
   [self.topView removeGestureRecognizer:self.resetTapGesture];
   [self removeTopViewSnapshot];
   self.panGesture.enabled = YES;
@@ -416,16 +435,6 @@
 - (BOOL)topViewHasFocus
 {
   return self.topView.center.x == self.resettedCenter;
-}
-
-- (void)performSelectorOnChildViewControllers:(SEL)selector
-{
-  NSArray *childViewControllers = [self childViewControllers];
-  for (UIViewController *childViewController in childViewControllers) {
-    if ([childViewController respondsToSelector:selector]) {
-      [childViewController performSelector:selector];
-    }
-  }
 }
 
 @end

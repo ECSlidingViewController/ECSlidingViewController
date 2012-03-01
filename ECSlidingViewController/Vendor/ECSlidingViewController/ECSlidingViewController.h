@@ -9,6 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "UIImage+ImageWithUIView.h"
 
+/** Notification that gets posted when the underRight view will appear */
+extern NSString *const ECSlidingViewUnderRightWillAppear;
+
+/** Notification that gets posted when the underLeft view will appear */
+extern NSString *const ECSlidingViewUnderLeftWillAppear;
+
+/** Notification that gets posted when the top view is anchored to the left side of the screen */
+extern NSString *const ECSlidingViewTopDidAnchorLeft;
+
+/** Notification that gets posted when the top view is anchored to the right side of the screen */
+extern NSString *const ECSlidingViewTopDidAnchorRight;
+
+/** Notification that gets posted when the top view is centered on the screen */
+extern NSString *const ECSlidingViewTopDidReset;
+
 /** @constant ECSide side of screen */
 typedef enum {
   /** Left side of screen */

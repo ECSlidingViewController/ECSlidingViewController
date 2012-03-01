@@ -10,6 +10,32 @@
 
 @implementation ThirdTopViewController
 
+- (void)awakeFromNib
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self 
+                                           selector:@selector(underLeftWillAppear:)
+                                               name:ECSlidingViewUnderLeftWillAppear 
+                                             object:self.slidingViewController];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(topDidAnchorRight:) 
+                                               name:ECSlidingViewTopDidAnchorRight 
+                                             object:self.slidingViewController];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(underRightWillAppear:) 
+                                               name:ECSlidingViewUnderRightWillAppear 
+                                             object:self.slidingViewController];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(topDidAnchorLeft:) 
+                                               name:ECSlidingViewTopDidAnchorLeft 
+                                             object:self.slidingViewController];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(topDidReset:) 
+                                               name:ECSlidingViewTopDidReset 
+                                             object:self.slidingViewController];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
@@ -30,18 +56,28 @@
   [self.slidingViewController anchorTopViewTo:ECRight animations:nil onComplete:nil];
 }
 
-// callbacks from slidingViewController
-- (void)underLeftWillAppear
+// slidingViewController notification
+- (void)underLeftWillAppear:(NSNotification *)notification
 {
   NSLog(@"under left will appear");
 }
 
-- (void)underRightWillAppear
+- (void)topDidAnchorRight:(NSNotification *)notification
+{
+  NSLog(@"top did anchor right");
+}
+
+- (void)underRightWillAppear:(NSNotification *)notification
 {
   NSLog(@"under right will appear");
 }
 
-- (void)topDidReset
+- (void)topDidAnchorLeft:(NSNotification *)notification
+{
+  NSLog(@"top did anchor left");
+}
+
+- (void)topDidReset:(NSNotification *)notification
 {
   NSLog(@"top did reset");
 }
