@@ -6,11 +6,12 @@
 //  Copyright (c) 2012 EdgeCase. All rights reserved.
 //
 
+#define HORIZ_SWIPE_DRAG_MIN  5
 #import "ECSlidingViewController.h"
 
 @interface ECSlidingViewController()
 
-@property (nonatomic, strong) UIButton *topViewSnapshot;
+@property (nonatomic, strong) UIView *topViewSnapshot;
 @property (nonatomic, unsafe_unretained) CGFloat initialTouchPositionX;
 @property (nonatomic, unsafe_unretained) CGFloat initialHoizontalCenter;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
@@ -138,6 +139,9 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+  if(!topViewHasFocus){
+    [self removeTopViewSnapshot];
+  }
   if ([self underRightShowing] && ![self topViewIsOffScreen]) {
     [self updateTopViewHorizontalCenter:self.anchorLeftTopViewCenter];
   } else if ([self underRightShowing] && [self topViewIsOffScreen]) {
@@ -146,6 +150,12 @@
     [self updateTopViewHorizontalCenter:self.anchorRightTopViewCenter];
   } else if ([self underLeftShowing] && [self topViewIsOffScreen]) {
     [self updateTopViewHorizontalCenter:self.screenWidth + self.resettedCenter];
+  }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  if(!topViewHasFocus){
+    [self addTopViewSnapshot];
   }
 }
 
@@ -210,10 +220,11 @@
     } else {
       self.panGesture.enabled = NO;
     }
-    
     if (complete) {
       complete();
     }
+    topViewHasFocus = NO;
+    [self addTopViewSnapshot];
   }];
 }
 
@@ -238,6 +249,8 @@
     if (complete) {
       complete();
     }
+    topViewHasFocus = NO;
+    [self addTopViewSnapshot];
   }];
 }
 
@@ -246,6 +259,7 @@
   [UIView animateWithDuration:0.25f animations:^{
     [self updateTopViewHorizontalCenter:self.resettedCenter];
   } completion:^(BOOL finished) {
+    topViewHasFocus = YES;
     [self topViewHorizontalCenterDidChange:self.resettedCenter];
   }];
 }
@@ -318,9 +332,10 @@
 - (void)addTopViewSnapshot
 {
   if (!self.topViewSnapshot.superview && !self.shouldAllowUserInteractionsWhenAnchored) {
-    self.topViewSnapshot = [[UIButton alloc] initWithFrame:self.topView.bounds];
-    [self.topViewSnapshot setImage:[UIImage imageWithUIView:self.topView] forState:(UIControlStateNormal | UIControlStateHighlighted | UIControlStateSelected)];
+    self.topViewSnapshot = [[UIView alloc] initWithFrame:self.topView.bounds];
+    topViewSnapshot.layer.contents = (id)[UIImage imageWithUIView:self.topView].CGImage;
     [self.topView addSubview:self.topViewSnapshot];
+    [self.topViewSnapshot addGestureRecognizer:self.resetTapGesture];
   }
 }
 
@@ -328,6 +343,7 @@
 {
   if (self.topViewSnapshot.superview) {
     [self.topViewSnapshot removeFromSuperview];
+    topViewSnapshot = nil;
   }
 }
 
@@ -380,10 +396,7 @@
 
 - (void)underLeftWillAppear
 {
-  [self addTopViewSnapshot];
-  if (resetStrategy & ECTapping) {
-    [self.topView addGestureRecognizer:self.resetTapGesture];
-  }
+  topViewHasFocus = NO;
   self.underRightView.hidden = YES;
   [self.underLeftViewController viewWillAppear:NO];
   self.underLeftView.hidden = NO;
@@ -391,10 +404,7 @@
 
 - (void)underRightWillAppear
 {
-  [self addTopViewSnapshot];
-  if (resetStrategy & ECTapping) {
-    [self.topView addGestureRecognizer:self.resetTapGesture];
-  }
+  topViewHasFocus = NO;
   self.underLeftView.hidden = YES;
   [self.underRightViewController viewWillAppear:NO];
   self.underRightView.hidden = NO;
@@ -402,9 +412,14 @@
 
 - (void)topDidReset
 {
+  topViewHasFocus = YES;
   [self.topView removeGestureRecognizer:self.resetTapGesture];
   [self removeTopViewSnapshot];
   self.panGesture.enabled = YES;
 }
+
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
+//  return YES;
+//}
 
 @end
