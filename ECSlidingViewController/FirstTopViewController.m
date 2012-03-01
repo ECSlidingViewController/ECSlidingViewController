@@ -21,20 +21,12 @@
   self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   self.view.clipsToBounds = NO;
   
-  UIStoryboard *storyboard;
-  
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-  } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
-  }
-  
   if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-    self.slidingViewController.underLeftViewController  = [storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+    self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
   }
   
   if (![self.slidingViewController.underRightViewController isKindOfClass:[UnderRightViewController class]]) {
-    self.slidingViewController.underRightViewController = [storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
+    self.slidingViewController.underRightViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UnderRight"];
   }
   
   [self.view addGestureRecognizer:self.slidingViewController.panGesture];

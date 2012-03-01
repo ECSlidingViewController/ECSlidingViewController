@@ -48,14 +48,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSString *identifier = [NSString stringWithFormat:@"%@Top", [self.menuItems objectAtIndex:indexPath.row]];
-  UIStoryboard *storyboard;
-  
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-  } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
-  }
-  UIViewController *newTopViewController = [storyboard instantiateViewControllerWithIdentifier:identifier];
+
+  UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
   
   [self.slidingViewController anchorTopViewOffScreenTo:ECRight animations:nil onComplete:^{
     CGRect frame = self.slidingViewController.topViewController.view.frame;

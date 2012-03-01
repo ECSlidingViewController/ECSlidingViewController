@@ -40,9 +40,8 @@ You'll need these four files:
 Add a UIViewController to your storyboards and set the subclass to `ECSlidingViewController`.  Then, you'll need to configure the instance of this view controller by setting a `topViewController`
 
 	  ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
-	  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
 	  
-	  slidingViewController.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+	  slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
 
 In this example, we can get a reference to the `ECSlidingViewController` instance then, we set the `topViewController` with an instance of a `UIViewController` subclass called `FirstTopViewController` that is identified as "FirstTop".
 
@@ -61,10 +60,8 @@ Below is the `viewWillAppear:` method for `FirstTopViewController`.
 	{
 	  [super viewWillAppear:animated];
 	  
-	  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:nil];
-	  
 	  if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-	    self.slidingViewController.underLeftViewController  = [storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+	    self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
 	  }
 	  
 	  [self.view addGestureRecognizer:self.slidingViewController.panGesture];
