@@ -35,6 +35,7 @@
 - (void)underRightWillAppear;
 - (void)topDidReset;
 - (BOOL)topViewHasFocus;
+- (void)performSelectorOnChildViewControllers:(SEL)selector;
 
 @end
 
@@ -390,6 +391,7 @@
 
 - (void)underLeftWillAppear
 {
+  [self performSelectorOnChildViewControllers:@selector(underLeftWillAppear)];
   self.underRightView.hidden = YES;
   [self.underLeftViewController viewWillAppear:NO];
   self.underLeftView.hidden = NO;
@@ -397,6 +399,7 @@
 
 - (void)underRightWillAppear
 {
+  [self performSelectorOnChildViewControllers:@selector(underRightWillAppear)];
   self.underLeftView.hidden = YES;
   [self.underRightViewController viewWillAppear:NO];
   self.underRightView.hidden = NO;
@@ -404,6 +407,7 @@
 
 - (void)topDidReset
 {
+  [self performSelectorOnChildViewControllers:@selector(topDidReset)];
   [self.topView removeGestureRecognizer:self.resetTapGesture];
   [self removeTopViewSnapshot];
   self.panGesture.enabled = YES;
@@ -412,6 +416,16 @@
 - (BOOL)topViewHasFocus
 {
   return self.topView.center.x == self.resettedCenter;
+}
+
+- (void)performSelectorOnChildViewControllers:(SEL)selector
+{
+  NSArray *childViewControllers = [self childViewControllers];
+  for (UIViewController *childViewController in childViewControllers) {
+    if ([childViewController respondsToSelector:selector]) {
+      [childViewController performSelector:selector];
+    }
+  }
 }
 
 @end

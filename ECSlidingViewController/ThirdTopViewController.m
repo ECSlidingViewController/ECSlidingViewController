@@ -30,4 +30,20 @@
   [self.slidingViewController anchorTopViewTo:ECRight animations:nil onComplete:nil];
 }
 
+// callbacks from slidingViewController
+- (void)underLeftWillAppear
+{
+  NSLog(@"under left will appear");
+}
+
+- (void)underRightWillAppear
+{
+  NSLog(@"under right will appear");
+}
+
+- (void)topDidReset
+{
+  NSLog(@"top did reset");
+}
+
 @end
