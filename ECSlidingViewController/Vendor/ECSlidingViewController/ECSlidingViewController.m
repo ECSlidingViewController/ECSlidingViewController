@@ -16,10 +16,6 @@
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *resetTapGesture;
 
-- (BOOL)underLeftShowing;
-- (BOOL)underRightShowing;
-- (BOOL)topViewIsOffScreen;
-
 - (NSUInteger)autoResizeToFillScreen;
 - (UIView *)topView;
 - (UIView *)underLeftView;

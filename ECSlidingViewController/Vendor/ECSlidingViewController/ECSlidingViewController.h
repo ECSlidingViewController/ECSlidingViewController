@@ -124,6 +124,15 @@ typedef enum {
 /** Slides the top view back to the center. */
 - (void)resetTopView;
 
+/** Returns true if the underLeft view is showing (even partially) */
+- (BOOL)underLeftShowing;
+
+/** Returns true if the underRight view is showing (even partially) */
+- (BOOL)underRightShowing;
+
+/** Returns true if the top view is completely off the screen */
+- (BOOL)topViewIsOffScreen;
+
 @end
 
 /** UIViewController extension */
