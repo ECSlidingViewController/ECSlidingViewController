@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 EdgeCase. All rights reserved.
 //
 
-#define HORIZ_SWIPE_DRAG_MIN  5
 #import "ECSlidingViewController.h"
 
 @interface ECSlidingViewController()
@@ -39,6 +38,7 @@
 - (void)underLeftWillAppear;
 - (void)underRightWillAppear;
 - (void)topDidReset;
+- (BOOL)topViewHasFocus;
 
 @end
 
@@ -139,7 +139,7 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-  if(!topViewHasFocus){
+  if(![self topViewHasFocus]){
     [self removeTopViewSnapshot];
   }
   if ([self underRightShowing] && ![self topViewIsOffScreen]) {
@@ -154,7 +154,7 @@
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  if(!topViewHasFocus){
+  if(![self topViewHasFocus]){
     [self addTopViewSnapshot];
   }
 }
@@ -223,7 +223,7 @@
     if (complete) {
       complete();
     }
-    topViewHasFocus = NO;
+    
     [self addTopViewSnapshot];
   }];
 }
@@ -249,7 +249,6 @@
     if (complete) {
       complete();
     }
-    topViewHasFocus = NO;
     [self addTopViewSnapshot];
   }];
 }
@@ -259,7 +258,6 @@
   [UIView animateWithDuration:0.25f animations:^{
     [self updateTopViewHorizontalCenter:self.resettedCenter];
   } completion:^(BOOL finished) {
-    topViewHasFocus = YES;
     [self topViewHorizontalCenterDidChange:self.resettedCenter];
   }];
 }
@@ -396,7 +394,6 @@
 
 - (void)underLeftWillAppear
 {
-  topViewHasFocus = NO;
   self.underRightView.hidden = YES;
   [self.underLeftViewController viewWillAppear:NO];
   self.underLeftView.hidden = NO;
@@ -404,7 +401,6 @@
 
 - (void)underRightWillAppear
 {
-  topViewHasFocus = NO;
   self.underLeftView.hidden = YES;
   [self.underRightViewController viewWillAppear:NO];
   self.underRightView.hidden = NO;
@@ -412,14 +408,14 @@
 
 - (void)topDidReset
 {
-  topViewHasFocus = YES;
   [self.topView removeGestureRecognizer:self.resetTapGesture];
   [self removeTopViewSnapshot];
   self.panGesture.enabled = YES;
 }
 
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
-//  return YES;
-//}
+- (BOOL)topViewHasFocus
+{
+  return self.topView.center.x == self.resettedCenter;
+}
 
 @end
