@@ -41,6 +41,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (void)underRightWillAppear;
 - (void)topDidReset;
 - (BOOL)topViewHasFocus;
+- (void)updateUnderLeftLayout;
+- (void)updateUnderRightLayout;
 
 @end
 
@@ -68,6 +70,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 @synthesize anchorRightPeekAmount;
 @synthesize anchorLeftRevealAmount;
 @synthesize anchorRightRevealAmount;
+@synthesize underRightWidthLayout = _underRightWidthLayout;
+@synthesize underLeftWidthLayout  = _underLeftWidthLayout;
 @synthesize shouldAllowUserInteractionsWhenAnchored;
 @synthesize resetStrategy;
 
@@ -106,8 +110,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     [self addChildViewController:self.underLeftViewController];
     [self.underLeftViewController didMoveToParentViewController:self];
     
-    [_underLeftViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
-    [_underLeftViewController.view setFrame:self.view.bounds];
+    [self updateUnderLeftLayout];
     
     [self.view insertSubview:_underLeftViewController.view atIndex:0];
   }
@@ -124,19 +127,48 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     [self addChildViewController:self.underRightViewController];
     [self.underRightViewController didMoveToParentViewController:self];
     
-    [_underRightViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
-    [_underRightViewController.view setFrame:self.view.bounds];
+    [self updateUnderRightLayout];
     
     [self.view insertSubview:_underRightViewController.view atIndex:0];
   }
 }
 
+- (void)setUnderLeftWidthLayout:(ECViewWidthLayout)underLeftWidthLayout
+{
+  if (underLeftWidthLayout == ECVariableRevealWidth && self.anchorRightPeekAmount <= 0) {
+    [NSException raise:@"Invalid Width Layout" format:@"anchorRightPeekAmount must be set"];
+  } else if (underLeftWidthLayout == ECFixedRevealWidth && self.anchorRightRevealAmount <= 0) {
+    [NSException raise:@"Invalid Width Layout" format:@"anchorRightRevealAmount must be set"];
+  }
+  
+  _underLeftWidthLayout = underLeftWidthLayout;
+}
+
+- (void)setUnderRightWidthLayout:(ECViewWidthLayout)underRightWidthLayout
+{
+  if (underRightWidthLayout == ECVariableRevealWidth && self.anchorLeftPeekAmount <= 0) {
+    [NSException raise:@"Invalid Width Layout" format:@"anchorLeftPeekAmount must be set"];
+  } else if (underRightWidthLayout == ECFixedRevealWidth && self.anchorLeftRevealAmount <= 0) {
+    [NSException raise:@"Invalid Width Layout" format:@"anchorLeftRevealAmount must be set"];
+  }
+  
+  _underRightWidthLayout = underRightWidthLayout;
+}
+
 - (void)viewDidLoad
 {
+  [super viewDidLoad];
   self.shouldAllowUserInteractionsWhenAnchored = NO;
   self.resetStrategy = ECTapping | ECPanning;
   self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopView)];
   _panGesture          = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self updateUnderLeftLayout];
+  [self updateUnderRightLayout];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -144,13 +176,18 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   if(![self topViewHasFocus]){
     [self removeTopViewSnapshot];
   }
+  
   if ([self underRightShowing] && ![self topViewIsOffScreen]) {
+    [self updateUnderRightLayout];
     [self updateTopViewHorizontalCenter:self.anchorLeftTopViewCenter];
   } else if ([self underRightShowing] && [self topViewIsOffScreen]) {
+    [self updateUnderRightLayout];
     [self updateTopViewHorizontalCenter:-self.resettedCenter];
   } else if ([self underLeftShowing] && ![self topViewIsOffScreen]) {
+    [self updateUnderLeftLayout];
     [self updateTopViewHorizontalCenter:self.anchorRightTopViewCenter];
   } else if ([self underLeftShowing] && [self topViewIsOffScreen]) {
+    [self updateUnderLeftLayout];
     [self updateTopViewHorizontalCenter:self.screenWidth + self.resettedCenter];
   }
 }
@@ -410,6 +447,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   self.underRightView.hidden = YES;
   [self.underLeftViewController viewWillAppear:NO];
   self.underLeftView.hidden = NO;
+  [self updateUnderLeftLayout];
 }
 
 - (void)underRightWillAppear
@@ -420,6 +458,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   self.underLeftView.hidden = YES;
   [self.underRightViewController viewWillAppear:NO];
   self.underRightView.hidden = NO;
+  [self updateUnderRightLayout];
 }
 
 - (void)topDidReset
@@ -435,6 +474,77 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (BOOL)topViewHasFocus
 {
   return self.topView.center.x == self.resettedCenter;
+}
+
+- (void)updateUnderLeftLayout
+{
+  if (self.underLeftWidthLayout == ECFullWidth) {
+    [self.underLeftView setAutoresizingMask:self.autoResizeToFillScreen];
+    [self.underLeftView setFrame:self.view.bounds];
+  } else if (self.underLeftWidthLayout == ECVariableRevealWidth && !self.topViewIsOffScreen) {
+    CGRect frame = self.view.bounds;
+    CGFloat newWidth;
+    
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+      newWidth = [UIScreen mainScreen].bounds.size.height - self.anchorRightPeekAmount;
+    } else {
+      newWidth = [UIScreen mainScreen].bounds.size.width - self.anchorRightPeekAmount;
+    }
+    
+    frame.size.width = newWidth;
+    
+    self.underLeftView.frame = frame;
+  } else if (self.underLeftWidthLayout == ECFixedRevealWidth) {
+    CGRect frame = self.view.bounds;
+    
+    frame.size.width = self.anchorRightRevealAmount;
+    self.underLeftView.frame = frame;
+  } else {
+    [NSException raise:@"Invalid Width Layout" format:@"underLeftWidthLayout must be a valid ECViewWidthLayout"];
+  }
+}
+
+- (void)updateUnderRightLayout
+{
+  if (self.underRightWidthLayout == ECFullWidth) {
+    [self.underRightViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
+    self.underRightView.frame = self.view.bounds;
+  } else if (self.underRightWidthLayout == ECVariableRevealWidth) {
+    CGRect frame = self.view.bounds;
+    
+    CGFloat newLeftEdge;
+    CGFloat newWidth;
+    
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+      newWidth = [UIScreen mainScreen].bounds.size.height;
+    } else {
+      newWidth = [UIScreen mainScreen].bounds.size.width;
+    }
+    
+    if (self.topViewIsOffScreen) {
+      newLeftEdge = 0;
+    } else {
+      newLeftEdge = self.anchorLeftPeekAmount;
+      newWidth   -= self.anchorLeftPeekAmount;
+    }
+    
+    frame.origin.x   = newLeftEdge;
+    frame.size.width = newWidth;
+    
+    self.underRightView.frame = frame;
+  } else if (self.underRightWidthLayout == ECFixedRevealWidth) {
+    CGRect frame = self.view.bounds;
+    
+    CGFloat newLeftEdge = self.screenWidth - self.anchorLeftRevealAmount;
+    CGFloat newWidth = self.anchorLeftRevealAmount;
+    
+    frame.origin.x   = newLeftEdge;
+    frame.size.width = newWidth;
+    
+    self.underRightView.frame = frame;
+  } else {
+    [NSException raise:@"Invalid Width Layout" format:@"underRightWidthLayout must be a valid ECViewWidthLayout"];
+  }
 }
 
 @end

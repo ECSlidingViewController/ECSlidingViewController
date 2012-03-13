@@ -24,6 +24,16 @@ extern NSString *const ECSlidingViewTopDidAnchorRight;
 /** Notification that gets posted when the top view is centered on the screen */
 extern NSString *const ECSlidingViewTopDidReset;
 
+/** @constant ECViewWidthLayout width of under views */
+typedef enum {
+  /** Under view will take up the full width of the screen */
+  ECFullWidth,
+  /** Under view will have a fixed width equal to anchorRightRevealAmount or anchorLeftRevealAmount. */
+  ECFixedRevealWidth,
+  /** Under view will have a variable width depending on rotation equal to the screen's width - anchorRightPeekAmount or anchorLeftPeekAmount. */
+  ECVariableRevealWidth
+} ECViewWidthLayout;
+
 /** @constant ECSide side of screen */
 typedef enum {
   /** Left side of screen */
@@ -49,13 +59,13 @@ typedef enum {
 }
 
 /** Returns the view controller that will be visible when the top view is slide to the right.
-  
+ 
  This view controller is typically a menu or top-level view that switches out the top view controller.
  */
 @property (nonatomic, strong) UIViewController *underLeftViewController;
 
 /** Returns the view controller that will be visible when the top view is slide to the left.
-
+ 
  This view controller is typically a supplemental view to the top view.
  */
 @property (nonatomic, strong) UIViewController *underRightViewController;
@@ -103,6 +113,18 @@ typedef enum {
  By default, this is set to NO
  */
 @property (nonatomic, unsafe_unretained) BOOL shouldAllowUserInteractionsWhenAnchored;
+
+/** Specifies the behavior for the under left width
+ 
+ By default, this is set to ECFullWidth
+ */
+@property (nonatomic, unsafe_unretained) ECViewWidthLayout underLeftWidthLayout;
+
+/** Specifies the behavior for the under right width
+ 
+ By default, this is set to ECFullWidth
+ */
+@property (nonatomic, unsafe_unretained) ECViewWidthLayout underRightWidthLayout;
 
 /** Returns the strategy for resetting the top view when it is anchored.
  

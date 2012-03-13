@@ -25,6 +25,7 @@
   [super viewDidLoad];
   
   [self.slidingViewController setAnchorRightRevealAmount:280.0f];
+  self.slidingViewController.underLeftWidthLayout = ECFullWidth;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex

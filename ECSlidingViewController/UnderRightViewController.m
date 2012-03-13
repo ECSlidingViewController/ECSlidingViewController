@@ -10,56 +10,17 @@
 
 @interface UnderRightViewController()
 @property (nonatomic, unsafe_unretained) CGFloat peekLeftAmount;
-@property (nonatomic, unsafe_unretained) BOOL isSearching;
-- (void)updateLayoutForOrientation:(UIInterfaceOrientation)orientation;
 @end
 
 @implementation UnderRightViewController
 @synthesize peekLeftAmount;
-@synthesize isSearching;
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   self.peekLeftAmount = 40.0f;
-  self.isSearching = NO;
   [self.slidingViewController setAnchorLeftPeekAmount:self.peekLeftAmount];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  [self updateLayoutForOrientation:self.interfaceOrientation];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-  [self updateLayoutForOrientation:toInterfaceOrientation];
-}
-
-- (void)updateLayoutForOrientation:(UIInterfaceOrientation)orientation
-{
-  CGRect frame = self.view.frame;
-  CGFloat newLeftEdge;
-  CGFloat newWidth;
-  
-  if (UIInterfaceOrientationIsLandscape(orientation)) {
-    newWidth = [UIScreen mainScreen].bounds.size.height;
-  } else if (UIInterfaceOrientationIsPortrait(orientation)) {
-    newWidth = [UIScreen mainScreen].bounds.size.width;
-  }
-  
-  if (self.isSearching) {
-    newLeftEdge = 0;
-  } else {
-    newLeftEdge = self.peekLeftAmount;
-    newWidth   -= self.peekLeftAmount;
-  }
-  
-  frame.origin.x = newLeftEdge;
-  frame.size.width = newWidth;
-  
-  self.view.frame = frame;
+  self.slidingViewController.underRightWidthLayout = ECVariableRevealWidth;
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
@@ -73,9 +34,7 @@
       frame.size.width = [UIScreen mainScreen].bounds.size.width;
     }
     self.view.frame = frame;
-  } onComplete:^{
-    self.isSearching = YES;
-  }];
+  } onComplete:nil];
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -89,9 +48,7 @@
       frame.size.width = [UIScreen mainScreen].bounds.size.width - self.peekLeftAmount;
     }
     self.view.frame = frame;
-  } onComplete:^{
-    self.isSearching = NO;
-  }];
+  } onComplete:nil];
 }
 
 @end
