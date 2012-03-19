@@ -139,6 +139,13 @@ typedef enum {
 /** Slides the top view back to the center. */
 - (void)resetTopView;
 
+/** Slides the top view back to the center.
+
+ @param animations Perform changes to properties that will be animated while top view is moved back to the center of the screen. Can be nil.
+ @param onComplete Executed after the animation is completed. Can be nil.
+ */
+- (void)resetTopViewWithAnimations:(void(^)())animations onComplete:(void(^)())complete;
+
 /** Returns true if the underLeft view is showing (even partially) */
 - (BOOL)underLeftShowing;
 
