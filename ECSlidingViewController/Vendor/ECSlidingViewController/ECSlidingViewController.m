@@ -29,6 +29,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (UIView *)topView;
 - (UIView *)underLeftView;
 - (UIView *)underRightView;
+- (void)adjustLayout;
 - (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer;
 - (void)updateTopViewHorizontalCenter:(CGFloat)newHorizontalCenter;
 - (void)topViewHorizontalCenterWillChange:(CGFloat)newHorizontalCenter;
@@ -176,8 +177,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self updateUnderLeftLayout];
-  [self updateUnderRightLayout];
+  [self adjustLayout];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -186,6 +186,17 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     [self removeTopViewSnapshot];
   }
   
+  [self adjustLayout];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  if(![self topViewHasFocus]){
+    [self addTopViewSnapshot];
+  }
+}
+
+- (void)adjustLayout
+{
   if ([self underRightShowing] && ![self topViewIsOffScreen]) {
     [self updateUnderRightLayout];
     [self updateTopViewHorizontalCenter:self.anchorLeftTopViewCenter];
@@ -198,12 +209,6 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   } else if ([self underLeftShowing] && [self topViewIsOffScreen]) {
     [self updateUnderLeftLayout];
     [self updateTopViewHorizontalCenter:self.screenWidth + self.resettedCenter];
-  }
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  if(![self topViewHasFocus]){
-    [self addTopViewSnapshot];
   }
 }
 
