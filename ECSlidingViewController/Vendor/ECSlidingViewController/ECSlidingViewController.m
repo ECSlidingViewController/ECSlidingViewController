@@ -21,6 +21,9 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 @property (nonatomic, unsafe_unretained) CGFloat initialHoizontalCenter;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *resetTapGesture;
+@property (nonatomic, unsafe_unretained) BOOL underLeftShowing;
+@property (nonatomic, unsafe_unretained) BOOL underRightShowing;
+@property (nonatomic, unsafe_unretained) BOOL topViewIsOffScreen;
 
 - (NSUInteger)autoResizeToFillScreen;
 - (UIView *)topView;
@@ -81,6 +84,9 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 @synthesize initialHoizontalCenter;
 @synthesize panGesture = _panGesture;
 @synthesize resetTapGesture;
+@synthesize underLeftShowing   = _underLeftShowing;
+@synthesize underRightShowing  = _underRightShowing;
+@synthesize topViewIsOffScreen = _topViewIsOffScreen;
 
 - (void)setTopViewController:(UIViewController *)theTopViewController
 {
@@ -270,7 +276,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     if (complete) {
       complete();
     }
-    
+    _topViewIsOffScreen = NO;
     [self addTopViewSnapshot];
     dispatch_async(dispatch_get_main_queue(), ^{
       NSString *key = (side == ECLeft) ? ECSlidingViewTopDidAnchorLeft : ECSlidingViewTopDidAnchorRight;
@@ -305,6 +311,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     if (complete) {
       complete();
     }
+    _topViewIsOffScreen = YES;
     [self addTopViewSnapshot];
     dispatch_async(dispatch_get_main_queue(), ^{
       NSString *key = (side == ECLeft) ? ECSlidingViewTopDidAnchorLeft : ECSlidingViewTopDidAnchorRight;
@@ -331,21 +338,6 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     }
     [self topViewHorizontalCenterDidChange:self.resettedCenter];
   }];
-}
-
-- (BOOL)underLeftShowing
-{
-  return self.topView.frame.origin.x > 0;
-}
-
-- (BOOL)underRightShowing
-{
-  return self.topView.frame.origin.x < 0;
-}
-
-- (BOOL)topViewIsOffScreen
-{
-  return self.topView.center.x <= -self.resettedCenter + 1 || self.topView.center.x >= self.screenWidth + self.resettedCenter - 1;
 }
 
 - (NSUInteger)autoResizeToFillScreen
@@ -472,6 +464,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   [self.underLeftViewController viewWillAppear:NO];
   self.underLeftView.hidden = NO;
   [self updateUnderLeftLayout];
+  _underLeftShowing  = YES;
+  _underRightShowing = NO;
 }
 
 - (void)underRightWillAppear
@@ -483,6 +477,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   [self.underRightViewController viewWillAppear:NO];
   self.underRightView.hidden = NO;
   [self updateUnderRightLayout];
+  _underLeftShowing  = NO;
+  _underRightShowing = YES;
 }
 
 - (void)topDidReset
@@ -493,6 +489,9 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   [self.topView removeGestureRecognizer:self.resetTapGesture];
   [self removeTopViewSnapshot];
   self.panGesture.enabled = YES;
+  _underLeftShowing   = NO;
+  _underRightShowing  = NO;
+  _topViewIsOffScreen = NO;
 }
 
 - (BOOL)topViewHasFocus
