@@ -185,9 +185,9 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     CGFloat currentVelocityX     = currentVelocityPoint.x;
     
     if ([self underLeftShowing] && currentVelocityX > 100) {
-      [self anchorTopViewTo:ECRight animations:nil onComplete:nil];
+      [self anchorTopViewTo:ECRight];
     } else if ([self underRightShowing] && currentVelocityX < 100) {
-      [self anchorTopViewTo:ECLeft animations:nil onComplete:nil];
+      [self anchorTopViewTo:ECLeft];
     } else {
       [self resetTopView];
     }
@@ -197,6 +197,11 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (UIPanGestureRecognizer *)panGesture
 {
   return _panGesture;
+}
+
+- (void)anchorTopViewTo:(ECSide)side
+{
+  [self anchorTopViewTo:side animations:nil onComplete:nil];
 }
 
 - (void)anchorTopViewTo:(ECSide)side animations:(void (^)())animations onComplete:(void (^)())complete
@@ -232,6 +237,11 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
       [[NSNotificationCenter defaultCenter] postNotificationName:key object:self userInfo:nil];
     });
   }];
+}
+
+- (void)anchorTopViewOffScreenTo:(ECSide)side
+{
+  [self anchorTopViewOffScreenTo:side animations:nil onComplete:nil];
 }
 
 - (void)anchorTopViewOffScreenTo:(ECSide)side animations:(void(^)())animations onComplete:(void(^)())complete

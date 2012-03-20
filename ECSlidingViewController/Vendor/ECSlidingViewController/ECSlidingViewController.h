@@ -123,10 +123,24 @@ typedef enum {
  A peek amount or reveal amount must be set for the given side. The top view will anchor to one of those specified values.
  
  @param side The side for the top view to slide towards.
+ */
+- (void)anchorTopViewTo:(ECSide)side;
+
+/** Slides the top view in the direction of the specified side.
+ 
+ A peek amount or reveal amount must be set for the given side. The top view will anchor to one of those specified values.
+ 
+ @param side The side for the top view to slide towards.
  @param animations Perform changes to properties that will be animated while top view is moved off screen. Can be nil.
  @param onComplete Executed after the animation is completed. Can be nil.
  */
 - (void)anchorTopViewTo:(ECSide)side animations:(void(^)())animations onComplete:(void(^)())complete;
+
+/** Slides the top view off of the screen in the direction of the specified side.
+ 
+ @param side The side for the top view to slide off the screen towards.
+ */
+- (void)anchorTopViewOffScreenTo:(ECSide)side;
 
 /** Slides the top view off of the screen in the direction of the specified side.
  

@@ -46,12 +46,12 @@
 
 - (IBAction)revealMenu:(id)sender
 {
-  [self.slidingViewController anchorTopViewTo:ECRight animations:nil onComplete:nil];
+  [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 - (IBAction)revealUnderRight:(id)sender
 {
-  [self.slidingViewController anchorTopViewTo:ECLeft animations:nil onComplete:nil];
+  [self.slidingViewController anchorTopViewTo:ECLeft];
 }
 
 @end
