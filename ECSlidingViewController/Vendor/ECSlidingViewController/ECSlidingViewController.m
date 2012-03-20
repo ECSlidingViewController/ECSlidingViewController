@@ -86,6 +86,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 {
   [self removeTopViewSnapshot];
   [_topViewController.view removeFromSuperview];
+  [_topViewController willMoveToParentViewController:nil];
   [_topViewController removeFromParentViewController];
   
   _topViewController = theTopViewController;
@@ -102,6 +103,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (void)setUnderLeftViewController:(UIViewController *)theUnderLeftViewController
 {
   [_underLeftViewController.view removeFromSuperview];
+  [_underLeftViewController willMoveToParentViewController:nil];
   [_underLeftViewController removeFromParentViewController];
   
   _underLeftViewController = theUnderLeftViewController;
@@ -119,6 +121,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (void)setUnderRightViewController:(UIViewController *)theUnderRightViewController
 {
   [_underRightViewController.view removeFromSuperview];
+  [_underRightViewController willMoveToParentViewController:nil];
   [_underRightViewController removeFromParentViewController];
   
   _underRightViewController = theUnderRightViewController;
