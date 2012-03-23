@@ -332,6 +332,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 
 - (void)resetTopViewWithAnimations:(void(^)())animations onComplete:(void(^)())complete
 {
+  [self topViewHorizontalCenterWillChange:self.resettedCenter];
+  
   [UIView animateWithDuration:0.25f animations:^{
     if (animations) {
       animations();
