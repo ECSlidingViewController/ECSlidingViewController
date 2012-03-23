@@ -503,7 +503,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 
 - (BOOL)topViewHasFocus
 {
-  return self.topView.center.x == self.resettedCenter;
+  return !_underLeftShowing && !_underRightShowing && !_topViewIsOffScreen;
 }
 
 - (void)updateUnderLeftLayout
