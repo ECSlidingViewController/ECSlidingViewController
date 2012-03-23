@@ -172,6 +172,10 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   self.resetStrategy = ECTapping | ECPanning;
   self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopView)];
   _panGesture          = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
+  
+  self.topViewSnapshot = [[UIView alloc] initWithFrame:self.topView.bounds];
+  [self.topViewSnapshot setAutoresizingMask:self.autoResizeToFillScreen];
+  [self.topViewSnapshot addGestureRecognizer:self.resetTapGesture];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -400,10 +404,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (void)addTopViewSnapshot
 {
   if (!self.topViewSnapshot.superview && !self.shouldAllowUserInteractionsWhenAnchored) {
-    self.topViewSnapshot = [[UIView alloc] initWithFrame:self.topView.bounds];
     topViewSnapshot.layer.contents = (id)[UIImage imageWithUIView:self.topView].CGImage;
     [self.topView addSubview:self.topViewSnapshot];
-    [self.topViewSnapshot addGestureRecognizer:self.resetTapGesture];
   }
 }
 
@@ -411,7 +413,6 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 {
   if (self.topViewSnapshot.superview) {
     [self.topViewSnapshot removeFromSuperview];
-    topViewSnapshot = nil;
   }
 }
 
