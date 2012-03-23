@@ -201,6 +201,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 
 - (void)adjustLayout
 {
+  self.topViewSnapshot.frame = self.topView.bounds;
+  
   if ([self underRightShowing] && ![self topViewIsOffScreen]) {
     [self updateUnderRightLayout];
     [self updateTopViewHorizontalCenter:self.anchorLeftTopViewCenter];
