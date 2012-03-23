@@ -11,7 +11,7 @@ This project is an example app that showcases the uses for `ECSlidingViewControl
 
 * Panning gesture to move top view can be set on any `UIView`. It is most likely a navigation bar or the whole top view itself.
 * Configurable anchor positions, with automatic adjustments for orientation change. See "Anchor Position Geometry" section below.
-* There are no assumptions about the size and layout of the views under the top view. That is up to the implementor.
+* There are no assumptions about the size and layout of the views under the top view. See the `underLeftWidthLayout` and `underRightWidthLayout` properties if you need a common layout.
 * The child views can be changed at anytime.
 * Child view controllers can be an instance of `UIViewController` or any subclass of `UIViewController` including `UINavigationController` and `UITabBarController`.
 * iPad support.
