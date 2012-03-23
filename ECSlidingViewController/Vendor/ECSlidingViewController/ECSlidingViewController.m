@@ -77,7 +77,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 @synthesize underRightWidthLayout = _underRightWidthLayout;
 @synthesize underLeftWidthLayout  = _underLeftWidthLayout;
 @synthesize shouldAllowUserInteractionsWhenAnchored;
-@synthesize resetStrategy;
+@synthesize resetStrategy = _resetStrategy;
 
 // category properties
 @synthesize topViewSnapshot;
@@ -169,9 +169,10 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 {
   [super viewDidLoad];
   self.shouldAllowUserInteractionsWhenAnchored = NO;
-  self.resetStrategy = ECTapping | ECPanning;
   self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopView)];
   _panGesture          = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
+  self.resetTapGesture.enabled = NO;
+  self.resetStrategy = ECTapping | ECPanning;
   
   self.topViewSnapshot = [[UIView alloc] initWithFrame:self.topView.bounds];
   [self.topViewSnapshot setAutoresizingMask:self.autoResizeToFillScreen];
@@ -196,6 +197,16 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
   if(![self topViewHasFocus]){
     [self addTopViewSnapshot];
+  }
+}
+
+- (void)setResetStrategy:(ECResetStrategy)theResetStrategy
+{
+  _resetStrategy = theResetStrategy;
+  if (_resetStrategy & ECTapping) {
+    self.resetTapGesture.enabled = YES;
+  } else {
+    self.resetTapGesture.enabled = NO;
   }
 }
 
@@ -279,7 +290,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
     }
     [self updateTopViewHorizontalCenter:newCenter];
   } completion:^(BOOL finished){
-    if (resetStrategy & ECPanning) {
+    if (_resetStrategy & ECPanning) {
       self.panGesture.enabled = YES;
     } else {
       self.panGesture.enabled = NO;
