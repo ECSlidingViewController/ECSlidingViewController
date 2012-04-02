@@ -103,6 +103,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   
   [_topViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
   [_topViewController.view setFrame:self.view.bounds];
+  _topViewController.view.layer.shadowOffset = CGSizeZero;
+  _topViewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   
   [self.view addSubview:_topViewController.view];
 }
