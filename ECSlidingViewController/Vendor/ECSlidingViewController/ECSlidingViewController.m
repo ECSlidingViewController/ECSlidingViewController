@@ -103,6 +103,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   
   [_topViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
   [_topViewController.view setFrame:self.view.bounds];
+  _topViewController.view.layer.shadowOffset = CGSizeZero;
+  _topViewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   
   [self.view addSubview:_topViewController.view];
 }
@@ -187,6 +189,9 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+  self.topView.layer.shadowPath = nil;
+  self.topView.layer.shouldRasterize = YES;
+  
   if(![self topViewHasFocus]){
     [self removeTopViewSnapshot];
   }
@@ -195,6 +200,9 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+  self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
+  self.topView.layer.shouldRasterize = NO;
+  
   if(![self topViewHasFocus]){
     [self addTopViewSnapshot];
   }
