@@ -103,8 +103,6 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   
   [_topViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
   [_topViewController.view setFrame:self.view.bounds];
-  _topViewController.view.layer.shadowOffset = CGSizeZero;
-  _topViewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   
   [self.view addSubview:_topViewController.view];
 }
@@ -184,6 +182,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  self.topView.layer.shadowOffset = CGSizeZero;
+  self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   [self adjustLayout];
 }
 
