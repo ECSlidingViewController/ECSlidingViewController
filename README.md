@@ -87,6 +87,19 @@ Below is an example of the anchorRightRevealAmount set:
 
 ![anchorRightRevealAmount example](http://dl.dropbox.com/u/10937237/reveal.png)
 
+## Top View Shadow
+
+`ECSlidingViewController` handles the shadowOffset, shadowPath, and their rotations for you automatically.  The following code in your top view controller will add a shadow:
+
+    - (void)viewWillAppear:(BOOL)animated
+    {
+      [super viewWillAppear:animated];
+
+	  self.view.layer.shadowOpacity = 0.75f;
+	  self.view.layer.shadowRadius = 10.0f;
+	  self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+	}
+
 ## MIT License
 Copyright (C) 2012 EdgeCase
 
