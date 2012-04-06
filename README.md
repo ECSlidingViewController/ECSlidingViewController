@@ -26,7 +26,7 @@ This project is an example app that showcases the uses for `ECSlidingViewControl
 
 This section will walk through of a simplified version of the included example app. You'll see how to setup the top view that can be panned to the right side to reveal the under left view.
 
-### Copy ECSlidingViewController into your project
+### Include ECSlidingViewController into your project
 
 You'll need these four files:
 
@@ -34,6 +34,10 @@ You'll need these four files:
 * ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.m
 * ECSlidingViewController/Vendor/ECSlidingViewController/UIImage+ImageWithUIView.h
 * ECSlidingViewController/Vendor/ECSlidingViewController/UIImage+ImageWithUIView.m
+
+OR - you can use [CocoaPods](http://cocoapods.org/). Add the following line to your Podspec:
+
+    dependency 'ECSlidingViewController', '~> 0.9.0'
 
 ### Setup storyboards and set the topViewController
 
