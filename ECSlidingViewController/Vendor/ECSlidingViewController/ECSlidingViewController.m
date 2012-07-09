@@ -91,6 +91,8 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 
 - (void)setTopViewController:(UIViewController *)theTopViewController
 {
+  CGRect topViewFrame = _topViewController ? _topViewController.view.frame : self.view.bounds;
+  
   [self removeTopViewSnapshot];
   [_topViewController.view removeFromSuperview];
   [_topViewController willMoveToParentViewController:nil];
@@ -102,7 +104,7 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
   [self.topViewController didMoveToParentViewController:self];
   
   [_topViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
-  [_topViewController.view setFrame:self.view.bounds];
+  [_topViewController.view setFrame:topViewFrame];
   _topViewController.view.layer.shadowOffset = CGSizeZero;
   _topViewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
   
