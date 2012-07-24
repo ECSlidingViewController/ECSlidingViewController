@@ -8,11 +8,13 @@
 
 #import "ECSlidingViewController.h"
 
-NSString *const ECSlidingViewUnderRightWillAppear = @"ECSlidingViewUnderRightWillAppear";
-NSString *const ECSlidingViewUnderLeftWillAppear  = @"ECSlidingViewUnderLeftWillAppear";
-NSString *const ECSlidingViewTopDidAnchorLeft     = @"ECSlidingViewTopDidAnchorLeft";
-NSString *const ECSlidingViewTopDidAnchorRight    = @"ECSlidingViewTopDidAnchorRight";
-NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
+NSString *const ECSlidingViewUnderRightWillAppear    = @"ECSlidingViewUnderRightWillAppear";
+NSString *const ECSlidingViewUnderLeftWillAppear     = @"ECSlidingViewUnderLeftWillAppear";
+NSString *const ECSlidingViewUnderLeftWillDisappear  = @"ECSlidingViewUnderLeftWillDisappear";
+NSString *const ECSlidingViewUnderRightWillDisappear = @"ECSlidingViewUnderRightWillDisappear";
+NSString *const ECSlidingViewTopDidAnchorLeft        = @"ECSlidingViewTopDidAnchorLeft";
+NSString *const ECSlidingViewTopDidAnchorRight       = @"ECSlidingViewTopDidAnchorRight";
+NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidReset";
 
 @interface ECSlidingViewController()
 
@@ -408,8 +410,22 @@ NSString *const ECSlidingViewTopDidReset          = @"ECSlidingViewTopDidReset";
 
 - (void)topViewHorizontalCenterWillChange:(CGFloat)newHorizontalCenter
 {
+	
+
   CGPoint center = self.topView.center;
   
+	if (center.x >= self.resettedCenter && newHorizontalCenter == self.resettedCenter) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:ECSlidingViewUnderLeftWillDisappear object:self userInfo:nil];
+		});
+	}
+	
+	if (center.x <= self.resettedCenter && newHorizontalCenter == self.resettedCenter) {
+		dispatch_async(dispatch_get_main_queue(), ^{
+			[[NSNotificationCenter defaultCenter] postNotificationName:ECSlidingViewUnderRightWillDisappear object:self userInfo:nil];
+		});
+	}
+	
   if (center.x <= self.resettedCenter && newHorizontalCenter > self.resettedCenter) {
     [self underLeftWillAppear];
   } else if (center.x >= self.resettedCenter && newHorizontalCenter < self.resettedCenter) {
