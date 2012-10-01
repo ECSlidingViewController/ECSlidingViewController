@@ -15,6 +15,12 @@ extern NSString *const ECSlidingViewUnderRightWillAppear;
 /** Notification that gets posted when the underLeft view will appear */
 extern NSString *const ECSlidingViewUnderLeftWillAppear;
 
+/** Notification that gets posted when the underLeft view will disappear */
+extern NSString *const ECSlidingViewUnderLeftWillDisappear;
+
+/** Notification that gets posted when the underRight view will disappear */
+extern NSString *const ECSlidingViewUnderRightWillDisappear;
+
 /** Notification that gets posted when the top view is anchored to the left side of the screen */
 extern NSString *const ECSlidingViewTopDidAnchorLeft;
 
