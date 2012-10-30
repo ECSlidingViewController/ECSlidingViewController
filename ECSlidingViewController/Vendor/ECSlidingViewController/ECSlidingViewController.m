@@ -252,22 +252,22 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     self.initialTouchPositionX = currentTouchPositionX;
     self.initialHoizontalCenter = self.topView.center.x;
   } else if (recognizer.state == UIGestureRecognizerStateChanged) {
+    
+    CGPoint translation = [recognizer translationInView:self.view];
+    
+    if(fabs(translation.x) > fabs(translation.y))
+    {
+      CGFloat panAmount = self.initialTouchPositionX - currentTouchPositionX;
+      CGFloat newCenterPosition = self.initialHoizontalCenter - panAmount;
       
-      CGPoint translation = [recognizer translationInView:self.view];
-      
-      if(fabs(translation.x) > fabs(translation.y))
-      {
-          CGFloat panAmount = self.initialTouchPositionX - currentTouchPositionX;
-          CGFloat newCenterPosition = self.initialHoizontalCenter - panAmount;
-          
-          if ((newCenterPosition < self.resettedCenter && self.anchorLeftTopViewCenter == NSNotFound) || (newCenterPosition > self.resettedCenter && self.anchorRightTopViewCenter == NSNotFound)) {
-              newCenterPosition = self.resettedCenter;
-          }
-          
-          [self topViewHorizontalCenterWillChange:newCenterPosition];
-          [self updateTopViewHorizontalCenter:newCenterPosition];
-          [self topViewHorizontalCenterDidChange:newCenterPosition];
+      if ((newCenterPosition < self.resettedCenter && self.anchorLeftTopViewCenter == NSNotFound) || (newCenterPosition > self.resettedCenter && self.anchorRightTopViewCenter == NSNotFound)) {
+        newCenterPosition = self.resettedCenter;
       }
+      
+      [self topViewHorizontalCenterWillChange:newCenterPosition];
+      [self updateTopViewHorizontalCenter:newCenterPosition];
+      [self topViewHorizontalCenterDidChange:newCenterPosition];
+    }
   } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
