@@ -27,6 +27,9 @@ extern NSString *const ECSlidingViewTopDidAnchorLeft;
 /** Notification that gets posted when the top view is anchored to the right side of the screen */
 extern NSString *const ECSlidingViewTopDidAnchorRight;
 
+/** Notification that gets posted when the top view will be centered on the screen */
+extern NSString *const ECSlidingViewTopWillReset;
+
 /** Notification that gets posted when the top view is centered on the screen */
 extern NSString *const ECSlidingViewTopDidReset;
 
