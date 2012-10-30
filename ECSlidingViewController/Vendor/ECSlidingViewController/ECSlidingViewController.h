@@ -123,6 +123,14 @@ typedef enum {
  */
 @property (nonatomic, unsafe_unretained) BOOL shouldAllowUserInteractionsWhenAnchored;
 
+/** Specifies if the top view snapshot requires a pan gesture recognizer.
+ 
+ This is useful when panGesture is added to the navigation bar instead of the main view.
+ 
+ By default, this is set to NO
+ */
+@property (nonatomic, unsafe_unretained) BOOL shouldAddPanGestureRecognizerToTopViewSnapshot;
+
 /** Specifies the behavior for the under left width
  
  By default, this is set to ECFullWidth
