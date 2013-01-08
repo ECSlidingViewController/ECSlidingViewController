@@ -20,14 +20,14 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 @interface ECSlidingViewController()
 
 @property (nonatomic, strong) UIView *topViewSnapshot;
-@property (nonatomic, unsafe_unretained) CGFloat initialTouchPositionX;
-@property (nonatomic, unsafe_unretained) CGFloat initialHoizontalCenter;
+@property (nonatomic, assign) CGFloat initialTouchPositionX;
+@property (nonatomic, assign) CGFloat initialHoizontalCenter;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *resetTapGesture;
 @property (nonatomic, strong) UIPanGestureRecognizer *topViewSnapshotPanGesture;
-@property (nonatomic, unsafe_unretained) BOOL underLeftShowing;
-@property (nonatomic, unsafe_unretained) BOOL underRightShowing;
-@property (nonatomic, unsafe_unretained) BOOL topViewIsOffScreen;
+@property (nonatomic, assign) BOOL underLeftShowing;
+@property (nonatomic, assign) BOOL underRightShowing;
+@property (nonatomic, assign) BOOL topViewIsOffScreen;
 
 - (NSUInteger)autoResizeToFillScreen;
 - (UIView *)topView;

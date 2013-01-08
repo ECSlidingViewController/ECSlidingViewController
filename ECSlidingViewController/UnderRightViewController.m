@@ -9,7 +9,7 @@
 #import "UnderRightViewController.h"
 
 @interface UnderRightViewController()
-@property (nonatomic, unsafe_unretained) CGFloat peekLeftAmount;
+@property (nonatomic, assign) CGFloat peekLeftAmount;
 @end
 
 @implementation UnderRightViewController

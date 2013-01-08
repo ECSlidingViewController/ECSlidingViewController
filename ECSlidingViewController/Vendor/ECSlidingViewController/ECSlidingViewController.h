@@ -91,7 +91,7 @@ typedef enum {
  
  @see anchorLeftRevealAmount
  */
-@property (nonatomic, unsafe_unretained) CGFloat anchorLeftPeekAmount;
+@property (nonatomic, assign) CGFloat anchorLeftPeekAmount;
 
 /** Returns the number of points the top view is visible when the top view is anchored to the right side.
  
@@ -99,7 +99,7 @@ typedef enum {
  
  @see anchorRightRevealAmount
  */
-@property (nonatomic, unsafe_unretained) CGFloat anchorRightPeekAmount;
+@property (nonatomic, assign) CGFloat anchorRightPeekAmount;
 
 /** Returns the number of points the under right view is visible when the top view is anchored to the left side.
  
@@ -107,7 +107,7 @@ typedef enum {
  
  @see anchorLeftPeekAmount
  */
-@property (nonatomic, unsafe_unretained) CGFloat anchorLeftRevealAmount;
+@property (nonatomic, assign) CGFloat anchorLeftRevealAmount;
 
 /** Returns the number of points the under left view is visible when the top view is anchored to the right side.
  
@@ -115,13 +115,13 @@ typedef enum {
  
  @see anchorRightPeekAmount
  */
-@property (nonatomic, unsafe_unretained) CGFloat anchorRightRevealAmount;
+@property (nonatomic, assign) CGFloat anchorRightRevealAmount;
 
 /** Specifies if the user should be able to interact with the top view when it is anchored.
  
  By default, this is set to NO
  */
-@property (nonatomic, unsafe_unretained) BOOL shouldAllowUserInteractionsWhenAnchored;
+@property (nonatomic, assign) BOOL shouldAllowUserInteractionsWhenAnchored;
 
 /** Specifies if the top view snapshot requires a pan gesture recognizer.
  
@@ -129,19 +129,19 @@ typedef enum {
  
  By default, this is set to NO
  */
-@property (nonatomic, unsafe_unretained) BOOL shouldAddPanGestureRecognizerToTopViewSnapshot;
+@property (nonatomic, assign) BOOL shouldAddPanGestureRecognizerToTopViewSnapshot;
 
 /** Specifies the behavior for the under left width
  
  By default, this is set to ECFullWidth
  */
-@property (nonatomic, unsafe_unretained) ECViewWidthLayout underLeftWidthLayout;
+@property (nonatomic, assign) ECViewWidthLayout underLeftWidthLayout;
 
 /** Specifies the behavior for the under right width
  
  By default, this is set to ECFullWidth
  */
-@property (nonatomic, unsafe_unretained) ECViewWidthLayout underRightWidthLayout;
+@property (nonatomic, assign) ECViewWidthLayout underRightWidthLayout;
 
 /** Returns the strategy for resetting the top view when it is anchored.
  
@@ -149,7 +149,7 @@ typedef enum {
  
  If this is set to ECNone, then there must be a custom way to reset the top view otherwise it will stay anchored.
  */
-@property (nonatomic, unsafe_unretained) ECResetStrategy resetStrategy;
+@property (nonatomic, assign) ECResetStrategy resetStrategy;
 
 /** Returns a horizontal panning gesture for moving the top view.
  
