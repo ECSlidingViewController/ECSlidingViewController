@@ -117,6 +117,14 @@ typedef enum {
  */
 @property (nonatomic, assign) CGFloat anchorRightRevealAmount;
 
+/** Specifies whether or not the top view can be panned past the anchor point.
+ 
+ Set to NO if you don't want to show the empty space behind the top and under view.
+ 
+ By defaut, this is set to YES
+ */
+@property (nonatomic, assign) BOOL shouldAllowPanningPastAnchor;
+
 /** Specifies if the user should be able to interact with the top view when it is anchored.
  
  By default, this is set to NO

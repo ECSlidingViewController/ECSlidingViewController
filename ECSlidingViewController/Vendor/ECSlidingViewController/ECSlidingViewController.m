@@ -80,6 +80,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 @synthesize anchorRightRevealAmount;
 @synthesize underRightWidthLayout = _underRightWidthLayout;
 @synthesize underLeftWidthLayout  = _underLeftWidthLayout;
+@synthesize shouldAllowPanningPastAnchor;
 @synthesize shouldAllowUserInteractionsWhenAnchored;
 @synthesize shouldAddPanGestureRecognizerToTopViewSnapshot;
 @synthesize resetStrategy = _resetStrategy;
@@ -174,6 +175,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  self.shouldAllowPanningPastAnchor = YES;
   self.shouldAllowUserInteractionsWhenAnchored = NO;
   self.shouldAddPanGestureRecognizerToTopViewSnapshot = NO;
   self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopView)];
@@ -260,9 +262,13 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
       newCenterPosition = self.resettedCenter;
     }
     
-    [self topViewHorizontalCenterWillChange:newCenterPosition];
-    [self updateTopViewHorizontalCenter:newCenterPosition];
-    [self topViewHorizontalCenterDidChange:newCenterPosition];
+    BOOL newCenterPositionIsOutsideAnchor = newCenterPosition < self.anchorLeftTopViewCenter || self.anchorRightTopViewCenter < newCenterPosition;
+    
+    if ((newCenterPositionIsOutsideAnchor && self.shouldAllowPanningPastAnchor) || !newCenterPositionIsOutsideAnchor) {
+      [self topViewHorizontalCenterWillChange:newCenterPosition];
+      [self updateTopViewHorizontalCenter:newCenterPosition];
+      [self topViewHorizontalCenterDidChange:newCenterPosition];
+    }
   } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
