@@ -43,8 +43,6 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (CGFloat)anchorRightTopViewCenter;
 - (CGFloat)anchorLeftTopViewCenter;
 - (CGFloat)resettedCenter;
-- (CGFloat)screenWidth;
-- (CGFloat)screenWidthForOrientation:(UIInterfaceOrientation)orientation;
 - (void)underLeftWillAppear;
 - (void)underRightWillAppear;
 - (void)topDidReset;
@@ -242,7 +240,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     [self updateTopViewHorizontalCenter:self.anchorRightTopViewCenter];
   } else if ([self underLeftShowing] && [self topViewIsOffScreen]) {
     [self updateUnderLeftLayout];
-    [self updateTopViewHorizontalCenter:self.screenWidth + self.resettedCenter];
+    [self updateTopViewHorizontalCenter:self.view.bounds.size.width + self.resettedCenter];
   }
 }
 
@@ -340,7 +338,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   if (side == ECLeft) {
     newCenter = -self.resettedCenter;
   } else if (side == ECRight) {
-    newCenter = self.screenWidth + self.resettedCenter;
+    newCenter = self.view.bounds.size.width + self.resettedCenter;
   }
   
   [self topViewHorizontalCenterWillChange:newCenter];
@@ -477,7 +475,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (CGFloat)anchorRightTopViewCenter
 {
   if (self.anchorRightPeekAmount) {
-    return self.screenWidth + self.resettedCenter - self.anchorRightPeekAmount;
+    return self.view.bounds.size.width + self.resettedCenter - self.anchorRightPeekAmount;
   } else if (self.anchorRightRevealAmount) {
     return self.resettedCenter + self.anchorRightRevealAmount;
   } else {
@@ -490,7 +488,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   if (self.anchorLeftPeekAmount) {
     return -self.resettedCenter + self.anchorLeftPeekAmount;
   } else if (self.anchorLeftRevealAmount) {
-    return -self.resettedCenter + (self.screenWidth - self.anchorLeftRevealAmount);
+    return -self.resettedCenter + (self.view.bounds.size.width - self.anchorLeftRevealAmount);
   } else {
     return NSNotFound;
   }
@@ -498,27 +496,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 - (CGFloat)resettedCenter
 {
-  return ceil(self.screenWidth / 2);
-}
-
-- (CGFloat)screenWidth
-{
-  return [self screenWidthForOrientation:[UIApplication sharedApplication].statusBarOrientation];
-}
-
-- (CGFloat)screenWidthForOrientation:(UIInterfaceOrientation)orientation
-{
-  CGSize size = [UIScreen mainScreen].bounds.size;
-  UIApplication *application = [UIApplication sharedApplication];
-  if (UIInterfaceOrientationIsLandscape(orientation))
-  {
-    size = CGSizeMake(size.height, size.width);
-  }
-  if (application.statusBarHidden == NO)
-  {
-    size.height -= MIN(application.statusBarFrame.size.width, application.statusBarFrame.size.height);
-  }
-  return size.width;
+  return (self.view.bounds.size.width / 2);
 }
 
 - (void)underLeftWillAppear
@@ -574,16 +552,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     [self.underLeftView setFrame:self.view.bounds];
   } else if (self.underLeftWidthLayout == ECVariableRevealWidth && !self.topViewIsOffScreen) {
     CGRect frame = self.view.bounds;
-    CGFloat newWidth;
     
-    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-      newWidth = [UIScreen mainScreen].bounds.size.height - self.anchorRightPeekAmount;
-    } else {
-      newWidth = [UIScreen mainScreen].bounds.size.width - self.anchorRightPeekAmount;
-    }
-    
-    frame.size.width = newWidth;
-    
+    frame.size.width = frame.size.width - self.anchorRightPeekAmount;
     self.underLeftView.frame = frame;
   } else if (self.underLeftWidthLayout == ECFixedRevealWidth) {
     CGRect frame = self.view.bounds;
@@ -604,13 +574,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     CGRect frame = self.view.bounds;
     
     CGFloat newLeftEdge;
-    CGFloat newWidth;
-    
-    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-      newWidth = [UIScreen mainScreen].bounds.size.height;
-    } else {
-      newWidth = [UIScreen mainScreen].bounds.size.width;
-    }
+    CGFloat newWidth = frame.size.width;
     
     if (self.topViewIsOffScreen) {
       newLeftEdge = 0;
@@ -626,7 +590,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   } else if (self.underRightWidthLayout == ECFixedRevealWidth) {
     CGRect frame = self.view.bounds;
     
-    CGFloat newLeftEdge = self.screenWidth - self.anchorLeftRevealAmount;
+    CGFloat newLeftEdge = frame.size.width - self.anchorLeftRevealAmount;
     CGFloat newWidth = self.anchorLeftRevealAmount;
     
     frame.origin.x   = newLeftEdge;
