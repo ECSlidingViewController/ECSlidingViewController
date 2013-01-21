@@ -18,8 +18,6 @@
     self.slidingViewController.underLeftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
   }
   self.slidingViewController.underRightViewController = nil;
-  self.slidingViewController.anchorLeftPeekAmount     = 0;
-  self.slidingViewController.anchorLeftRevealAmount   = 0;
   
   [self.view addGestureRecognizer:self.slidingViewController.panGesture];
 }
