@@ -504,8 +504,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     [[NSNotificationCenter defaultCenter] postNotificationName:ECSlidingViewUnderLeftWillAppear object:self userInfo:nil];
   });
   [self.underRightView removeFromSuperview];
-  [self.view insertSubview:self.underLeftView belowSubview:self.topView];
   [self updateUnderLeftLayout];
+  [self.view insertSubview:self.underLeftView belowSubview:self.topView];
   _underLeftShowing  = YES;
   _underRightShowing = NO;
 }
@@ -516,8 +516,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     [[NSNotificationCenter defaultCenter] postNotificationName:ECSlidingViewUnderRightWillAppear object:self userInfo:nil];
   });
   [self.underLeftView removeFromSuperview];
-  [self.view insertSubview:self.underRightView belowSubview:self.topView];
   [self updateUnderRightLayout];
+  [self.view insertSubview:self.underRightView belowSubview:self.topView];
   _underLeftShowing  = NO;
   _underRightShowing = YES;
 }
