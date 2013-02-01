@@ -180,6 +180,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   _panGesture          = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
   self.resetTapGesture.enabled = NO;
   self.resetStrategy = ECTapping | ECPanning;
+  self.panningVelocityXThreshold = 100;
   
   self.topViewSnapshot = [[UIView alloc] initWithFrame:self.topView.bounds];
   [self.topViewSnapshot setAutoresizingMask:self.autoResizeToFillScreen];
@@ -272,9 +273,9 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
     
-    if ([self underLeftShowing] && currentVelocityX > 100) {
+    if ([self underLeftShowing] && currentVelocityX > self.panningVelocityXThreshold) {
       [self anchorTopViewTo:ECRight];
-    } else if ([self underRightShowing] && currentVelocityX < 100) {
+    } else if ([self underRightShowing] && currentVelocityX <= self.panningVelocityXThreshold) {
       [self anchorTopViewTo:ECLeft];
     } else {
       [self resetTopView];
