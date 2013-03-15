@@ -165,6 +165,13 @@ typedef enum {
  */
 @property (nonatomic, assign) NSUInteger panningVelocityXThreshold;
 
+/** Can be set to provide a continuous callback as the top view slides.
+ 
+ Useful for animations synchronized to the sliding.
+ 
+ */
+@property (nonatomic,copy) void (^continuousBlock)(float xPos);
+
 /** Returns a horizontal panning gesture for moving the top view.
  
  This is typically added to the top view or a top view's navigation bar.
