@@ -37,7 +37,7 @@ You'll need these four files:
 
 OR - you can use [CocoaPods](http://cocoapods.org/). Add the following line to your Podspec:
 
-    pod 'ECSlidingViewController', '~> 0.9.0'
+    pod 'ECSlidingViewController', '~> 0.10.0'
 
 ### Setup storyboards and set the topViewController
 
