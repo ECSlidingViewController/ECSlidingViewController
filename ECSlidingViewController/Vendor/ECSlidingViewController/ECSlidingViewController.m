@@ -21,7 +21,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 @property (nonatomic, strong) UIView *topViewSnapshot;
 @property (nonatomic, assign) CGFloat initialTouchPositionX;
-@property (nonatomic, assign) CGFloat initialHoizontalCenter;
+@property (nonatomic, assign) CGFloat initialHorizontalCenter;
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong) UITapGestureRecognizer *resetTapGesture;
 @property (nonatomic, strong) UIPanGestureRecognizer *topViewSnapshotPanGesture;
@@ -86,7 +86,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 // category properties
 @synthesize topViewSnapshot;
 @synthesize initialTouchPositionX;
-@synthesize initialHoizontalCenter;
+@synthesize initialHorizontalCenter;
 @synthesize panGesture = _panGesture;
 @synthesize resetTapGesture;
 @synthesize underLeftShowing   = _underLeftShowing;
@@ -251,10 +251,10 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   
   if (recognizer.state == UIGestureRecognizerStateBegan) {
     self.initialTouchPositionX = currentTouchPositionX;
-    self.initialHoizontalCenter = self.topView.center.x;
+    self.initialHorizontalCenter = self.topView.center.x;
   } else if (recognizer.state == UIGestureRecognizerStateChanged) {
     CGFloat panAmount = self.initialTouchPositionX - currentTouchPositionX;
-    CGFloat newCenterPosition = self.initialHoizontalCenter - panAmount;
+    CGFloat newCenterPosition = self.initialHorizontalCenter - panAmount;
     
     if ((newCenterPosition < self.resettedCenter && (self.anchorLeftTopViewCenter == NSNotFound || self.underRightViewController == nil)) ||
         (newCenterPosition > self.resettedCenter && (self.anchorRightTopViewCenter == NSNotFound || self.underLeftViewController == nil))) {
