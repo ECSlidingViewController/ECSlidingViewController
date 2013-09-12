@@ -170,7 +170,7 @@ typedef enum {
  Useful for animations synchronized to the sliding.
  
  */
-@property (nonatomic,copy) void (^continuousBlock)(float xPos);
+@property (nonatomic,copy) void (^topViewCenterMoved)(float xPos);
 
 /** Returns a horizontal panning gesture for moving the top view.
  

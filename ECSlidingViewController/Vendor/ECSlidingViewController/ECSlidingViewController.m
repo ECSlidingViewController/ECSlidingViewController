@@ -250,9 +250,6 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 {
   CGPoint currentTouchPoint     = [recognizer locationInView:self.view];
   CGFloat currentTouchPositionX = currentTouchPoint.x;
-    
-  if(self.continuousBlock)
-    self.continuousBlock(currentTouchPositionX);
   
   if (recognizer.state == UIGestureRecognizerStateBegan) {
     self.initialTouchPositionX = currentTouchPositionX;
@@ -422,6 +419,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   CGPoint center = self.topView.center;
   center.x = newHorizontalCenter;
   self.topView.layer.position = center;
+  if (self.topViewCenterMoved) self.topViewCenterMoved(newHorizontalCenter);
 }
 
 - (void)topViewHorizontalCenterWillChange:(CGFloat)newHorizontalCenter

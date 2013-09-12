@@ -21,7 +21,7 @@
   
   [self.view addGestureRecognizer:self.slidingViewController.panGesture];
     
-  self.slidingViewController.continuousBlock = ^(float x){
+  self.slidingViewController.topViewCenterMoved = ^(float x){
     self.view.backgroundColor = [UIColor colorWithRed:x/self.view.bounds.size.width green:50 blue:70 alpha:1];
   };
 }
