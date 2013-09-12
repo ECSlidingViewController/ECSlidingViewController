@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11D50" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="SIb-O2-Xa4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="13A569" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="SIb-O2-Xa4">
     <dependencies>
-        <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
+        <!--Menu View Controller-->
         <scene sceneID="vux-Sf-7zs">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WAQ-KG-3dU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Menu" id="K2H-Q6-O20" customClass="MenuViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dD5-Ap-SBZ">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -26,12 +25,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WAQ-KG-3dU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="504" y="-1153"/>
         </scene>
+        <!--Second Top View Controller-->
         <scene sceneID="srH-xs-0fc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="30g-af-uzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SecondTop" id="8Oo-HP-N9T" customClass="SecondTopViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wVL-ud-63R">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -54,12 +54,13 @@
                         <color key="backgroundColor" red="0.0" green="0.83163265310000001" blue="0.68719590809999997" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="30g-af-uzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1366" y="-2316"/>
         </scene>
+        <!--Third Top View Controller-->
         <scene sceneID="m0k-BS-fu1">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pOm-Ve-zqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="ThirdTop" id="VuW-Q4-Kdw" customClass="ThirdTopViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wkv-sR-l1J">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -82,12 +83,13 @@
                         <color key="backgroundColor" red="0.31581848979999999" green="0.63389155529999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pOm-Ve-zqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1366" y="-3472"/>
         </scene>
+        <!--View Controller-->
         <scene sceneID="9Lf-Ds-7hE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iCA-AT-FmW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="7TO-m0-aL5" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Wly-m0-fDF">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -96,12 +98,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="voj-fx-Y0v"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iCA-AT-FmW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3128" y="-4635"/>
         </scene>
+        <!--Navigation Top View Controller-->
         <scene sceneID="uTs-LF-eUf">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mkw-MZ-h1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="NavigationTop" definesPresentationContext="YES" id="1hx-oA-DgE" customClass="NavigationTopViewController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vlA-OI-a5q">
                         <autoresizingMask key="autoresizingMask"/>
@@ -110,12 +113,13 @@
                         <segue destination="NXj-9U-Y8g" kind="relationship" relationship="rootViewController" id="bjU-iw-BID"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mkw-MZ-h1g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1366" y="-4635"/>
         </scene>
+        <!--Sample Table View Controller-->
         <scene sceneID="ZSn-tl-r3h">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0q0-M8-OFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="NXj-9U-Y8g" customClass="SampleTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kNR-UP-LbH">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
@@ -140,14 +144,21 @@
                             <outlet property="delegate" destination="NXj-9U-Y8g" id="3LL-BN-9x0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="wWQ-ug-3ai"/>
+                    <navigationItem key="navigationItem" id="wWQ-ug-3ai">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="2rl-9s-H88">
+                            <connections>
+                                <action selector="revealMenu:" destination="NXj-9U-Y8g" id="Lqt-fU-RtY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0q0-M8-OFj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2228" y="-4635"/>
         </scene>
+        <!--First Top View Controller-->
         <scene sceneID="krM-pN-5xZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sXC-W5-s9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="FirstTop" id="euu-E6-BqD" customClass="FirstTopViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CqQ-Cm-tng">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -175,12 +186,13 @@
                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sXC-W5-s9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1366" y="-1153"/>
         </scene>
+        <!--Under Right View Controller-->
         <scene sceneID="lD1-B4-aXE">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cmP-nh-T4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController storyboardIdentifier="UnderRight" id="HUx-p0-9NJ" customClass="UnderRightViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dGB-Ia-LVm">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -214,6 +226,7 @@
                         <outlet property="searchDisplayController" destination="Tyo-Kv-5mr" id="9GB-UB-SDR"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cmP-nh-T4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="Tyo-Kv-5mr">
                     <connections>
                         <outlet property="delegate" destination="HUx-p0-9NJ" id="UHw-xq-eh9"/>
@@ -226,9 +239,9 @@
             </objects>
             <point key="canvasLocation" x="2228" y="-1153"/>
         </scene>
+        <!--Initial Sliding View Controller-->
         <scene sceneID="b9f-M7-SOp">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1dW-ho-hEk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="SIb-O2-Xa4" customClass="InitialSlidingViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="blf-xf-5ab">
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
@@ -236,6 +249,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1dW-ho-hEk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-362" y="-1153"/>
         </scene>
