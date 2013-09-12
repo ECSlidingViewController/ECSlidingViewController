@@ -14,7 +14,7 @@
   UIImage *img;  
   UIGraphicsBeginImageContext(screenShotSize);
   CGContextRef ctx = UIGraphicsGetCurrentContext();
-  [view drawLayer:view.layer inContext:ctx];
+  [view.layer renderInContext:ctx];
   img = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
   
