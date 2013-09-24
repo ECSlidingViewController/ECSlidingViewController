@@ -178,6 +178,13 @@ typedef enum {
  */
 @property (nonatomic,copy) void (^topViewCenterMoved)(float xPos);
 
+/** A view that is the same size and position as the status bar
+ 
+ It is guaranteed to always be on top of the top and under views.
+ 
+ */
+@property (nonatomic, strong) UIView *statusBarBackgroundView;
+
 /** Returns a horizontal panning gesture for moving the top view.
  
  This is typically added to the top view or a top view's navigation bar.

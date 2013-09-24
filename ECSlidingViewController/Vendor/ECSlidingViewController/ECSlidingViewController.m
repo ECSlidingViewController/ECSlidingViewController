@@ -114,7 +114,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   _topViewController.view.layer.shadowOffset = CGSizeZero;
   _topViewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:[self fullViewBounds]].CGPath;
   
-  [self.view addSubview:_topViewController.view];
+  [self.view insertSubview:_topViewController.view belowSubview:self.statusBarBackgroundView];
   self.topViewSnapshot.frame = self.topView.bounds;
 }
 
@@ -290,6 +290,17 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
       [self resetTopView];
     }
   }
+}
+
+- (UIView *)statusBarBackgroundView
+{
+  if (_statusBarBackgroundView) return _statusBarBackgroundView;
+  
+  _statusBarBackgroundView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].statusBarFrame];
+  _statusBarBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+  [self.view addSubview:_statusBarBackgroundView];
+  
+  return _statusBarBackgroundView;
 }
 
 - (UIPanGestureRecognizer *)panGesture

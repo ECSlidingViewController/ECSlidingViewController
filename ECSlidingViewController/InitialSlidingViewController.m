@@ -22,11 +22,18 @@
   }
   
   self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+  
+  self.statusBarBackgroundView.backgroundColor = [UIColor blackColor];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
   return YES;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+  return UIStatusBarStyleLightContent;
 }
 
 @end
