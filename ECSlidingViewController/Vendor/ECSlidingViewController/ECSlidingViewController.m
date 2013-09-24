@@ -178,6 +178,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   self.shouldAllowPanningPastAnchor = YES;
   self.shouldAllowUserInteractionsWhenAnchored = NO;
   self.shouldAddPanGestureRecognizerToTopViewSnapshot = NO;
+  self.shouldAdjustChildViewHeightForStatusBar = YES;
   self.resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopView)];
   _panGesture          = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
   self.resetTapGesture.enabled = NO;
@@ -511,9 +512,13 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 - (CGRect)fullViewBounds
 {
-  CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-  if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-    statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.width;
+  CGFloat statusBarHeight = 0;
+  
+  if (self.shouldAdjustChildViewHeightForStatusBar) {
+    statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+      statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.width;
+    }
   }
   CGRect bounds = self.view.bounds;
   bounds.origin.y += statusBarHeight;

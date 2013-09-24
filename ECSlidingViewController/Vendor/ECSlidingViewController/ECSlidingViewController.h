@@ -139,6 +139,12 @@ typedef enum {
  */
 @property (nonatomic, assign) BOOL shouldAddPanGestureRecognizerToTopViewSnapshot;
 
+/** Specifies if the the child views should be shortened to accomodate the status bar.
+ 
+ By default, this is set to YES
+ */
+@property (nonatomic, assign) BOOL shouldAdjustChildViewHeightForStatusBar;
+
 /** Specifies the behavior for the under left width
  
  By default, this is set to ECFullWidth
