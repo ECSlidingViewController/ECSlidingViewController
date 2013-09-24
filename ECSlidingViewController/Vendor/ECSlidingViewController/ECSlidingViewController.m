@@ -43,6 +43,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (CGFloat)anchorRightTopViewCenter;
 - (CGFloat)anchorLeftTopViewCenter;
 - (CGFloat)resettedCenter;
+- (CGRect)fullViewBounds;
 - (void)underLeftWillAppear;
 - (void)underRightWillAppear;
 - (void)topDidReset;
@@ -96,7 +97,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 - (void)setTopViewController:(UIViewController *)theTopViewController
 {
-  CGRect topViewFrame = _topViewController ? _topViewController.view.frame : self.view.bounds;
+  CGRect topViewFrame = _topViewController ? _topViewController.view.frame : [self fullViewBounds];
   
   [self removeTopViewSnapshot];
   [_topViewController.view removeFromSuperview];
@@ -111,7 +112,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   [_topViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
   [_topViewController.view setFrame:topViewFrame];
   _topViewController.view.layer.shadowOffset = CGSizeZero;
-  _topViewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
+  _topViewController.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:[self fullViewBounds]].CGPath;
   
   [self.view addSubview:_topViewController.view];
   self.topViewSnapshot.frame = self.topView.bounds;
@@ -192,7 +193,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 {
   [super viewWillAppear:animated];
   self.topView.layer.shadowOffset = CGSizeZero;
-  self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
+  self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:[self fullViewBounds]].CGPath;
   [self adjustLayout];
 }
 
@@ -209,7 +210,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
-  self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
+  self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:[self fullViewBounds]].CGPath;
   self.topView.layer.shouldRasterize = NO;
   
   if(![self topViewHasFocus]){
@@ -233,16 +234,22 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   
   if ([self underRightShowing] && ![self topViewIsOffScreen]) {
     [self updateUnderRightLayout];
+    self.topViewController.view.frame = [self fullViewBounds];
     [self updateTopViewHorizontalCenter:self.anchorLeftTopViewCenter];
   } else if ([self underRightShowing] && [self topViewIsOffScreen]) {
     [self updateUnderRightLayout];
+    self.topViewController.view.frame = [self fullViewBounds];
     [self updateTopViewHorizontalCenter:-self.resettedCenter];
   } else if ([self underLeftShowing] && ![self topViewIsOffScreen]) {
     [self updateUnderLeftLayout];
+    self.topViewController.view.frame = [self fullViewBounds];
     [self updateTopViewHorizontalCenter:self.anchorRightTopViewCenter];
   } else if ([self underLeftShowing] && [self topViewIsOffScreen]) {
     [self updateUnderLeftLayout];
+    self.topViewController.view.frame = [self fullViewBounds];
     [self updateTopViewHorizontalCenter:self.view.bounds.size.width + self.resettedCenter];
+  } else {
+    self.topViewController.view.frame = [self fullViewBounds];
   }
 }
 
@@ -502,6 +509,19 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   return (self.view.bounds.size.width / 2);
 }
 
+- (CGRect)fullViewBounds
+{
+  CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+  if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+    statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.width;
+  }
+  CGRect bounds = self.view.bounds;
+  bounds.origin.y += statusBarHeight;
+  bounds.size.height -= statusBarHeight;
+  
+  return bounds;
+}
+
 - (void)underLeftWillAppear
 {
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -550,14 +570,14 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 {
   if (self.underLeftWidthLayout == ECFullWidth) {
     [self.underLeftView setAutoresizingMask:self.autoResizeToFillScreen];
-    [self.underLeftView setFrame:self.view.bounds];
+    [self.underLeftView setFrame:[self fullViewBounds]];
   } else if (self.underLeftWidthLayout == ECVariableRevealWidth && !self.topViewIsOffScreen) {
-    CGRect frame = self.view.bounds;
+    CGRect frame = [self fullViewBounds];
     
     frame.size.width = frame.size.width - self.anchorRightPeekAmount;
     self.underLeftView.frame = frame;
   } else if (self.underLeftWidthLayout == ECFixedRevealWidth) {
-    CGRect frame = self.view.bounds;
+    CGRect frame = [self fullViewBounds];
     
     frame.size.width = self.anchorRightRevealAmount;
     self.underLeftView.frame = frame;
@@ -570,9 +590,9 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 {
   if (self.underRightWidthLayout == ECFullWidth) {
     [self.underRightViewController.view setAutoresizingMask:self.autoResizeToFillScreen];
-    self.underRightView.frame = self.view.bounds;
+    self.underRightView.frame = [self fullViewBounds];
   } else if (self.underRightWidthLayout == ECVariableRevealWidth) {
-    CGRect frame = self.view.bounds;
+    CGRect frame = [self fullViewBounds];
     
     CGFloat newLeftEdge;
     CGFloat newWidth = frame.size.width;
@@ -589,7 +609,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     
     self.underRightView.frame = frame;
   } else if (self.underRightWidthLayout == ECFixedRevealWidth) {
-    CGRect frame = self.view.bounds;
+    CGRect frame = [self fullViewBounds];
     
     CGFloat newLeftEdge = frame.size.width - self.anchorLeftRevealAmount;
     CGFloat newWidth = self.anchorLeftRevealAmount;
