@@ -25,16 +25,13 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-  [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
   [self.slidingViewController anchorTopViewOffScreenTo:ECLeft animations:^{
     CGRect frame = self.view.frame;
     frame.origin.x = 0.0f;
     if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
       frame.size.width = [UIScreen mainScreen].bounds.size.height;
-      frame.size.height = [UIScreen mainScreen].bounds.size.width;
     } else if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
       frame.size.width = [UIScreen mainScreen].bounds.size.width;
-      frame.size.height = [UIScreen mainScreen].bounds.size.height;
     }
     self.view.frame = frame;
   } onComplete:nil];
@@ -42,7 +39,6 @@
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-  [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
   [self.slidingViewController anchorTopViewTo:ECLeft animations:^{
     CGRect frame = self.view.frame;
     frame.origin.x = self.peekLeftAmount;
