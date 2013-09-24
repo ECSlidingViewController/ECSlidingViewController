@@ -141,7 +141,7 @@ typedef enum {
 
 /** Specifies if the the child views should be shortened to accomodate the status bar.
  
- By default, this is set to YES
+ By default, this is set to NO
  */
 @property (nonatomic, assign) BOOL shouldAdjustChildViewHeightForStatusBar;
 

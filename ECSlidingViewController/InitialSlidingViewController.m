@@ -13,6 +13,9 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.shouldAdjustChildViewHeightForStatusBar = YES;
+  self.statusBarBackgroundView.backgroundColor = [UIColor blackColor];
+  
   UIStoryboard *storyboard;
   
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
@@ -22,8 +25,6 @@
   }
   
   self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
-  
-  self.statusBarBackgroundView.backgroundColor = [UIColor blackColor];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
