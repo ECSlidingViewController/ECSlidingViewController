@@ -474,7 +474,6 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (void)addTopViewSnapshot
 {
   if (!self.topViewSnapshot.superview && !self.shouldAllowUserInteractionsWhenAnchored) {
-    //topViewSnapshot.layer.contents = (id)[UIImage imageWithUIView:self.topView].CGImage;
     [self.topView addSubview:self.topViewSnapshot];
     
     if (self.shouldAddPanGestureRecognizerToTopViewSnapshot && (_resetStrategy & ECPanning)) {
