@@ -531,7 +531,16 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
       statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.width;
     }
   }
-  CGRect bounds = self.view.bounds;
+  
+  CGRect bounds = [UIScreen mainScreen].bounds;
+  
+  if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+    CGFloat height = bounds.size.width;
+    CGFloat width  = bounds.size.height;
+    bounds.size.height = height;
+    bounds.size.width  = width;
+  }
+  
   bounds.origin.y += statusBarHeight;
   bounds.size.height -= statusBarHeight;
   
