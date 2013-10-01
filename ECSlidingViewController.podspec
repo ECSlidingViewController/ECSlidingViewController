@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         =  'ECSlidingViewController'
-  s.version      =  '0.10.0'
+  s.version      =  '1.0.0'
   s.license      = { :type => 'MIT', :text => <<-LICENSE
       Copyright (C) 2013 EdgeCase
 
