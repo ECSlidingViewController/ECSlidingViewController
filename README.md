@@ -28,16 +28,14 @@ This section will walk through of a simplified version of the included example a
 
 ### Include ECSlidingViewController into your project
 
-You'll need these four files:
+You'll need these two files:
 
 * ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h
 * ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.m
-* ECSlidingViewController/Vendor/ECSlidingViewController/UIImage+ImageWithUIView.h
-* ECSlidingViewController/Vendor/ECSlidingViewController/UIImage+ImageWithUIView.m
 
 OR - you can use [CocoaPods](http://cocoapods.org/). Add the following line to your Podspec:
 
-    pod 'ECSlidingViewController', '~> 0.10.0'
+    pod 'ECSlidingViewController', '~> 1.0.1'
 
 ### Setup storyboards and set the topViewController
 
