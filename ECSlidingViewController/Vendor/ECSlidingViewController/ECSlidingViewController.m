@@ -304,10 +304,12 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   } else if (recognizer.state == UIGestureRecognizerStateEnded || recognizer.state == UIGestureRecognizerStateCancelled) {
     CGPoint currentVelocityPoint = [recognizer velocityInView:self.view];
     CGFloat currentVelocityX     = currentVelocityPoint.x;
+    BOOL viewIsPastAnchor = (self.anchorLeftTopViewCenter != NSNotFound && self.topView.layer.position.x <= self.anchorLeftTopViewCenter) ||
+    (self.anchorRightTopViewCenter != NSNotFound && self.topView.layer.position.x >= self.anchorRightTopViewCenter);
     
-    if ([self underLeftShowing] && currentVelocityX > self.panningVelocityXThreshold) {
+    if ([self underLeftShowing] && (viewIsPastAnchor || currentVelocityX > self.panningVelocityXThreshold)) {
       [self anchorTopViewTo:ECRight];
-    } else if ([self underRightShowing] && -currentVelocityX > self.panningVelocityXThreshold) {
+    } else if ([self underRightShowing] && (viewIsPastAnchor || -currentVelocityX > self.panningVelocityXThreshold)) {
       [self anchorTopViewTo:ECLeft];
     } else {
       [self resetTopView];
