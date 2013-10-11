@@ -58,9 +58,9 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 - (ECSlidingViewController *)slidingViewController
 {
-  UIViewController *viewController = self.parentViewController;
+  UIViewController *viewController = self.parentViewController ? self.parentViewController : self.presentingViewController;
   while (!(viewController == nil || [viewController isKindOfClass:[ECSlidingViewController class]])) {
-    viewController = viewController.parentViewController;
+    viewController = viewController.parentViewController ? self.parentViewController : self.presentingViewController;
   }
   
   return (ECSlidingViewController *)viewController;
