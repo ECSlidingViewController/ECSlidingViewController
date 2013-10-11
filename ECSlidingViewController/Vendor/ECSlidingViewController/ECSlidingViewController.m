@@ -343,6 +343,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     }
     [self updateTopViewHorizontalCenter:newCenter];
   } completion:^(BOOL finished){
+    [self updateTopViewHorizontalCenter:newCenter];
     if (_resetStrategy & ECPanning) {
       self.panGesture.enabled = YES;
     } else {
@@ -390,6 +391,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     }
     [self updateTopViewHorizontalCenter:newCenter];
   } completion:^(BOOL finished){
+    [self updateTopViewHorizontalCenter:newCenter];
     if (complete) {
       complete();
     }
@@ -427,6 +429,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     }
     [self updateTopViewHorizontalCenter:self.resettedCenter];
   } completion:^(BOOL finished) {
+    [self updateTopViewHorizontalCenter:self.resettedCenter];
     if (complete) {
       complete();
     }
