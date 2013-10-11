@@ -15,6 +15,7 @@ This project is an example app that showcases the uses for `ECSlidingViewControl
 * The child views can be changed at anytime.
 * Child view controllers can be an instance of `UIViewController` or any subclass of `UIViewController` including `UINavigationController` and `UITabBarController`.
 * iPad support.
+* VoiceOver support.
 * See [ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h](https://github.com/edgecase/ECSlidingViewController/blob/master/ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h) for options and configuration.
 
 ## Requirements
