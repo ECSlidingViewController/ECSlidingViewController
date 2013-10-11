@@ -303,7 +303,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     
     if ([self underLeftShowing] && currentVelocityX > self.panningVelocityXThreshold) {
       [self anchorTopViewTo:ECRight];
-    } else if ([self underRightShowing] && currentVelocityX <= self.panningVelocityXThreshold) {
+    } else if ([self underRightShowing] && -currentVelocityX > self.panningVelocityXThreshold) {
       [self anchorTopViewTo:ECLeft];
     } else {
       [self resetTopView];
