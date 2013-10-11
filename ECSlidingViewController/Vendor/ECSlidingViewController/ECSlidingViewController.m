@@ -218,9 +218,13 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [self adjustLayout];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
   self.topView.layer.shadowOffset = CGSizeZero;
   self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.layer.bounds].CGPath;
-  [self adjustLayout];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
