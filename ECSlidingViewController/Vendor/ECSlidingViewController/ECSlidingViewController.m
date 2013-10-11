@@ -482,17 +482,11 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (void)addTopViewSnapshot
 {
   if (!self.topViewSnapshot.superview && !self.shouldAllowUserInteractionsWhenAnchored) {
-    if (!(self.shouldAddPanGestureRecognizerToTopViewSnapshot && (_resetStrategy & ECPanning))) {
-      if (!self.snapshotPanGesture) {
-        self.snapshotPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:nil action:nil];
-      }
-      
-      [topViewSnapshot addGestureRecognizer:self.snapshotPanGesture];
-    } else if (self.shouldAddPanGestureRecognizerToTopViewSnapshot) {
+    
+    if (self.shouldAddPanGestureRecognizerToTopViewSnapshot) {
       self.snapshotPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
       [topViewSnapshot addGestureRecognizer:self.snapshotPanGesture];
     }
-    
     [self.topView addSubview:self.topViewSnapshot];
   }
 }
