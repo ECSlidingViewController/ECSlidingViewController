@@ -15,6 +15,7 @@ This project is an example app that showcases the uses for `ECSlidingViewControl
 * The child views can be changed at anytime.
 * Child view controllers can be an instance of `UIViewController` or any subclass of `UIViewController` including `UINavigationController` and `UITabBarController`.
 * iPad support.
+* VoiceOver support.
 * See [ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h](https://github.com/edgecase/ECSlidingViewController/blob/master/ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h) for options and configuration.
 
 ## Requirements
@@ -35,7 +36,7 @@ You'll need these two files:
 
 OR - you can use [CocoaPods](http://cocoapods.org/). Add the following line to your Podspec:
 
-    pod 'ECSlidingViewController', '~> 1.0.1'
+    pod 'ECSlidingViewController', '~> 1.2.1'
 
 ### Setup storyboards and set the topViewController
 

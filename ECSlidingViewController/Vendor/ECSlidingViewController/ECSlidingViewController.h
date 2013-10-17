@@ -165,7 +165,7 @@ typedef enum {
  */
 @property (nonatomic, assign) ECResetStrategy resetStrategy;
 
-/** Returns the X-axis velocity threshold used for determining whether or not to process a pan to the left or right
+/** Returns the magnitude of the X-axis velocity threshold used for determining whether or not to process a pan to the left or right
 
  By default, this is set to 100
  */
