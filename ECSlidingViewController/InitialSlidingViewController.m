@@ -11,30 +11,30 @@
 @implementation InitialSlidingViewController
 
 - (void)viewDidLoad {
-  [super viewDidLoad];
-  
-  self.shouldAdjustChildViewHeightForStatusBar = YES;
-  self.statusBarBackgroundView.backgroundColor = [UIColor blackColor];
-  
-  UIStoryboard *storyboard;
-  
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
-  } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-    storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
-  }
-  
-  self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+    [super viewDidLoad];
+    
+    self.shouldAdjustChildViewHeightForStatusBar = YES;
+    self.statusBarBackgroundView.backgroundColor = [UIColor blackColor];
+    
+    UIStoryboard *storyboard;
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        storyboard = [UIStoryboard storyboardWithName:@"iPhone" bundle:nil];
+    } else if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        storyboard = [UIStoryboard storyboardWithName:@"iPad" bundle:nil];
+    }
+    
+    self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-  return YES;
+    return YES;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-  return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleLightContent;
 }
 
 @end

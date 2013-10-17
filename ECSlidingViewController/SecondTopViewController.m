@@ -12,23 +12,23 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-  [super viewWillAppear:animated];
-  
-  if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-    self.slidingViewController.underLeftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
-  }
-  self.slidingViewController.underRightViewController = nil;
-  
-  [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    [super viewWillAppear:animated];
     
-  self.slidingViewController.topViewCenterMoved = ^(float x){
-    self.view.backgroundColor = [UIColor colorWithRed:x/self.view.bounds.size.width green:50 blue:70 alpha:1];
-  };
+    if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
+        self.slidingViewController.underLeftViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
+    }
+    self.slidingViewController.underRightViewController = nil;
+    
+    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    
+    self.slidingViewController.topViewCenterMoved = ^(float x){
+        self.view.backgroundColor = [UIColor colorWithRed:x/self.view.bounds.size.width green:50 blue:70 alpha:1];
+    };
 }
 
 - (IBAction)revealMenu:(id)sender
 {
-  [self.slidingViewController anchorTopViewTo:ECRight];
+    [self.slidingViewController anchorTopViewTo:ECRight];
 }
 
 @end
