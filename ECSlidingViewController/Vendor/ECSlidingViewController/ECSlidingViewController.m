@@ -71,32 +71,6 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 @implementation ECSlidingViewController
 
-// public properties
-@synthesize underLeftViewController  = _underLeftViewController;
-@synthesize underRightViewController = _underRightViewController;
-@synthesize topViewController        = _topViewController;
-@synthesize anchorLeftPeekAmount;
-@synthesize anchorRightPeekAmount;
-@synthesize anchorLeftRevealAmount;
-@synthesize anchorRightRevealAmount;
-@synthesize underRightWidthLayout = _underRightWidthLayout;
-@synthesize underLeftWidthLayout  = _underLeftWidthLayout;
-@synthesize shouldAllowPanningPastAnchor;
-@synthesize shouldAllowUserInteractionsWhenAnchored;
-@synthesize shouldAddPanGestureRecognizerToTopViewSnapshot;
-@synthesize resetStrategy = _resetStrategy;
-
-// category properties
-@synthesize topViewSnapshot;
-@synthesize initialTouchPositionX;
-@synthesize initialHorizontalCenter;
-@synthesize panGesture = _panGesture;
-@synthesize resetTapGesture;
-@synthesize underLeftShowing   = _underLeftShowing;
-@synthesize underRightShowing  = _underRightShowing;
-@synthesize topViewIsOffScreen = _topViewIsOffScreen;
-@synthesize topViewSnapshotPanGesture = _topViewSnapshotPanGesture;
-
 - (id)init {
     self = [super init];
     if (self) {
@@ -529,7 +503,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
         
         if (self.shouldAddPanGestureRecognizerToTopViewSnapshot) {
             self.snapshotPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
-            [topViewSnapshot addGestureRecognizer:self.snapshotPanGesture];
+            [self.topViewSnapshot addGestureRecognizer:self.snapshotPanGesture];
         }
         [self.topView addSubview:self.topViewSnapshot];
     }
