@@ -191,14 +191,9 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     _underRightWidthLayout = underRightWidthLayout;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self adjustLayout];
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [self adjustLayout];
     self.topView.layer.shadowOffset = CGSizeZero;
     self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:[self fullViewBounds]].CGPath;
 }
@@ -304,7 +299,16 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 {
     if (_statusBarBackgroundView) return _statusBarBackgroundView;
     
-    _statusBarBackgroundView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].statusBarFrame];
+    CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
+    
+    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        CGFloat width = statusBarFrame.size.height;
+        CGFloat height = statusBarFrame.size.width;
+        statusBarFrame.size.width = width;
+        statusBarFrame.size.height = height;
+    }
+    
+    _statusBarBackgroundView = [[UIView alloc] initWithFrame:statusBarFrame];
     _statusBarBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_statusBarBackgroundView];
     
