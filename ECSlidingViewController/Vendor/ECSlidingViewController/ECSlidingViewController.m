@@ -200,6 +200,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     self.topView.layer.shadowPath = nil;
     self.topView.layer.shouldRasterize = YES;
     
@@ -211,6 +212,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:[self fullViewBounds]].CGPath;
     self.topView.layer.shouldRasterize = NO;
     
