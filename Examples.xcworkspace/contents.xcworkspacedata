@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:ECSlidingViewController"
+      name = "ECSlidingViewController">
+      <FileRef
+         location = "group:ECSlidingAnimationController.h">
+      </FileRef>
+      <FileRef
+         location = "group:ECSlidingAnimationController.m">
+      </FileRef>
+      <FileRef
+         location = "group:ECSlidingConstants.h">
+      </FileRef>
+      <FileRef
+         location = "group:ECSlidingInteractiveTransition.h">
+      </FileRef>
+      <FileRef
+         location = "group:ECSlidingInteractiveTransition.m">
+      </FileRef>
+      <FileRef
+         location = "group:ECSlidingSegue.h">
+      </FileRef>
+      <FileRef
+         location = "group:ECSlidingSegue.m">
+      </FileRef>
+      <FileRef
+         location = "group:ECSlidingViewController.h">
+      </FileRef>
+      <FileRef
+         location = "group:ECSlidingViewController.m">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Examples/BasicMenu/BasicMenu.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Examples/LayoutDemo/LayoutDemo.xcodeproj">
+   </FileRef>
+</Workspace>
