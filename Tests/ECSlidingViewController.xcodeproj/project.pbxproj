@@ -23,6 +23,9 @@
 		052BE629181C5A1F00EE3577 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE61D181C5A1F00EE3577 /* ECSlidingViewController.m */; };
 		052BE62A181C5A1F00EE3577 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE61D181C5A1F00EE3577 /* ECSlidingViewController.m */; };
 		052BE62C181C5C8400EE3577 /* ECSlidingViewControllerTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 052BE62B181C5C8400EE3577 /* ECSlidingViewControllerTests-Info.plist */; };
+		058F50D2181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 058F50D0181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h */; };
+		058F50D3181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 058F50D1181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m */; };
+		058F50D4181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 058F50D1181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m */; };
 		05C544A8181C4DF5002ED146 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C544A7181C4DF5002ED146 /* Foundation.framework */; };
 		05C544B6181C4DF5002ED146 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C544B5181C4DF5002ED146 /* XCTest.framework */; };
 		05C544B7181C4DF5002ED146 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C544A7181C4DF5002ED146 /* Foundation.framework */; };
@@ -65,6 +68,8 @@
 		052BE61C181C5A1F00EE3577 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingViewController.h; path = ../ECSlidingViewController/ECSlidingViewController.h; sourceTree = SOURCE_ROOT; };
 		052BE61D181C5A1F00EE3577 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingViewController.m; path = ../ECSlidingViewController/ECSlidingViewController.m; sourceTree = SOURCE_ROOT; };
 		052BE62B181C5C8400EE3577 /* ECSlidingViewControllerTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ECSlidingViewControllerTests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		058F50D0181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECPercentDrivenInteractiveTransition.h; path = ../ECSlidingViewController/ECPercentDrivenInteractiveTransition.h; sourceTree = SOURCE_ROOT; };
+		058F50D1181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECPercentDrivenInteractiveTransition.m; path = ../ECSlidingViewController/ECPercentDrivenInteractiveTransition.m; sourceTree = SOURCE_ROOT; };
 		05C544A4181C4DF5002ED146 /* libECSlidingViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libECSlidingViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C544A7181C4DF5002ED146 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05C544B4181C4DF5002ED146 /* ECSlidingViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECSlidingViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +132,8 @@
 		05C544A9181C4DF5002ED146 /* ECSlidingViewController */ = {
 			isa = PBXGroup;
 			children = (
+				058F50D0181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h */,
+				058F50D1181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m */,
 				052BE615181C5A1F00EE3577 /* ECSlidingAnimationController.h */,
 				052BE616181C5A1F00EE3577 /* ECSlidingAnimationController.m */,
 				052BE617181C5A1F00EE3577 /* ECSlidingConstants.h */,
@@ -167,6 +174,7 @@
 			files = (
 				052BE625181C5A1F00EE3577 /* ECSlidingSegue.h in Headers */,
 				052BE61E181C5A1F00EE3577 /* ECSlidingAnimationController.h in Headers */,
+				058F50D2181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h in Headers */,
 				052BE628181C5A1F00EE3577 /* ECSlidingViewController.h in Headers */,
 				052BE614181C596700EE3577 /* ECSlidingViewController-Prefix.pch in Headers */,
 				052BE622181C5A1F00EE3577 /* ECSlidingInteractiveTransition.h in Headers */,
@@ -259,6 +267,7 @@
 				052BE623181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m in Sources */,
 				052BE629181C5A1F00EE3577 /* ECSlidingViewController.m in Sources */,
 				052BE61F181C5A1F00EE3577 /* ECSlidingAnimationController.m in Sources */,
+				058F50D3181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				052BE626181C5A1F00EE3577 /* ECSlidingSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +281,7 @@
 				052BE620181C5A1F00EE3577 /* ECSlidingAnimationController.m in Sources */,
 				052BE627181C5A1F00EE3577 /* ECSlidingSegue.m in Sources */,
 				052BE624181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m in Sources */,
+				058F50D4181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

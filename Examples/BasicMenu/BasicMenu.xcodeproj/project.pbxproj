@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		058F50CF181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 058F50CE181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m */; };
 		05B9672B181B2F880013CA5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672A181B2F880013CA5D /* Foundation.framework */; };
 		05B9672D181B2F880013CA5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672C181B2F880013CA5D /* CoreGraphics.framework */; };
 		05B9672F181B2F880013CA5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672E181B2F880013CA5D /* UIKit.framework */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		058F50CD181CE8360081E684 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
+		058F50CE181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		05B96727181B2F880013CA5D /* BasicMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B9672A181B2F880013CA5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05B9672C181B2F880013CA5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +128,8 @@
 		05B96768181B2FED0013CA5D /* ECSlidingViewController */ = {
 			isa = PBXGroup;
 			children = (
+				058F50CD181CE8360081E684 /* ECPercentDrivenInteractiveTransition.h */,
+				058F50CE181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m */,
 				05B96769181B2FED0013CA5D /* ECSlidingAnimationController.h */,
 				05B9676A181B2FED0013CA5D /* ECSlidingAnimationController.m */,
 				05B9676B181B2FED0013CA5D /* ECSlidingConstants.h */,
@@ -207,6 +212,7 @@
 			files = (
 				05B96772181B2FED0013CA5D /* ECSlidingAnimationController.m in Sources */,
 				05B96775181B2FED0013CA5D /* ECSlidingViewController.m in Sources */,
+				058F50CF181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				05B96767181B2FBF0013CA5D /* MEHomeViewController.m in Sources */,
 				05B96773181B2FED0013CA5D /* ECSlidingInteractiveTransition.m in Sources */,
 				05B9673B181B2F880013CA5D /* MEAppDelegate.m in Sources */,

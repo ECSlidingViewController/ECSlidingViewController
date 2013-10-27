@@ -7,30 +7,23 @@
 //
 
 #import "ECSlidingInteractiveTransition.h"
-#import "ECSlidingViewController.h"
 #import "ECSlidingConstants.h"
 
 @interface ECSlidingInteractiveTransition ()
-@property (nonatomic, assign) id<UIViewControllerContextTransitioning>transitionContext;
-@property (nonatomic, assign) id<UIViewControllerAnimatedTransitioning> animationController;
+@property (nonatomic, assign) ECSlidingViewController *slidingViewController;
 @property (nonatomic, assign) BOOL positiveLeftToRight;
 @property (nonatomic, assign) CGFloat fullWidth;
 @property (nonatomic, assign) CGFloat currentPercentage;
-- (void)updateInteractiveTransition:(CGFloat)percentComplete;
-- (void)cancelInteractiveTransition;
-- (void)finishInteractiveTransition;
 @end
 
 @implementation ECSlidingInteractiveTransition
 
 #pragma mark - Constructors
 
-- (id)initWithTransitionContext:(id<UIViewControllerContextTransitioning>)transitionContext
-            animationController:(id<UIViewControllerAnimatedTransitioning>)animationController {
+- (id)initWithSlidingViewController:(ECSlidingViewController *)slidingViewController {
     self = [super init];
     if (self) {
-        self.transitionContext   = transitionContext;
-        self.animationController = animationController;
+        self.slidingViewController = slidingViewController;
     }
     
     return self;
@@ -39,6 +32,8 @@
 #pragma mark - UIViewControllerInteractiveTransitioning
 
 - (void)startInteractiveTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+    [super startInteractiveTransition:transitionContext];
+    
     UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
     CGFloat finalLeftEdge = CGRectGetMinX([transitionContext finalFrameForViewController:topViewController]);
     CGFloat initialLeftEdge = CGRectGetMinX([transitionContext initialFrameForViewController:topViewController]);
@@ -47,8 +42,6 @@
     self.positiveLeftToRight = initialLeftEdge < finalLeftEdge;
     self.fullWidth           = fullWidth;
     self.currentPercentage   = 0;
-    
-    [self.animationController animateTransition:transitionContext];
 }
 
 #pragma mark - Properties
@@ -65,27 +58,22 @@
 #pragma mark - UIPanGestureRecognizer action
 
 - (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer {
-    UIView *referenceView = [self.transitionContext containerView];
-    UIViewController *topViewController = [self.transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
-    ECSlidingViewController *slidingViewController = topViewController.slidingViewController;
-    CGFloat translationX  = [recognizer translationInView:referenceView].x;
-    CGFloat velocityX     = [recognizer velocityInView:referenceView].x;
+    CGFloat translationX  = [recognizer translationInView:self.slidingViewController.view].x;
+    CGFloat velocityX     = [recognizer velocityInView:self.slidingViewController.view].x;
 
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan: {
             BOOL isMovingRight = velocityX > 0;
-            
-            if (slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && isMovingRight) {
-                [slidingViewController anchorTopViewToRightAnimated:YES];
-            } else if (slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && !isMovingRight) {
-                [slidingViewController anchorTopViewToLeft:YES];
-            } else if (slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredLeft) {
-                [slidingViewController resetTopViewAnimated:YES];
-            } else if (slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight) {
-                [slidingViewController resetTopViewAnimated:YES];
-            }
 
-            [self updateInteractiveTransition:0.0];
+            if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && isMovingRight) {
+                [self.slidingViewController anchorTopViewToRightAnimated:YES];
+            } else if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && !isMovingRight) {
+                [self.slidingViewController anchorTopViewToLeft:YES];
+            } else if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredLeft) {
+                [self.slidingViewController resetTopViewAnimated:YES];
+            } else if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight) {
+                [self.slidingViewController resetTopViewAnimated:YES];
+            }
             
             break;
         }
@@ -115,21 +103,6 @@
         default:
             break;
     }
-}
-
-#pragma mark - Private
-
-- (void)updateInteractiveTransition:(CGFloat)percentComplete {
-    [self.transitionContext updateInteractiveTransition:percentComplete];
-    self.currentPercentage = percentComplete;
-}
-
-- (void)cancelInteractiveTransition {
-    [self.transitionContext cancelInteractiveTransition];
-}
-
-- (void)finishInteractiveTransition {
-    [self.transitionContext finishInteractiveTransition];
 }
 
 @end

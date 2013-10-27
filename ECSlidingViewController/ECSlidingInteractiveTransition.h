@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
+#import "ECPercentDrivenInteractiveTransition.h"
 
-@interface ECSlidingInteractiveTransition : NSObject <UIViewControllerInteractiveTransitioning>
+@class ECSlidingViewController;
+
+@interface ECSlidingInteractiveTransition : ECPercentDrivenInteractiveTransition
 @property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
-- (id)initWithTransitionContext:(id<UIViewControllerContextTransitioning>)transitionContext
-            animationController:(id<UIViewControllerAnimatedTransitioning>)animationController;
+- (id)initWithSlidingViewController:(ECSlidingViewController *)slidingViewController;
 @end

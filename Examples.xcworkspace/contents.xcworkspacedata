@@ -5,6 +5,12 @@
       location = "group:ECSlidingViewController"
       name = "ECSlidingViewController">
       <FileRef
+         location = "group:ECPercentDrivenInteractiveTransition.h">
+      </FileRef>
+      <FileRef
+         location = "group:ECPercentDrivenInteractiveTransition.m">
+      </FileRef>
+      <FileRef
          location = "group:ECSlidingAnimationController.h">
       </FileRef>
       <FileRef

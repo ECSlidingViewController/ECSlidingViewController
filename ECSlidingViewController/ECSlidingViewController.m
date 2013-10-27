@@ -337,8 +337,8 @@
 - (ECSlidingInteractiveTransition *)defaultInteractiveTransition {
     if (_defaultInteractiveTransition) return _defaultInteractiveTransition;
     
-    _defaultInteractiveTransition = [[ECSlidingInteractiveTransition alloc] initWithTransitionContext:self
-                                                                                  animationController:self.defaultAnimationController];
+    _defaultInteractiveTransition = [[ECSlidingInteractiveTransition alloc] initWithSlidingViewController:self];
+    _defaultInteractiveTransition.animationController = self.defaultAnimationController;
     
     return _defaultInteractiveTransition;
 }
@@ -515,27 +515,6 @@
     return NO;
 }
 
-#pragma mark - CADisplayLink action
-
-- (void)reversePausedAnimation:(CADisplayLink *)displayLink {
-    double percentInterval = displayLink.duration / [self.currentAnimationController transitionDuration:self];
-
-    self.currentAnimationPercentage -= percentInterval;
-    
-    if (self.currentAnimationPercentage <= 0.0) {
-        self.currentAnimationPercentage = 0.0;
-        [displayLink invalidate];
-    }
-    
-    [self updateInteractiveTransition:self.currentAnimationPercentage];
-    
-    if (self.currentAnimationPercentage == 0.0) {
-        [self.topViewController.view.layer removeAllAnimations];
-        CALayer *layer = self.view.layer;
-        layer.speed = 1.0;
-    }
-}
-
 #pragma mark - UIViewControllerContextTransitioning
 
 - (UIView *)containerView {
@@ -559,43 +538,15 @@
 }
 
 - (void)updateInteractiveTransition:(CGFloat)percentComplete {
-    if (self.currentOperation == ECSlidingViewControllerOperationNone) return;
     
-    CGFloat boundedPercentage;
-    if (percentComplete > 1.0) {
-        boundedPercentage = 1.0;
-    } else if (percentComplete < 0.0) {
-        boundedPercentage = 0.0;
-    } else {
-        boundedPercentage = percentComplete;
-    }
-    
-    self.currentAnimationPercentage = boundedPercentage;
-    CALayer *layer = self.view.layer;
-    CFTimeInterval pausedTime = [self.currentAnimationController transitionDuration:self] * self.currentAnimationPercentage;
-    layer.speed = 0.0;
-    layer.timeOffset = pausedTime;
 }
 
 - (void)finishInteractiveTransition {
-    if (self.currentOperation == ECSlidingViewControllerOperationNone) return;
-    
     _transitionWasCancelled = NO;
-    CALayer *layer = self.view.layer;
-    CFTimeInterval pausedTime = [layer timeOffset];
-    layer.speed = 1.0;
-    layer.timeOffset = 0.0;
-    layer.beginTime = 0.0;
-    CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
-    layer.beginTime = timeSincePause;
 }
 
 - (void)cancelInteractiveTransition {
-    if (self.currentOperation == ECSlidingViewControllerOperationNone) return;
-    
     _transitionWasCancelled = YES;
-    CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(reversePausedAnimation:)];
-    [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 }
 
 - (void)completeTransition:(BOOL)didComplete {
