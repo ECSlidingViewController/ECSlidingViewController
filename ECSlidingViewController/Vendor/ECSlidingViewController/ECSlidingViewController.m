@@ -555,7 +555,12 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 {
     CGFloat statusBarHeight = 0;
     
-    if (self.shouldAdjustChildViewHeightForStatusBar) {
+    BOOL legacyScreenHeightEnabled = NO;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        legacyScreenHeightEnabled = YES;
+    }
+    
+    if (self.shouldAdjustChildViewHeightForStatusBar || legacyScreenHeightEnabled) {
         statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
         if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
             statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.width;
@@ -571,7 +576,12 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
         bounds.size.width  = width;
     }
     
-    bounds.origin.y += statusBarHeight;
+    if (!legacyScreenHeightEnabled) {
+        // In iOS <= 6.1 the container view is already offset below the status bar.
+        // so no need to offset it if we use shouldAdjustChildViewHeightForStatusBar in iOS 7+.
+        bounds.origin.y += statusBarHeight;
+    }
+    
     bounds.size.height -= statusBarHeight;
     
     return bounds;

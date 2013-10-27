@@ -139,7 +139,7 @@ typedef enum {
  */
 @property (nonatomic, assign) BOOL shouldAddPanGestureRecognizerToTopViewSnapshot;
 
-/** Specifies if the the child views should be shortened to accomodate the status bar.
+/** Specifies if the the child views should be shortened to accomodate the status bar. iOS 7 only.
  
  By default, this is set to NO
  */
