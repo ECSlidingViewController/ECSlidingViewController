@@ -48,7 +48,7 @@
 - (id)initWithTopViewController:(UIViewController *)topViewController;
 - (void)anchorTopViewToRightAnimated:(BOOL)animated;
 - (void)anchorTopViewToRightAnimated:(BOOL)animated onComplete:(void (^)())complete;
-- (void)anchorTopViewToLeft:(BOOL)animated;
+- (void)anchorTopViewToLeftAnimated:(BOOL)animated;
 - (void)anchorTopViewToLeftAnimated:(BOOL)animated onComplete:(void (^)())complete;
 - (void)resetTopViewAnimated:(BOOL)animated;
 - (void)resetTopViewAnimated:(BOOL)animated onComplete:(void(^)())complete;

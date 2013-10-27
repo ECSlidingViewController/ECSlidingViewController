@@ -60,7 +60,7 @@
 }
 
 - (void)anchorLeft {
-    [self.slidingViewController anchorTopViewToLeft:YES];
+    [self.slidingViewController anchorTopViewToLeftAnimated:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

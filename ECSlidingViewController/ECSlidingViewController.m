@@ -353,7 +353,7 @@
     [self anchorTopViewToRightAnimated:animated onComplete:nil];
 }
 
-- (void)anchorTopViewToLeft:(BOOL)animated {
+- (void)anchorTopViewToLeftAnimated:(BOOL)animated {
     [self anchorTopViewToLeftAnimated:animated onComplete:nil];
 }
 
