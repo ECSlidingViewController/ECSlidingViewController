@@ -27,9 +27,14 @@ typedef NS_ENUM(NSInteger, ECSlidingViewControllerTopViewPosition) {
     ECSlidingViewControllerTopViewPositionCentered
 };
 
-typedef NS_ENUM(NSInteger, ECSlidingViewWidthLayout) {
-    ECSlidingViewWidthLayoutFull,
-    ECSlidingViewWidthLayoutReveal
+typedef NS_OPTIONS(NSUInteger, ECSlidingViewLayout) {
+    ECSlidingViewLayoutDefault                 = 0,
+    ECSlidingViewLayoutWidthFullContainer      = 1 << 0,
+    ECSlidingViewLayoutWidthReveal             = 1 << 1,
+    ECSlidingViewLayoutTopContainer            = 1 << 2,
+    ECSlidingViewLayoutTopTopLayoutGuide       = 1 << 3,
+    ECSlidingViewLayoutBottomContainer         = 1 << 4,
+    ECSlidingViewLayoutBottomBottomLayoutGuide = 1 << 5
 };
 
 #endif
