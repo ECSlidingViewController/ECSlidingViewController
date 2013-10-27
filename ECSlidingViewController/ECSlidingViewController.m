@@ -492,10 +492,7 @@
         }
     }];
     if ([self isInteractive]) {
-        [CATransaction begin];
-        [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
         [self.currentInteractiveTransition startInteractiveTransition:self];
-        [CATransaction commit];
     } else {
         [self.currentAnimationController animateTransition:self];
     }
