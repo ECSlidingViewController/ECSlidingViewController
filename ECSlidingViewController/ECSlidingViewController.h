@@ -26,6 +26,7 @@
     CGFloat _anchorLeftRevealAmount;
     CGFloat _anchorRightPeekAmount;
     CGFloat _anchorRightRevealAmount;
+    UIPanGestureRecognizer *_panGesture;
 }
 
 @property (nonatomic, assign) id<ECSlidingViewControllerDelegate> delegate;

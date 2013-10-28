@@ -44,17 +44,6 @@
     self.currentPercentage   = 0;
 }
 
-#pragma mark - Properties
-
-- (UIPanGestureRecognizer *)panGestureRecognizer {
-    if (_panGestureRecognizer) return _panGestureRecognizer;
-    
-    _panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                    action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
-    
-    return _panGestureRecognizer;
-}
-
 #pragma mark - UIPanGestureRecognizer action
 
 - (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer {

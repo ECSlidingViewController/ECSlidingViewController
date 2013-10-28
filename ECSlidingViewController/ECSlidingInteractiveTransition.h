@@ -13,6 +13,6 @@
 @class ECSlidingViewController;
 
 @interface ECSlidingInteractiveTransition : ECPercentDrivenInteractiveTransition
-@property (nonatomic, strong) UIPanGestureRecognizer *panGestureRecognizer;
 - (id)initWithSlidingViewController:(ECSlidingViewController *)slidingViewController;
+- (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer;
 @end

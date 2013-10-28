@@ -21,26 +21,6 @@
 
 @end
 
-@interface ECSlidingView : UIView
-@property (nonatomic, assign, readonly) BOOL interactionInProgress;
-@end
-
-@implementation ECSlidingView
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    _interactionInProgress = YES;
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    _interactionInProgress = NO;
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    _interactionInProgress = NO;
-}
-
-@end
-
 @interface ECSlidingViewController()
 @property (nonatomic, assign) ECSlidingViewControllerOperation currentOperation;
 @property (nonatomic, strong) ECSlidingAnimationController *defaultAnimationController;
@@ -52,6 +32,7 @@
 @property (nonatomic, assign) BOOL preserveRightPeekAmount;
 @property (nonatomic, assign) BOOL transitionWasCancelled;
 @property (nonatomic, assign) BOOL isAnimated;
+@property (nonatomic, assign) BOOL isInteractive;
 - (void)setup;
 
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position;
@@ -121,10 +102,6 @@
     if (self.underRightViewControllerStoryboardId) {
         self.underRightViewController = [self.storyboard instantiateViewControllerWithIdentifier:self.underRightViewControllerStoryboardId];
     }
-}
-
-- (void)loadView {
-    self.view = [[ECSlidingView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)viewDidLoad {
@@ -345,7 +322,11 @@
 }
 
 - (UIPanGestureRecognizer *)panGesture {
-    return self.defaultInteractiveTransition.panGestureRecognizer;
+    if (_panGesture) return _panGesture;
+    
+    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(detectPanGestureRecognizer:)];
+    
+    return _panGesture;
 }
 
 #pragma mark - Public
@@ -493,6 +474,9 @@
     if (self.currentAnimationController) {
         self.currentInteractiveTransition = [self.delegate slidingViewController:self
                                      interactionControllerForAnimationController:self.currentAnimationController];
+        if (self.currentInteractiveTransition) {
+            _isInteractive = YES;
+        }
     } else {
         self.currentAnimationController   = self.defaultAnimationController;
         self.currentInteractiveTransition = self.defaultInteractiveTransition;
@@ -547,6 +531,16 @@
     return NO;
 }
 
+#pragma mark - UIPanGestureRecognizer action
+
+- (void)detectPanGestureRecognizer:(UIPanGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        _isInteractive = YES;
+    }
+    
+    [self.defaultInteractiveTransition updateTopViewHorizontalCenterWithRecognizer:recognizer];
+}
+
 #pragma mark - UIViewControllerContextTransitioning
 
 - (UIView *)containerView {
@@ -558,7 +552,7 @@
 }
 
 - (BOOL)isInteractive {
-    return [(ECSlidingView *)self.view interactionInProgress];
+    return _isInteractive;
 }
 
 - (BOOL)transitionWasCancelled {
@@ -611,6 +605,7 @@
     }
     
     _transitionWasCancelled = NO;
+    _isInteractive = NO;
     self.currentOperation = ECSlidingViewControllerOperationNone;
     self.topViewController.view.frame = [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
 }
