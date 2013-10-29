@@ -44,4 +44,7 @@
    <FileRef
       location = "group:Examples/LayoutDemo/LayoutDemo.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Examples/TransitionFun/TransitionFun.xcodeproj">
+   </FileRef>
 </Workspace>
