@@ -22,6 +22,8 @@
 }
 
 - (void)updateInteractiveTransition:(CGFloat)percentComplete {
+    [self.transitionContext updateInteractiveTransition:_percentComplete];
+    
     CGFloat boundedPercentage;
     if (percentComplete > 1.0) {
         boundedPercentage = 1.0;
@@ -36,18 +38,18 @@
     CFTimeInterval pausedTime = [self.animationController transitionDuration:self.transitionContext] * _percentComplete;
     layer.speed = 0.0;
     layer.timeOffset = pausedTime;
-    
-    [self.transitionContext updateInteractiveTransition:_percentComplete];
 }
 
 - (void)cancelInteractiveTransition {
+    [self.transitionContext cancelInteractiveTransition];
+    
     CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(reversePausedAnimation:)];
     [displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    
-    [self.transitionContext cancelInteractiveTransition];
 }
 
 - (void)finishInteractiveTransition {
+    [self.transitionContext finishInteractiveTransition];
+    
     CALayer *layer = [self.transitionContext containerView].layer;
     CFTimeInterval pausedTime = [layer timeOffset];
     layer.speed = 1.0;
@@ -55,8 +57,6 @@
     layer.beginTime = 0.0;
     CFTimeInterval timeSincePause = [layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
     layer.beginTime = timeSincePause;
-    
-    [self.transitionContext finishInteractiveTransition];
 }
 
 #pragma mark - CADisplayLink action
