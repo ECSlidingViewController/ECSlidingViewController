@@ -17,11 +17,8 @@
 - (void)startInteractiveTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
     
-    [CATransaction begin];
-    [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
     [self.animationController animateTransition:transitionContext];
     [self updateInteractiveTransition:0];
-    [CATransaction commit];
 }
 
 - (void)updateInteractiveTransition:(CGFloat)percentComplete {

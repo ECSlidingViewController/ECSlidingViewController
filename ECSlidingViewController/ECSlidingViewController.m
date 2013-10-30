@@ -346,28 +346,19 @@
 - (void)anchorTopViewToRightAnimated:(BOOL)animated onComplete:(void (^)())complete {
     self.isAnimated = animated;
     ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionAnchoredRight];
-    [CATransaction begin];
-    [CATransaction setCompletionBlock:complete];
     [self animateOperation:operation];
-    [CATransaction commit];
 }
 
 - (void)anchorTopViewToLeftAnimated:(BOOL)animated onComplete:(void (^)())complete {
     self.isAnimated = animated;
     ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft];
-    [CATransaction begin];
-    [CATransaction setCompletionBlock:complete];
     [self animateOperation:operation];
-    [CATransaction commit];
 }
 
 - (void)resetTopViewAnimated:(BOOL)animated onComplete:(void(^)())complete {
     self.isAnimated = animated;
     ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionCentered];
-    [CATransaction begin];
-    [CATransaction setCompletionBlock:complete];
     [self animateOperation:operation];
-    [CATransaction commit];
 }
 
 #pragma mark - Private
