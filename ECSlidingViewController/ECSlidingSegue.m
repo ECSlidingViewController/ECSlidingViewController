@@ -11,11 +11,23 @@
 
 @implementation ECSlidingSegue
 
+- (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination {
+    self = [super initWithIdentifier:identifier source:source destination:destination];
+    if (self) {
+        self.shouldAlwaysResetTopViewController = NO;
+    }
+    
+    return self;
+}
+
 - (void)perform {
     ECSlidingViewController *slidingViewController = [[self sourceViewController] slidingViewController];
     UIViewController *destinationViewController    = [self destinationViewController];
     
-    slidingViewController.topViewController = destinationViewController;
+    if (self.shouldAlwaysResetTopViewController || ![destinationViewController isMemberOfClass:[slidingViewController.topViewController class]]) {
+        slidingViewController.topViewController = destinationViewController;
+    }
+    
     [slidingViewController resetTopViewAnimated:YES];
 }
 
