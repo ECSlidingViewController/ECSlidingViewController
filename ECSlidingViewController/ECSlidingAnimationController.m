@@ -31,8 +31,13 @@
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration animations:^{
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
         topViewController.view.frame = topViewFinalFrame;
     } completion:^(BOOL finished) {
+        if ([transitionContext transitionWasCancelled]) {
+            topViewController.view.frame = [transitionContext initialFrameForViewController:topViewController];
+        }
+        
         [transitionContext completeTransition:finished];
     }];
 }
