@@ -467,9 +467,14 @@
                                      interactionControllerForAnimationController:self.currentAnimationController];
         if (self.currentInteractiveTransition) {
             _isInteractive = YES;
+        } else {
+            self.defaultInteractiveTransition.animationController = self.currentAnimationController;
+            self.currentInteractiveTransition = self.defaultInteractiveTransition;
         }
     } else {
-        self.currentAnimationController   = self.defaultAnimationController;
+        self.currentAnimationController = self.defaultAnimationController;
+        
+        self.defaultInteractiveTransition.animationController = self.currentAnimationController;
         self.currentInteractiveTransition = self.defaultInteractiveTransition;
     }
     
