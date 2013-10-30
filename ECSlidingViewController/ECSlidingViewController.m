@@ -610,7 +610,6 @@
     _transitionWasCancelled = NO;
     _isInteractive = NO;
     self.currentOperation = ECSlidingViewControllerOperationNone;
-    self.topViewController.view.frame = [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
 }
 
 - (UIViewController *)viewControllerForKey:(NSString *)key {
