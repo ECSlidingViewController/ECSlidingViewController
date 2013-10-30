@@ -33,6 +33,7 @@
 @property (nonatomic, assign) BOOL transitionWasCancelled;
 @property (nonatomic, assign) BOOL isAnimated;
 @property (nonatomic, assign) BOOL isInteractive;
+@property (nonatomic, copy) void (^animationComplete)();
 - (void)setup;
 
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position;
@@ -345,18 +346,21 @@
 
 - (void)anchorTopViewToRightAnimated:(BOOL)animated onComplete:(void (^)())complete {
     self.isAnimated = animated;
+    self.animationComplete = complete;
     ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionAnchoredRight];
     [self animateOperation:operation];
 }
 
 - (void)anchorTopViewToLeftAnimated:(BOOL)animated onComplete:(void (^)())complete {
     self.isAnimated = animated;
+    self.animationComplete = complete;
     ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft];
     [self animateOperation:operation];
 }
 
 - (void)resetTopViewAnimated:(BOOL)animated onComplete:(void(^)())complete {
     self.isAnimated = animated;
+    self.animationComplete = complete;
     ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionCentered];
     [self animateOperation:operation];
 }
@@ -577,6 +581,9 @@
     if ([self.currentAnimationController respondsToSelector:@selector(animationEnded:)]) {
         [self.currentAnimationController animationEnded:didComplete];
     }
+    
+    if (self.animationComplete) self.animationComplete();
+    self.animationComplete = nil;
     
     if ([self transitionWasCancelled]) {
         if (self.currentOperation == ECSlidingViewControllerOperationAnchorLeft) {
