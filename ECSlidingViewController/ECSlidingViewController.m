@@ -43,6 +43,10 @@
                                                toPosition:(ECSlidingViewControllerTopViewPosition)toPosition;
 - (void)animateOperation:(ECSlidingViewControllerOperation)operation;
 - (BOOL)operationIsValid:(ECSlidingViewControllerOperation)operation;
+- (void)beginAppearanceTransitionForOperation:(ECSlidingViewControllerOperation)operation;
+- (void)endAppearanceTransitionForOperation:(ECSlidingViewControllerOperation)operation isCancelled:(BOOL)canceled;
+- (UIViewController *)viewControllerWillAppearForSuccessfulOperation:(ECSlidingViewControllerOperation)operation;
+- (UIViewController *)viewControllerWillDisappearForSuccessfulOperation:(ECSlidingViewControllerOperation)operation;
 @end
 
 @implementation ECSlidingViewController
@@ -482,40 +486,13 @@
         self.currentInteractiveTransition = self.defaultInteractiveTransition;
     }
     
-    UIViewController *viewControllerWillAppear;
-    UIViewController *viewControllerWillDisappear;
-    
-    if (self.currentOperation == ECSlidingViewControllerOperationAnchorLeft) {
-        viewControllerWillAppear = self.underRightViewController;
-    } else if (self.currentOperation == ECSlidingViewControllerOperationAnchorRight) {
-        viewControllerWillAppear = self.underLeftViewController;
-    } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromLeft) {
-        viewControllerWillDisappear = self.underRightViewController;
-    } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromRight) {
-        viewControllerWillDisappear = self.underLeftViewController;
-    }
-    
-    [viewControllerWillAppear beginAppearanceTransition:YES animated:_isAnimated];
-    [viewControllerWillDisappear beginAppearanceTransition:NO animated:_isAnimated];
+    [self beginAppearanceTransitionForOperation:operation];
 
-    [CATransaction begin];
-    [CATransaction setCompletionBlock:^{
-        [viewControllerWillDisappear endAppearanceTransition];
-        [viewControllerWillAppear endAppearanceTransition];
-        
-        if (_transitionWasCancelled) {
-            [viewControllerWillDisappear beginAppearanceTransition:YES animated:_isAnimated];
-            [viewControllerWillDisappear endAppearanceTransition];
-            [viewControllerWillAppear beginAppearanceTransition:NO animated:_isAnimated];
-            [viewControllerWillAppear endAppearanceTransition];
-        }
-    }];
     if ([self isInteractive]) {
         [self.currentInteractiveTransition startInteractiveTransition:self];
     } else {
         [self.currentAnimationController animateTransition:self];
     }
-    [CATransaction commit];
 }
 
 - (BOOL)operationIsValid:(ECSlidingViewControllerOperation)operation {
@@ -529,6 +506,53 @@
     }
     
     return NO;
+}
+
+- (void)beginAppearanceTransitionForOperation:(ECSlidingViewControllerOperation)operation {
+    UIViewController *viewControllerWillAppear    = [self viewControllerWillAppearForSuccessfulOperation:operation];
+    UIViewController *viewControllerWillDisappear = [self viewControllerWillDisappearForSuccessfulOperation:operation];
+    
+    [viewControllerWillAppear    beginAppearanceTransition:YES animated:_isAnimated];
+    [viewControllerWillDisappear beginAppearanceTransition:NO animated:_isAnimated];
+}
+
+- (void)endAppearanceTransitionForOperation:(ECSlidingViewControllerOperation)operation isCancelled:(BOOL)canceled {
+    UIViewController *viewControllerWillAppear    = [self viewControllerWillAppearForSuccessfulOperation:operation];
+    UIViewController *viewControllerWillDisappear = [self viewControllerWillDisappearForSuccessfulOperation:operation];
+    
+    if (canceled) {
+        [viewControllerWillDisappear beginAppearanceTransition:YES animated:_isAnimated];
+        [viewControllerWillDisappear endAppearanceTransition];
+        [viewControllerWillAppear beginAppearanceTransition:NO animated:_isAnimated];
+        [viewControllerWillAppear endAppearanceTransition];
+    } else {
+        [viewControllerWillDisappear endAppearanceTransition];
+        [viewControllerWillAppear endAppearanceTransition];
+    }
+}
+
+- (UIViewController *)viewControllerWillAppearForSuccessfulOperation:(ECSlidingViewControllerOperation)operation {
+    UIViewController *viewControllerWillAppear = nil;
+    
+    if (operation == ECSlidingViewControllerOperationAnchorLeft) {
+        viewControllerWillAppear = self.underRightViewController;
+    } else if (operation == ECSlidingViewControllerOperationAnchorRight) {
+        viewControllerWillAppear = self.underLeftViewController;
+    }
+    
+    return viewControllerWillAppear;
+}
+
+- (UIViewController *)viewControllerWillDisappearForSuccessfulOperation:(ECSlidingViewControllerOperation)operation {
+    UIViewController *viewControllerWillDisappear = nil;
+    
+    if (operation == ECSlidingViewControllerOperationResetFromLeft) {
+        viewControllerWillDisappear = self.underRightViewController;
+    } else if (operation == ECSlidingViewControllerOperationResetFromRight) {
+        viewControllerWillDisappear = self.underLeftViewController;
+    }
+    
+    return viewControllerWillDisappear;
 }
 
 #pragma mark - UIPanGestureRecognizer action
@@ -584,6 +608,8 @@
     
     if (self.animationComplete) self.animationComplete();
     self.animationComplete = nil;
+    
+    [self endAppearanceTransitionForOperation:self.currentOperation isCancelled:[self transitionWasCancelled]];
     
     if ([self transitionWasCancelled]) {
         if (self.currentOperation == ECSlidingViewControllerOperationAnchorLeft) {
