@@ -33,6 +33,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     [super viewDidLoad];
     
     [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
+    self.slidingViewController.underLeftViewLayout = ECSlidingViewLayoutWidthFullContainer | ECSlidingViewLayoutTopContainer | ECSlidingViewLayoutBottomContainer;
     self.slidingViewController.delegate = self;
 }
 
