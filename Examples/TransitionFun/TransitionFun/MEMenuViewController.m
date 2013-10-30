@@ -18,6 +18,26 @@
     [super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"%s:%d %s", __FILE__, __LINE__, __PRETTY_FUNCTION__);
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"%s:%d %s", __FILE__, __LINE__, __PRETTY_FUNCTION__);
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSLog(@"%s:%d %s", __FILE__, __LINE__, __PRETTY_FUNCTION__);
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    NSLog(@"%s:%d %s", __FILE__, __LINE__, __PRETTY_FUNCTION__);
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

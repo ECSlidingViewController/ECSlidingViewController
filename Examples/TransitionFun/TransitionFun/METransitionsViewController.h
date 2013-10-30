@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ECSlidingViewController.h"
 
-@interface METransitionsViewController : UITableViewController
+@interface METransitionsViewController : UITableViewController <ECSlidingViewControllerDelegate>
 - (IBAction)menuButtonTapped:(id)sender;
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */; };
 		057DC25C181DE6AE00D15995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25B181DE6AE00D15995 /* Foundation.framework */; };
 		057DC25E181DE6AE00D15995 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25D181DE6AE00D15995 /* CoreGraphics.framework */; };
 		057DC260181DE6AE00D15995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25F181DE6AE00D15995 /* UIKit.framework */; };
@@ -25,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEFoldAnimationController.h; sourceTree = "<group>"; };
+		05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEFoldAnimationController.m; sourceTree = "<group>"; };
 		057DC258181DE6AE00D15995 /* TransitionFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitionFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		057DC25B181DE6AE00D15995 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		057DC25D181DE6AE00D15995 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -69,6 +72,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05629E8F181F4D7100A88F6C /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */,
+				05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */,
+			);
+			name = Transitions;
+			sourceTree = "<group>";
+		};
 		057DC24F181DE6AE00D15995 = {
 			isa = PBXGroup;
 			children = (
@@ -101,15 +113,16 @@
 			isa = PBXGroup;
 			children = (
 				057DC290181DE6D600D15995 /* ECSlidingViewController */,
+				057DC273181DE6AE00D15995 /* Images.xcassets */,
+				057DC26D181DE6AE00D15995 /* Main.storyboard */,
 				057DC26A181DE6AE00D15995 /* MEAppDelegate.h */,
 				057DC26B181DE6AE00D15995 /* MEAppDelegate.m */,
-				057DC26D181DE6AE00D15995 /* Main.storyboard */,
-				057DC273181DE6AE00D15995 /* Images.xcassets */,
-				057DC262181DE6AE00D15995 /* Supporting Files */,
-				057DC2A1181DEE4700D15995 /* METransitionsViewController.h */,
-				057DC2A2181DEE4700D15995 /* METransitionsViewController.m */,
 				057DC2A4181DF4F500D15995 /* MEMenuViewController.h */,
 				057DC2A5181DF4F500D15995 /* MEMenuViewController.m */,
+				057DC2A1181DEE4700D15995 /* METransitionsViewController.h */,
+				057DC2A2181DEE4700D15995 /* METransitionsViewController.m */,
+				057DC262181DE6AE00D15995 /* Supporting Files */,
+				05629E8F181F4D7100A88F6C /* Transitions */,
 			);
 			path = TransitionFun;
 			sourceTree = "<group>";
@@ -211,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				057DC26C181DE6AE00D15995 /* MEAppDelegate.m in Sources */,
+				05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */,
 				057DC29E181DE6D600D15995 /* ECSlidingInteractiveTransition.m in Sources */,
 				057DC29F181DE6D600D15995 /* ECSlidingSegue.m in Sources */,
 				057DC268181DE6AE00D15995 /* main.m in Sources */,
@@ -361,6 +375,7 @@
 				057DC28C181DE6AE00D15995 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
