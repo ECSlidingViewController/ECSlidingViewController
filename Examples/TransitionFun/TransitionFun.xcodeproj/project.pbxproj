@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */; };
 		05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */; };
 		057DC25C181DE6AE00D15995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25B181DE6AE00D15995 /* Foundation.framework */; };
 		057DC25E181DE6AE00D15995 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25D181DE6AE00D15995 /* CoreGraphics.framework */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05160F561820CDF300EA3BDD /* MEZoomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEZoomAnimationController.h; sourceTree = "<group>"; };
+		05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEZoomAnimationController.m; sourceTree = "<group>"; };
 		05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEFoldAnimationController.h; sourceTree = "<group>"; };
 		05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEFoldAnimationController.m; sourceTree = "<group>"; };
 		057DC258181DE6AE00D15995 /* TransitionFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitionFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +80,8 @@
 			children = (
 				05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */,
 				05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */,
+				05160F561820CDF300EA3BDD /* MEZoomAnimationController.h */,
+				05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */,
 			);
 			name = Transitions;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 				057DC29D181DE6D600D15995 /* ECSlidingAnimationController.m in Sources */,
 				057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */,
 				057DC29C181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.m in Sources */,
+				05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */,
 				057DC2A3181DEE4700D15995 /* METransitionsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

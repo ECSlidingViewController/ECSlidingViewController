@@ -8,15 +8,17 @@
 
 #import "METransitionsViewController.h"
 #import "MEFoldAnimationController.h"
+#import "MEZoomAnimationController.h"
 
 static NSString *const METransitionDefault = @"Default";
 static NSString *const METransitionFold = @"Fold";
-static NSString *const METransitionShrink = @"Shrink";
+static NSString *const METransitionZoom = @"Zoom";
 static NSString *const METransitionUIDynamics = @"UI Dynamics";
 
 @interface METransitionsViewController ()
 @property (nonatomic, strong) NSArray *transitions;
 @property (nonatomic, strong) MEFoldAnimationController *foldAnimationController;
+@property (nonatomic, strong) MEZoomAnimationController *zoomAnimationController;
 @end
 
 @implementation METransitionsViewController
@@ -55,7 +57,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
 - (NSArray *)transitions {
     if (_transitions) return _transitions;
     
-    _transitions = @[METransitionDefault, METransitionFold, METransitionShrink, METransitionUIDynamics];
+    _transitions = @[METransitionDefault, METransitionFold, METransitionZoom, METransitionUIDynamics];
     
     return _transitions;
 }
@@ -66,6 +68,14 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     _foldAnimationController = [[MEFoldAnimationController alloc] init];
     
     return _foldAnimationController;
+}
+
+- (MEZoomAnimationController *)zoomAnimationController {
+    if (_zoomAnimationController) return _zoomAnimationController;
+    
+    _zoomAnimationController = [[MEZoomAnimationController alloc] init];
+    
+    return _zoomAnimationController;
 }
 
 #pragma mark - UITableViewDataSource
@@ -96,8 +106,9 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     
     if ([transition isEqualToString:METransitionFold]) {
         animationController = self.foldAnimationController;
-    } else if ([transition isEqualToString:METransitionShrink]) {
-        
+    } else if ([transition isEqualToString:METransitionZoom]) {
+        self.zoomAnimationController.operation = operation;
+        animationController = self.zoomAnimationController;
     } else if ([transition isEqualToString:METransitionUIDynamics]) {
         
     } else {
@@ -117,7 +128,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     if ([transition isEqualToString:METransitionFold]) {
         // The fold transition uses the default sliding interaction
         interactiveTransition = nil;
-    } else if ([transition isEqualToString:METransitionShrink]) {
+    } else if ([transition isEqualToString:METransitionZoom]) {
         // The shrink transition uses the default sliding interaction
         interactiveTransition = nil;
     } else if ([transition isEqualToString:METransitionUIDynamics]) {

@@ -32,7 +32,7 @@
     CATransform3D transform = CATransform3DIdentity;
     transform.m34 = -0.002;
     containerView.layer.sublayerTransform = transform;
-    
+
     UIViewController *underViewController;
     
     if (topViewController == toViewController) {
@@ -72,8 +72,8 @@
         [self foldLayers:leftSideView.layer rightSide:rightSideView.layer];
     }
     
-    [containerView insertSubview:leftSideView belowSubview:topViewController.view];
-    [containerView insertSubview:rightSideView aboveSubview:topViewController.view];
+    [containerView.layer insertSublayer:leftSideView.layer below:topViewController.view.layer];
+    [containerView.layer insertSublayer:rightSideView.layer below:topViewController.view.layer];
     
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     [UIView animateWithDuration:duration animations:^{
@@ -87,6 +87,7 @@
             [self unfoldLayers:leftSideView.layer rightSide:rightSideView.layer];
         }
     } completion:^(BOOL finished) {
+        containerView.layer.sublayerTransform = CATransform3DIdentity;
         [leftSideView removeFromSuperview];
         [rightSideView removeFromSuperview];
 
