@@ -12,10 +12,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.shouldAdjustChildViewHeightForStatusBar = YES;
-    self.statusBarBackgroundView.backgroundColor = [UIColor blackColor];
-    
+
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+        self.shouldAdjustChildViewHeightForStatusBar = YES;
+        self.statusBarBackgroundView.backgroundColor = [UIColor blackColor];
+    }
+
     UIStoryboard *storyboard;
     
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
