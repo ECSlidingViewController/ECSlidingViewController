@@ -312,6 +312,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     
     _statusBarBackgroundView = [[UIView alloc] initWithFrame:statusBarFrame];
     _statusBarBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+    _statusBarBackgroundView.userInteractionEnabled = NO;
     [self.view addSubview:_statusBarBackgroundView];
     
     return _statusBarBackgroundView;
