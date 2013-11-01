@@ -9,6 +9,7 @@
 #import "METransitionsViewController.h"
 #import "MEFoldAnimationController.h"
 #import "MEZoomAnimationController.h"
+#import "MEDynamicTransition.h"
 
 static NSString *const METransitionDefault = @"Default";
 static NSString *const METransitionFold = @"Fold";
@@ -19,6 +20,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
 @property (nonatomic, strong) NSArray *transitions;
 @property (nonatomic, strong) MEFoldAnimationController *foldAnimationController;
 @property (nonatomic, strong) MEZoomAnimationController *zoomAnimationController;
+@property (nonatomic, strong) MEDynamicTransition *dynamicTransition;
 @end
 
 @implementation METransitionsViewController
@@ -78,6 +80,14 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     return _zoomAnimationController;
 }
 
+- (MEDynamicTransition *)dynamicTransition {
+    if (_dynamicTransition) return _dynamicTransition;
+    
+    _dynamicTransition = [[MEDynamicTransition alloc] initWithSlidingViewController:self.slidingViewController];
+    
+    return _dynamicTransition;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -95,6 +105,19 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *selection = self.transitions[indexPath.row];
+    if ([selection isEqualToString:METransitionUIDynamics]) {
+        [self.navigationController.view removeGestureRecognizer:self.slidingViewController.panGesture];
+        [self.navigationController.view addGestureRecognizer:self.dynamicTransition.panGesture];
+    } else {
+        [self.navigationController.view removeGestureRecognizer:self.dynamicTransition.panGesture];
+        [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
+    }
+}
+
 #pragma mark - ECSlidingViewControllerDelegate
 
 - (id<UIViewControllerAnimatedTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
@@ -110,7 +133,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
         self.zoomAnimationController.operation = operation;
         animationController = self.zoomAnimationController;
     } else if ([transition isEqualToString:METransitionUIDynamics]) {
-        
+        animationController = self.dynamicTransition;
     } else {
         // Default
         animationController = nil;
@@ -132,7 +155,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
         // The shrink transition uses the default sliding interaction
         interactiveTransition = nil;
     } else if ([transition isEqualToString:METransitionUIDynamics]) {
-        
+        interactiveTransition = self.dynamicTransition;
     } else {
         // Default
         interactiveTransition = nil;

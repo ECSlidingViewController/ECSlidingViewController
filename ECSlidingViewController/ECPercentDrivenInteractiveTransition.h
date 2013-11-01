@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface ECPercentDrivenInteractiveTransition : NSObject <UIViewControllerInteractiveTransitioning>
-@property (nonatomic, assign) id<UIViewControllerAnimatedTransitioning> animationController;
+@property (nonatomic, strong) id<UIViewControllerAnimatedTransitioning> animationController;
 @property (nonatomic, assign, readonly) CGFloat percentComplete;
 @property (nonatomic, assign, readonly) CGFloat duration;
 - (void)updateInteractiveTransition:(CGFloat)percentComplete;

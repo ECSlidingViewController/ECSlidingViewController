@@ -24,6 +24,7 @@
 		057DC2A0181DE6D600D15995 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC29B181DE6D600D15995 /* ECSlidingViewController.m */; };
 		057DC2A3181DEE4700D15995 /* METransitionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC2A2181DEE4700D15995 /* METransitionsViewController.m */; };
 		057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC2A5181DF4F500D15995 /* MEMenuViewController.m */; };
+		05A4996D1822FEA90051F08E /* MEDynamicTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4996C1822FEA90051F08E /* MEDynamicTransition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		057DC2A2181DEE4700D15995 /* METransitionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METransitionsViewController.m; sourceTree = "<group>"; };
 		057DC2A4181DF4F500D15995 /* MEMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEMenuViewController.h; sourceTree = "<group>"; };
 		057DC2A5181DF4F500D15995 /* MEMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEMenuViewController.m; sourceTree = "<group>"; };
+		05A4996B1822FEA90051F08E /* MEDynamicTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEDynamicTransition.h; sourceTree = "<group>"; };
+		05A4996C1822FEA90051F08E /* MEDynamicTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEDynamicTransition.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,8 @@
 				05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */,
 				05160F561820CDF300EA3BDD /* MEZoomAnimationController.h */,
 				05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */,
+				05A4996B1822FEA90051F08E /* MEDynamicTransition.h */,
+				05A4996C1822FEA90051F08E /* MEDynamicTransition.m */,
 			);
 			name = Transitions;
 			sourceTree = "<group>";
@@ -234,6 +239,7 @@
 				057DC29F181DE6D600D15995 /* ECSlidingSegue.m in Sources */,
 				057DC268181DE6AE00D15995 /* main.m in Sources */,
 				057DC2A0181DE6D600D15995 /* ECSlidingViewController.m in Sources */,
+				05A4996D1822FEA90051F08E /* MEDynamicTransition.m in Sources */,
 				057DC29D181DE6D600D15995 /* ECSlidingAnimationController.m in Sources */,
 				057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */,
 				057DC29C181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.m in Sources */,
