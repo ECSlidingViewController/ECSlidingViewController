@@ -121,8 +121,6 @@
     } else {
         [self.animationController animateTransition:transitionContext];
     }
-    
-    _isInteractive = NO;
 }
 
 #pragma mark - UIPanGestureRecognizer action
@@ -131,19 +129,19 @@
     UIView *topView       = self.slidingViewController.topViewController.view;
     CGFloat translationX  = [recognizer translationInView:self.slidingViewController.view].x;
     CGFloat velocityX     = [recognizer velocityInView:self.slidingViewController.view].x;
-    
+
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan: {
             BOOL isMovingRight = velocityX > 0;
             
             CALayer *presentationLayer = (CALayer *)topView.layer.presentationLayer;
             self.initialTopViewFrame = presentationLayer.frame;
-            
+
             _isInteractive = YES;
             
-            if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && isMovingRight) {
+            if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && isMovingRight && self.slidingViewController.underLeftViewController) {
                 [self.slidingViewController anchorTopViewToRightAnimated:YES];
-            } else if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && !isMovingRight) {
+            } else if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && !isMovingRight && self.slidingViewController.underRightViewController) {
                 [self.slidingViewController anchorTopViewToLeftAnimated:YES];
             } else if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredLeft) {
                 [self.slidingViewController resetTopViewAnimated:YES];
@@ -156,6 +154,8 @@
             break;
         }
         case UIGestureRecognizerStateChanged: {
+            if (!_isInteractive) return;
+            
             _collisionBehavior = nil;
             _attachmentBehavior = nil;
             _pushBehavior = nil;
@@ -163,7 +163,13 @@
             _animator = nil;
             
             CGRect topViewInitialFrame = self.initialTopViewFrame;
-            topViewInitialFrame.origin.x += translationX;
+            CGFloat newLeftEdge = topViewInitialFrame.origin.x + translationX;
+            
+            if (newLeftEdge < 0) {
+                newLeftEdge = 0;
+            }
+            
+            topViewInitialFrame.origin.x = newLeftEdge;
             topView.frame = topViewInitialFrame;
             
             if (!self.positiveLeftToRight) translationX = translationX * -1.0;
@@ -175,6 +181,8 @@
         }
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled: {
+            if (!_isInteractive) return;
+            
             self.isPanningRight = velocityX > 0;
             
             CGFloat containerWidth = self.slidingViewController.view.bounds.size.width;
