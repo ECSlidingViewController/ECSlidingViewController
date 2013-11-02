@@ -183,6 +183,8 @@
         case UIGestureRecognizerStateCancelled: {
             if (!_isInteractive) return;
             
+            _isInteractive = NO;
+            
             self.isPanningRight = velocityX > 0;
             
             CGFloat containerWidth = self.slidingViewController.view.bounds.size.width;
