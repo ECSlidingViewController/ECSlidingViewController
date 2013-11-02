@@ -166,7 +166,7 @@
     
     CGRect expectedRect;
     
-    self.slidingViewController.underLeftViewLayout = ECSlidingViewLayoutWidthFullContainer | ECSlidingViewLayoutTopContainer;
+    self.underLeftViewController.edgesForExtendedLayout = UIRectEdgeAll;
     
     // resetting from left should start at zero
     [self.slidingViewController setValue:[NSNumber numberWithInteger:ECSlidingViewControllerOperationResetFromLeft]
@@ -192,7 +192,7 @@
     expectedRect = CGRectMake(0, 0, 320, 480);
     XCTAssertEqual([self.slidingViewController initialFrameForViewController:self.underLeftViewController], expectedRect);
     
-    self.slidingViewController.underLeftViewLayout = ECSlidingViewLayoutWidthReveal | ECSlidingViewLayoutTopContainer;
+    self.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     
     // resetting from right should start at reveal width
     [self.slidingViewController setValue:[NSNumber numberWithInteger:ECSlidingViewControllerOperationResetFromRight]
@@ -208,7 +208,7 @@
     
     CGRect expectedRect;
     
-    self.slidingViewController.underLeftViewLayout = ECSlidingViewLayoutWidthFullContainer | ECSlidingViewLayoutTopContainer;
+    self.slidingViewController.underLeftViewController.edgesForExtendedLayout = UIRectEdgeAll;
     
     // resetting from left should end at zero
     [self.slidingViewController setValue:[NSNumber numberWithInteger:ECSlidingViewControllerOperationResetFromLeft]
@@ -234,7 +234,7 @@
     expectedRect = CGRectMake(0, 0, 320, 480);
     XCTAssertEqual([self.slidingViewController finalFrameForViewController:self.underLeftViewController], expectedRect);
     
-    self.slidingViewController.underLeftViewLayout = ECSlidingViewLayoutWidthReveal | ECSlidingViewLayoutTopContainer;
+    self.slidingViewController.underLeftViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     
     // anchor right should end at reveal width
     [self.slidingViewController setValue:[NSNumber numberWithInteger:ECSlidingViewControllerOperationAnchorRight]
@@ -250,7 +250,7 @@
     
     CGRect expectedRect;
     
-    self.slidingViewController.underRightViewLayout = ECSlidingViewLayoutWidthFullContainer | ECSlidingViewLayoutTopContainer;
+    self.slidingViewController.underRightViewController.edgesForExtendedLayout = UIRectEdgeAll;
     
     // resetting from left should start at full width
     [self.slidingViewController setValue:[NSNumber numberWithInteger:ECSlidingViewControllerOperationResetFromLeft]
@@ -276,7 +276,7 @@
     expectedRect = CGRectZero;
     XCTAssertEqual([self.slidingViewController initialFrameForViewController:self.underRightViewController], expectedRect);
     
-    self.slidingViewController.underRightViewLayout = ECSlidingViewLayoutWidthReveal | ECSlidingViewLayoutTopContainer;
+    self.slidingViewController.underRightViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeRight;
     
     // resetting from left should start at reveal width
     [self.slidingViewController setValue:[NSNumber numberWithInteger:ECSlidingViewControllerOperationResetFromLeft]
@@ -292,7 +292,7 @@
     
     CGRect expectedRect;
     
-    self.slidingViewController.underRightViewLayout = ECSlidingViewLayoutWidthFullContainer | ECSlidingViewLayoutTopContainer;
+    self.slidingViewController.underRightViewController.edgesForExtendedLayout = UIRectEdgeAll;
     
     // resetting from left should end at zero
     [self.slidingViewController setValue:[NSNumber numberWithInteger:ECSlidingViewControllerOperationResetFromLeft]
@@ -318,7 +318,7 @@
     expectedRect = CGRectZero;
     XCTAssertEqual([self.slidingViewController finalFrameForViewController:self.underRightViewController], expectedRect);
     
-    self.slidingViewController.underRightViewLayout = ECSlidingViewLayoutWidthReveal | ECSlidingViewLayoutTopContainer;
+    self.slidingViewController.underRightViewController.edgesForExtendedLayout = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeRight;
     
     // anchor left should end at reveal width
     [self.slidingViewController setValue:[NSNumber numberWithInteger:ECSlidingViewControllerOperationAnchorLeft]

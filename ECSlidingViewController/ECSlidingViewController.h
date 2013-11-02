@@ -33,9 +33,6 @@
 @property (nonatomic, strong) UIViewController *topViewController;
 @property (nonatomic, strong) UIViewController *underLeftViewController;
 @property (nonatomic, strong) UIViewController *underRightViewController;
-@property (nonatomic, assign) ECSlidingViewLayout topViewLayout;
-@property (nonatomic, assign) ECSlidingViewLayout underLeftViewLayout;
-@property (nonatomic, assign) ECSlidingViewLayout underRightViewLayout;
 @property (nonatomic, assign) CGFloat anchorLeftPeekAmount;
 @property (nonatomic, assign) CGFloat anchorLeftRevealAmount;
 @property (nonatomic, assign) CGFloat anchorRightPeekAmount;

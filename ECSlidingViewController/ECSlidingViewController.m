@@ -89,9 +89,6 @@
     self.anchorLeftPeekAmount    = 44;
     self.anchorRightRevealAmount = 276;
     _currentTopViewPosition = ECSlidingViewControllerTopViewPositionCentered;
-    self.underLeftViewLayout  = ECSlidingViewLayoutTopContainer | ECSlidingViewLayoutBottomContainer | ECSlidingViewLayoutWidthReveal;
-    self.underRightViewLayout = ECSlidingViewLayoutTopContainer | ECSlidingViewLayoutBottomContainer | ECSlidingViewLayoutWidthReveal;
-    self.topViewLayout        = ECSlidingViewLayoutTopContainer | ECSlidingViewLayoutBottomContainer;
 }
 
 #pragma mark - UIViewController
@@ -380,13 +377,13 @@
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position {
     CGRect containerViewFrame = self.view.bounds;
     
-    if (self.topViewLayout & ECSlidingViewLayoutTopTopLayoutGuide) {
+    if (!(self.topViewController.edgesForExtendedLayout & UIRectEdgeTop)) {
         CGFloat topLayoutGuideLength = [self.topLayoutGuide length];
         containerViewFrame.origin.y     = topLayoutGuideLength;
         containerViewFrame.size.height -= topLayoutGuideLength;
     }
     
-    if (self.topViewLayout & ECSlidingViewLayoutBottomBottomLayoutGuide) {
+    if (!(self.topViewController.edgesForExtendedLayout & UIRectEdgeBottom)) {
         CGFloat bottomLayoutGuideLength = [self.bottomLayoutGuide length];
         containerViewFrame.size.height -= bottomLayoutGuideLength;
     }
@@ -408,18 +405,18 @@
 - (CGRect)underLeftViewCalculatedFrame {
     CGRect containerViewFrame = self.view.bounds;
     
-    if (self.underLeftViewLayout & ECSlidingViewLayoutTopTopLayoutGuide) {
+    if (!(self.underLeftViewController.edgesForExtendedLayout & UIRectEdgeTop)) {
         CGFloat topLayoutGuideLength    = [self.topLayoutGuide length];
         containerViewFrame.origin.y     = topLayoutGuideLength;
         containerViewFrame.size.height -= topLayoutGuideLength;
     }
     
-    if (self.underLeftViewLayout & ECSlidingViewLayoutBottomBottomLayoutGuide) {
+    if (!(self.underLeftViewController.edgesForExtendedLayout & UIRectEdgeBottom)) {
         CGFloat bottomLayoutGuideLength = [self.bottomLayoutGuide length];
         containerViewFrame.size.height -= bottomLayoutGuideLength;
     }
     
-    if (self.underLeftViewLayout & ECSlidingViewLayoutWidthReveal) {
+    if (!(self.underLeftViewController.edgesForExtendedLayout & UIRectEdgeRight)) {
         containerViewFrame.size.width = self.anchorRightRevealAmount;
     }
     
@@ -429,18 +426,18 @@
 - (CGRect)underRightViewCalculatedFrame {
     CGRect containerViewFrame = self.view.bounds;
     
-    if (self.underRightViewLayout & ECSlidingViewLayoutTopTopLayoutGuide) {
+    if (!(self.underRightViewController.edgesForExtendedLayout & UIRectEdgeTop)) {
         CGFloat topLayoutGuideLength    = [self.topLayoutGuide length];
         containerViewFrame.origin.y     = topLayoutGuideLength;
         containerViewFrame.size.height -= topLayoutGuideLength;
     }
     
-    if (self.underRightViewLayout & ECSlidingViewLayoutBottomBottomLayoutGuide) {
+    if (!(self.underRightViewController.edgesForExtendedLayout & UIRectEdgeBottom)) {
         CGFloat bottomLayoutGuideLength = [self.bottomLayoutGuide length];
         containerViewFrame.size.height -= bottomLayoutGuideLength;
     }
     
-    if (self.underRightViewLayout & ECSlidingViewLayoutWidthReveal) {
+    if (!(self.underRightViewController.edgesForExtendedLayout & UIRectEdgeLeft)) {
         containerViewFrame.origin.x   = self.anchorLeftPeekAmount;
         containerViewFrame.size.width = self.anchorLeftRevealAmount;
     }

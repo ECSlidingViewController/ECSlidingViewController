@@ -34,14 +34,16 @@
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:topViewController];
     
     // configure under left view controller
-    underLeftViewController.view.layer.borderWidth = 20;
+    underLeftViewController.view.layer.borderWidth     = 20;
     underLeftViewController.view.layer.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
     underLeftViewController.view.layer.borderColor     = [UIColor colorWithWhite:0.8 alpha:1.0].CGColor;
+    underLeftViewController.edgesForExtendedLayout     = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
     
     // configure under right view controller
-    underRightViewController.view.layer.borderWidth = 20;
+    underRightViewController.view.layer.borderWidth     = 20;
     underRightViewController.view.layer.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
     underRightViewController.view.layer.borderColor     = [UIColor colorWithWhite:0.8 alpha:1.0].CGColor;
+    underRightViewController.edgesForExtendedLayout     = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeRight;
     
     self.slidingViewController = [[ECSlidingViewController alloc] initWithTopViewController:navigationController];
     self.slidingViewController.underLeftViewController  = underLeftViewController;
