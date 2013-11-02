@@ -27,6 +27,7 @@
     }
     
     self.topViewController = [storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+    self.shouldAddPanGestureRecognizerToTopViewSnapshot = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation

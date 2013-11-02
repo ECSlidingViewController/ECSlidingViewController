@@ -512,7 +512,10 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
             self.snapshotPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(updateTopViewHorizontalCenterWithRecognizer:)];
             [self.topViewSnapshot addGestureRecognizer:self.snapshotPanGesture];
         }
-        [self.topView addSubview:self.topViewSnapshot];
+        
+        self.topViewSnapshot.frame = self.topView.frame;
+        [self.view addSubview:self.topViewSnapshot];
+        self.topView.userInteractionEnabled = NO;
     }
 }
 
@@ -522,6 +525,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
         self.topViewSnapshotPanGesture = nil;
         self.snapshotPanGesture = nil;
         [self.topViewSnapshot removeFromSuperview];
+        self.topView.userInteractionEnabled = YES;
     }
 }
 
