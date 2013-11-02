@@ -21,7 +21,6 @@
 @property (nonatomic, assign) BOOL isPanningRight;
 @property (nonatomic, assign) BOOL isInteractive;
 @property (nonatomic, assign) CGFloat fullWidth;
-@property (nonatomic, assign) CGFloat currentPercentage;
 @property (nonatomic, assign) CGRect initialTopViewFrame;
 @end
 
@@ -113,7 +112,6 @@
         
         self.positiveLeftToRight = initialLeftEdge < finalLeftEdge;
         self.fullWidth           = fullWidth;
-        self.currentPercentage   = 0;
     } else {
         [self.animationController animateTransition:transitionContext];
     }
