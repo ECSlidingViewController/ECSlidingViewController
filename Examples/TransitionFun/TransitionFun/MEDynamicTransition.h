@@ -10,9 +10,9 @@
 #import "ECSlidingViewController.h"
 #import "ECPercentDrivenInteractiveTransition.h"
 
-@interface MEDynamicTransition : NSObject <UIViewControllerAnimatedTransitioning,
-                                           UIViewControllerInteractiveTransitioning,
+@interface MEDynamicTransition : NSObject <UIViewControllerInteractiveTransitioning,
                                            UIDynamicAnimatorDelegate>
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 - (id)initWithSlidingViewController:(ECSlidingViewController *)slidingViewController;
+@property (nonatomic, strong) id<UIViewControllerAnimatedTransitioning> animationController;
 @end

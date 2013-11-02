@@ -12,16 +12,14 @@
 @interface MEDynamicTransition ()
 @property (nonatomic, assign) ECSlidingViewController *slidingViewController;
 @property (nonatomic, assign) id<UIViewControllerContextTransitioning> transitionContext;
-@property (nonatomic, strong) id<UIViewControllerAnimatedTransitioning> animationController;
 @property (nonatomic, strong) UIDynamicAnimator *animator;
-@property (nonatomic, strong) UIDynamicItemBehavior *itemBehavior;
 @property (nonatomic, strong) UICollisionBehavior *collisionBehavior;
 @property (nonatomic, strong) UIAttachmentBehavior *attachmentBehavior;
 @property (nonatomic, strong) UIPushBehavior *pushBehavior;
-@property (nonatomic, strong) UIGravityBehavior *gravityBehavior;
 @property (nonatomic, strong) UIDynamicBehavior *compositeBehavior;
 @property (nonatomic, assign) BOOL positiveLeftToRight;
 @property (nonatomic, assign) BOOL isPanningRight;
+@property (nonatomic, assign) BOOL isInteractive;
 @property (nonatomic, assign) CGFloat fullWidth;
 @property (nonatomic, assign) CGFloat currentPercentage;
 @property (nonatomic, assign) CGRect initialTopViewFrame;
@@ -33,7 +31,6 @@
     self = [super init];
     if (self) {
         self.slidingViewController = slidingViewController;
-        self.animationController   = [[ECSlidingAnimationController alloc] init];
     }
     
     return self;
@@ -49,14 +46,6 @@
     return _panGesture;
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)animationController {
-    if (_animationController) return _animationController;
-    
-    _animationController = [[ECSlidingAnimationController alloc] init];
-    
-    return _animationController;
-}
-
 - (UIDynamicAnimator *)animator {
     if (_animator) return _animator;
     
@@ -64,16 +53,6 @@
     _animator.delegate = self;
     
     return _animator;
-}
-
-- (UIDynamicItemBehavior *)itemBehavior {
-    if (_itemBehavior) return _itemBehavior;
-    
-    _itemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.slidingViewController.topViewController.view]];
-    _itemBehavior.allowsRotation = NO;
-    _itemBehavior.density = 10;
-    
-    return _itemBehavior;
 }
 
 - (UICollisionBehavior *)collisionBehavior {
@@ -110,14 +89,6 @@
     return _pushBehavior;
 }
 
-- (UIGravityBehavior *)gravityBehavior {
-    if (_gravityBehavior) return _gravityBehavior;
-    
-    _gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[self.slidingViewController.topViewController.view]];
-    
-    return _gravityBehavior;
-}
-
 - (UIDynamicBehavior *)compositeBehavior {
     if (_compositeBehavior) return _compositeBehavior;
     
@@ -125,20 +96,8 @@
     [_compositeBehavior addChildBehavior:self.collisionBehavior];
     [_compositeBehavior addChildBehavior:self.attachmentBehavior];
     [_compositeBehavior addChildBehavior:self.pushBehavior];
-//    [_compositeBehavior addChildBehavior:self.gravityBehavior];
-//    [_compositeBehavior addChildBehavior:self.itemBehavior];
     
     return _compositeBehavior;
-}
-
-#pragma mark - UIViewControllerAnimatedTransitioning
-
-- (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
-    return [self.animationController transitionDuration:transitionContext];
-}
-
-- (void)animateTransition:(id <UIViewControllerContextTransitioning>)transitionContext {
-    [self.animationController animateTransition:transitionContext];
 }
 
 #pragma mark - UIViewControllerInteractiveTransitioning
@@ -146,16 +105,20 @@
 - (void)startInteractiveTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
     
-    UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
-    CGFloat finalLeftEdge = CGRectGetMinX([transitionContext finalFrameForViewController:topViewController]);
-    CGFloat initialLeftEdge = CGRectGetMinX([transitionContext initialFrameForViewController:topViewController]);
-    CGFloat fullWidth = fabsf(finalLeftEdge - initialLeftEdge);
+    if (_isInteractive) {
+        UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
+        CGFloat finalLeftEdge = CGRectGetMinX([transitionContext finalFrameForViewController:topViewController]);
+        CGFloat initialLeftEdge = CGRectGetMinX([transitionContext initialFrameForViewController:topViewController]);
+        CGFloat fullWidth = fabsf(finalLeftEdge - initialLeftEdge);
+        
+        self.positiveLeftToRight = initialLeftEdge < finalLeftEdge;
+        self.fullWidth           = fullWidth;
+        self.currentPercentage   = 0;
+    } else {
+        [self.animationController animateTransition:transitionContext];
+    }
     
-    self.positiveLeftToRight = initialLeftEdge < finalLeftEdge;
-    self.fullWidth           = fullWidth;
-    self.currentPercentage   = 0;
-    
-    
+    _isInteractive = NO;
 }
 
 #pragma mark - UIPanGestureRecognizer action
@@ -172,6 +135,8 @@
             CALayer *presentationLayer = (CALayer *)topView.layer.presentationLayer;
             self.initialTopViewFrame = presentationLayer.frame;
             
+            _isInteractive = YES;
+            
             if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && isMovingRight) {
                 [self.slidingViewController anchorTopViewToRightAnimated:YES];
             } else if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered && !isMovingRight) {
@@ -180,6 +145,8 @@
                 [self.slidingViewController resetTopViewAnimated:YES];
             } else if (self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight) {
                 [self.slidingViewController resetTopViewAnimated:YES];
+            } else {
+                _isInteractive = NO;
             }
             
             break;
@@ -214,9 +181,6 @@
             [self.animator updateItemUsingCurrentState:self.slidingViewController.topViewController.view];
             
             self.attachmentBehavior.anchorPoint = anchorPoint;
-            
-            self.gravityBehavior.angle = self.isPanningRight ? 0 : M_PI;
-            self.gravityBehavior.magnitude = 1;
             
             self.pushBehavior.angle = 0; // velocity may be negative
             self.pushBehavior.magnitude = velocityX;

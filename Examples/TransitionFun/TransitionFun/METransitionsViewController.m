@@ -7,6 +7,7 @@
 //
 
 #import "METransitionsViewController.h"
+#import "ECSlidingAnimationController.h"
 #import "MEFoldAnimationController.h"
 #import "MEZoomAnimationController.h"
 #import "MEDynamicTransition.h"
@@ -18,6 +19,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
 
 @interface METransitionsViewController ()
 @property (nonatomic, strong) NSArray *transitions;
+@property (nonatomic, strong) ECSlidingAnimationController *slidingAnimationController;
 @property (nonatomic, strong) MEFoldAnimationController *foldAnimationController;
 @property (nonatomic, strong) MEZoomAnimationController *zoomAnimationController;
 @property (nonatomic, strong) MEDynamicTransition *dynamicTransition;
@@ -62,6 +64,14 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     _transitions = @[METransitionDefault, METransitionFold, METransitionZoom, METransitionUIDynamics];
     
     return _transitions;
+}
+
+- (ECSlidingAnimationController *)slidingAnimationController {
+    if (_slidingAnimationController) return _slidingAnimationController;
+    
+    _slidingAnimationController = [[ECSlidingAnimationController alloc] init];
+    
+    return _slidingAnimationController;
 }
 
 - (MEFoldAnimationController *)foldAnimationController {
@@ -133,7 +143,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
         self.zoomAnimationController.operation = operation;
         animationController = self.zoomAnimationController;
     } else if ([transition isEqualToString:METransitionUIDynamics]) {
-        animationController = self.dynamicTransition;
+        animationController = self.slidingAnimationController;
     } else {
         // Default
         animationController = nil;
@@ -155,6 +165,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
         // The shrink transition uses the default sliding interaction
         interactiveTransition = nil;
     } else if ([transition isEqualToString:METransitionUIDynamics]) {
+        self.dynamicTransition.animationController = animationController;
         interactiveTransition = self.dynamicTransition;
     } else {
         // Default
