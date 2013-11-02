@@ -25,7 +25,7 @@
 - (NSArray *)menuItems {
     if (_menuItems) return _menuItems;
     
-    _menuItems = @[@"Transitions", @"Noop 1", @"Noop 2"];
+    _menuItems = @[@"Transitions"];
     
     return _menuItems;
 }
