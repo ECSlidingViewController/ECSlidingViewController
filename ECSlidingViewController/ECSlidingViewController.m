@@ -35,6 +35,9 @@
 @property (nonatomic, assign) BOOL isAnimated;
 @property (nonatomic, assign) BOOL isInteractive;
 @property (nonatomic, copy) void (^animationComplete)();
+@property (nonatomic, copy) void (^coordinatorAnimations)(id<UIViewControllerTransitionCoordinatorContext>context);
+@property (nonatomic, copy) void (^coordinatorCompletion)(id<UIViewControllerTransitionCoordinatorContext>context);
+@property (nonatomic, copy) void (^coordinatorInteractionEnded)(id<UIViewControllerTransitionCoordinatorContext>context);
 - (void)setup;
 
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position;
@@ -210,6 +213,10 @@
     } else {
         return nil;
     }
+}
+
+- (id<UIViewControllerTransitionCoordinator>)transitionCoordinator {
+    return self;
 }
 
 #pragma mark - Properties
@@ -514,7 +521,11 @@
     }
     
     [self beginAppearanceTransitionForOperation:operation];
-
+    
+    self.defaultAnimationController.coordinatorAnimations         = self.coordinatorAnimations;
+    self.defaultAnimationController.coordinatorCompletion         = self.coordinatorCompletion;
+    self.defaultInteractiveTransition.coordinatorInteractionEnded = self.coordinatorInteractionEnded;
+    
     if ([self isInteractive]) {
         [self.currentInteractiveTransition startInteractiveTransition:self];
     } else {
@@ -592,7 +603,13 @@
     [self.defaultInteractiveTransition updateTopViewHorizontalCenterWithRecognizer:recognizer];
 }
 
-#pragma mark - UIViewControllerContextTransitioning
+#pragma mark - UIViewControllerTransitionCoordinatorContext
+
+- (BOOL)initiallyInteractive {
+    return _isAnimated && _isInteractive;
+}
+
+#pragma mark - UIViewControllerContextTransitioning and UIViewControllerTransitionCoordinatorContext
 
 - (UIView *)containerView {
     return self.view;
@@ -660,9 +677,12 @@
         }
     }
     
-    _transitionWasCancelled = NO;
-    _isInteractive = NO;
-    self.currentOperation = ECSlidingViewControllerOperationNone;
+    _transitionWasCancelled      = NO;
+    _isInteractive               = NO;
+    _coordinatorAnimations       = nil;
+    _coordinatorCompletion       = nil;
+    _coordinatorInteractionEnded = nil;
+    self.currentOperation        = ECSlidingViewControllerOperationNone;
 }
 
 - (UIViewController *)viewControllerForKey:(NSString *)key {
@@ -723,6 +743,27 @@
     }
     
     return CGRectZero;
+}
+
+#pragma mark - UIViewControllerTransitionCoordinator
+
+- (BOOL)animateAlongsideTransition:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))animation
+                        completion:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))completion {
+    self.coordinatorAnimations = animation;
+    self.coordinatorCompletion = completion;
+    return YES;
+}
+
+- (BOOL)animateAlongsideTransitionInView:(UIView *)view
+                               animation:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))animation
+                              completion:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))completion {
+    self.coordinatorAnimations = animation;
+    self.coordinatorCompletion = completion;
+    return YES;
+}
+
+- (void)notifyWhenInteractionEndsUsingBlock:(void(^)(id<UIViewControllerTransitionCoordinatorContext>context))handler {
+    self.coordinatorInteractionEnded = handler;
 }
 
 @end

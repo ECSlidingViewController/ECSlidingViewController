@@ -15,4 +15,5 @@
 @interface ECSlidingInteractiveTransition : ECPercentDrivenInteractiveTransition
 - (id)initWithSlidingViewController:(ECSlidingViewController *)slidingViewController;
 - (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer;
+@property (nonatomic, copy) void (^coordinatorInteractionEnded)(id<UIViewControllerTransitionCoordinatorContext>context);
 @end

@@ -21,7 +21,9 @@
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>)animationController;
 @end
 
-@interface ECSlidingViewController : UIViewController <UIViewControllerContextTransitioning> {
+@interface ECSlidingViewController : UIViewController <UIViewControllerContextTransitioning,
+                                                       UIViewControllerTransitionCoordinator,
+                                                       UIViewControllerTransitionCoordinatorContext> {
     CGFloat _anchorLeftPeekAmount;
     CGFloat _anchorLeftRevealAmount;
     CGFloat _anchorRightPeekAmount;
