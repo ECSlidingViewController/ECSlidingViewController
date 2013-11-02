@@ -27,6 +27,7 @@
     UIViewController *toViewController  = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView    = [transitionContext containerView];
     CGRect topViewFinalFrame = [transitionContext finalFrameForViewController:topViewController];
+    CGFloat revealWidth;
     BOOL isResetting = NO;
     
     CATransform3D transform = CATransform3DIdentity;
@@ -37,19 +38,21 @@
     
     if (topViewController == toViewController) {
         underViewController = [transitionContext viewControllerForKey:ECTransitionContextUnderLeftControllerKey];
+        revealWidth = [transitionContext initialFrameForViewController:topViewController].origin.x;
         isResetting = YES;
     } else {
         underViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        revealWidth = [transitionContext finalFrameForViewController:topViewController].origin.x;
         isResetting = NO;
     }
-        
+
     CGRect underViewInitialFrame = [transitionContext initialFrameForViewController:underViewController];
     UIView *underView = underViewController.view;
     
     underView.frame = underViewInitialFrame;
     [underView removeFromSuperview];
 
-    CGFloat underViewHalfwayPoint = underView.bounds.size.width / 2;
+    CGFloat underViewHalfwayPoint = revealWidth / 2;
     CGRect leftSideFrame = CGRectMake(0, 0, underViewHalfwayPoint, underView.bounds.size.height);
     CGRect rightSideFrame = CGRectMake(underViewHalfwayPoint, 0, underViewHalfwayPoint, underView.bounds.size.height);
     
