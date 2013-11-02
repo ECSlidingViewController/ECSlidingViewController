@@ -16,12 +16,12 @@
 		05B9673B181B2F880013CA5D /* MEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9673A181B2F880013CA5D /* MEAppDelegate.m */; };
 		05B9673E181B2F880013CA5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05B9673C181B2F880013CA5D /* Main.storyboard */; };
 		05B96743181B2F880013CA5D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05B96742181B2F880013CA5D /* Images.xcassets */; };
-		05B96764181B2FB50013CA5D /* MESettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B96763181B2FB50013CA5D /* MESettingsViewController.m */; };
-		05B96767181B2FBF0013CA5D /* MEHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B96766181B2FBF0013CA5D /* MEHomeViewController.m */; };
 		05B96772181B2FED0013CA5D /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9676A181B2FED0013CA5D /* ECSlidingAnimationController.m */; };
 		05B96773181B2FED0013CA5D /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9676D181B2FED0013CA5D /* ECSlidingInteractiveTransition.m */; };
 		05B96774181B2FED0013CA5D /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9676F181B2FED0013CA5D /* ECSlidingSegue.m */; };
 		05B96775181B2FED0013CA5D /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B96771181B2FED0013CA5D /* ECSlidingViewController.m */; };
+		05FD31F61824A99200482982 /* ECSlidingUnwindSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FD31F51824A99200482982 /* ECSlidingUnwindSegue.m */; };
+		05FD31F91824AA1F00482982 /* MEMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FD31F81824AA1F00482982 /* MEMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,10 +40,6 @@
 		05B9673D181B2F880013CA5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		05B96742181B2F880013CA5D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		05B96749181B2F880013CA5D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		05B96762181B2FB50013CA5D /* MESettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MESettingsViewController.h; sourceTree = "<group>"; };
-		05B96763181B2FB50013CA5D /* MESettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MESettingsViewController.m; sourceTree = "<group>"; };
-		05B96765181B2FBF0013CA5D /* MEHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEHomeViewController.h; sourceTree = "<group>"; };
-		05B96766181B2FBF0013CA5D /* MEHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEHomeViewController.m; sourceTree = "<group>"; };
 		05B96769181B2FED0013CA5D /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
 		05B9676A181B2FED0013CA5D /* ECSlidingAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingAnimationController.m; sourceTree = "<group>"; };
 		05B9676B181B2FED0013CA5D /* ECSlidingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingConstants.h; sourceTree = "<group>"; };
@@ -53,6 +49,10 @@
 		05B9676F181B2FED0013CA5D /* ECSlidingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingSegue.m; sourceTree = "<group>"; };
 		05B96770181B2FED0013CA5D /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
 		05B96771181B2FED0013CA5D /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		05FD31F41824A99200482982 /* ECSlidingUnwindSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingUnwindSegue.h; sourceTree = "<group>"; };
+		05FD31F51824A99200482982 /* ECSlidingUnwindSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingUnwindSegue.m; sourceTree = "<group>"; };
+		05FD31F71824AA1F00482982 /* MEMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEMenuViewController.h; sourceTree = "<group>"; };
+		05FD31F81824AA1F00482982 /* MEMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +105,8 @@
 				05B9673C181B2F880013CA5D /* Main.storyboard */,
 				05B96739181B2F880013CA5D /* MEAppDelegate.h */,
 				05B9673A181B2F880013CA5D /* MEAppDelegate.m */,
-				05B96765181B2FBF0013CA5D /* MEHomeViewController.h */,
-				05B96766181B2FBF0013CA5D /* MEHomeViewController.m */,
-				05B96762181B2FB50013CA5D /* MESettingsViewController.h */,
-				05B96763181B2FB50013CA5D /* MESettingsViewController.m */,
+				05FD31F71824AA1F00482982 /* MEMenuViewController.h */,
+				05FD31F81824AA1F00482982 /* MEMenuViewController.m */,
 				05B96731181B2F880013CA5D /* Supporting Files */,
 			);
 			path = BasicMenu;
@@ -137,6 +135,8 @@
 				05B9676D181B2FED0013CA5D /* ECSlidingInteractiveTransition.m */,
 				05B9676E181B2FED0013CA5D /* ECSlidingSegue.h */,
 				05B9676F181B2FED0013CA5D /* ECSlidingSegue.m */,
+				05FD31F41824A99200482982 /* ECSlidingUnwindSegue.h */,
+				05FD31F51824A99200482982 /* ECSlidingUnwindSegue.m */,
 				05B96770181B2FED0013CA5D /* ECSlidingViewController.h */,
 				05B96771181B2FED0013CA5D /* ECSlidingViewController.m */,
 			);
@@ -211,14 +211,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				05B96772181B2FED0013CA5D /* ECSlidingAnimationController.m in Sources */,
+				05FD31F91824AA1F00482982 /* MEMenuViewController.m in Sources */,
 				05B96775181B2FED0013CA5D /* ECSlidingViewController.m in Sources */,
 				058F50CF181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */,
-				05B96767181B2FBF0013CA5D /* MEHomeViewController.m in Sources */,
 				05B96773181B2FED0013CA5D /* ECSlidingInteractiveTransition.m in Sources */,
+				05FD31F61824A99200482982 /* ECSlidingUnwindSegue.m in Sources */,
 				05B9673B181B2F880013CA5D /* MEAppDelegate.m in Sources */,
 				05B96737181B2F880013CA5D /* main.m in Sources */,
 				05B96774181B2FED0013CA5D /* ECSlidingSegue.m in Sources */,
-				05B96764181B2FB50013CA5D /* MESettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

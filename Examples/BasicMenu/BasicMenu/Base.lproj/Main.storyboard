@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3746"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--Menu View Controller-->
         <scene sceneID="3ZM-IB-Kuc">
             <objects>
-                <tableViewController storyboardIdentifier="MenuViewController" id="F6a-MU-Um8" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MenuViewController" id="F6a-MU-Um8" customClass="MEMenuViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="zLM-el-GFL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,10 +68,10 @@
             </objects>
             <point key="canvasLocation" x="-222" y="180"/>
         </scene>
-        <!--Settings View Controller - Settings-->
+        <!--Table View Controller - Settings-->
         <scene sceneID="bks-qE-5VU">
             <objects>
-                <tableViewController storyboardIdentifier="SettingsViewController" id="Vnj-XV-PPz" customClass="MESettingsViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SettingsViewController" id="Vnj-XV-PPz" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="9fl-RI-Ur4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,12 +90,13 @@
                     <navigationItem key="navigationItem" title="Settings" id="wZ9-ev-chX">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="V4M-rz-zDi">
                             <connections>
-                                <action selector="menuButtonTapped:" destination="Vnj-XV-PPz" id="vXG-J1-sxI"/>
+                                <segue destination="Qbe-Xw-RHl" kind="unwind" unwindAction="unwindToMenuViewController:" id="z8l-gU-sfr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="622-d1-gYX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Qbe-Xw-RHl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="837" y="1606"/>
         </scene>
@@ -114,10 +115,10 @@
             </objects>
             <point key="canvasLocation" x="303" y="1606"/>
         </scene>
-        <!--Home View Controller - Home-->
+        <!--View Controller - Home-->
         <scene sceneID="HcY-HC-t1g">
             <objects>
-                <viewController id="87u-ZJ-49t" customClass="MEHomeViewController" sceneMemberID="viewController">
+                <viewController id="87u-ZJ-49t" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="S4H-Ct-Kq4"/>
                         <viewControllerLayoutGuide type="bottom" id="Ig8-GA-DwW"/>
@@ -130,12 +131,13 @@
                     <navigationItem key="navigationItem" title="Home" id="7va-ve-X7O">
                         <barButtonItem key="leftBarButtonItem" title="Menu" id="gDy-hb-lIv">
                             <connections>
-                                <action selector="menuButtonTapped:" destination="87u-ZJ-49t" id="Jcd-Xh-EM5"/>
+                                <segue destination="LMD-nb-ePp" kind="unwind" unwindAction="unwindToMenuViewController:" id="ocx-C1-69Z"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aUV-BV-bVQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="LMD-nb-ePp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="829" y="894"/>
         </scene>

@@ -7,6 +7,7 @@
 //
 
 #import "ECSlidingViewController.h"
+#import "ECSlidingUnwindSegue.h"
 
 @implementation UIViewController(SlidingViewExtension)
 
@@ -183,6 +184,11 @@
 
 - (BOOL)shouldAutomaticallyForwardRotationMethods {
     return YES;
+}
+
+- (UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(NSString *)identifier {
+    ECSlidingUnwindSegue *unwindSegue = [[ECSlidingUnwindSegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    return unwindSegue;
 }
 
 #pragma mark - Properties

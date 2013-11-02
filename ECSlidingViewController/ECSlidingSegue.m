@@ -14,7 +14,7 @@
 - (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination {
     self = [super initWithIdentifier:identifier source:source destination:destination];
     if (self) {
-        self.shouldAlwaysResetTopViewController = NO;
+        self.skipSettingTopViewController = NO;
     }
     
     return self;
@@ -24,7 +24,7 @@
     ECSlidingViewController *slidingViewController = [[self sourceViewController] slidingViewController];
     UIViewController *destinationViewController    = [self destinationViewController];
     
-    if (self.shouldAlwaysResetTopViewController || ![destinationViewController isMemberOfClass:[slidingViewController.topViewController class]]) {
+    if (!self.skipSettingTopViewController) {
         slidingViewController.topViewController = destinationViewController;
     }
     

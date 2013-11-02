@@ -7,12 +7,18 @@
 //
 
 #import "MEMenuViewController.h"
+#import "ECSlidingSegue.h"
 
 @interface MEMenuViewController ()
 @property (nonatomic, strong) NSArray *menuItems;
 @end
 
 @implementation MEMenuViewController
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    ECSlidingSegue *slidingSegue = (ECSlidingSegue *)segue;
+    slidingSegue.skipSettingTopViewController = YES;
+}
 
 #pragma mark - Properties
 

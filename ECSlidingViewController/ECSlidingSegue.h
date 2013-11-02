@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ECSlidingSegue : UIStoryboardSegue
-@property (nonatomic, assign) BOOL shouldAlwaysResetTopViewController;
+@property (nonatomic, assign) BOOL skipSettingTopViewController;
 @end
