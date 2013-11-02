@@ -63,8 +63,8 @@
     CGFloat containerWidth  = self.slidingViewController.view.bounds.size.width;
     CGFloat revealAmount    = self.slidingViewController.anchorRightRevealAmount;
     
-    [_collisionBehavior addBoundaryWithIdentifier:@"LeftEdge" fromPoint:CGPointMake(0, 0) toPoint:CGPointMake(0, containerHeight)];
-    [_collisionBehavior addBoundaryWithIdentifier:@"RightEdge" fromPoint:CGPointMake(revealAmount + containerWidth, 0) toPoint:CGPointMake(revealAmount + containerWidth, containerHeight)];
+    [_collisionBehavior addBoundaryWithIdentifier:@"LeftEdge" fromPoint:CGPointMake(-1, 0) toPoint:CGPointMake(-1, containerHeight)];
+    [_collisionBehavior addBoundaryWithIdentifier:@"RightEdge" fromPoint:CGPointMake(revealAmount + containerWidth + 1, 0) toPoint:CGPointMake(revealAmount + containerWidth + 1, containerHeight)];
 
     return _collisionBehavior;
 }
