@@ -609,6 +609,26 @@
     return _isAnimated && _isInteractive;
 }
 
+- (BOOL)isCancelled {
+    return _transitionWasCancelled;
+}
+
+- (NSTimeInterval)transitionDuration {
+    return [self.currentAnimationController transitionDuration:self];
+}
+
+- (CGFloat)percentComplete {
+    return self.currentAnimationPercentage;
+}
+
+- (CGFloat)completionVelocity {
+    return 1.0;
+}
+
+- (UIViewAnimationCurve)completionCurve {
+    return UIViewAnimationCurveLinear;
+}
+
 #pragma mark - UIViewControllerContextTransitioning and UIViewControllerTransitionCoordinatorContext
 
 - (UIView *)containerView {
@@ -632,7 +652,7 @@
 }
 
 - (void)updateInteractiveTransition:(CGFloat)percentComplete {
-    
+    self.currentAnimationPercentage = percentComplete;
 }
 
 - (void)finishInteractiveTransition {
@@ -683,6 +703,7 @@
     _coordinatorAnimations       = nil;
     _coordinatorCompletion       = nil;
     _coordinatorInteractionEnded = nil;
+    _currentAnimationPercentage  = 0;
     self.currentOperation        = ECSlidingViewControllerOperationNone;
 }
 
