@@ -188,6 +188,30 @@
     return unwindSegue;
 }
 
+- (UIViewController *)childViewControllerForStatusBarHidden {
+    if (self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered) {
+        return self.topViewController;
+    } else if (self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredLeft) {
+        return self.underRightViewController;
+    } else if (self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight) {
+        return self.underLeftViewController;
+    } else {
+        return nil;
+    }
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    if (self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionCentered) {
+        return self.topViewController;
+    } else if (self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredLeft) {
+        return self.underRightViewController;
+    } else if (self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight) {
+        return self.underLeftViewController;
+    } else {
+        return nil;
+    }
+}
+
 #pragma mark - Properties
 
 - (void)setTopViewController:(UIViewController *)topViewController {
