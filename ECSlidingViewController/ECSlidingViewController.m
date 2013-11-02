@@ -646,15 +646,6 @@
 - (void)completeTransition:(BOOL)didComplete {
     if (self.currentOperation == ECSlidingViewControllerOperationNone) return;
     
-    if ([self.currentAnimationController respondsToSelector:@selector(animationEnded:)]) {
-        [self.currentAnimationController animationEnded:didComplete];
-    }
-    
-    if (self.animationComplete) self.animationComplete();
-    self.animationComplete = nil;
-    
-    [self endAppearanceTransitionForOperation:self.currentOperation isCancelled:[self transitionWasCancelled]];
-    
     if ([self transitionWasCancelled]) {
         if (self.currentOperation == ECSlidingViewControllerOperationAnchorLeft) {
             _currentTopViewPosition = ECSlidingViewControllerTopViewPositionCentered;
@@ -676,6 +667,16 @@
             _currentTopViewPosition = ECSlidingViewControllerTopViewPositionCentered;
         }
     }
+    
+    if ([self.currentAnimationController respondsToSelector:@selector(animationEnded:)]) {
+        [self.currentAnimationController animationEnded:didComplete];
+    }
+    
+    if (self.animationComplete) self.animationComplete();
+    self.animationComplete = nil;
+    
+    [self endAppearanceTransitionForOperation:self.currentOperation isCancelled:[self transitionWasCancelled]];
+    [self setNeedsStatusBarAppearanceUpdate];
     
     _transitionWasCancelled      = NO;
     _isInteractive               = NO;
