@@ -363,6 +363,14 @@
     return _defaultInteractiveTransition;
 }
 
+- (UIView *)gestureView {
+    if (_gestureView) return _gestureView;
+    
+    _gestureView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    return _gestureView;
+}
+
 - (UIPanGestureRecognizer *)resetPanGesture {
     if (_resetPanGesture) return _resetPanGesture;
     
@@ -663,7 +671,9 @@
         if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGestureDisabled) {
             topView.userInteractionEnabled = NO;
         } else {
-            self.gestureView = [[UIView alloc] initWithFrame:topView.frame];
+            self.gestureView.frame = topView.frame;
+            [self.gestureView removeGestureRecognizer:self.resetTapGesture];
+            [self.gestureView removeGestureRecognizer:self.resetPanGesture];
 
             if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGesturePanning && self.panGesture.view && self.panGesture.isEnabled) {
                 [self.gestureView addGestureRecognizer:self.resetPanGesture];
@@ -678,7 +688,6 @@
     } else {
         topView.userInteractionEnabled = YES;
         [self.gestureView removeFromSuperview];
-        self.gestureView = nil;
     }
 }
 
