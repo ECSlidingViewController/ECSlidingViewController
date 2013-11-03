@@ -425,6 +425,20 @@
 #pragma mark - Private
 
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position {
+    if ([(NSObject *)self.delegate respondsToSelector:@selector(slidingViewController:layoutControllerForTopViewPosition:)]) {
+        id<ECSlidingViewControllerLayout> layoutController = [self.delegate slidingViewController:self
+                                                               layoutControllerForTopViewPosition:position];
+        
+        if (layoutController) {
+            CGRect frame = [layoutController slidingViewController:self
+                                            frameForViewController:self.topViewController
+                                                   topViewPosition:position];
+            if (!CGRectIsInfinite(frame)) {
+                return frame;
+            }
+        }
+    }
+    
     CGRect containerViewFrame = self.view.bounds;
     
     if (!(self.topViewController.edgesForExtendedLayout & UIRectEdgeTop)) {
@@ -453,6 +467,20 @@
 }
 
 - (CGRect)underLeftViewCalculatedFrame {
+    if ([(NSObject *)self.delegate respondsToSelector:@selector(slidingViewController:layoutControllerForTopViewPosition:)]) {
+        id<ECSlidingViewControllerLayout> layoutController = [self.delegate slidingViewController:self
+                                                               layoutControllerForTopViewPosition:self.currentTopViewPosition];
+        
+        if (layoutController) {
+            CGRect frame = [layoutController slidingViewController:self
+                                            frameForViewController:self.underLeftViewController
+                                                   topViewPosition:self.currentTopViewPosition];
+            if (!CGRectIsInfinite(frame)) {
+                return frame;
+            }
+        }
+    }
+    
     CGRect containerViewFrame = self.view.bounds;
     
     if (!(self.underLeftViewController.edgesForExtendedLayout & UIRectEdgeTop)) {
@@ -474,6 +502,20 @@
 }
 
 - (CGRect)underRightViewCalculatedFrame {
+    if ([(NSObject *)self.delegate respondsToSelector:@selector(slidingViewController:layoutControllerForTopViewPosition:)]) {
+        id<ECSlidingViewControllerLayout> layoutController = [self.delegate slidingViewController:self
+                                                               layoutControllerForTopViewPosition:self.currentTopViewPosition];
+        
+        if (layoutController) {
+            CGRect frame = [layoutController slidingViewController:self
+                                            frameForViewController:self.underRightViewController
+                                                   topViewPosition:self.currentTopViewPosition];
+            if (!CGRectIsInfinite(frame)) {
+                return frame;
+            }
+        }
+    }
+    
     CGRect containerViewFrame = self.view.bounds;
     
     if (!(self.underRightViewController.edgesForExtendedLayout & UIRectEdgeTop)) {

@@ -13,12 +13,20 @@
 
 @class ECSlidingViewController;
 
+@protocol ECSlidingViewControllerLayout <NSObject>
+- (CGRect)slidingViewController:(ECSlidingViewController *)slidingViewController
+         frameForViewController:(UIViewController *)viewController
+                topViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition;
+@end
+
 @protocol ECSlidingViewControllerDelegate
 - (id<UIViewControllerAnimatedTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
                                    animationControllerForOperation:(ECSlidingViewControllerOperation)operation
                                                  topViewController:(UIViewController *)topViewController;
 - (id<UIViewControllerInteractiveTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>)animationController;
+- (id<ECSlidingViewControllerLayout>)slidingViewController:(ECSlidingViewController *)slidingViewController
+                        layoutControllerForTopViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition;
 @end
 
 @interface ECSlidingViewController : UIViewController <UIViewControllerContextTransitioning,

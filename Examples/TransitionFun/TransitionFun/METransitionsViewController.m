@@ -177,6 +177,18 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     return interactiveTransition;
 }
 
+- (id<ECSlidingViewControllerLayout>)slidingViewController:(ECSlidingViewController *)slidingViewController layoutControllerForTopViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition {
+    NSUInteger selectedIndex = [self.tableView indexPathForSelectedRow].row;
+    NSString *transition = self.transitions[selectedIndex];
+    id<ECSlidingViewControllerLayout> layoutController = nil;
+    
+    if ([transition isEqualToString:METransitionZoom]) {
+        layoutController = self.zoomAnimationController;
+    }
+    
+    return layoutController;
+}
+
 - (IBAction)menuButtonTapped:(id)sender {
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
 }

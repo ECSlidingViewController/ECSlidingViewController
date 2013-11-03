@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "ECSlidingViewController.h"
 
-@interface MEZoomAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
+@interface MEZoomAnimationController : NSObject <UIViewControllerAnimatedTransitioning, ECSlidingViewControllerLayout>
 @property (nonatomic, assign) ECSlidingViewControllerOperation operation;
 @end
