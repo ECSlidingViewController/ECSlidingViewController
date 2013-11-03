@@ -39,6 +39,7 @@
 @property (nonatomic, assign) CGFloat anchorLeftRevealAmount;
 @property (nonatomic, assign) CGFloat anchorRightPeekAmount;
 @property (nonatomic, assign) CGFloat anchorRightRevealAmount;
+@property (nonatomic, assign) ECSlidingViewControllerAnchoredGesture topViewAnchoredGesture;
 @property (nonatomic, assign, readonly) ECSlidingViewControllerTopViewPosition currentTopViewPosition;
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *panGesture;
 

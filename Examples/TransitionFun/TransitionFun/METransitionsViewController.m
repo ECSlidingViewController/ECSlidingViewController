@@ -40,6 +40,7 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     
     [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     self.slidingViewController.delegate = self;
+    self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
 }
 
 - (void)viewDidAppear:(BOOL)animated {

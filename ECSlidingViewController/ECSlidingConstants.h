@@ -27,4 +27,11 @@ typedef NS_ENUM(NSInteger, ECSlidingViewControllerTopViewPosition) {
     ECSlidingViewControllerTopViewPositionCentered
 };
 
+typedef NS_OPTIONS(NSInteger, ECSlidingViewControllerAnchoredGesture) {
+    ECSlidingViewControllerAnchoredGestureNone     = 0,
+    ECSlidingViewControllerAnchoredGesturePanning  = 1 << 0,
+    ECSlidingViewControllerAnchoredGestureTapping  = 1 << 1,
+    ECSlidingViewControllerAnchoredGestureDisabled = 1 << 2
+};
+
 #endif
