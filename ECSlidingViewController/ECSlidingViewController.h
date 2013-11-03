@@ -29,6 +29,7 @@
     CGFloat _anchorRightPeekAmount;
     CGFloat _anchorRightRevealAmount;
     UIPanGestureRecognizer *_panGesture;
+    UITapGestureRecognizer *_resetTapGesture;
 }
 
 @property (nonatomic, assign) id<ECSlidingViewControllerDelegate> delegate;
@@ -42,6 +43,7 @@
 @property (nonatomic, assign) ECSlidingViewControllerAnchoredGesture topViewAnchoredGesture;
 @property (nonatomic, assign, readonly) ECSlidingViewControllerTopViewPosition currentTopViewPosition;
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *panGesture;
+@property (nonatomic, strong, readonly) UITapGestureRecognizer *resetTapGesture;
 
 @property (nonatomic, strong) NSString *topViewControllerStoryboardId;
 @property (nonatomic, strong) NSString *underLeftViewControllerStoryboardId;

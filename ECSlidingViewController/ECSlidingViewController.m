@@ -29,6 +29,7 @@
 @property (nonatomic, strong) id<UIViewControllerAnimatedTransitioning> currentAnimationController;
 @property (nonatomic, strong) id<UIViewControllerInteractiveTransitioning> currentInteractiveTransition;
 @property (nonatomic, strong) UIView *gestureView;
+@property (nonatomic, strong) UIPanGestureRecognizer *resetPanGesture;
 @property (nonatomic, assign) CGFloat currentAnimationPercentage;
 @property (nonatomic, assign) BOOL preserveLeftPeekAmount;
 @property (nonatomic, assign) BOOL preserveRightPeekAmount;
@@ -362,6 +363,22 @@
     return _defaultInteractiveTransition;
 }
 
+- (UIPanGestureRecognizer *)resetPanGesture {
+    if (_resetPanGesture) return _resetPanGesture;
+    
+    _resetPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(detectPanGestureRecognizer:)];
+    
+    return _resetPanGesture;
+}
+
+- (UITapGestureRecognizer *)resetTapGesture {
+    if (_resetTapGesture) return _resetTapGesture;
+    
+    _resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopViewAnimated:)];
+    
+    return _resetTapGesture;
+}
+
 - (UIPanGestureRecognizer *)panGesture {
     if (_panGesture) return _panGesture;
     
@@ -606,16 +623,13 @@
         } else {
             self.gestureView = [[UIView alloc] initWithFrame:topView.frame];
 
-            if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGesturePanning) {
-                UIPanGestureRecognizer *resetPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                                  action:@selector(detectPanGestureRecognizer:)];
-                [self.gestureView addGestureRecognizer:resetPanGesture];
+            if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGesturePanning && self.panGesture.view && self.panGesture.isEnabled) {
+                [self.gestureView addGestureRecognizer:self.resetPanGesture];
                 [self.view insertSubview:self.gestureView aboveSubview:topView];
             }
 
             if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGestureTapping) {
-                UITapGestureRecognizer *resetTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(resetTopViewAnimated:)];
-                [self.gestureView addGestureRecognizer:resetTapGesture];
+                [self.gestureView addGestureRecognizer:self.resetTapGesture];
                 [self.view insertSubview:self.gestureView aboveSubview:topView];
             }
         }
