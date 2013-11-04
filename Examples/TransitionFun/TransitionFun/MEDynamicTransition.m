@@ -104,8 +104,10 @@
 - (void)startInteractiveTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     self.transitionContext = transitionContext;
     
+    UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
+    topViewController.view.userInteractionEnabled = NO;
+    
     if (_isInteractive) {
-        UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
         UIViewController *underViewController = [transitionContext viewControllerForKey:ECTransitionContextUnderLeftControllerKey];
         CGRect underViewInitialFrame = [transitionContext initialFrameForViewController:underViewController];
         UIView *containerView = [transitionContext containerView];
@@ -223,6 +225,8 @@
     _pushBehavior = nil;
     _compositeBehavior = nil;
     _animator = nil;
+    
+    self.slidingViewController.topViewController.view.userInteractionEnabled = YES;
     
     [self.transitionContext completeTransition:YES];
 }
