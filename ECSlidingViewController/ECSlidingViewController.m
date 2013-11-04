@@ -30,12 +30,14 @@
 @property (nonatomic, strong) id<UIViewControllerInteractiveTransitioning> currentInteractiveTransition;
 @property (nonatomic, strong) UIView *gestureView;
 @property (nonatomic, strong) UIPanGestureRecognizer *resetPanGesture;
+@property (nonatomic, strong) NSMapTable *customAnchoredGesturesViewMap;
 @property (nonatomic, assign) CGFloat currentAnimationPercentage;
 @property (nonatomic, assign) BOOL preserveLeftPeekAmount;
 @property (nonatomic, assign) BOOL preserveRightPeekAmount;
 @property (nonatomic, assign) BOOL transitionWasCancelled;
 @property (nonatomic, assign) BOOL isAnimated;
 @property (nonatomic, assign) BOOL isInteractive;
+@property (nonatomic, assign) BOOL transitionInProgress;
 @property (nonatomic, copy) void (^animationComplete)();
 @property (nonatomic, copy) void (^coordinatorAnimations)(id<UIViewControllerTransitionCoordinatorContext>context);
 @property (nonatomic, copy) void (^coordinatorCompletion)(id<UIViewControllerTransitionCoordinatorContext>context);
@@ -95,6 +97,7 @@
     self.anchorLeftPeekAmount    = 44;
     self.anchorRightRevealAmount = 276;
     _currentTopViewPosition = ECSlidingViewControllerTopViewPositionCentered;
+    self.transitionInProgress = NO;
 }
 
 #pragma mark - UIViewController
@@ -379,6 +382,14 @@
     return _resetPanGesture;
 }
 
+- (NSMapTable *)customAnchoredGesturesViewMap {
+    if (_customAnchoredGesturesViewMap) return _customAnchoredGesturesViewMap;
+    
+    _customAnchoredGesturesViewMap = [NSMapTable mapTableWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableWeakMemory];
+    
+    return _customAnchoredGesturesViewMap;
+}
+
 - (UITapGestureRecognizer *)resetTapGesture {
     if (_resetTapGesture) return _resetTapGesture;
     
@@ -566,6 +577,9 @@
 
 - (void)animateOperation:(ECSlidingViewControllerOperation)operation {
     if (![self operationIsValid:operation]) return;
+    if (self.transitionInProgress) return;
+    
+    self.transitionInProgress = YES;
     
     self.currentOperation = operation;
     
@@ -672,22 +686,37 @@
             topView.userInteractionEnabled = NO;
         } else {
             self.gestureView.frame = topView.frame;
-            [self.gestureView removeGestureRecognizer:self.resetTapGesture];
-            [self.gestureView removeGestureRecognizer:self.resetPanGesture];
+            for (UIGestureRecognizer *gesture in self.gestureView.gestureRecognizers) {
+                [self.gestureView removeGestureRecognizer:gesture];
+            }
 
             if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGesturePanning && self.panGesture.view && self.panGesture.isEnabled) {
                 [self.gestureView addGestureRecognizer:self.resetPanGesture];
-                [self.view insertSubview:self.gestureView aboveSubview:topView];
+                if (!self.gestureView.superview) [self.view insertSubview:self.gestureView aboveSubview:topView];
             }
 
             if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGestureTapping) {
                 [self.gestureView addGestureRecognizer:self.resetTapGesture];
-                [self.view insertSubview:self.gestureView aboveSubview:topView];
+                if (!self.gestureView.superview) [self.view insertSubview:self.gestureView aboveSubview:topView];
+            }
+            
+            if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGestureCustom) {
+                for (UIGestureRecognizer *gesture in self.customAnchoredGestures) {
+                    [self.customAnchoredGesturesViewMap setObject:gesture.view forKey:gesture];
+                    [gesture.view removeGestureRecognizer:gesture];
+                    [self.gestureView addGestureRecognizer:gesture];
+                }
+                if (!self.gestureView.superview) [self.view insertSubview:self.gestureView aboveSubview:topView];
             }
         }
     } else {
-        topView.userInteractionEnabled = YES;
+        self.topViewController.view.userInteractionEnabled = YES;
         [self.gestureView removeFromSuperview];
+        for (UIGestureRecognizer *gesture in self.customAnchoredGestures) {
+            UIView *originalView = [self.customAnchoredGesturesViewMap objectForKey:gesture];
+            if (![originalView.gestureRecognizers containsObject:gesture]) [originalView addGestureRecognizer:gesture];
+        }
+        [self.customAnchoredGesturesViewMap removeAllObjects];
     }
 }
 
@@ -804,6 +833,7 @@
     _coordinatorInteractionEnded = nil;
     _currentAnimationPercentage  = 0;
     self.currentOperation        = ECSlidingViewControllerOperationNone;
+    self.transitionInProgress    = NO;
 }
 
 - (UIViewController *)viewControllerForKey:(NSString *)key {

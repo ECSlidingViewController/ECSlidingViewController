@@ -52,6 +52,7 @@
 @property (nonatomic, assign, readonly) ECSlidingViewControllerTopViewPosition currentTopViewPosition;
 @property (nonatomic, strong, readonly) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, strong, readonly) UITapGestureRecognizer *resetTapGesture;
+@property (nonatomic, strong) NSArray *customAnchoredGestures;
 
 @property (nonatomic, strong) NSString *topViewControllerStoryboardId;
 @property (nonatomic, strong) NSString *underLeftViewControllerStoryboardId;

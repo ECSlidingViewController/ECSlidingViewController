@@ -31,7 +31,8 @@ typedef NS_OPTIONS(NSInteger, ECSlidingViewControllerAnchoredGesture) {
     ECSlidingViewControllerAnchoredGestureNone     = 0,
     ECSlidingViewControllerAnchoredGesturePanning  = 1 << 0,
     ECSlidingViewControllerAnchoredGestureTapping  = 1 << 1,
-    ECSlidingViewControllerAnchoredGestureDisabled = 1 << 2
+    ECSlidingViewControllerAnchoredGestureCustom   = 1 << 2,
+    ECSlidingViewControllerAnchoredGestureDisabled = 1 << 3
 };
 
 #endif

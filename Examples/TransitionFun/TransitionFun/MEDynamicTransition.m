@@ -225,16 +225,6 @@
     _animator = nil;
     
     [self.transitionContext completeTransition:YES];
-    
-    BOOL topViewIsAnchored = self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredLeft ||
-                             self.slidingViewController.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight;
-    UIView *topView = [self.transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey].view;
-    
-    if (topViewIsAnchored) {
-        [topView addGestureRecognizer:self.slidingViewController.resetTapGesture];
-    } else {
-        [topView removeGestureRecognizer:self.slidingViewController.resetTapGesture];
-    }
 }
 
 @end

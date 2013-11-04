@@ -120,11 +120,13 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *selection = self.transitions[indexPath.row];
     if ([selection isEqualToString:METransitionUIDynamics]) {
-        self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureNone;
+        self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGestureCustom;
+        self.slidingViewController.customAnchoredGestures = @[self.dynamicTransition.panGesture];
         [self.navigationController.view removeGestureRecognizer:self.slidingViewController.panGesture];
         [self.navigationController.view addGestureRecognizer:self.dynamicTransition.panGesture];
     } else {
         self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
+        self.slidingViewController.customAnchoredGestures = @[];
         [self.navigationController.view removeGestureRecognizer:self.dynamicTransition.panGesture];
         [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     }
