@@ -69,11 +69,11 @@
 
 #pragma mark - Constructors
 
-- (id)init {
-    return [self initWithTopViewController:nil];
++ (instancetype)slidingWithTopViewController:(UIViewController *)topViewController {
+    return [[self alloc] initWithTopViewController:topViewController];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self setup];
@@ -82,7 +82,7 @@
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self setup];
@@ -91,7 +91,7 @@
     return self;
 }
 
-- (id)initWithTopViewController:(UIViewController *)topViewController {
+- (instancetype)initWithTopViewController:(UIViewController *)topViewController {
     self = [self initWithNibName:nil bundle:nil];
     if (self) {
         self.topViewController = topViewController;

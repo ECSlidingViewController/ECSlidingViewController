@@ -60,7 +60,7 @@
     underRightViewController.view.layer.borderColor     = [UIColor colorWithWhite:0.8 alpha:1.0].CGColor;
     underRightViewController.edgesForExtendedLayout     = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeRight;
     
-    self.slidingViewController = [[ECSlidingViewController alloc] initWithTopViewController:navigationController];
+    self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:navigationController];
     self.slidingViewController.underLeftViewController  = underLeftViewController;
     self.slidingViewController.underRightViewController = underRightViewController;
     

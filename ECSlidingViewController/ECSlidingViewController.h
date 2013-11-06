@@ -72,7 +72,8 @@
 @property (nonatomic, strong) NSString *underLeftViewControllerStoryboardId;
 @property (nonatomic, strong) NSString *underRightViewControllerStoryboardId;
 
-- (id)initWithTopViewController:(UIViewController *)topViewController;
++ (instancetype)slidingWithTopViewController:(UIViewController *)topViewController;
+- (instancetype)initWithTopViewController:(UIViewController *)topViewController;
 - (void)anchorTopViewToRightAnimated:(BOOL)animated;
 - (void)anchorTopViewToRightAnimated:(BOOL)animated onComplete:(void (^)())complete;
 - (void)anchorTopViewToLeftAnimated:(BOOL)animated;
