@@ -831,14 +831,14 @@
     [self setNeedsStatusBarAppearanceUpdate];
     [self updateTopViewGestures];
     
-    _transitionWasCancelled      = NO;
-    _isInteractive               = NO;
-    _coordinatorAnimations       = nil;
-    _coordinatorCompletion       = nil;
-    _coordinatorInteractionEnded = nil;
-    _currentAnimationPercentage  = 0;
-    self.currentOperation        = ECSlidingViewControllerOperationNone;
-    self.transitionInProgress    = NO;
+    _transitionWasCancelled          = NO;
+    _isInteractive                   = NO;
+    self.coordinatorAnimations       = nil;
+    self.coordinatorCompletion       = nil;
+    self.coordinatorInteractionEnded = nil;
+    self.currentAnimationPercentage  = 0;
+    self.currentOperation            = ECSlidingViewControllerOperationNone;
+    self.transitionInProgress        = NO;
 }
 
 - (UIViewController *)viewControllerForKey:(NSString *)key {
