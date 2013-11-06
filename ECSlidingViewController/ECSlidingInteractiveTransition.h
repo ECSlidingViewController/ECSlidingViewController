@@ -6,9 +6,10 @@
 //  Copyright (c) 2013 Mike Enriquez. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ECSlidingViewController.h"
 #import "ECPercentDrivenInteractiveTransition.h"
+#import "ECSlidingViewController.h"
 
 @class ECSlidingViewController;
 

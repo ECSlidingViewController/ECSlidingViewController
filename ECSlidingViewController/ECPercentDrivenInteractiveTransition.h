@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface ECPercentDrivenInteractiveTransition : NSObject <UIViewControllerInteractiveTransitioning>
 @property (nonatomic, strong) id<UIViewControllerAnimatedTransitioning> animationController;

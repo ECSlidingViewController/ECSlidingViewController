@@ -7,7 +7,7 @@
 //
 
 #import "ECSlidingUnwindSegue.h"
-#import "ECSlidingViewController.h"
+
 #import "UIViewController+ECSlidingViewController.h"
 
 @implementation ECSlidingUnwindSegue

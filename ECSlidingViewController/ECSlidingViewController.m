@@ -7,6 +7,9 @@
 //
 
 #import "ECSlidingViewController.h"
+
+#import "ECSlidingAnimationController.h"
+#import "ECSlidingInteractiveTransition.h"
 #import "ECSlidingUnwindSegue.h"
 
 @interface ECSlidingViewController()

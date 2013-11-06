@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "ECSlidingConstants.h"
-#import "ECSlidingAnimationController.h"
-#import "ECSlidingInteractiveTransition.h"
 
 @class ECSlidingViewController;
 

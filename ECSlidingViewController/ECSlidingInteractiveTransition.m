@@ -7,7 +7,6 @@
 //
 
 #import "ECSlidingInteractiveTransition.h"
-#import "ECSlidingConstants.h"
 
 @interface ECSlidingInteractiveTransition ()
 @property (nonatomic, assign) ECSlidingViewController *slidingViewController;
