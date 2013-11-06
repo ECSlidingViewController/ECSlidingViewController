@@ -8,6 +8,7 @@
 
 #import "METransitionsViewController.h"
 #import "ECSlidingAnimationController.h"
+#import "UIViewController+ECSlidingViewController.h"
 #import "MEFoldAnimationController.h"
 #import "MEZoomAnimationController.h"
 #import "MEDynamicTransition.h"

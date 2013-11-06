@@ -8,6 +8,7 @@
 
 #import "ECSlidingSegue.h"
 #import "ECSlidingViewController.h"
+#import "UIViewController+ECSlidingViewController.h"
 
 @implementation ECSlidingSegue
 

@@ -9,19 +9,6 @@
 #import "ECSlidingViewController.h"
 #import "ECSlidingUnwindSegue.h"
 
-@implementation UIViewController(SlidingViewExtension)
-
-- (ECSlidingViewController *)slidingViewController {
-    UIViewController *viewController = self.parentViewController ? self.parentViewController : self.presentingViewController;
-    while (!(viewController == nil || [viewController isKindOfClass:[ECSlidingViewController class]])) {
-        viewController = viewController.parentViewController ? viewController.parentViewController : viewController.presentingViewController;
-    }
-    
-    return (ECSlidingViewController *)viewController;
-}
-
-@end
-
 @interface ECSlidingViewController()
 @property (nonatomic, assign) ECSlidingViewControllerOperation currentOperation;
 @property (nonatomic, strong) ECSlidingAnimationController *defaultAnimationController;

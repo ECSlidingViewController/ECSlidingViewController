@@ -67,9 +67,3 @@
 - (void)resetTopViewAnimated:(BOOL)animated onComplete:(void(^)())complete;
 
 @end
-
-/** UIViewController extension */
-@interface UIViewController(SlidingViewExtension)
-/** Convience method for getting access to the ECSlidingViewController instance */
-- (ECSlidingViewController *)slidingViewController;
-@end

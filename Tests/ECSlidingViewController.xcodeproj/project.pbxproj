@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050E9475182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 050E9473182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h */; };
+		050E9476182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050E9474182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m */; };
 		052BE60D181C55EE00EE3577 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052BE60C181C55EE00EE3577 /* UIKit.framework */; };
 		052BE614181C596700EE3577 /* ECSlidingViewController-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 052BE5C6181C544E00EE3577 /* ECSlidingViewController-Prefix.pch */; };
 		052BE61E181C5A1F00EE3577 /* ECSlidingAnimationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052BE615181C5A1F00EE3577 /* ECSlidingAnimationController.h */; };
@@ -58,6 +60,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		050E9473182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+ECSlidingViewController.h"; path = "../ECSlidingViewController/UIViewController+ECSlidingViewController.h"; sourceTree = SOURCE_ROOT; };
+		050E9474182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+ECSlidingViewController.m"; path = "../ECSlidingViewController/UIViewController+ECSlidingViewController.m"; sourceTree = SOURCE_ROOT; };
 		052BE5C6181C544E00EE3577 /* ECSlidingViewController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ECSlidingViewController-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		052BE60C181C55EE00EE3577 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		052BE615181C5A1F00EE3577 /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingAnimationController.h; path = ../ECSlidingViewController/ECSlidingAnimationController.h; sourceTree = SOURCE_ROOT; };
@@ -149,6 +153,8 @@
 				05FD31FB1824AF7200482982 /* ECSlidingUnwindSegue.m */,
 				052BE61C181C5A1F00EE3577 /* ECSlidingViewController.h */,
 				052BE61D181C5A1F00EE3577 /* ECSlidingViewController.m */,
+				050E9473182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h */,
+				050E9474182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m */,
 			);
 			path = ECSlidingViewController;
 			sourceTree = "<group>";
@@ -184,6 +190,7 @@
 				052BE628181C5A1F00EE3577 /* ECSlidingViewController.h in Headers */,
 				05FD31FC1824AF7200482982 /* ECSlidingUnwindSegue.h in Headers */,
 				052BE614181C596700EE3577 /* ECSlidingViewController-Prefix.pch in Headers */,
+				050E9475182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h in Headers */,
 				052BE622181C5A1F00EE3577 /* ECSlidingInteractiveTransition.h in Headers */,
 				052BE621181C5A1F00EE3577 /* ECSlidingConstants.h in Headers */,
 			);
@@ -272,6 +279,7 @@
 			files = (
 				052BE623181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m in Sources */,
 				052BE629181C5A1F00EE3577 /* ECSlidingViewController.m in Sources */,
+				050E9476182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */,
 				052BE61F181C5A1F00EE3577 /* ECSlidingAnimationController.m in Sources */,
 				05FD31FD1824AF7200482982 /* ECSlidingUnwindSegue.m in Sources */,
 				058F50D3181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */,

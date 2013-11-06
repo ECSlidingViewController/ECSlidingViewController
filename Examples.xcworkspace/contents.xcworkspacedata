@@ -43,6 +43,12 @@
       <FileRef
          location = "group:ECSlidingViewController.m">
       </FileRef>
+      <FileRef
+         location = "group:UIViewController+ECSlidingViewController.h">
+      </FileRef>
+      <FileRef
+         location = "group:UIViewController+ECSlidingViewController.m">
+      </FileRef>
    </Group>
    <FileRef
       location = "group:Examples/BasicMenu/BasicMenu.xcodeproj">
