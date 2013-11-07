@@ -36,10 +36,10 @@
  Called when the sliding view controller needs to update the child views in response to a rotation or bounds change.
  
  @param slidingViewController The sliding view controller that needs to update its layout.
- @param viewController The view controller
+ @param viewController The view controller that needs a layout update.
  @param topViewPosition The position of the top view.
  
- @return A frame for the given view controller at the given top view position. Return CGRectInfinite to use the default layout.
+ @return A frame for the given view controller at the given top view position. Return `CGRectInfinite` to use the default layout.
  */
 - (CGRect)slidingViewController:(ECSlidingViewController *)slidingViewController
          frameForViewController:(UIViewController *)viewController
@@ -156,28 +156,28 @@
 ///-----------------------------
 
 /**
- The fixed distance between the left side of the container and the right edge of the top view when the top view is anchored to the left. This value remains constant duration rotation or bound changes. Setting this value will automatically calculate `anchorLeftRevealAmount`.
+ The fixed distance between the left side of the container and the right edge of the top view when the top view is anchored to the left. This value remains constant duration rotation or bound changes. Setting this value will automatically calculate `anchorLeftRevealAmount`. This value is not set by default, therefore it is variable and dependent upon the default value of `anchorLeftRevealAmount`.
  
  @see anchorLeftRevealAmount
  */
 @property (nonatomic, assign) CGFloat anchorLeftPeekAmount;
 
 /**
- The fixed distance between the right edge of the top view and the right side of the container when the top view is anchored to the left. This value remains constant duration rotation or bound changes. Setting this value will automatically calculate `anchorLeftPeekAmount`.
+ The fixed distance between the right edge of the top view and the right side of the container when the top view is anchored to the left. This value remains constant duration rotation or bound changes. Setting this value will automatically calculate `anchorLeftPeekAmount`. This is set to 44.0 by default.
  
  @see anchorLeftPeekAmount
  */
 @property (nonatomic, assign) CGFloat anchorLeftRevealAmount;
 
 /**
- The fixed distance between the left edge of the top view and the right side of the container when the top view is anchored to the right. This value remains constant duration rotation or bound changes. Setting this value will automatically calculate `anchorRightRevealAmount`.
+ The fixed distance between the left edge of the top view and the right side of the container when the top view is anchored to the right. This value remains constant duration rotation or bound changes. Setting this value will automatically calculate `anchorRightRevealAmount`. This value si not set by default, therefore it is variable and dependent upon the default value of `anchorRightRevealAmount`.
  
  @see anchorRightRevealAmount
  */
 @property (nonatomic, assign) CGFloat anchorRightPeekAmount;
 
 /**
- The fixed distance between the left side of the container and the left edge of the top view when the top view is anchored to the right. This value remains constant duration rotation or bound changes. Setting this value will automatically calculate `anchorRightPeekAmount`.
+ The fixed distance between the left side of the container and the left edge of the top view when the top view is anchored to the right. This value remains constant duration rotation or bound changes. Setting this value will automatically calculate `anchorRightPeekAmount`. This is set to 276.0 by default.
  
  @see anchorRightPeekAmount
  */
