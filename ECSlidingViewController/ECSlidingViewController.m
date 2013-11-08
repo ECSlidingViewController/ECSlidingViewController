@@ -601,9 +601,9 @@
     
     [self beginAppearanceTransitionForOperation:operation];
     
-    self.defaultAnimationController.coordinatorAnimations         = self.coordinatorAnimations;
-    self.defaultAnimationController.coordinatorCompletion         = self.coordinatorCompletion;
-    self.defaultInteractiveTransition.coordinatorInteractionEnded = self.coordinatorInteractionEnded;
+    [self.defaultAnimationController setValue:self.coordinatorAnimations forKey:@"coordinatorAnimations"];
+    [self.defaultAnimationController setValue:self.coordinatorCompletion forKey:@"coordinatorCompletion"];
+    [self.defaultInteractiveTransition setValue:self.coordinatorInteractionEnded forKey:@"coordinatorInteractionEnded"];
     
     if ([self isInteractive]) {
         [self.currentInteractiveTransition startInteractiveTransition:self];

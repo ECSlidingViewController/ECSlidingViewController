@@ -28,6 +28,7 @@
 @property (nonatomic, assign) BOOL positiveLeftToRight;
 @property (nonatomic, assign) CGFloat fullWidth;
 @property (nonatomic, assign) CGFloat currentPercentage;
+@property (nonatomic, copy) void (^coordinatorInteractionEnded)(id<UIViewControllerTransitionCoordinatorContext>context);
 @end
 
 @implementation ECSlidingInteractiveTransition

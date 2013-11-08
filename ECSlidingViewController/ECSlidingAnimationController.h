@@ -24,7 +24,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+/**
+ `ECSlidingAnimationController` is the default animator object used by `ECSlidingViewController`. It animates the top view by sliding it horizontally.
+ 
+ An instance this class may be returned from a sliding view controller's delegate for `slidingViewController:animationControllerForOperation:topViewController:`. Do this if you want to use the default animation along with a custom interactive transition.
+ */
 @interface ECSlidingAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
-@property (nonatomic, copy) void (^coordinatorAnimations)(id<UIViewControllerTransitionCoordinatorContext>context);
-@property (nonatomic, copy) void (^coordinatorCompletion)(id<UIViewControllerTransitionCoordinatorContext>context);
+
 @end

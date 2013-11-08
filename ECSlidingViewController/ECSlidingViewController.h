@@ -54,6 +54,8 @@
 /**
  Called to allow the delegate to return a non-interactive animator object for use during a transition.
  
+ Returning an object will disable the sliding view controller's `transitionCoordinator` animation and completion callbacks.
+ 
  @param slidingViewController The sliding view controller that is being transitioned.
  @param operation The type of transition that is occuring. See `ECSlidingViewControllerOperation` for a list of possible values.
  @param topViewController
@@ -66,6 +68,8 @@
 
 /**
  Called to allow the delegate to return an interactive animator object for use during a transition.
+ 
+ Returning an object will disable the sliding view controller's `transitionCoordinator` block given to `notifyWhenInteractionEndsUsingBlock:`
  
  @param slidingViewController The sliding view controller that is being transitioned.
  @param animationController The non-interactive animator object. This will be the same object that is returned from `slidingViewController:animationController:topViewController`.

@@ -24,6 +24,11 @@
 #import "ECSlidingAnimationController.h"
 #import "ECSlidingConstants.h"
 
+@interface ECSlidingAnimationController ()
+@property (nonatomic, copy) void (^coordinatorAnimations)(id<UIViewControllerTransitionCoordinatorContext>context);
+@property (nonatomic, copy) void (^coordinatorCompletion)(id<UIViewControllerTransitionCoordinatorContext>context);
+@end
+
 @implementation ECSlidingAnimationController
 
 #pragma mark - UIViewControllerAnimatedTransitioning

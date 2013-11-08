@@ -28,8 +28,14 @@
 
 @class ECSlidingViewController;
 
+/**
+ Used internally by `ECSlidingViewController` as the default interactive transition. It uses the sliding view controller's `panGesture` to do a percent driven interaction transition. In most cases, developers will not need to use this class for anything, but it provides a good example of how to implement a percent driven transition with a gesture.
+ 
+ Custom animation transitions take advantage of this interaction without having to create an instance of this class and returning it from the sliding view controller's delegate method `slidingViewController:interactionControllerForAnimationController:animationController:`. The sliding view controller's `panGesture` can be used to drive the custom animation.
+ 
+ The initial direction of the panning determines the type of operation that is triggered. The reveal width represents 100 percent, and the panning distance determines values in-between the reveal width.
+ */
 @interface ECSlidingInteractiveTransition : ECPercentDrivenInteractiveTransition
 - (id)initWithSlidingViewController:(ECSlidingViewController *)slidingViewController;
 - (void)updateTopViewHorizontalCenterWithRecognizer:(UIPanGestureRecognizer *)recognizer;
-@property (nonatomic, copy) void (^coordinatorInteractionEnded)(id<UIViewControllerTransitionCoordinatorContext>context);
 @end
