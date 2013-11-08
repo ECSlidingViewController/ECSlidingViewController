@@ -25,11 +25,17 @@
 
 #import "UIViewController+ECSlidingViewController.h"
 
+@interface ECSlidingSegue ()
+/** Used internally by ECSlidingViewController */
+@property (nonatomic, assign) BOOL isUnwinding;
+@end
+
 @implementation ECSlidingSegue
 
 - (id)initWithIdentifier:(NSString *)identifier source:(UIViewController *)source destination:(UIViewController *)destination {
     self = [super initWithIdentifier:identifier source:source destination:destination];
     if (self) {
+        self.isUnwinding = NO;
         self.skipSettingTopViewController = NO;
     }
     
@@ -40,11 +46,19 @@
     ECSlidingViewController *slidingViewController = [[self sourceViewController] slidingViewController];
     UIViewController *destinationViewController    = [self destinationViewController];
     
-    if (!self.skipSettingTopViewController) {
-        slidingViewController.topViewController = destinationViewController;
+    if (self.isUnwinding) {
+        if ([slidingViewController.underLeftViewController isMemberOfClass:[destinationViewController class]]) {
+            [slidingViewController anchorTopViewToRightAnimated:YES];
+        } else if ([slidingViewController.underRightViewController isMemberOfClass:[destinationViewController class]]) {
+            [slidingViewController anchorTopViewToLeftAnimated:YES];
+        }
+    } else {
+        if (!self.skipSettingTopViewController) {
+            slidingViewController.topViewController = destinationViewController;
+        }
+        
+        [slidingViewController resetTopViewAnimated:YES];
     }
-    
-    [slidingViewController resetTopViewAnimated:YES];
 }
 
 @end

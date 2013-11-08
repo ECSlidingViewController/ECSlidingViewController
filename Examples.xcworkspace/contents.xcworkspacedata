@@ -32,12 +32,6 @@
          location = "group:ECSlidingSegue.m">
       </FileRef>
       <FileRef
-         location = "group:ECSlidingUnwindSegue.h">
-      </FileRef>
-      <FileRef
-         location = "group:ECSlidingUnwindSegue.m">
-      </FileRef>
-      <FileRef
          location = "group:ECSlidingViewController.h">
       </FileRef>
       <FileRef

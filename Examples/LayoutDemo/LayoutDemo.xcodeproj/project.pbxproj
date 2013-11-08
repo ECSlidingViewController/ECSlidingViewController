@@ -20,7 +20,6 @@
 		0564A995181B37B90077C08C /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564A990181B37B90077C08C /* ECSlidingSegue.m */; };
 		0564A996181B37B90077C08C /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564A992181B37B90077C08C /* ECSlidingViewController.m */; };
 		058F50CC181CE8230081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 058F50CB181CE8230081E684 /* ECPercentDrivenInteractiveTransition.m */; };
-		05FD31F31824A98800482982 /* ECSlidingUnwindSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FD31F21824A98800482982 /* ECSlidingUnwindSegue.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,8 +48,6 @@
 		0564A992181B37B90077C08C /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		058F50CA181CE8230081E684 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		058F50CB181CE8230081E684 /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
-		05FD31F11824A98800482982 /* ECSlidingUnwindSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingUnwindSegue.h; sourceTree = "<group>"; };
-		05FD31F21824A98800482982 /* ECSlidingUnwindSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingUnwindSegue.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +127,6 @@
 				0564A98E181B37B90077C08C /* ECSlidingInteractiveTransition.m */,
 				0564A98F181B37B90077C08C /* ECSlidingSegue.h */,
 				0564A990181B37B90077C08C /* ECSlidingSegue.m */,
-				05FD31F11824A98800482982 /* ECSlidingUnwindSegue.h */,
-				05FD31F21824A98800482982 /* ECSlidingUnwindSegue.m */,
 				0564A991181B37B90077C08C /* ECSlidingViewController.h */,
 				0564A992181B37B90077C08C /* ECSlidingViewController.m */,
 				050E946D182AC7BE00A7D96C /* UIViewController+ECSlidingViewController.h */,
@@ -207,7 +202,6 @@
 			files = (
 				0564A995181B37B90077C08C /* ECSlidingSegue.m in Sources */,
 				050E946F182AC7BE00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */,
-				05FD31F31824A98800482982 /* ECSlidingUnwindSegue.m in Sources */,
 				0564A994181B37B90077C08C /* ECSlidingInteractiveTransition.m in Sources */,
 				0564A96B181B35C40077C08C /* MEAppDelegate.m in Sources */,
 				0564A993181B37B90077C08C /* ECSlidingAnimationController.m in Sources */,

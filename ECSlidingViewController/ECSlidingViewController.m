@@ -25,7 +25,7 @@
 
 #import "ECSlidingAnimationController.h"
 #import "ECSlidingInteractiveTransition.h"
-#import "ECSlidingUnwindSegue.h"
+#import "ECSlidingSegue.h"
 
 @interface ECSlidingViewController()
 @property (nonatomic, assign) ECSlidingViewControllerOperation currentOperation;
@@ -200,7 +200,8 @@
 }
 
 - (UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(NSString *)identifier {
-    ECSlidingUnwindSegue *unwindSegue = [[ECSlidingUnwindSegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    ECSlidingSegue *unwindSegue = [[ECSlidingSegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
+    [unwindSegue setValue:@YES forKey:@"isUnwinding"];
     return unwindSegue;
 }
 
