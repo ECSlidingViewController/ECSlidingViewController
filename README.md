@@ -53,7 +53,7 @@ And... to those of you who [contributed changes](https://github.com/edgecase/ECS
 
 ## MIT License
 
-Copyright (c) 2013 Mike Enriquez
+Copyright (c) 2013 Michael Enriquez (http://enriquez.me)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
