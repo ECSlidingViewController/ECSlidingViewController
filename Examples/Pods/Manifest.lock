@@ -1,0 +1,14 @@
+PODS:
+  - ECSlidingViewController (2.0.0)
+
+DEPENDENCIES:
+  - ECSlidingViewController (from `../`)
+
+EXTERNAL SOURCES:
+  ECSlidingViewController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ECSlidingViewController: db8b46b70d6d57b2e1154318acd5334274617f37
+
+COCOAPODS: 0.27.1

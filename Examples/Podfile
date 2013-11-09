@@ -1,0 +1,17 @@
+workspace '../Examples.xcworkspace'
+
+link_with 'BasicMenu'
+xcodeproj 'BasicMenu/BasicMenu.xcodeproj'
+pod 'ECSlidingViewController', :path => '../'
+
+target :LayoutDemo do
+  link_with 'LayoutDemo'
+  xcodeproj 'LayoutDemo/LayoutDemo.xcodeproj'
+  pod 'ECSlidingViewController', :path => '../'
+end
+
+target :TransitionFun do
+  link_with 'TransitionFun'
+  xcodeproj 'TransitionFun/TransitionFun.xcodeproj'
+  pod 'ECSlidingViewController', :path => '../'
+end

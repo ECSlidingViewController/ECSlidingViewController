@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050E946C182AC79E00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050E946B182AC79E00A7D96C /* UIViewController+ECSlidingViewController.m */; };
 		05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */; };
 		05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */; };
 		057DC25C181DE6AE00D15995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25B181DE6AE00D15995 /* Foundation.framework */; };
@@ -18,20 +17,14 @@
 		057DC26C181DE6AE00D15995 /* MEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC26B181DE6AE00D15995 /* MEAppDelegate.m */; };
 		057DC26F181DE6AE00D15995 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057DC26D181DE6AE00D15995 /* Main.storyboard */; };
 		057DC274181DE6AE00D15995 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 057DC273181DE6AE00D15995 /* Images.xcassets */; };
-		057DC29C181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC292181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.m */; };
-		057DC29D181DE6D600D15995 /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC294181DE6D600D15995 /* ECSlidingAnimationController.m */; };
-		057DC29E181DE6D600D15995 /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC297181DE6D600D15995 /* ECSlidingInteractiveTransition.m */; };
-		057DC29F181DE6D600D15995 /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC299181DE6D600D15995 /* ECSlidingSegue.m */; };
-		057DC2A0181DE6D600D15995 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC29B181DE6D600D15995 /* ECSlidingViewController.m */; };
 		057DC2A3181DEE4700D15995 /* METransitionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC2A2181DEE4700D15995 /* METransitionsViewController.m */; };
 		057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC2A5181DF4F500D15995 /* MEMenuViewController.m */; };
 		05A4996D1822FEA90051F08E /* MEDynamicTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4996C1822FEA90051F08E /* MEDynamicTransition.m */; };
 		05CBD182182DF3B200118119 /* METransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CBD181182DF3B200118119 /* METransitions.m */; };
+		DB53A2AC25744123A2240315 /* libPods-TransitionFun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE0E5E204AC4832B02D4341 /* libPods-TransitionFun.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		050E946A182AC79E00A7D96C /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ECSlidingViewController.h"; sourceTree = "<group>"; };
-		050E946B182AC79E00A7D96C /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ECSlidingViewController.m"; sourceTree = "<group>"; };
 		05160F561820CDF300EA3BDD /* MEZoomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEZoomAnimationController.h; sourceTree = "<group>"; };
 		05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEZoomAnimationController.m; sourceTree = "<group>"; };
 		05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEFoldAnimationController.h; sourceTree = "<group>"; };
@@ -49,17 +42,6 @@
 		057DC26E181DE6AE00D15995 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		057DC273181DE6AE00D15995 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		057DC27A181DE6AE00D15995 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		057DC291181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
-		057DC292181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
-		057DC293181DE6D600D15995 /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
-		057DC294181DE6D600D15995 /* ECSlidingAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingAnimationController.m; sourceTree = "<group>"; };
-		057DC295181DE6D600D15995 /* ECSlidingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingConstants.h; sourceTree = "<group>"; };
-		057DC296181DE6D600D15995 /* ECSlidingInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingInteractiveTransition.h; sourceTree = "<group>"; };
-		057DC297181DE6D600D15995 /* ECSlidingInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingInteractiveTransition.m; sourceTree = "<group>"; };
-		057DC298181DE6D600D15995 /* ECSlidingSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingSegue.h; sourceTree = "<group>"; };
-		057DC299181DE6D600D15995 /* ECSlidingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingSegue.m; sourceTree = "<group>"; };
-		057DC29A181DE6D600D15995 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
-		057DC29B181DE6D600D15995 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		057DC2A1181DEE4700D15995 /* METransitionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METransitionsViewController.h; sourceTree = "<group>"; };
 		057DC2A2181DEE4700D15995 /* METransitionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METransitionsViewController.m; sourceTree = "<group>"; };
 		057DC2A4181DF4F500D15995 /* MEMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEMenuViewController.h; sourceTree = "<group>"; };
@@ -68,6 +50,8 @@
 		05A4996C1822FEA90051F08E /* MEDynamicTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEDynamicTransition.m; sourceTree = "<group>"; };
 		05CBD180182DF3B200118119 /* METransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METransitions.h; sourceTree = "<group>"; };
 		05CBD181182DF3B200118119 /* METransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METransitions.m; sourceTree = "<group>"; };
+		265D2379E32047049E358830 /* Pods-TransitionFun.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TransitionFun.xcconfig"; path = "../Pods/Pods-TransitionFun.xcconfig"; sourceTree = "<group>"; };
+		7EE0E5E204AC4832B02D4341 /* libPods-TransitionFun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TransitionFun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +62,7 @@
 				057DC25E181DE6AE00D15995 /* CoreGraphics.framework in Frameworks */,
 				057DC260181DE6AE00D15995 /* UIKit.framework in Frameworks */,
 				057DC25C181DE6AE00D15995 /* Foundation.framework in Frameworks */,
+				DB53A2AC25744123A2240315 /* libPods-TransitionFun.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +88,7 @@
 				057DC261181DE6AE00D15995 /* TransitionFun */,
 				057DC25A181DE6AE00D15995 /* Frameworks */,
 				057DC259181DE6AE00D15995 /* Products */,
+				265D2379E32047049E358830 /* Pods-TransitionFun.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +107,7 @@
 				057DC25D181DE6AE00D15995 /* CoreGraphics.framework */,
 				057DC25F181DE6AE00D15995 /* UIKit.framework */,
 				057DC27A181DE6AE00D15995 /* XCTest.framework */,
+				7EE0E5E204AC4832B02D4341 /* libPods-TransitionFun.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -128,7 +115,6 @@
 		057DC261181DE6AE00D15995 /* TransitionFun */ = {
 			isa = PBXGroup;
 			children = (
-				057DC290181DE6D600D15995 /* ECSlidingViewController */,
 				057DC273181DE6AE00D15995 /* Images.xcassets */,
 				057DC26D181DE6AE00D15995 /* Main.storyboard */,
 				057DC26A181DE6AE00D15995 /* MEAppDelegate.h */,
@@ -156,27 +142,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		057DC290181DE6D600D15995 /* ECSlidingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				057DC291181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.h */,
-				057DC292181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.m */,
-				057DC293181DE6D600D15995 /* ECSlidingAnimationController.h */,
-				057DC294181DE6D600D15995 /* ECSlidingAnimationController.m */,
-				057DC295181DE6D600D15995 /* ECSlidingConstants.h */,
-				057DC296181DE6D600D15995 /* ECSlidingInteractiveTransition.h */,
-				057DC297181DE6D600D15995 /* ECSlidingInteractiveTransition.m */,
-				057DC298181DE6D600D15995 /* ECSlidingSegue.h */,
-				057DC299181DE6D600D15995 /* ECSlidingSegue.m */,
-				057DC29A181DE6D600D15995 /* ECSlidingViewController.h */,
-				057DC29B181DE6D600D15995 /* ECSlidingViewController.m */,
-				050E946A182AC79E00A7D96C /* UIViewController+ECSlidingViewController.h */,
-				050E946B182AC79E00A7D96C /* UIViewController+ECSlidingViewController.m */,
-			);
-			name = ECSlidingViewController;
-			path = ../../../ECSlidingViewController;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -184,9 +149,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 057DC28A181DE6AE00D15995 /* Build configuration list for PBXNativeTarget "TransitionFun" */;
 			buildPhases = (
+				818BCF7749A6437BB39DF560 /* Check Pods Manifest.lock */,
 				057DC254181DE6AE00D15995 /* Sources */,
 				057DC255181DE6AE00D15995 /* Frameworks */,
 				057DC256181DE6AE00D15995 /* Resources */,
+				0F708C9F5DE144D59D352873 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -238,6 +205,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0F708C9F5DE144D59D352873 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Pods-TransitionFun-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		818BCF7749A6437BB39DF560 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		057DC254181DE6AE00D15995 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -246,15 +246,9 @@
 				05CBD182182DF3B200118119 /* METransitions.m in Sources */,
 				057DC26C181DE6AE00D15995 /* MEAppDelegate.m in Sources */,
 				05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */,
-				050E946C182AC79E00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */,
-				057DC29E181DE6D600D15995 /* ECSlidingInteractiveTransition.m in Sources */,
-				057DC29F181DE6D600D15995 /* ECSlidingSegue.m in Sources */,
 				057DC268181DE6AE00D15995 /* main.m in Sources */,
-				057DC2A0181DE6D600D15995 /* ECSlidingViewController.m in Sources */,
 				05A4996D1822FEA90051F08E /* MEDynamicTransition.m in Sources */,
-				057DC29D181DE6D600D15995 /* ECSlidingAnimationController.m in Sources */,
 				057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */,
-				057DC29C181DE6D600D15995 /* ECPercentDrivenInteractiveTransition.m in Sources */,
 				05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */,
 				057DC2A3181DEE4700D15995 /* METransitionsViewController.m in Sources */,
 			);
@@ -356,6 +350,7 @@
 		};
 		057DC28B181DE6AE00D15995 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 265D2379E32047049E358830 /* Pods-TransitionFun.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -369,6 +364,7 @@
 		};
 		057DC28C181DE6AE00D15995 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 265D2379E32047049E358830 /* Pods-TransitionFun.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

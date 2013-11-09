@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050E9472182AC7CB00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050E9471182AC7CB00A7D96C /* UIViewController+ECSlidingViewController.m */; };
-		058F50CF181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 058F50CE181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m */; };
 		05B9672B181B2F880013CA5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672A181B2F880013CA5D /* Foundation.framework */; };
 		05B9672D181B2F880013CA5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672C181B2F880013CA5D /* CoreGraphics.framework */; };
 		05B9672F181B2F880013CA5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B9672E181B2F880013CA5D /* UIKit.framework */; };
@@ -17,18 +15,11 @@
 		05B9673B181B2F880013CA5D /* MEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9673A181B2F880013CA5D /* MEAppDelegate.m */; };
 		05B9673E181B2F880013CA5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05B9673C181B2F880013CA5D /* Main.storyboard */; };
 		05B96743181B2F880013CA5D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05B96742181B2F880013CA5D /* Images.xcassets */; };
-		05B96772181B2FED0013CA5D /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9676A181B2FED0013CA5D /* ECSlidingAnimationController.m */; };
-		05B96773181B2FED0013CA5D /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9676D181B2FED0013CA5D /* ECSlidingInteractiveTransition.m */; };
-		05B96774181B2FED0013CA5D /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9676F181B2FED0013CA5D /* ECSlidingSegue.m */; };
-		05B96775181B2FED0013CA5D /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B96771181B2FED0013CA5D /* ECSlidingViewController.m */; };
 		05FD31F91824AA1F00482982 /* MEMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FD31F81824AA1F00482982 /* MEMenuViewController.m */; };
+		3C2BAD09EE2C49E49647CACA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C1A553B18F8E4C0B9DE357C8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		050E9470182AC7CB00A7D96C /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ECSlidingViewController.h"; sourceTree = "<group>"; };
-		050E9471182AC7CB00A7D96C /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ECSlidingViewController.m"; sourceTree = "<group>"; };
-		058F50CD181CE8360081E684 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
-		058F50CE181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		05B96727181B2F880013CA5D /* BasicMenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BasicMenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B9672A181B2F880013CA5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05B9672C181B2F880013CA5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -42,17 +33,10 @@
 		05B9673D181B2F880013CA5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		05B96742181B2F880013CA5D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		05B96749181B2F880013CA5D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		05B96769181B2FED0013CA5D /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
-		05B9676A181B2FED0013CA5D /* ECSlidingAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingAnimationController.m; sourceTree = "<group>"; };
-		05B9676B181B2FED0013CA5D /* ECSlidingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingConstants.h; sourceTree = "<group>"; };
-		05B9676C181B2FED0013CA5D /* ECSlidingInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingInteractiveTransition.h; sourceTree = "<group>"; };
-		05B9676D181B2FED0013CA5D /* ECSlidingInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingInteractiveTransition.m; sourceTree = "<group>"; };
-		05B9676E181B2FED0013CA5D /* ECSlidingSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingSegue.h; sourceTree = "<group>"; };
-		05B9676F181B2FED0013CA5D /* ECSlidingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingSegue.m; sourceTree = "<group>"; };
-		05B96770181B2FED0013CA5D /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
-		05B96771181B2FED0013CA5D /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		05FD31F71824AA1F00482982 /* MEMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEMenuViewController.h; sourceTree = "<group>"; };
 		05FD31F81824AA1F00482982 /* MEMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEMenuViewController.m; sourceTree = "<group>"; };
+		7D84431ECB0A448DA7633FF7 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = ../Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C1A553B18F8E4C0B9DE357C8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +47,7 @@
 				05B9672D181B2F880013CA5D /* CoreGraphics.framework in Frameworks */,
 				05B9672F181B2F880013CA5D /* UIKit.framework in Frameworks */,
 				05B9672B181B2F880013CA5D /* Foundation.framework in Frameworks */,
+				3C2BAD09EE2C49E49647CACA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +60,7 @@
 				05B96730181B2F880013CA5D /* BasicMenu */,
 				05B96729181B2F880013CA5D /* Frameworks */,
 				05B96728181B2F880013CA5D /* Products */,
+				7D84431ECB0A448DA7633FF7 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +79,7 @@
 				05B9672C181B2F880013CA5D /* CoreGraphics.framework */,
 				05B9672E181B2F880013CA5D /* UIKit.framework */,
 				05B96749181B2F880013CA5D /* XCTest.framework */,
+				C1A553B18F8E4C0B9DE357C8 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -100,7 +87,6 @@
 		05B96730181B2F880013CA5D /* BasicMenu */ = {
 			isa = PBXGroup;
 			children = (
-				05B96768181B2FED0013CA5D /* ECSlidingViewController */,
 				05B96742181B2F880013CA5D /* Images.xcassets */,
 				05B9673C181B2F880013CA5D /* Main.storyboard */,
 				05B96739181B2F880013CA5D /* MEAppDelegate.h */,
@@ -123,27 +109,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		05B96768181B2FED0013CA5D /* ECSlidingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				058F50CD181CE8360081E684 /* ECPercentDrivenInteractiveTransition.h */,
-				058F50CE181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m */,
-				05B96769181B2FED0013CA5D /* ECSlidingAnimationController.h */,
-				05B9676A181B2FED0013CA5D /* ECSlidingAnimationController.m */,
-				05B9676B181B2FED0013CA5D /* ECSlidingConstants.h */,
-				05B9676C181B2FED0013CA5D /* ECSlidingInteractiveTransition.h */,
-				05B9676D181B2FED0013CA5D /* ECSlidingInteractiveTransition.m */,
-				05B9676E181B2FED0013CA5D /* ECSlidingSegue.h */,
-				05B9676F181B2FED0013CA5D /* ECSlidingSegue.m */,
-				05B96770181B2FED0013CA5D /* ECSlidingViewController.h */,
-				05B96771181B2FED0013CA5D /* ECSlidingViewController.m */,
-				050E9470182AC7CB00A7D96C /* UIViewController+ECSlidingViewController.h */,
-				050E9471182AC7CB00A7D96C /* UIViewController+ECSlidingViewController.m */,
-			);
-			name = ECSlidingViewController;
-			path = ../../../ECSlidingViewController;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -151,9 +116,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05B96759181B2F880013CA5D /* Build configuration list for PBXNativeTarget "BasicMenu" */;
 			buildPhases = (
+				428AA5AC15BD488B86C275C1 /* Check Pods Manifest.lock */,
 				05B96723181B2F880013CA5D /* Sources */,
 				05B96724181B2F880013CA5D /* Frameworks */,
 				05B96725181B2F880013CA5D /* Resources */,
+				218EBA7F67C5440D830D3942 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,20 +172,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		218EBA7F67C5440D830D3942 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		428AA5AC15BD488B86C275C1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		05B96723181B2F880013CA5D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05B96772181B2FED0013CA5D /* ECSlidingAnimationController.m in Sources */,
 				05FD31F91824AA1F00482982 /* MEMenuViewController.m in Sources */,
-				050E9472182AC7CB00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */,
-				05B96775181B2FED0013CA5D /* ECSlidingViewController.m in Sources */,
-				058F50CF181CE8360081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */,
-				05B96773181B2FED0013CA5D /* ECSlidingInteractiveTransition.m in Sources */,
 				05B9673B181B2F880013CA5D /* MEAppDelegate.m in Sources */,
 				05B96737181B2F880013CA5D /* main.m in Sources */,
-				05B96774181B2FED0013CA5D /* ECSlidingSegue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +312,7 @@
 		};
 		05B9675A181B2F880013CA5D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D84431ECB0A448DA7633FF7 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -331,6 +326,7 @@
 		};
 		05B9675B181B2F880013CA5D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D84431ECB0A448DA7633FF7 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
