@@ -109,7 +109,6 @@
         self.slidingViewController.customAnchoredGestures = @[];
         [self.navigationController.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
         [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
-
     }
 }
 
