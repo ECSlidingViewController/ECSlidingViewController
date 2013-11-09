@@ -25,7 +25,7 @@
 #import "ECSlidingAnimationController.h"
 
 @interface MEDynamicTransition ()
-@property (nonatomic, assign) ECSlidingViewController *slidingViewController;
+@property (nonatomic, strong) ECSlidingAnimationController *defaultAnimationController;
 @property (nonatomic, assign) id<UIViewControllerContextTransitioning> transitionContext;
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 @property (nonatomic, strong) UICollisionBehavior *collisionBehavior;
@@ -41,23 +41,28 @@
 
 @implementation MEDynamicTransition
 
-- (id)initWithSlidingViewController:(ECSlidingViewController *)slidingViewController {
-    self = [super init];
-    if (self) {
-        self.slidingViewController = slidingViewController;
-    }
-    
+#pragma mark - ECSlidingViewControllerDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
+                                   animationControllerForOperation:(ECSlidingViewControllerOperation)operation
+                                                 topViewController:(UIViewController *)topViewController {
+    return self.defaultAnimationController;
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
+                          interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>)animationController {
+    self.slidingViewController = slidingViewController;
     return self;
 }
 
 #pragma mark - Properties
 
-- (UIPanGestureRecognizer *)panGesture {
-    if (_panGesture) return _panGesture;
+- (ECSlidingAnimationController *)defaultAnimationController {
+    if (_defaultAnimationController) return _defaultAnimationController;
     
-    _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+    _defaultAnimationController = [[ECSlidingAnimationController alloc] init];
     
-    return _panGesture;
+    return _defaultAnimationController;
 }
 
 - (UIDynamicAnimator *)animator {
@@ -136,7 +141,7 @@
         self.positiveLeftToRight = initialLeftEdge < finalLeftEdge;
         self.fullWidth           = fullWidth;
     } else {
-        [self.animationController animateTransition:transitionContext];
+        [self.defaultAnimationController animateTransition:transitionContext];
     }
 }
 

@@ -26,6 +26,7 @@
 		057DC2A3181DEE4700D15995 /* METransitionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC2A2181DEE4700D15995 /* METransitionsViewController.m */; };
 		057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC2A5181DF4F500D15995 /* MEMenuViewController.m */; };
 		05A4996D1822FEA90051F08E /* MEDynamicTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4996C1822FEA90051F08E /* MEDynamicTransition.m */; };
+		05CBD182182DF3B200118119 /* METransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CBD181182DF3B200118119 /* METransitions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		057DC2A5181DF4F500D15995 /* MEMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEMenuViewController.m; sourceTree = "<group>"; };
 		05A4996B1822FEA90051F08E /* MEDynamicTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEDynamicTransition.h; sourceTree = "<group>"; };
 		05A4996C1822FEA90051F08E /* MEDynamicTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEDynamicTransition.m; sourceTree = "<group>"; };
+		05CBD180182DF3B200118119 /* METransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METransitions.h; sourceTree = "<group>"; };
+		05CBD181182DF3B200118119 /* METransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METransitions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 				057DC26B181DE6AE00D15995 /* MEAppDelegate.m */,
 				057DC2A4181DF4F500D15995 /* MEMenuViewController.h */,
 				057DC2A5181DF4F500D15995 /* MEMenuViewController.m */,
+				05CBD180182DF3B200118119 /* METransitions.h */,
+				05CBD181182DF3B200118119 /* METransitions.m */,
 				057DC2A1181DEE4700D15995 /* METransitionsViewController.h */,
 				057DC2A2181DEE4700D15995 /* METransitionsViewController.m */,
 				057DC262181DE6AE00D15995 /* Supporting Files */,
@@ -238,6 +243,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05CBD182182DF3B200118119 /* METransitions.m in Sources */,
 				057DC26C181DE6AE00D15995 /* MEAppDelegate.m in Sources */,
 				05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */,
 				050E946C182AC79E00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */,

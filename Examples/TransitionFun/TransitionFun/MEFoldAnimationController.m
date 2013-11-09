@@ -32,6 +32,14 @@
 
 @implementation MEFoldAnimationController
 
+#pragma mark - ECSlidingViewControllerDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
+                                   animationControllerForOperation:(ECSlidingViewControllerOperation)operation
+                                                 topViewController:(UIViewController *)topViewController {
+    return self;
+}
+
 #pragma mark - UIViewControllerAnimatedTransitioning
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {

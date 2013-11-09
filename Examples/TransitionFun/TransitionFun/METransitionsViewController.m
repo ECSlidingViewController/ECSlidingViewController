@@ -22,40 +22,26 @@
 // THE SOFTWARE.
 
 #import "METransitionsViewController.h"
-#import "ECSlidingAnimationController.h"
-#import "UIViewController+ECSlidingViewController.h"
-#import "MEFoldAnimationController.h"
-#import "MEZoomAnimationController.h"
-#import "MEDynamicTransition.h"
 
-static NSString *const METransitionDefault = @"Default";
-static NSString *const METransitionFold = @"Fold";
-static NSString *const METransitionZoom = @"Zoom";
-static NSString *const METransitionUIDynamics = @"UI Dynamics";
+#import "UIViewController+ECSlidingViewController.h"
+#import "MEDynamicTransition.h"
+#import "METransitions.h"
 
 @interface METransitionsViewController ()
-@property (nonatomic, strong) NSArray *transitions;
-@property (nonatomic, strong) ECSlidingAnimationController *slidingAnimationController;
-@property (nonatomic, strong) MEFoldAnimationController *foldAnimationController;
-@property (nonatomic, strong) MEZoomAnimationController *zoomAnimationController;
-@property (nonatomic, strong) MEDynamicTransition *dynamicTransition;
+@property (nonatomic, strong) METransitions *transitions;
+@property (nonatomic, strong) UIPanGestureRecognizer *dynamicTransitionPanGesture;
 @end
 
 @implementation METransitionsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
-    self.slidingViewController.delegate = self;
+//    id<ECSlidingViewControllerDelegate> transitionDelegate = self.transitions.all[0][@"transition"];
+//    self.slidingViewController.delegate = self.transitions.all[0][@"transition"];
     self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
 }
 
@@ -67,64 +53,38 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Properties
 
-- (NSArray *)transitions {
+- (METransitions *)transitions {
     if (_transitions) return _transitions;
     
-    _transitions = @[METransitionDefault, METransitionFold, METransitionZoom, METransitionUIDynamics];
+    _transitions = [[METransitions alloc] init];
     
     return _transitions;
 }
 
-- (ECSlidingAnimationController *)slidingAnimationController {
-    if (_slidingAnimationController) return _slidingAnimationController;
+- (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
+    if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
     
-    _slidingAnimationController = [[ECSlidingAnimationController alloc] init];
+    NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"name = %@", METransitionNameDynamic];
+    NSArray *transitionsData = [self.transitions.all filteredArrayUsingPredicate:namePredicate];
+    MEDynamicTransition *dynamicTransition = transitionsData[0][@"transition"];
+    _dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:dynamicTransition action:@selector(handlePanGesture:)];
     
-    return _slidingAnimationController;
-}
-
-- (MEFoldAnimationController *)foldAnimationController {
-    if (_foldAnimationController) return _foldAnimationController;
-    
-    _foldAnimationController = [[MEFoldAnimationController alloc] init];
-    
-    return _foldAnimationController;
-}
-
-- (MEZoomAnimationController *)zoomAnimationController {
-    if (_zoomAnimationController) return _zoomAnimationController;
-    
-    _zoomAnimationController = [[MEZoomAnimationController alloc] init];
-    
-    return _zoomAnimationController;
-}
-
-- (MEDynamicTransition *)dynamicTransition {
-    if (_dynamicTransition) return _dynamicTransition;
-    
-    _dynamicTransition = [[MEDynamicTransition alloc] initWithSlidingViewController:self.slidingViewController];
-    
-    return _dynamicTransition;
+    return _dynamicTransitionPanGesture;
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.transitions.count;
+    return self.transitions.all.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"TransitionCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSString *transition = self.transitions[indexPath.row];
+    NSString *transition = self.transitions.all[indexPath.row][@"name"];
     
     cell.textLabel.text = transition;
     
@@ -134,77 +94,30 @@ static NSString *const METransitionUIDynamics = @"UI Dynamics";
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *selection = self.transitions[indexPath.row];
-    if ([selection isEqualToString:METransitionUIDynamics]) {
+    NSDictionary *transitionData = self.transitions.all[indexPath.row];
+    id<ECSlidingViewControllerDelegate> transition = transitionData[@"transition"];
+    if (transition == (id)[NSNull null]) {
+        self.slidingViewController.delegate = nil;
+    } else {
+        self.slidingViewController.delegate = transition;
+    }
+    
+    NSString *transitionName = transitionData[@"name"];
+    if ([transitionName isEqualToString:METransitionNameDynamic]) {
+        MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)transition;
+        dynamicTransition.slidingViewController = self.slidingViewController;
+        
         self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGestureCustom;
-        self.slidingViewController.customAnchoredGestures = @[self.dynamicTransition.panGesture];
+        self.slidingViewController.customAnchoredGestures = @[self.dynamicTransitionPanGesture];
         [self.navigationController.view removeGestureRecognizer:self.slidingViewController.panGesture];
-        [self.navigationController.view addGestureRecognizer:self.dynamicTransition.panGesture];
+        [self.navigationController.view addGestureRecognizer:self.dynamicTransitionPanGesture];
     } else {
         self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
         self.slidingViewController.customAnchoredGestures = @[];
-        [self.navigationController.view removeGestureRecognizer:self.dynamicTransition.panGesture];
+        [self.navigationController.view removeGestureRecognizer:self.dynamicTransitionPanGesture];
         [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
+
     }
-}
-
-#pragma mark - ECSlidingViewControllerDelegate
-
-- (id<UIViewControllerAnimatedTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
-                                   animationControllerForOperation:(ECSlidingViewControllerOperation)operation
-                                                 topViewController:(UIViewController *)topViewController {
-    NSUInteger selectedIndex = [self.tableView indexPathForSelectedRow].row;
-    NSString *transition = self.transitions[selectedIndex];
-    id<UIViewControllerAnimatedTransitioning> animationController = nil;
-    
-    if ([transition isEqualToString:METransitionFold]) {
-        animationController = self.foldAnimationController;
-    } else if ([transition isEqualToString:METransitionZoom]) {
-        self.zoomAnimationController.operation = operation;
-        animationController = self.zoomAnimationController;
-    } else if ([transition isEqualToString:METransitionUIDynamics]) {
-        animationController = self.slidingAnimationController;
-    } else {
-        // Default
-        animationController = nil;
-    }
-
-    return animationController;
-}
-
-- (id<UIViewControllerInteractiveTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
-                          interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>)animationController {
-    NSUInteger selectedIndex = [self.tableView indexPathForSelectedRow].row;
-    NSString *transition = self.transitions[selectedIndex];
-    id<UIViewControllerInteractiveTransitioning> interactiveTransition;
-    
-    if ([transition isEqualToString:METransitionFold]) {
-        // The fold transition uses the default sliding interaction
-        interactiveTransition = nil;
-    } else if ([transition isEqualToString:METransitionZoom]) {
-        // The shrink transition uses the default sliding interaction
-        interactiveTransition = nil;
-    } else if ([transition isEqualToString:METransitionUIDynamics]) {
-        self.dynamicTransition.animationController = animationController;
-        interactiveTransition = self.dynamicTransition;
-    } else {
-        // Default
-        interactiveTransition = nil;
-    }
-    
-    return interactiveTransition;
-}
-
-- (id<ECSlidingViewControllerLayout>)slidingViewController:(ECSlidingViewController *)slidingViewController layoutControllerForTopViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition {
-    NSUInteger selectedIndex = [self.tableView indexPathForSelectedRow].row;
-    NSString *transition = self.transitions[selectedIndex];
-    id<ECSlidingViewControllerLayout> layoutController = nil;
-    
-    if ([transition isEqualToString:METransitionZoom]) {
-        layoutController = self.zoomAnimationController;
-    }
-    
-    return layoutController;
 }
 
 - (IBAction)menuButtonTapped:(id)sender {

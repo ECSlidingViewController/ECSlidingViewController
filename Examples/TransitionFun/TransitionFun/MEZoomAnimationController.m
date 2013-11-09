@@ -23,7 +23,45 @@
 
 #import "MEZoomAnimationController.h"
 
+@interface MEZoomAnimationController ()
+@property (nonatomic, assign) ECSlidingViewControllerOperation operation;
+@end
+
 @implementation MEZoomAnimationController
+
+#pragma mark - ECSlidingViewControllerDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)slidingViewController:(ECSlidingViewController *)slidingViewController
+                                   animationControllerForOperation:(ECSlidingViewControllerOperation)operation
+                                                 topViewController:(UIViewController *)topViewController {
+    self.operation = operation;
+    return self;
+}
+
+- (id<ECSlidingViewControllerLayout>)slidingViewController:(ECSlidingViewController *)slidingViewController
+                        layoutControllerForTopViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition {
+    return self;
+}
+
+#pragma mark - ECSlidingViewControllerLayout
+
+- (CGRect)slidingViewController:(ECSlidingViewController *)slidingViewController
+         frameForViewController:(UIViewController *)viewController
+                topViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition {
+    if (topViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight && viewController == slidingViewController.topViewController) {
+        CGRect frame = slidingViewController.view.frame;
+        frame.origin.x = slidingViewController.anchorRightRevealAmount;
+        frame.size.width  = frame.size.width  * 0.75;
+        frame.size.height = frame.size.height * 0.75;
+        frame.origin.y = (slidingViewController.view.frame.size.height - frame.size.height) / 2;
+        
+        return frame;
+    } else {
+        return CGRectInfinite;
+    }
+}
+
+#pragma mark - UIViewControllerAnimatedTransitioning
 
 - (NSTimeInterval)transitionDuration:(id <UIViewControllerContextTransitioning>)transitionContext {
     return 0.25;
@@ -94,24 +132,6 @@
             
             [transitionContext completeTransition:finished];
         }];
-    }
-}
-
-#pragma mark - ECSlidingViewControllerLayout
-
-- (CGRect)slidingViewController:(ECSlidingViewController *)slidingViewController
-         frameForViewController:(UIViewController *)viewController
-                topViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition {
-    if (topViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight && viewController == slidingViewController.topViewController) {
-        CGRect frame = slidingViewController.view.frame;
-        frame.origin.x = slidingViewController.anchorRightRevealAmount;
-        frame.size.width  = frame.size.width  * 0.75;
-        frame.size.height = frame.size.height * 0.75;
-        frame.origin.y = (slidingViewController.view.frame.size.height - frame.size.height) / 2;
-        
-        return frame;
-    } else {
-        return CGRectInfinite;
     }
 }
 

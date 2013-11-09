@@ -579,13 +579,22 @@
     
     self.currentOperation = operation;
     
-    self.currentAnimationController = [self.delegate slidingViewController:self
-                                           animationControllerForOperation:operation
-                                                         topViewController:self.topViewController];
+    if ([(NSObject *)self.delegate respondsToSelector:@selector(slidingViewController:animationControllerForOperation:topViewController:)]) {
+        self.currentAnimationController = [self.delegate slidingViewController:self
+                                               animationControllerForOperation:operation
+                                                             topViewController:self.topViewController];
+        
+        if ([(NSObject *)self.delegate respondsToSelector:@selector(slidingViewController:interactionControllerForAnimationController:)]) {
+            self.currentInteractiveTransition = [self.delegate slidingViewController:self
+                                         interactionControllerForAnimationController:self.currentAnimationController];
+        } else {
+            self.currentInteractiveTransition = nil;
+        }
+    } else {
+        self.currentAnimationController = nil;
+    }
     
     if (self.currentAnimationController) {
-        self.currentInteractiveTransition = [self.delegate slidingViewController:self
-                                     interactionControllerForAnimationController:self.currentAnimationController];
         if (self.currentInteractiveTransition) {
             _isInteractive = YES;
         } else {
