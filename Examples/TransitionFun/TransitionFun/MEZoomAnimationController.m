@@ -80,8 +80,8 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
     if (self.operation == ECSlidingViewControllerOperationAnchorRight) {
         [containerView insertSubview:underLeftViewController.view belowSubview:topView];
         
-        [self topViewStartingState:topView containerFrame:containerView.frame];
-        [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.frame];
+        [self topViewStartingState:topView containerFrame:containerView.bounds];
+        [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.bounds];
 
         NSTimeInterval duration = [self transitionDuration:transitionContext];
         [UIView animateWithDuration:duration animations:^{
@@ -89,8 +89,8 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
             [self topViewAnchorRightEndState:topView anchoredFrame:[transitionContext finalFrameForViewController:topViewController]];
         } completion:^(BOOL finished) {
             if ([transitionContext transitionWasCancelled]) {
-                [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.frame];
-                [self topViewStartingState:topView containerFrame:containerView.frame];
+                [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.bounds];
+                [self topViewStartingState:topView containerFrame:containerView.bounds];
             }
             
             [transitionContext completeTransition:finished];
@@ -101,8 +101,8 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
 
         NSTimeInterval duration = [self transitionDuration:transitionContext];
         [UIView animateWithDuration:duration animations:^{
-            [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.frame];
-            [self topViewStartingState:topView containerFrame:containerView.frame];
+            [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.bounds];
+            [self topViewStartingState:topView containerFrame:containerView.bounds];
         } completion:^(BOOL finished) {
             if ([transitionContext transitionWasCancelled]) {
                 [self underLeftViewEndState:underLeftViewController.view];
@@ -121,12 +121,12 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
 #pragma mark - Private
 
 - (CGRect)topViewAnchoredRightFrame:(ECSlidingViewController *)slidingViewController {
-    CGRect frame = slidingViewController.view.frame;
+    CGRect frame = slidingViewController.view.bounds;
     
     frame.origin.x    = slidingViewController.anchorRightRevealAmount;
     frame.size.width  = frame.size.width  * MEZoomAnimationScaleFactor;
     frame.size.height = frame.size.height * MEZoomAnimationScaleFactor;
-    frame.origin.y    = (slidingViewController.view.frame.size.height - frame.size.height) / 2;
+    frame.origin.y    = (slidingViewController.view.bounds.size.height - frame.size.height) / 2;
     
     return frame;
 }

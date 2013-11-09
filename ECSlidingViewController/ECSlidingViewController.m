@@ -177,6 +177,7 @@
 
 - (void)viewWillLayoutSubviews {
     if (self.currentOperation == ECSlidingViewControllerOperationNone) {
+        self.gestureView.frame = [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
         self.topViewController.view.frame = [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
         self.underLeftViewController.view.frame = [self underLeftViewCalculatedFrame];
         self.underRightViewController.view.frame = [self underRightViewCalculatedFrame];
@@ -185,6 +186,7 @@
 
 - (void)viewDidLayoutSubviews {
     if (self.currentOperation == ECSlidingViewControllerOperationNone) {
+        [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
         self.topViewController.view.frame = [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
         self.underLeftViewController.view.frame = [self underLeftViewCalculatedFrame];
         self.underRightViewController.view.frame = [self underRightViewCalculatedFrame];
