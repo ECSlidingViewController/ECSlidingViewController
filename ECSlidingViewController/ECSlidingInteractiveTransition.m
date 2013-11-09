@@ -53,7 +53,7 @@
     CGFloat finalLeftEdge = CGRectGetMinX([transitionContext finalFrameForViewController:topViewController]);
     CGFloat initialLeftEdge = CGRectGetMinX([transitionContext initialFrameForViewController:topViewController]);
     CGFloat fullWidth = fabsf(finalLeftEdge - initialLeftEdge);
-
+    
     self.positiveLeftToRight = initialLeftEdge < finalLeftEdge;
     self.fullWidth           = fullWidth;
     self.currentPercentage   = 0;

@@ -453,7 +453,7 @@
 
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position {
     CGRect frameFromDelegate = [self frameFromDelegateForViewController:self.topViewController
-                                                        topViewPosition:self.currentTopViewPosition];
+                                                        topViewPosition:position];
     if (!CGRectIsInfinite(frameFromDelegate)) return frameFromDelegate;
     
     CGRect containerViewFrame = self.view.bounds;

@@ -23,8 +23,15 @@
 
 #import "MEZoomAnimationController.h"
 
+static CGFloat const MEZoomAnimationScaleFactor = 0.75;
+
 @interface MEZoomAnimationController ()
 @property (nonatomic, assign) ECSlidingViewControllerOperation operation;
+- (CGRect)topViewAnchoredRightFrame:(ECSlidingViewController *)slidingViewController;
+- (void)topViewStartingState:(UIView *)topView containerFrame:(CGRect)containerFrame;
+- (void)topViewAnchorRightEndState:(UIView *)topView anchoredFrame:(CGRect)anchoredFrame;
+- (void)underLeftViewStartingState:(UIView *)underLeftView containerFrame:(CGRect)containerFrame;
+- (void)underLeftViewEndState:(UIView *)underLeftView;
 @end
 
 @implementation MEZoomAnimationController
@@ -49,13 +56,7 @@
          frameForViewController:(UIViewController *)viewController
                 topViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition {
     if (topViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight && viewController == slidingViewController.topViewController) {
-        CGRect frame = slidingViewController.view.frame;
-        frame.origin.x = slidingViewController.anchorRightRevealAmount;
-        frame.size.width  = frame.size.width  * 0.75;
-        frame.size.height = frame.size.height * 0.75;
-        frame.origin.y = (slidingViewController.view.frame.size.height - frame.size.height) / 2;
-        
-        return frame;
+        return [self topViewAnchoredRightFrame:slidingViewController];
     } else {
         return CGRectInfinite;
     }
@@ -71,68 +72,84 @@
     UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
     UIViewController *underLeftViewController  = [transitionContext viewControllerForKey:ECTransitionContextUnderLeftControllerKey];
     UIView *containerView = [transitionContext containerView];
-    CGRect topViewInitialFrame = [transitionContext initialFrameForViewController:topViewController];
-    CGRect topViewFinalFrame   = [transitionContext finalFrameForViewController:topViewController];
     
     UIView *topView = topViewController.view;
     
     underLeftViewController.view.layer.transform = CATransform3DIdentity;
     
     if (self.operation == ECSlidingViewControllerOperationAnchorRight) {
-        underLeftViewController.view.alpha = 0;
-        
-        topView.frame = topViewInitialFrame;
-        underLeftViewController.view.frame = [transitionContext initialFrameForViewController:underLeftViewController];
-        
         [containerView insertSubview:underLeftViewController.view belowSubview:topView];
         
-        underLeftViewController.view.layer.transform = CATransform3DMakeScale(1.25, 1.25, 1);
-        
+        [self topViewStartingState:topView containerFrame:containerView.frame];
+        [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.frame];
+
         NSTimeInterval duration = [self transitionDuration:transitionContext];
         [UIView animateWithDuration:duration animations:^{
-            CGFloat scaleFactor = 0.75;
-            
-            underLeftViewController.view.alpha = 1;
-            underLeftViewController.view.layer.transform = CATransform3DIdentity;
-            
-            topView.layer.transform = CATransform3DMakeScale(scaleFactor, scaleFactor, 1);
-            topView.layer.position = CGPointMake(topViewFinalFrame.origin.x + ((topView.layer.bounds.size.width * scaleFactor) / 2), topView.layer.position.y);
+            [self underLeftViewEndState:underLeftViewController.view];
+            [self topViewAnchorRightEndState:topView anchoredFrame:[transitionContext finalFrameForViewController:topViewController]];
         } completion:^(BOOL finished) {
             if ([transitionContext transitionWasCancelled]) {
-                topView.layer.transform = CATransform3DIdentity;
-                topView.frame = topViewInitialFrame;
+                [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.frame];
+                [self topViewStartingState:topView containerFrame:containerView.frame];
             }
             
             [transitionContext completeTransition:finished];
         }];
     } else if (self.operation == ECSlidingViewControllerOperationResetFromRight) {
-        underLeftViewController.view.layer.transform = CATransform3DIdentity;
-        
+        [self topViewAnchorRightEndState:topView anchoredFrame:[transitionContext initialFrameForViewController:topViewController]];
+        [self underLeftViewEndState:underLeftViewController.view];
+
         NSTimeInterval duration = [self transitionDuration:transitionContext];
         [UIView animateWithDuration:duration animations:^{
-            underLeftViewController.view.alpha = 0;
-            underLeftViewController.view.layer.transform = CATransform3DMakeScale(1.25, 1.25, 1);
-            
-            topView.layer.transform = CATransform3DIdentity;
-            topView.layer.position = [transitionContext containerView].center;
+            [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.frame];
+            [self topViewStartingState:topView containerFrame:containerView.frame];
         } completion:^(BOOL finished) {
             if ([transitionContext transitionWasCancelled]) {
-                CGFloat scaleFactor = 0.75;
-                
-                underLeftViewController.view.alpha = 1;
-                underLeftViewController.view.layer.transform = CATransform3DMakeScale(1, 1, 1);
-                
-                topView.layer.transform = CATransform3DMakeScale(scaleFactor, scaleFactor, 1);
-                topView.layer.position = CGPointMake(topViewInitialFrame.origin.x + ((topView.layer.bounds.size.width * scaleFactor) / 2), topView.layer.position.y);
+                [self underLeftViewEndState:underLeftViewController.view];
+                [self topViewAnchorRightEndState:topView anchoredFrame:[transitionContext initialFrameForViewController:topViewController]];
             } else {
-                underLeftViewController.view.layer.transform = CATransform3DIdentity;
                 underLeftViewController.view.alpha = 1;
+                underLeftViewController.view.layer.transform = CATransform3DIdentity;
                 [underLeftViewController.view removeFromSuperview];
             }
             
             [transitionContext completeTransition:finished];
         }];
     }
+}
+
+#pragma mark - Private
+
+- (CGRect)topViewAnchoredRightFrame:(ECSlidingViewController *)slidingViewController {
+    CGRect frame = slidingViewController.view.frame;
+    
+    frame.origin.x    = slidingViewController.anchorRightRevealAmount;
+    frame.size.width  = frame.size.width  * MEZoomAnimationScaleFactor;
+    frame.size.height = frame.size.height * MEZoomAnimationScaleFactor;
+    frame.origin.y    = (slidingViewController.view.frame.size.height - frame.size.height) / 2;
+    
+    return frame;
+}
+
+- (void)topViewStartingState:(UIView *)topView containerFrame:(CGRect)containerFrame {
+    topView.layer.transform = CATransform3DIdentity;
+    topView.layer.position  = CGPointMake(containerFrame.size.width / 2, containerFrame.size.height / 2);
+}
+
+- (void)topViewAnchorRightEndState:(UIView *)topView anchoredFrame:(CGRect)anchoredFrame {
+    topView.layer.transform = CATransform3DMakeScale(MEZoomAnimationScaleFactor, MEZoomAnimationScaleFactor, 1);
+    topView.layer.position  = CGPointMake(anchoredFrame.origin.x + ((topView.layer.bounds.size.width * MEZoomAnimationScaleFactor) / 2), topView.layer.position.y);
+}
+
+- (void)underLeftViewStartingState:(UIView *)underLeftView containerFrame:(CGRect)containerFrame {
+    underLeftView.alpha = 0;
+    underLeftView.frame = containerFrame;
+    underLeftView.layer.transform = CATransform3DMakeScale(1.25, 1.25, 1);
+}
+
+- (void)underLeftViewEndState:(UIView *)underLeftView {
+    underLeftView.alpha = 1;
+    underLeftView.layer.transform = CATransform3DIdentity;
 }
 
 @end
