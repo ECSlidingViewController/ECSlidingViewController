@@ -36,20 +36,13 @@
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
-//    id<ECSlidingViewControllerDelegate> transitionDelegate = self.transitions.all[0][@"transition"];
-//    self.slidingViewController.delegate = self.transitions.all[0][@"transition"];
-    self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGesturePanning;
-}
-
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     if (![self.tableView indexPathForSelectedRow]) {
-        [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        NSIndexPath *defaultIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView selectRowAtIndexPath:defaultIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [self tableView:self.tableView didSelectRowAtIndexPath:defaultIndexPath];
     }
 }
 
