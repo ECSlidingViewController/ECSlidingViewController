@@ -52,19 +52,25 @@
     underLeftViewController.view.layer.borderWidth     = 20;
     underLeftViewController.view.layer.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
     underLeftViewController.view.layer.borderColor     = [UIColor colorWithWhite:0.8 alpha:1.0].CGColor;
-    underLeftViewController.edgesForExtendedLayout     = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft;
+    underLeftViewController.edgesForExtendedLayout     = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeLeft; // don't go under the top view
     
     // configure under right view controller
     underRightViewController.view.layer.borderWidth     = 20;
     underRightViewController.view.layer.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0].CGColor;
     underRightViewController.view.layer.borderColor     = [UIColor colorWithWhite:0.8 alpha:1.0].CGColor;
-    underRightViewController.edgesForExtendedLayout     = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeRight;
+    underRightViewController.edgesForExtendedLayout     = UIRectEdgeTop | UIRectEdgeBottom | UIRectEdgeRight; // don't go under the top view
     
+    // configure sliding view controller
     self.slidingViewController = [ECSlidingViewController slidingWithTopViewController:navigationController];
     self.slidingViewController.underLeftViewController  = underLeftViewController;
     self.slidingViewController.underRightViewController = underRightViewController;
     
+    // enable swiping on the top view
     [navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
+    
+    // configure anchored layout
+    self.slidingViewController.anchorRightPeekAmount  = 100.0;
+    self.slidingViewController.anchorLeftRevealAmount = 250.0;
     
     self.window.rootViewController = self.slidingViewController;
     
