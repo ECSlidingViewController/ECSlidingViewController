@@ -471,6 +471,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     CGPoint center = self.topView.center;
     center.x = newHorizontalCenter;
     self.topView.layer.position = center;
+    self.topViewSnapshot.frame = self.topView.frame;
     if (self.topViewCenterMoved) self.topViewCenterMoved(newHorizontalCenter);
 }
 
