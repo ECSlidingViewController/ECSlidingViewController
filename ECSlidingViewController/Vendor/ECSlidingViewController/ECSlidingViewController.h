@@ -68,141 +68,141 @@ typedef enum {
 }
 
 /** Returns the view controller that will be visible when the top view is slide to the right.
- 
+
  This view controller is typically a menu or top-level view that switches out the top view controller.
  */
 @property (nonatomic, strong) UIViewController *underLeftViewController;
 
 /** Returns the view controller that will be visible when the top view is slide to the left.
- 
+
  This view controller is typically a supplemental view to the top view.
  */
 @property (nonatomic, strong) UIViewController *underRightViewController;
 
 /** Returns the top view controller.
- 
+
  This is the main view controller that is presented above the other view controllers.
  */
 @property (nonatomic, strong) UIViewController *topViewController;
 
 /** Returns the number of points the top view is visible when the top view is anchored to the left side.
- 
+
  This value is fixed after rotation. If the number of points to reveal needs to be fixed, use anchorLeftRevealAmount.
- 
+
  @see anchorLeftRevealAmount
  */
 @property (nonatomic, assign) CGFloat anchorLeftPeekAmount;
 
 /** Returns the number of points the top view is visible when the top view is anchored to the right side.
- 
+
  This value is fixed after rotation. If the number of points to reveal needs to be fixed, use anchorRightRevealAmount.
- 
+
  @see anchorRightRevealAmount
  */
 @property (nonatomic, assign) CGFloat anchorRightPeekAmount;
 
 /** Returns the number of points the under right view is visible when the top view is anchored to the left side.
- 
+
  This value is fixed after rotation. If the number of points to peek needs to be fixed, use anchorLeftPeekAmount.
- 
+
  @see anchorLeftPeekAmount
  */
 @property (nonatomic, assign) CGFloat anchorLeftRevealAmount;
 
 /** Returns the number of points the under left view is visible when the top view is anchored to the right side.
- 
+
  This value is fixed after rotation. If the number of points to peek needs to be fixed, use anchorRightPeekAmount.
- 
+
  @see anchorRightPeekAmount
  */
 @property (nonatomic, assign) CGFloat anchorRightRevealAmount;
 
 /** Specifies whether or not the top view can be panned past the anchor point.
- 
+
  Set to NO if you don't want to show the empty space behind the top and under view.
- 
+
  By defaut, this is set to YES
  */
 @property (nonatomic, assign) BOOL shouldAllowPanningPastAnchor;
 
 /** Specifies if the user should be able to interact with the top view when it is anchored.
- 
+
  By default, this is set to NO
  */
 @property (nonatomic, assign) BOOL shouldAllowUserInteractionsWhenAnchored;
 
 /** Specifies if the top view snapshot requires a pan gesture recognizer.
- 
+
  This is useful when panGesture is added to the navigation bar instead of the main view.
- 
+
  By default, this is set to NO
  */
 @property (nonatomic, assign) BOOL shouldAddPanGestureRecognizerToTopViewSnapshot;
 
 /** Specifies if the the child views should be shortened to accomodate the status bar. iOS 7 only.
- 
+
  By default, this is set to NO
  */
 @property (nonatomic, assign) BOOL shouldAdjustChildViewHeightForStatusBar;
 
 /** Specifies the behavior for the under left width
- 
+
  By default, this is set to ECFullWidth
  */
 @property (nonatomic, assign) ECViewWidthLayout underLeftWidthLayout;
 
 /** Specifies the behavior for the under right width
- 
+
  By default, this is set to ECFullWidth
  */
 @property (nonatomic, assign) ECViewWidthLayout underRightWidthLayout;
 
 /** Returns the strategy for resetting the top view when it is anchored.
- 
+
  By default, this is set to ECPanning | ECTapping to allow both panning and tapping to reset the top view.
- 
+
  If this is set to ECNone, then there must be a custom way to reset the top view otherwise it will stay anchored.
  */
 @property (nonatomic, assign) ECResetStrategy resetStrategy;
 
 /** Returns the magnitude of the X-axis velocity threshold used for determining whether or not to process a pan to the left or right
- 
+
  By default, this is set to 100
  */
 @property (nonatomic, assign) NSUInteger panningVelocityXThreshold;
 
 /** Can be set to provide a continuous callback as the top view slides.
- 
+
  Useful for animations synchronized to the sliding.
- 
+
  */
 @property (nonatomic,copy) void (^topViewCenterMoved)(float xPos);
 
 /** A view that is the same size and position as the status bar
- 
+
  It is guaranteed to always be on top of the top and under views.
- 
+
  */
 @property (nonatomic, strong) UIView *statusBarBackgroundView;
 
 /** Returns a horizontal panning gesture for moving the top view.
- 
+
  This is typically added to the top view or a top view's navigation bar.
  */
 - (UIPanGestureRecognizer *)panGesture;
 
 /** Slides the top view in the direction of the specified side.
- 
+
  A peek amount or reveal amount must be set for the given side. The top view will anchor to one of those specified values.
- 
+
  @param side The side for the top view to slide towards.
  */
 - (void)anchorTopViewTo:(ECSide)side;
 
 /** Slides the top view in the direction of the specified side.
- 
+
  A peek amount or reveal amount must be set for the given side. The top view will anchor to one of those specified values.
- 
+
  @param side The side for the top view to slide towards.
  @param animations Perform changes to properties that will be animated while top view is moved off screen. Can be nil.
  @param onComplete Executed after the animation is completed. Can be nil.
@@ -210,13 +210,13 @@ typedef enum {
 - (void)anchorTopViewTo:(ECSide)side animations:(void(^)())animations onComplete:(void(^)())complete;
 
 /** Slides the top view off of the screen in the direction of the specified side.
- 
+
  @param side The side for the top view to slide off the screen towards.
  */
 - (void)anchorTopViewOffScreenTo:(ECSide)side;
 
 /** Slides the top view off of the screen in the direction of the specified side.
- 
+
  @param side The side for the top view to slide off the screen towards.
  @param animations Perform changes to properties that will be animated while top view is moved off screen. Can be nil.
  @param onComplete Executed after the animation is completed. Can be nil.
@@ -227,7 +227,7 @@ typedef enum {
 - (void)resetTopView;
 
 /** Slides the top view back to the center.
- 
+
  @param animations Perform changes to properties that will be animated while top view is moved back to the center of the screen. Can be nil.
  @param onComplete Executed after the animation is completed. Can be nil.
  */
