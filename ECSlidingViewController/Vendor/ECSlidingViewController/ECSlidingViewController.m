@@ -560,22 +560,25 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (CGRect)fullViewBounds
 {
     CGFloat statusBarHeight = 0.0f;
-    
-    BOOL legacyScreenHeightEnabled = NO;
-    if (floor(NSFoundationVersionNumber) <= 993.00) {
-        legacyScreenHeightEnabled = YES;
-    }
+
+    /**
+     Enable legacy screen height support if we are running on an SDK prior to iOS 6
+     and thus does not support the supportedInterfaceOrientationsForWindow: selector on
+     UIApplication, which was introduced in iOS 6
+     */
+    UIApplication *sharedApplication = [UIApplication sharedApplication];
+    BOOL legacyScreenHeightEnabled = ![sharedApplication respondsToSelector:@selector(supportedInterfaceOrientationsForWindow:)];
     
     if (self.shouldAdjustChildViewHeightForStatusBar || legacyScreenHeightEnabled) {
-        statusBarHeight = CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
-        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            statusBarHeight = CGRectGetWidth([UIApplication sharedApplication].statusBarFrame);
+        statusBarHeight = sharedApplication.statusBarFrame.size.height;
+        if (UIInterfaceOrientationIsLandscape(sharedApplication.statusBarOrientation)) {
+            statusBarHeight = sharedApplication.statusBarFrame.size.width;
         }
     }
     
     CGRect bounds = [UIScreen mainScreen].bounds;
     
-    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+    if (UIInterfaceOrientationIsLandscape(sharedApplication.statusBarOrientation)) {
         CGFloat height = CGRectGetWidth(bounds);
         CGFloat width  = CGRectGetHeight(bounds);
         bounds.size.height = height;
