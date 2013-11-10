@@ -171,9 +171,9 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 - (void)setUnderLeftWidthLayout:(ECViewWidthLayout)underLeftWidthLayout
 {
-    if (underLeftWidthLayout == ECVariableRevealWidth && self.anchorRightPeekAmount <= 0) {
+    if (underLeftWidthLayout == ECVariableRevealWidth && self.anchorRightPeekAmount <= 0.0f) {
         [NSException raise:@"Invalid Width Layout" format:@"anchorRightPeekAmount must be set"];
-    } else if (underLeftWidthLayout == ECFixedRevealWidth && self.anchorRightRevealAmount <= 0) {
+    } else if (underLeftWidthLayout == ECFixedRevealWidth && self.anchorRightRevealAmount <= 0.0f) {
         [NSException raise:@"Invalid Width Layout" format:@"anchorRightRevealAmount must be set"];
     }
     
@@ -182,9 +182,9 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 - (void)setUnderRightWidthLayout:(ECViewWidthLayout)underRightWidthLayout
 {
-    if (underRightWidthLayout == ECVariableRevealWidth && self.anchorLeftPeekAmount <= 0) {
+    if (underRightWidthLayout == ECVariableRevealWidth && self.anchorLeftPeekAmount <= 0.0f) {
         [NSException raise:@"Invalid Width Layout" format:@"anchorLeftPeekAmount must be set"];
-    } else if (underRightWidthLayout == ECFixedRevealWidth && self.anchorLeftRevealAmount <= 0) {
+    } else if (underRightWidthLayout == ECFixedRevealWidth && self.anchorLeftRevealAmount <= 0.0f) {
         [NSException raise:@"Invalid Width Layout" format:@"anchorLeftRevealAmount must be set"];
     }
     
@@ -250,7 +250,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     } else if ([self underLeftShowing] && [self topViewIsOffScreen]) {
         [self updateUnderLeftLayout];
         self.topViewController.view.frame = [self fullViewBounds];
-        [self updateTopViewHorizontalCenter:self.view.bounds.size.width + self.resettedCenter];
+        [self updateTopViewHorizontalCenter:CGRectGetWidth(self.view.bounds) + self.resettedCenter];
     } else {
         self.topViewController.view.frame = [self fullViewBounds];
     }
@@ -304,8 +304,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
     
     if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        CGFloat width = statusBarFrame.size.height;
-        CGFloat height = statusBarFrame.size.width;
+        CGFloat width = CGRectGetHeight(statusBarFrame);
+        CGFloat height = CGRectGetWidth(statusBarFrame);
         statusBarFrame.size.width = width;
         statusBarFrame.size.height = height;
     }
@@ -383,7 +383,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     if (side == ECLeft) {
         newCenter = -self.resettedCenter;
     } else if (side == ECRight) {
-        newCenter = self.view.bounds.size.width + self.resettedCenter;
+        newCenter = CGRectGetWidth(self.view.bounds) + self.resettedCenter;
     }
     
     [self topViewHorizontalCenterWillChange:newCenter];
@@ -533,7 +533,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (CGFloat)anchorRightTopViewCenter
 {
     if (self.anchorRightPeekAmount) {
-        return self.view.bounds.size.width + self.resettedCenter - self.anchorRightPeekAmount;
+        return CGRectGetWidth(self.view.bounds) + self.resettedCenter - self.anchorRightPeekAmount;
     } else if (self.anchorRightRevealAmount) {
         return self.resettedCenter + self.anchorRightRevealAmount;
     } else {
@@ -546,7 +546,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     if (self.anchorLeftPeekAmount) {
         return -self.resettedCenter + self.anchorLeftPeekAmount;
     } else if (self.anchorLeftRevealAmount) {
-        return -self.resettedCenter + (self.view.bounds.size.width - self.anchorLeftRevealAmount);
+        return -self.resettedCenter + (CGRectGetWidth(self.view.bounds) - self.anchorLeftRevealAmount);
     } else {
         return NSNotFound;
     }
@@ -554,30 +554,33 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 - (CGFloat)resettedCenter
 {
-    return (self.view.bounds.size.width / 2);
+    return (CGRectGetWidth(self.view.bounds) / 2.0f);
 }
 
 - (CGRect)fullViewBounds
 {
-    CGFloat statusBarHeight = 0;
-    
-    BOOL legacyScreenHeightEnabled = NO;
-    if (floor(NSFoundationVersionNumber) <= 993.00) {
-        legacyScreenHeightEnabled = YES;
-    }
+    CGFloat statusBarHeight = 0.0f;
+
+    /**
+     Enable legacy screen height support if we are running on an SDK prior to iOS 6
+     and thus does not support the supportedInterfaceOrientationsForWindow: selector on
+     UIApplication, which was introduced in iOS 6
+     */
+    UIApplication *sharedApplication = [UIApplication sharedApplication];
+    BOOL legacyScreenHeightEnabled = ![sharedApplication respondsToSelector:@selector(supportedInterfaceOrientationsForWindow:)];
     
     if (self.shouldAdjustChildViewHeightForStatusBar || legacyScreenHeightEnabled) {
-        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-        if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.width;
+        statusBarHeight = sharedApplication.statusBarFrame.size.height;
+        if (UIInterfaceOrientationIsLandscape(sharedApplication.statusBarOrientation)) {
+            statusBarHeight = sharedApplication.statusBarFrame.size.width;
         }
     }
     
     CGRect bounds = [UIScreen mainScreen].bounds;
     
-    if (UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        CGFloat height = bounds.size.width;
-        CGFloat width  = bounds.size.height;
+    if (UIInterfaceOrientationIsLandscape(sharedApplication.statusBarOrientation)) {
+        CGFloat height = CGRectGetWidth(bounds);
+        CGFloat width  = CGRectGetHeight(bounds);
         bounds.size.height = height;
         bounds.size.width  = width;
     }
@@ -645,7 +648,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     } else if (self.underLeftWidthLayout == ECVariableRevealWidth && !self.topViewIsOffScreen) {
         CGRect frame = [self fullViewBounds];
         
-        frame.size.width = frame.size.width - self.anchorRightPeekAmount;
+        frame.size.width -= self.anchorRightPeekAmount;
         self.underLeftView.frame = frame;
     } else if (self.underLeftWidthLayout == ECFixedRevealWidth) {
         CGRect frame = [self fullViewBounds];
@@ -666,10 +669,10 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
         CGRect frame = [self fullViewBounds];
         
         CGFloat newLeftEdge;
-        CGFloat newWidth = frame.size.width;
+        CGFloat newWidth = CGRectGetWidth(frame);
         
         if (self.topViewIsOffScreen) {
-            newLeftEdge = 0;
+            newLeftEdge = 0.0f;
         } else {
             newLeftEdge = self.anchorLeftPeekAmount;
             newWidth   -= self.anchorLeftPeekAmount;
@@ -682,7 +685,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     } else if (self.underRightWidthLayout == ECFixedRevealWidth) {
         CGRect frame = [self fullViewBounds];
         
-        CGFloat newLeftEdge = frame.size.width - self.anchorLeftRevealAmount;
+        CGFloat newLeftEdge = CGRectGetWidth(frame) - self.anchorLeftRevealAmount;
         CGFloat newWidth = self.anchorLeftRevealAmount;
         
         frame.origin.x   = newLeftEdge;
