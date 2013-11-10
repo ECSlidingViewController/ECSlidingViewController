@@ -1,6 +1,8 @@
 # BasicMenu
 
-This app consists of three screens: Home, Settings, and Menu. Tapping the menu buton anchors the top view to the right to show the menu. From there, you can tap on Home or Settings to reset the top view to the middle while changing the top view controller. This example is also a good representation of the defaults used with `ECSlidingViewController`.
+This app consists of three screens: Home, Settings, and Menu. Tapping the menu button anchors the top view to the right to show the menu. From there, you can tap on Home or Settings to reset the top view to the middle while changing the top view controller. This example is also a good representation of the defaults used with `ECSlidingViewController`.
+
+![gif](https://dl.dropboxusercontent.com/u/4110829/BasicMenu.gif)
 
 ## How it's Made
 

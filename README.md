@@ -8,7 +8,7 @@
 
 ### Well Behaved View Controller Container
 
-Your view controllers will receive the appropriate view lifecycle and rotation methods at the right time. Their layouts will be appropriately updated on rotation or bound changes while respecting their `edgesForExtendedLayout` property.
+Your view controllers will receive the appropriate view life cycle and rotation methods at the right time. Their layouts will be appropriately updated on rotation or bound changes while respecting their `edgesForExtendedLayout` property.
 
 This allows you to use `ECSlidingViewController` in a similar fashion you would use a `UINavigationController`, `UITabBarController`, `UIPageViewController`, etc...
 
@@ -29,7 +29,7 @@ Custom transitions use the new protocols introduced in iOS 7 while exposing an A
 
 ## Installation
 
-Install with [Cocoapods](http://cocoapods.org) by adding the following to your Podfile:
+Install with [CocoaPods](http://cocoapods.org) by adding the following to your Podfile:
 
 ``` ruby
 pod 'ECSlidingViewController', '~> 2.0'
@@ -39,7 +39,7 @@ Or copy the `ECSlidingViewController/` directory from this repo into your projec
 
 ## Example Workspace Projects
 
-A good way to learn how to use `ECSlidingViewController` is to go through the example apps in Examples.xcworkspace. Each example has a README with an explaination of how things are done.
+A good way to learn how to use `ECSlidingViewController` is to go through the example apps in Examples.xcworkspace. Each example has a README with an explanation of how things are done.
 
 * [BasicMenu](Examples/BasicMenu/). Complete example using Storyboards with minimal code.
 * [LayoutDemo](Examples/LayoutDemo/). This is a universal app showcasing the layout.

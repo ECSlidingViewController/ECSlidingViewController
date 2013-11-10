@@ -2,6 +2,8 @@
 
 This app has a view controller on both the left and right sides. It supports rotation and is a universal app. Run it on the iPhone or iPad. Rotate it with the top view anchored to see how the layout is updated. You can swipe the top view to the left or right or tap on the buttons to trigger a transition.
 
+![gif](https://dl.dropboxusercontent.com/u/4110829/LayoutDemo.gif)
+
 ## How it's Made
 
 All the code to accomplish this is in MEAppDelegate's `application:didFinishLaunchingWithOptions:`. You would normally create subclasses of the view controllers and keep your app delegate clean, but the focus of this example is to show how to configure a sliding view controller.

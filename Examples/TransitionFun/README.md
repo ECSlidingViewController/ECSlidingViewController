@@ -2,6 +2,8 @@
 
 Have fun with transitions with TransitionFun! This is a universal app that has an under left view and supports portrait and landscape modes. Select a transition from the table and trigger it by tapping the menu button or swiping the top view. Another thing to test out is the gestures when the top view is anchored. You can tap or pan the top view to reset it, and you cannot interact with the top view.
 
+![gif](https://dl.dropboxusercontent.com/u/4110829/TransitionFun.gif)
+
 # How it's Made
 
 There is a lot of plumbing in the project for setting up the table and changing the sliding view controller's delegate. We'll point out some of the more interesting parts here.
@@ -49,9 +51,9 @@ if ([transitionName isEqualToString:METransitionNameDynamic]) {
 }
 ```
 
-The `MEDynamicTransition` is an interactive transition, so it has its own way of triggering a transition with a pan gesture. The code above switches between using the default pan gesture and the dyanmic transition pan gesture.
+The `MEDynamicTransition` is an interactive transition, so it has its own way of triggering a transition with a pan gesture. The code above switches between using the default pan gesture and the dynamic transition pan gesture.
 
-We're using the `topViewAnchoredGesture` property to select which gestures to use when the top view is anchored. For the dyanmic transition we want to use the tap gesture and the dynamic panning gesture to reset the top view. The other case uses the default interactive transition pan gesture and a tap gesture for resetting.
+We're using the `topViewAnchoredGesture` property to select which gestures to use when the top view is anchored. For the dynamic transition we want to use the tap gesture and the dynamic panning gesture to reset the top view. The other case uses the default interactive transition pan gesture and a tap gesture for resetting.
 
 Each custom transition conforms to the `ECSlidingViewControllerDelegate`. This allows the transition to decide if it wants to customize the animation, interaction, or layout.
 
