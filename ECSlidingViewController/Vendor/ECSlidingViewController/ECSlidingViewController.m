@@ -562,7 +562,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     CGFloat statusBarHeight = 0;
     
     BOOL legacyScreenHeightEnabled = NO;
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+    if (floor(NSFoundationVersionNumber) <= 993.00) {
         legacyScreenHeightEnabled = YES;
     }
     
