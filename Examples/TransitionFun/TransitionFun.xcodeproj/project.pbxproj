@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */; };
+		0526990E182F37CE00285190 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0526990D182F37CE00285190 /* Main-iPad.storyboard */; };
 		05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */; };
 		057DC25C181DE6AE00D15995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25B181DE6AE00D15995 /* Foundation.framework */; };
 		057DC25E181DE6AE00D15995 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25D181DE6AE00D15995 /* CoreGraphics.framework */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		05160F561820CDF300EA3BDD /* MEZoomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEZoomAnimationController.h; sourceTree = "<group>"; };
 		05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEZoomAnimationController.m; sourceTree = "<group>"; };
+		0526990D182F37CE00285190 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEFoldAnimationController.h; sourceTree = "<group>"; };
 		05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEFoldAnimationController.m; sourceTree = "<group>"; };
 		057DC258181DE6AE00D15995 /* TransitionFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitionFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				057DC273181DE6AE00D15995 /* Images.xcassets */,
+				0526990D182F37CE00285190 /* Main-iPad.storyboard */,
 				057DC26D181DE6AE00D15995 /* Main.storyboard */,
 				057DC26A181DE6AE00D15995 /* MEAppDelegate.h */,
 				057DC26B181DE6AE00D15995 /* MEAppDelegate.m */,
@@ -200,6 +203,7 @@
 				057DC274181DE6AE00D15995 /* Images.xcassets in Resources */,
 				057DC266181DE6AE00D15995 /* InfoPlist.strings in Resources */,
 				057DC26F181DE6AE00D15995 /* Main.storyboard in Resources */,
+				0526990E182F37CE00285190 /* Main-iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +361,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TransitionFun/TransitionFun-Prefix.pch";
 				INFOPLIST_FILE = "TransitionFun/TransitionFun-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -371,7 +377,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TransitionFun/TransitionFun-Prefix.pch";
 				INFOPLIST_FILE = "TransitionFun/TransitionFun-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

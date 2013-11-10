@@ -58,6 +58,7 @@
     NSString *menuItem = self.menuItems[indexPath.row];
     
     cell.textLabel.text = menuItem;
+    [cell setBackgroundColor:[UIColor clearColor]];
     
     return cell;
 }
