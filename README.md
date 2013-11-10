@@ -14,7 +14,7 @@ This allows you to use `ECSlidingViewController` in a similar fashion you would 
 
 ### Storyboards Support
 
-`ECSlidingViewController` provides KVC compliant properties for setting user defined runtime attributes in Storyboards. Do your configuration in Storyboards, and use the built in segue with minimal code.
+`ECSlidingViewController` provides KVC compliant properties for setting user defined runtime attributes in Storyboards. Do your configuration in Storyboards, and use the built in segue for transitions.
 
 This feature is optional and everything can be done programmatically if you wanted. Just like any other view controller container, you will most likely use Storyboards with some programmatic customizations.
 
@@ -39,11 +39,11 @@ Or copy the `ECSlidingViewController/` directory from this repo into your projec
 
 ## Example Workspace Projects
 
-A good way to learn how to use `ECSlidingViewController` is to go through the example apps in [Examples.xcworkspace](http://github.com/edgecase/ECSlidingViewController/blob/master/Examples.xcworkspace)
+A good way to learn how to use `ECSlidingViewController` is to go through the example apps in Examples.xcworkspace. Each example has a README with an explaination of how things are done.
 
-* BasicMenu. Complete example using Storyboards with minimal code.
-* LayoutDemo. This is a universal app showcasing the layout.
-* TransitionFun. See how custom transitions are done.
+* [BasicMenu](Examples/BasicMenu/). Complete example using Storyboards with minimal code.
+* [LayoutDemo](Examples/LayoutDemo/). This is a universal app showcasing the layout.
+* [TransitionFun](Examples/TransitionFun). See how custom transitions are done.
 
 ## Credits
 
