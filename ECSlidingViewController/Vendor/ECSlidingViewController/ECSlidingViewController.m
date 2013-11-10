@@ -71,7 +71,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 
 @implementation ECSlidingViewController
 
-- (id)init {
+- (id)init
+{
     self = [super init];
     if (self) {
         [self setup];
@@ -80,7 +81,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
     self = [super initWithCoder:aDecoder];
     if (self) {
         [self setup];
@@ -89,7 +91,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         [self setup];
@@ -98,7 +101,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     return self;
 }
 
-- (void)setup {
+- (void)setup
+{
     self.shouldAllowPanningPastAnchor = YES;
     self.shouldAllowUserInteractionsWhenAnchored = NO;
     self.shouldAddPanGestureRecognizerToTopViewSnapshot = NO;
@@ -191,7 +195,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     _underRightWidthLayout = underRightWidthLayout;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
     [self adjustLayout];
     self.topView.layer.shadowOffset = CGSizeZero;
@@ -211,7 +216,8 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     [self adjustLayout];
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation{
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     self.topView.layer.shadowPath = [UIBezierPath bezierPathWithRect:[self fullViewBounds]].CGPath;
     self.topView.layer.shouldRasterize = NO;
