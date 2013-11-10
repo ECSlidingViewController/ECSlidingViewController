@@ -10,7 +10,7 @@ This was made almost entirely in Storyboards except for the unwind segue. It may
 
 Select the sliding view controller in the Storyboard and show the identity inspector (COMMAND-OPTION-3). You should see the following:
 
-![Sliding View Controller Identity Inspector](todo)
+![Sliding View Controller Identity Inspector](https://dl.dropboxusercontent.com/u/4110829/sliding-vc-attributes.png)
 
 The sliding view controller needs to know which view controllers to load initially when itself is loaded. This is done in the "User Defined Runtime Attributes". We set the `topViewControllerStoryboardId` to the string value "HomeNavigationController". This will set the sliding view controller's `topViewController` to a view controller in Storyboard with the Storyboard ID "HomeNavigationController". The same thing is done to set the `underLeftViewController` to the "MenuViewController"
 
@@ -20,7 +20,7 @@ You should be able to find the navigation controller with the Storyboard ID "Hom
 
 The menu view controller is a simple table with two static rows. Each row has a sliding segue to a view controller. Click on either segue and show the attributes inspector (COMMAND-OPTION-4). You'll see that we're using a custom segue with the class `ECSlidingSegue`.
 
-![Menu View Controller Attributes Inspector](todo)
+![Sliding Segue Attributes Inspector](https://dl.dropboxusercontent.com/u/4110829/sliding-segue-attributes.png)
 
 Sliding segues call the `resetTopViewAnimated:` method on the sliding view controller after setting the `topViewController` to the destination view controller. In this case, our segue from the "Home" row to the "HomeNavigationController" will set the `topViewController` to the navigation controller and then reset the top view. Same thing for the "Settings" row.
 
@@ -30,7 +30,7 @@ Note that the menu view controller has a custom subclass called `MEMenuViewContr
 
 Both the Home and Settings view controllers have a menu button which causes the top view to slide to the right and show the menu. This is accomplished with an unwind segue. Make this connection by CTRL-dragging from the menu button down to the green exit symbol. Select `unwindToMenuViewController:` to unwind to the menu.
 
-![Unwind Segue](todo)
+![Unwind Segue](https://dl.dropboxusercontent.com/u/4110829/unwind-segue.png)
 
 The unwind segue will detect that the current `underLeftViewController` instance is of the same type as the destination of the unwind segue. This will trigger a `anchorTopViewToRightAnimated:` on the sliding view controller. If the current under right view controller was the same type as the destination, then it will trigger an anchor to the left side instead.
 

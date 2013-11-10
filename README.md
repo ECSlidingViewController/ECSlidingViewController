@@ -2,6 +2,8 @@
 
 `ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu" or "Slide Out" as seen in the Path or Facebook iOS apps.
 
+![screenshots](https://dl.dropboxusercontent.com/u/4110829/screenshots.png)
+
 ## Features
 
 ### Well Behaved View Controller Container
