@@ -2,7 +2,7 @@
 
 `ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu", "Slide Out", "Hamburger Menu/Drawer/Sidebar", etc...
 
-![iPhone and iPad Mini screenshots](wiki/readme-assets/readme-hero.png)
+![iPhone and iPad Mini screenshots](http://github.com/edgecase/ECSlidingViewController/wiki/readme-assets/readme-hero.png)
 
 Supports all screen sizes and orientations.
 
