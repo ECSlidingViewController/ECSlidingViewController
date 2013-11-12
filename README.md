@@ -1,24 +1,28 @@
 # ECSlidingViewController 2
 
-`ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu" or "Slide Out" as seen in the Path or Facebook iOS apps.
+`ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu", "Slide Out", "Hamburger Menu/Drawer/Sidebar", etc...
 
-![screenshots](https://dl.dropboxusercontent.com/u/4110829/screenshots.png)
+![iPhone and iPad Mini screenshots](wiki/readme-assets/readme-hero.png)
+
+Supports all screen sizes and orientations.
 
 ## Features
 
 ### Well Behaved View Controller Container
 
-Your view controllers will receive the appropriate view life cycle and rotation methods at the right time. Their layouts will be appropriately updated on rotation or bound changes while respecting their `edgesForExtendedLayout` property.
+Your view controllers will receive the appropriate view life cycle and rotation methods at the right time. Their layouts will be appropriately updated on rotation or bound changes while respecting their `edgesForExtendedLayout` property. This means you have control over how your view controllers position themselves under or below the status bar, navigation bar, or any other container that sets a `topLayoutGuide`.
 
-This allows you to use `ECSlidingViewController` in a similar fashion you would use a `UINavigationController`, `UITabBarController`, `UIPageViewController`, etc...
+`ECSlidingViewController` tries its best to feel like it is a part of the `UIKit` view controller container family, and it works when nesting any combination of them together.
 
 ### Storyboards Support
 
-`ECSlidingViewController` provides KVC compliant properties for setting user defined runtime attributes in Storyboards. Do your configuration in Storyboards, and use the built in segue for transitions.
+Basic configuration can be done by using [User Defined Runtime Attributes](http://twoshotsofcocoa.com/?p=70). `ECSlidingViewController` comes with a custom segue and supports unwind segues for transitioning between view controllers.
 
 This feature is optional and everything can be done programmatically if you wanted. Just like any other view controller container, you will most likely use Storyboards with some programmatic customizations.
 
 ### Custom Transitions
+
+If the default sliding animation or swiping interaction to move the top view doesn't suit your needs, then you can customize them.
 
 Custom transitions use the new protocols introduced in iOS 7 while exposing an API similar to the API that the UIKit containers expose for custom transitions. You should feel right at home if you are familiar with the custom transition API in iOS 7.
 
@@ -32,8 +36,11 @@ Custom transitions use the new protocols introduced in iOS 7 while exposing an A
 Install with [CocoaPods](http://cocoapods.org) by adding the following to your Podfile:
 
 ``` ruby
+platform :ios, '7.0'
 pod 'ECSlidingViewController', '~> 2.0'
 ```
+
+**Note**: We follow http://semver.org for versioning the API.
 
 Or copy the `ECSlidingViewController/` directory from this repo into your project.
 
@@ -44,6 +51,8 @@ A good way to learn how to use `ECSlidingViewController` is to go through the ex
 * [BasicMenu](Examples/BasicMenu/). Complete example using Storyboards with minimal code.
 * [LayoutDemo](Examples/LayoutDemo/). This is a universal app showcasing the layout.
 * [TransitionFun](Examples/TransitionFun). See how custom transitions are done.
+
+**Note**: There is a problem with the simulator flashing the animation when cancelling an interactive transition. This does NOT happen on the device.
 
 ## Credits
 
