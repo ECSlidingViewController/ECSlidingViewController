@@ -2,7 +2,7 @@
 
 Have fun with transitions with TransitionFun! This is a universal app that has an under left view and supports portrait and landscape modes. Select a transition from the table and trigger it by tapping the menu button or swiping the top view. Another thing to test out is the gestures when the top view is anchored. You can tap or pan the top view to reset it, and you cannot interact with the top view.
 
-![gif](https://dl.dropboxusercontent.com/u/4110829/TransitionFun.gif)
+![gif](http://github.com/edgecase/ECSlidingViewController/wiki/readme-assets/TransitionFun.gif)
 
 # How it's Made
 

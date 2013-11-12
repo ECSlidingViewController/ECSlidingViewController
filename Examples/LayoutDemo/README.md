@@ -2,7 +2,7 @@
 
 This app has a view controller on both the left and right sides. It supports rotation and is a universal app. Run it on the iPhone or iPad. Rotate it with the top view anchored to see how the layout is updated. You can swipe the top view to the left or right or tap on the buttons to trigger a transition.
 
-![gif](https://dl.dropboxusercontent.com/u/4110829/LayoutDemo.gif)
+![gif](http://github.com/edgecase/ECSlidingViewController/wiki/readme-assets/LayoutDemo.gif)
 
 ## How it's Made
 
