@@ -14,6 +14,8 @@ dsa_priv.pem
 *.pbxuser
 *.xcodeproj/project.xcworkspace/
 *.xcodeproj/xcuserdata/
+*xcuserdata
+xcshareddata
 
 # CocoaPods
 Pods
