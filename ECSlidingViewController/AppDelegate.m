@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <DCIntrospect/DCIntrospect.h>
 
 @implementation AppDelegate
 
@@ -14,6 +15,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#if TARGET_IPHONE_SIMULATOR
+    [[DCIntrospect sharedIntrospector] start];
+#endif
     return YES;
 }
 
