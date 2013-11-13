@@ -559,12 +559,12 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
     CGFloat statusBarHeight = 0.0f;
 
     /**
-     Enable legacy screen height support if we are running on an SDK prior to iOS 6
-     and thus does not support the supportedInterfaceOrientationsForWindow: selector on
-     UIApplication, which was introduced in iOS 6
+     Enable legacy screen height support if we are running on an SDK prior to iOS 7
+     and thus does not support the backgroundRefreshStatus selector on
+     UIApplication, which was introduced in iOS 7
      */
     UIApplication *sharedApplication = [UIApplication sharedApplication];
-    BOOL legacyScreenHeightEnabled = ![sharedApplication respondsToSelector:@selector(supportedInterfaceOrientationsForWindow:)];
+    BOOL legacyScreenHeightEnabled = ![sharedApplication respondsToSelector:@selector(backgroundRefreshStatus)];
 
     if (self.shouldAdjustChildViewHeightForStatusBar || legacyScreenHeightEnabled) {
         statusBarHeight = sharedApplication.statusBarFrame.size.height;
