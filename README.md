@@ -2,7 +2,7 @@
 
 `ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu", "Slide Out", "Hamburger Menu/Drawer/Sidebar", etc...
 
-![iPhone and iPad Mini screenshots](http://github.com/edgecase/ECSlidingViewController/wiki/readme-assets/readme-hero.png)
+![iPhone and iPad Mini screenshots](http://github.com/ECSlidingViewController/ECSlidingViewController/wiki/readme-assets/readme-hero.png)
 
 Supports all screen sizes and orientations.
 
@@ -22,7 +22,7 @@ This feature is optional and everything can be done programmatically if you want
 
 ### Custom Transitions
 
-If the default sliding animation or swiping interaction to move the top view doesn't suit your needs, then you can customize them.
+If the default sliding animation or swiping interaction to move the top view doesn't suit your needs, then you can customize them by providing your own.
 
 Custom transitions use the new protocols introduced in iOS 7 while exposing an API similar to the API that the UIKit containers expose for custom transitions. You should feel right at home if you are familiar with the custom transition API in iOS 7.
 
@@ -31,22 +31,32 @@ Custom transitions use the new protocols introduced in iOS 7 while exposing an A
 * iOS 7
 * Xcode 5
 
+**Note**: For iOS 5-7 support, `ECSlidingViewController` version 1.x is [available on this branch](https://github.com/ECSlidingViewController/ECSlidingViewController/tree/1.x).
+
 ## Installation
 
 Install with [CocoaPods](http://cocoapods.org) by adding the following to your Podfile:
 
 ``` ruby
 platform :ios, '7.0'
-pod 'ECSlidingViewController', '~> 2.0'
+pod 'ECSlidingViewController', '~> 2.0.beta'
 ```
 
-**Note**: We follow http://semver.org for versioning the API.
+**Note**: We follow http://semver.org for versioning the public API.
 
 Or copy the `ECSlidingViewController/` directory from this repo into your project.
 
-## Example Workspace Projects
+## Documentation
 
-A good way to learn how to use `ECSlidingViewController` is to go through the example apps in Examples.xcworkspace. Each example has a README with an explanation of how things are done.
+### Header Files
+
+The public API is documented in the header files. It will automatically show up in Xcode 5's quick help, or you can view it online:
+
+TODO: Generate formatted docs and put online somewhere.
+
+### Sample Code
+
+A good way to learn how to use `ECSlidingViewController` is to go through the example apps in `Examples.xcworkspace`. Each example has a README with an explanation of how things are done.
 
 * [BasicMenu](Examples/BasicMenu/). Complete example using Storyboards with minimal code.
 * [LayoutDemo](Examples/LayoutDemo/). This is a universal app showcasing the layout.
@@ -54,13 +64,25 @@ A good way to learn how to use `ECSlidingViewController` is to go through the ex
 
 **Note**: There is a problem with the simulator flashing the animation when cancelling an interactive transition. This does NOT happen on the device.
 
+### Wiki
+
+The wiki contains guides that go into more detail on how to use specific features of `ECSlidingViewController`.
+
+[ECSlidingViewController Wiki Homepage](http://github.com/ECSlidingViewController/ECSlidingViewController/wiki)
+
+## Getting Help
+
+If you need help using `ECSlidingViewController`, please post a question on [StackOverflow with the "ECSlidingViewController" tag](http://stackoverflow.com/questions/ask?tags=ecslidingviewcontroller). Also, the more context you can provide (such as sample projects) the easier it will be for you to get help.
+
+If you think you found a problem with `ECSlidingViewController`, please [post an issue](https://github.com/ECSlidingViewController/ECSlidingViewController/issues). A sample project or fork of any of the examples demonstrating the problem will help us fix the issue more quickly.
+
 ## Credits
 
 Created and maintained by [Mike Enriquez](http://enriquez.me).
 
 [Neo Innovation](http://neo.com) (formerly known as EdgeCase) for allowing Mike to work on `ECSlidingViewController` on company time during its inception. He is no longer with the company, but continues to maintain the project.
 
-And... to those of you who [contributed changes](https://github.com/edgecase/ECSlidingViewController/graphs/contributors) or [reported issues](https://github.com/edgecase/ECSlidingViewController/issues).
+And... to those of you who [contributed changes](https://github.com/ECSlidingViewController/ECSlidingViewController/graphs/contributors) or [reported issues](https://github.com/ECSlidingViewController/ECSlidingViewController/issues).
 
 ## MIT License
 
