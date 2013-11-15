@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */; };
+		0526990E182F37CE00285190 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0526990D182F37CE00285190 /* Main-iPad.storyboard */; };
+		05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */; };
+		057DC25C181DE6AE00D15995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25B181DE6AE00D15995 /* Foundation.framework */; };
+		057DC25E181DE6AE00D15995 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25D181DE6AE00D15995 /* CoreGraphics.framework */; };
+		057DC260181DE6AE00D15995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25F181DE6AE00D15995 /* UIKit.framework */; };
+		057DC266181DE6AE00D15995 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 057DC264181DE6AE00D15995 /* InfoPlist.strings */; };
+		057DC268181DE6AE00D15995 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC267181DE6AE00D15995 /* main.m */; };
+		057DC26C181DE6AE00D15995 /* MEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC26B181DE6AE00D15995 /* MEAppDelegate.m */; };
+		057DC26F181DE6AE00D15995 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057DC26D181DE6AE00D15995 /* Main.storyboard */; };
+		057DC274181DE6AE00D15995 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 057DC273181DE6AE00D15995 /* Images.xcassets */; };
+		057DC2A3181DEE4700D15995 /* METransitionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC2A2181DEE4700D15995 /* METransitionsViewController.m */; };
+		057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 057DC2A5181DF4F500D15995 /* MEMenuViewController.m */; };
+		05A4996D1822FEA90051F08E /* MEDynamicTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A4996C1822FEA90051F08E /* MEDynamicTransition.m */; };
+		05CBD182182DF3B200118119 /* METransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CBD181182DF3B200118119 /* METransitions.m */; };
+		DB53A2AC25744123A2240315 /* libPods-TransitionFun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EE0E5E204AC4832B02D4341 /* libPods-TransitionFun.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05160F561820CDF300EA3BDD /* MEZoomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEZoomAnimationController.h; sourceTree = "<group>"; };
+		05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEZoomAnimationController.m; sourceTree = "<group>"; };
+		0526990D182F37CE00285190 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
+		05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEFoldAnimationController.h; sourceTree = "<group>"; };
+		05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEFoldAnimationController.m; sourceTree = "<group>"; };
+		057DC258181DE6AE00D15995 /* TransitionFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitionFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		057DC25B181DE6AE00D15995 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		057DC25D181DE6AE00D15995 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		057DC25F181DE6AE00D15995 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		057DC263181DE6AE00D15995 /* TransitionFun-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TransitionFun-Info.plist"; sourceTree = "<group>"; };
+		057DC265181DE6AE00D15995 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		057DC267181DE6AE00D15995 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		057DC269181DE6AE00D15995 /* TransitionFun-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TransitionFun-Prefix.pch"; sourceTree = "<group>"; };
+		057DC26A181DE6AE00D15995 /* MEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MEAppDelegate.h; sourceTree = "<group>"; };
+		057DC26B181DE6AE00D15995 /* MEAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MEAppDelegate.m; sourceTree = "<group>"; };
+		057DC26E181DE6AE00D15995 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		057DC273181DE6AE00D15995 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		057DC27A181DE6AE00D15995 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		057DC2A1181DEE4700D15995 /* METransitionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METransitionsViewController.h; sourceTree = "<group>"; };
+		057DC2A2181DEE4700D15995 /* METransitionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METransitionsViewController.m; sourceTree = "<group>"; };
+		057DC2A4181DF4F500D15995 /* MEMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEMenuViewController.h; sourceTree = "<group>"; };
+		057DC2A5181DF4F500D15995 /* MEMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEMenuViewController.m; sourceTree = "<group>"; };
+		05A4996B1822FEA90051F08E /* MEDynamicTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEDynamicTransition.h; sourceTree = "<group>"; };
+		05A4996C1822FEA90051F08E /* MEDynamicTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEDynamicTransition.m; sourceTree = "<group>"; };
+		05CBD180182DF3B200118119 /* METransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = METransitions.h; sourceTree = "<group>"; };
+		05CBD181182DF3B200118119 /* METransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = METransitions.m; sourceTree = "<group>"; };
+		265D2379E32047049E358830 /* Pods-TransitionFun.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TransitionFun.xcconfig"; path = "../Pods/Pods-TransitionFun.xcconfig"; sourceTree = "<group>"; };
+		7EE0E5E204AC4832B02D4341 /* libPods-TransitionFun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TransitionFun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		057DC255181DE6AE00D15995 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				057DC25E181DE6AE00D15995 /* CoreGraphics.framework in Frameworks */,
+				057DC260181DE6AE00D15995 /* UIKit.framework in Frameworks */,
+				057DC25C181DE6AE00D15995 /* Foundation.framework in Frameworks */,
+				DB53A2AC25744123A2240315 /* libPods-TransitionFun.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05629E8F181F4D7100A88F6C /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */,
+				05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */,
+				05160F561820CDF300EA3BDD /* MEZoomAnimationController.h */,
+				05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */,
+				05A4996B1822FEA90051F08E /* MEDynamicTransition.h */,
+				05A4996C1822FEA90051F08E /* MEDynamicTransition.m */,
+			);
+			name = Transitions;
+			sourceTree = "<group>";
+		};
+		057DC24F181DE6AE00D15995 = {
+			isa = PBXGroup;
+			children = (
+				057DC261181DE6AE00D15995 /* TransitionFun */,
+				057DC25A181DE6AE00D15995 /* Frameworks */,
+				057DC259181DE6AE00D15995 /* Products */,
+				265D2379E32047049E358830 /* Pods-TransitionFun.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		057DC259181DE6AE00D15995 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				057DC258181DE6AE00D15995 /* TransitionFun.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		057DC25A181DE6AE00D15995 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				057DC25B181DE6AE00D15995 /* Foundation.framework */,
+				057DC25D181DE6AE00D15995 /* CoreGraphics.framework */,
+				057DC25F181DE6AE00D15995 /* UIKit.framework */,
+				057DC27A181DE6AE00D15995 /* XCTest.framework */,
+				7EE0E5E204AC4832B02D4341 /* libPods-TransitionFun.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		057DC261181DE6AE00D15995 /* TransitionFun */ = {
+			isa = PBXGroup;
+			children = (
+				057DC273181DE6AE00D15995 /* Images.xcassets */,
+				0526990D182F37CE00285190 /* Main-iPad.storyboard */,
+				057DC26D181DE6AE00D15995 /* Main.storyboard */,
+				057DC26A181DE6AE00D15995 /* MEAppDelegate.h */,
+				057DC26B181DE6AE00D15995 /* MEAppDelegate.m */,
+				057DC2A4181DF4F500D15995 /* MEMenuViewController.h */,
+				057DC2A5181DF4F500D15995 /* MEMenuViewController.m */,
+				05CBD180182DF3B200118119 /* METransitions.h */,
+				05CBD181182DF3B200118119 /* METransitions.m */,
+				057DC2A1181DEE4700D15995 /* METransitionsViewController.h */,
+				057DC2A2181DEE4700D15995 /* METransitionsViewController.m */,
+				057DC262181DE6AE00D15995 /* Supporting Files */,
+				05629E8F181F4D7100A88F6C /* Transitions */,
+			);
+			path = TransitionFun;
+			sourceTree = "<group>";
+		};
+		057DC262181DE6AE00D15995 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				057DC263181DE6AE00D15995 /* TransitionFun-Info.plist */,
+				057DC264181DE6AE00D15995 /* InfoPlist.strings */,
+				057DC267181DE6AE00D15995 /* main.m */,
+				057DC269181DE6AE00D15995 /* TransitionFun-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		057DC257181DE6AE00D15995 /* TransitionFun */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 057DC28A181DE6AE00D15995 /* Build configuration list for PBXNativeTarget "TransitionFun" */;
+			buildPhases = (
+				818BCF7749A6437BB39DF560 /* Check Pods Manifest.lock */,
+				057DC254181DE6AE00D15995 /* Sources */,
+				057DC255181DE6AE00D15995 /* Frameworks */,
+				057DC256181DE6AE00D15995 /* Resources */,
+				0F708C9F5DE144D59D352873 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TransitionFun;
+			productName = TransitionFun;
+			productReference = 057DC258181DE6AE00D15995 /* TransitionFun.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		057DC250181DE6AE00D15995 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ME;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Mike Enriquez";
+			};
+			buildConfigurationList = 057DC253181DE6AE00D15995 /* Build configuration list for PBXProject "TransitionFun" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 057DC24F181DE6AE00D15995;
+			productRefGroup = 057DC259181DE6AE00D15995 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				057DC257181DE6AE00D15995 /* TransitionFun */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		057DC256181DE6AE00D15995 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				057DC274181DE6AE00D15995 /* Images.xcassets in Resources */,
+				057DC266181DE6AE00D15995 /* InfoPlist.strings in Resources */,
+				057DC26F181DE6AE00D15995 /* Main.storyboard in Resources */,
+				0526990E182F37CE00285190 /* Main-iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0F708C9F5DE144D59D352873 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Pods-TransitionFun-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		818BCF7749A6437BB39DF560 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		057DC254181DE6AE00D15995 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CBD182182DF3B200118119 /* METransitions.m in Sources */,
+				057DC26C181DE6AE00D15995 /* MEAppDelegate.m in Sources */,
+				05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */,
+				057DC268181DE6AE00D15995 /* main.m in Sources */,
+				05A4996D1822FEA90051F08E /* MEDynamicTransition.m in Sources */,
+				057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */,
+				05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */,
+				057DC2A3181DEE4700D15995 /* METransitionsViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		057DC264181DE6AE00D15995 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				057DC265181DE6AE00D15995 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		057DC26D181DE6AE00D15995 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				057DC26E181DE6AE00D15995 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		057DC288181DE6AE00D15995 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		057DC289181DE6AE00D15995 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		057DC28B181DE6AE00D15995 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 265D2379E32047049E358830 /* Pods-TransitionFun.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TransitionFun/TransitionFun-Prefix.pch";
+				INFOPLIST_FILE = "TransitionFun/TransitionFun-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		057DC28C181DE6AE00D15995 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 265D2379E32047049E358830 /* Pods-TransitionFun.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TransitionFun/TransitionFun-Prefix.pch";
+				INFOPLIST_FILE = "TransitionFun/TransitionFun-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		057DC253181DE6AE00D15995 /* Build configuration list for PBXProject "TransitionFun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				057DC288181DE6AE00D15995 /* Debug */,
+				057DC289181DE6AE00D15995 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		057DC28A181DE6AE00D15995 /* Build configuration list for PBXNativeTarget "TransitionFun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				057DC28B181DE6AE00D15995 /* Debug */,
+				057DC28C181DE6AE00D15995 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 057DC250181DE6AE00D15995 /* Project object */;
+}

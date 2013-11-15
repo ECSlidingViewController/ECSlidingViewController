@@ -1,125 +1,107 @@
-# ECSlidingViewController
+# ECSlidingViewController 2
 
-`ECSlidingViewController` is a view controller container for iOS that presents its child view controllers in two layers. It provides functionality for sliding the top view to reveal the views underneath it. This functionality is inspired by the Path 2.0 and Facebook iPhone apps.
+`ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu", "Slide Out", "Hamburger Menu/Drawer/Sidebar", etc...
 
-<iframe src="http://player.vimeo.com/video/35959384?title=0&amp;byline=0&amp;portrait=0" width="400" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe><p><a href="http://vimeo.com/35959384">ECSlidingViewController Demo</a> from <a href="http://vimeo.com/user5026288">EdgeCase</a> on <a href="http://vimeo.com">Vimeo</a>.</p>
+![iPhone and iPad Mini screenshots](http://github.com/ECSlidingViewController/ECSlidingViewController/wiki/readme-assets/readme-hero.png)
 
-This project is an example app that showcases the uses for `ECSlidingViewController`. This app uses storyboards, but it is not required.
-
+Supports all screen sizes and orientations.
 
 ## Features
 
-* Panning gesture to move top view can be set on any `UIView`. It is most likely a navigation bar or the whole top view itself.
-* Configurable anchor positions, with automatic adjustments for orientation change. See "Anchor Position Geometry" section below.
-* There are no assumptions about the size and layout of the views under the top view. See the `underLeftWidthLayout` and `underRightWidthLayout` properties if you need a common layout.
-* The child views can be changed at anytime.
-* Child view controllers can be an instance of `UIViewController` or any subclass of `UIViewController` including `UINavigationController` and `UITabBarController`.
-* iPad support.
-* VoiceOver support.
-* See [ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h](https://github.com/edgecase/ECSlidingViewController/blob/master/ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h) for options and configuration.
+### Well Behaved View Controller Container
+
+Your view controllers will receive the appropriate view life cycle and rotation methods at the right time. Their layouts will be appropriately updated on rotation or bound changes while respecting their `edgesForExtendedLayout` property. This means you have control over how your view controllers position themselves under or below the status bar, navigation bar, or any other container that sets a `topLayoutGuide`.
+
+`ECSlidingViewController` tries its best to feel like it is a part of the `UIKit` view controller container family, and it works when nesting any combination of them together.
+
+### Storyboards Support
+
+Basic configuration can be done by using [User Defined Runtime Attributes](http://twoshotsofcocoa.com/?p=70). `ECSlidingViewController` comes with a custom segue and supports unwind segues for transitioning between view controllers.
+
+This feature is optional and everything can be done programmatically if you wanted. Just like any other view controller container, you will most likely use Storyboards with some programmatic customizations.
+
+### Custom Transitions
+
+If the default sliding animation or swiping interaction to move the top view doesn't suit your needs, then you can customize them by providing your own.
+
+Custom transitions use the new protocols introduced in iOS 7 while exposing an API similar to the API that the UIKit containers expose for custom transitions. You should feel right at home if you are familiar with the custom transition API in iOS 7.
 
 ## Requirements
 
-* iOS 5
-* ARC
+* iOS 7
+* Xcode 5
 
-## Getting Started
+**Note**: For iOS 5-7 support, `ECSlidingViewController` version 1.x is [available on this branch](https://github.com/ECSlidingViewController/ECSlidingViewController/tree/1.x).
 
-This section will walk through of a simplified version of the included example app. You'll see how to setup the top view that can be panned to the right side to reveal the under left view.
+## Installation
 
-### Include ECSlidingViewController into your project
+Install with [CocoaPods](http://cocoapods.org) by adding the following to your Podfile:
 
-You'll need these two files:
+``` ruby
+platform :ios, '7.0'
+pod 'ECSlidingViewController', '~> 2.0.beta'
+```
 
-* ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.h
-* ECSlidingViewController/Vendor/ECSlidingViewController/ECSlidingViewController.m
+**Note**: We follow http://semver.org for versioning the public API.
 
-OR - you can use [CocoaPods](http://cocoapods.org/). Add the following line to your Podspec:
+Or copy the `ECSlidingViewController/` directory from this repo into your project.
 
-    pod 'ECSlidingViewController', '~> 1.3'
+## Documentation
 
-### Setup storyboards and set the topViewController
+### Header Files
 
-Add a UIViewController to your storyboards and set the subclass to `ECSlidingViewController`.  Then, you'll need to configure the instance of this view controller by setting a `topViewController`
+The public API is documented in the header files. It will automatically show up in Xcode 5's quick help, or you can view it online:
 
-	  ECSlidingViewController *slidingViewController = (ECSlidingViewController *)self.window.rootViewController;
-	  
-	  slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"FirstTop"];
+TODO: Generate formatted docs and put online somewhere.
 
-In this example, we can get a reference to the `ECSlidingViewController` instance then, we set the `topViewController` with an instance of a `UIViewController` subclass called `FirstTopViewController` that is identified as "FirstTop".
+### Sample Code
 
-### Configure the topViewController
+A good way to learn how to use `ECSlidingViewController` is to go through the example apps in `Examples.xcworkspace`. Each example has a README with an explanation of how things are done.
 
-The top view controller is responsible for two things:
+* [BasicMenu](Examples/BasicMenu/). Complete example using Storyboards with minimal code.
+* [LayoutDemo](Examples/LayoutDemo/). This is a universal app showcasing the layout.
+* [TransitionFun](Examples/TransitionFun). See how custom transitions are done.
 
-* Setting the view controllers underneath it.
-* Adding the `panGesture` to a `UIView`.
+**Note**: There is a problem with the simulator flashing the animation when cancelling an interactive transition. This does NOT happen on the device.
 
-To do these, you must first add an `#import "ECSlidingViewController.h"` to the `FirstTopViewController` header. Then in the implementation you'll have access to a category on `UIViewController` called `slidingViewController`.  This the top-level instance of the `ECSlidingViewController` container.  With this instance, you can set the view controllers underneath the top view and add panning.
+### Wiki
 
-Below is the `viewWillAppear:` method for `FirstTopViewController`.
+The wiki contains guides that go into more detail on how to use specific features of `ECSlidingViewController`.
 
-	- (void)viewWillAppear:(BOOL)animated
-	{
-	  [super viewWillAppear:animated];
-	  
-	  if (![self.slidingViewController.underLeftViewController isKindOfClass:[MenuViewController class]]) {
-	    self.slidingViewController.underLeftViewController  = [self.storyboard instantiateViewControllerWithIdentifier:@"Menu"];
-	  }
-	  
-	  [self.view addGestureRecognizer:self.slidingViewController.panGesture];
-	  [self.slidingViewController setAnchorRightRevealAmount:280.0f];
-	}
+[ECSlidingViewController Wiki Homepage](http://github.com/ECSlidingViewController/ECSlidingViewController/wiki)
 
-The above code will conditionally set the `underLeftViewController` if it is not already there. Then, it adds the gesture recognizer to the top view. The last line of code specifies the top view's anchor position on the right side.
+## Getting Help
 
-## Anchor Position Geometry
+If you need help using `ECSlidingViewController`, please post a question on [StackOverflow with the "ECSlidingViewController" tag](http://stackoverflow.com/questions/ask?tags=ecslidingviewcontroller). Also, the more context you can provide (such as sample projects) the easier it will be for you to get help.
 
-There are four properties related to anchor positions. They are a combination of left, right, reveal amount, and peek amount. The diagrams below demonstrate the difference between peek and reveal.
+If you think you found a problem with `ECSlidingViewController`, please [post an issue](https://github.com/ECSlidingViewController/ECSlidingViewController/issues). A sample project or fork of any of the examples demonstrating the problem will help us fix the issue more quickly.
 
-* anchorLeftPeekAmount
-* anchorRightPeekAmount
-* anchorLeftRevealAmount
-* anchorRightRevealAmount
+## Credits
 
-Below is an example of the anchorRightPeekAmount set:
+Created and maintained by [Mike Enriquez](http://enriquez.me).
 
-![anchorRightPeekAmount example](http://dl.dropbox.com/u/10937237/peek.png)
+[Neo Innovation](http://neo.com) (formerly known as EdgeCase) for allowing Mike to work on `ECSlidingViewController` on company time during its inception. He is no longer with the company, but continues to maintain the project.
 
-Below is an example of the anchorRightRevealAmount set:
-
-![anchorRightRevealAmount example](http://dl.dropbox.com/u/10937237/reveal.png)
-
-## Top View Shadow
-
-`ECSlidingViewController` handles the shadowOffset, shadowPath, and their rotations for you automatically.  The following code in your top view controller will add a shadow:
-
-    - (void)viewWillAppear:(BOOL)animated
-    {
-      [super viewWillAppear:animated];
-
-	  self.view.layer.shadowOpacity = 0.75f;
-	  self.view.layer.shadowRadius = 10.0f;
-	  self.view.layer.shadowColor = [UIColor blackColor].CGColor;
-	}
+And... to those of you who [contributed changes](https://github.com/ECSlidingViewController/ECSlidingViewController/graphs/contributors) or [reported issues](https://github.com/ECSlidingViewController/ECSlidingViewController/issues).
 
 ## MIT License
-Copyright (C) 2013 EdgeCase
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
+Copyright (c) 2013 Michael Enriquez (http://enriquez.me)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
