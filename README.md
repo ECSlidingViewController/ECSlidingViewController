@@ -39,7 +39,7 @@ Install with [CocoaPods](http://cocoapods.org) by adding the following to your P
 
 ``` ruby
 platform :ios, '7.0'
-pod 'ECSlidingViewController', '~> 2.0.beta'
+pod 'ECSlidingViewController', '~> 2.0.0-beta'
 ```
 
 **Note**: We follow http://semver.org for versioning the public API.
