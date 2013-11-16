@@ -52,7 +52,7 @@ Or copy the `ECSlidingViewController/` directory from this repo into your projec
 
 The public API is documented in the header files. It will automatically show up in Xcode 5's quick help, or you can view it online:
 
-TODO: Generate formatted docs and put online somewhere.
+[ECSlidingViewController Reference at cocoadocs.org](http://cocoadocs.org/docsets/ECSlidingViewController/2.0.0-beta1/)
 
 ### Sample Code
 
