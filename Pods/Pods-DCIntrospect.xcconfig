@@ -1,0 +1,1 @@
+PODS_DCINTROSPECT_OTHER_LDFLAGS = -framework QuartzCore
