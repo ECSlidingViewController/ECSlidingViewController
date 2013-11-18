@@ -87,6 +87,10 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // hack to get selectedBackgroundView's presentation layer to update after rotation.
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell.selectedBackgroundView.layer removeAllAnimations];
+
     NSDictionary *transitionData = self.transitions.all[indexPath.row];
     id<ECSlidingViewControllerDelegate> transition = transitionData[@"transition"];
     if (transition == (id)[NSNull null]) {
