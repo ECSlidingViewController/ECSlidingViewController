@@ -89,7 +89,8 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
             [self topViewAnchorRightEndState:topView anchoredFrame:[transitionContext finalFrameForViewController:topViewController]];
         } completion:^(BOOL finished) {
             if ([transitionContext transitionWasCancelled]) {
-                [self underLeftViewStartingState:underLeftViewController.view containerFrame:containerView.bounds];
+                underLeftViewController.view.frame = [transitionContext initialFrameForViewController:underLeftViewController];
+                underLeftViewController.view.alpha = 1;
                 [self topViewStartingState:topView containerFrame:containerView.bounds];
             }
             
