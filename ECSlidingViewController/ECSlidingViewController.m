@@ -193,6 +193,10 @@
     }
 }
 
+- (BOOL)shouldAutorotate {
+    return self.currentOperation == ECSlidingViewControllerOperationNone;
+}
+
 - (BOOL)shouldAutomaticallyForwardAppearanceMethods {
     return NO;
 }
@@ -841,6 +845,7 @@
     self.currentAnimationPercentage  = 0;
     self.currentOperation            = ECSlidingViewControllerOperationNone;
     self.transitionInProgress        = NO;
+    [UIViewController attemptRotationToDeviceOrientation];
 }
 
 - (UIViewController *)viewControllerForKey:(NSString *)key {
