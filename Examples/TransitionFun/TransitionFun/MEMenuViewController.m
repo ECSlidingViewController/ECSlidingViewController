@@ -30,6 +30,11 @@
 
 @implementation MEMenuViewController
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     ECSlidingSegue *slidingSegue = (ECSlidingSegue *)segue;
     slidingSegue.skipSettingTopViewController = YES;
