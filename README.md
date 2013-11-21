@@ -8,6 +8,8 @@ Supports all screen sizes and orientations.
 
 ## Features
 
+The philosophy behind `ECSlidingViewController` is to provide simple defaults while being customizable. It may not work or look the way you want out of the box, but it doesn't get in the way when customizing it.
+
 ### Well Behaved View Controller Container
 
 Your view controllers will receive the appropriate view life cycle and rotation methods at the right time. Their layouts will be appropriately updated on rotation or bound changes while respecting their `edgesForExtendedLayout` property. This means you have control over how your view controllers position themselves under or below the status bar, navigation bar, or any other container that sets a `topLayoutGuide`.
