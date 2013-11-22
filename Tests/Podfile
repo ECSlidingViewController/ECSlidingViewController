@@ -1,0 +1,2 @@
+pod 'ECSlidingViewController', :path => '../'
+pod 'Kiwi/XCTest', '~> 2.2'

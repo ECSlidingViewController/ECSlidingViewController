@@ -1,0 +1,4 @@
+language: objective-c
+before_install: rake travis:before_install
+install: rake travis:install
+script: rake travis:script

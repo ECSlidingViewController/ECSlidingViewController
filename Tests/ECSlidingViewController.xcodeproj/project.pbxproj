@@ -7,96 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050E9475182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 050E9473182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h */; };
-		050E9476182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 050E9474182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m */; };
-		052BE60D181C55EE00EE3577 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 052BE60C181C55EE00EE3577 /* UIKit.framework */; };
-		052BE614181C596700EE3577 /* ECSlidingViewController-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 052BE5C6181C544E00EE3577 /* ECSlidingViewController-Prefix.pch */; };
-		052BE61E181C5A1F00EE3577 /* ECSlidingAnimationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052BE615181C5A1F00EE3577 /* ECSlidingAnimationController.h */; };
-		052BE61F181C5A1F00EE3577 /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE616181C5A1F00EE3577 /* ECSlidingAnimationController.m */; };
-		052BE620181C5A1F00EE3577 /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE616181C5A1F00EE3577 /* ECSlidingAnimationController.m */; };
-		052BE621181C5A1F00EE3577 /* ECSlidingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 052BE617181C5A1F00EE3577 /* ECSlidingConstants.h */; };
-		052BE622181C5A1F00EE3577 /* ECSlidingInteractiveTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 052BE618181C5A1F00EE3577 /* ECSlidingInteractiveTransition.h */; };
-		052BE623181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE619181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m */; };
-		052BE624181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE619181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m */; };
-		052BE625181C5A1F00EE3577 /* ECSlidingSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 052BE61A181C5A1F00EE3577 /* ECSlidingSegue.h */; };
-		052BE626181C5A1F00EE3577 /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE61B181C5A1F00EE3577 /* ECSlidingSegue.m */; };
-		052BE627181C5A1F00EE3577 /* ECSlidingSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE61B181C5A1F00EE3577 /* ECSlidingSegue.m */; };
-		052BE628181C5A1F00EE3577 /* ECSlidingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 052BE61C181C5A1F00EE3577 /* ECSlidingViewController.h */; };
-		052BE629181C5A1F00EE3577 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE61D181C5A1F00EE3577 /* ECSlidingViewController.m */; };
-		052BE62A181C5A1F00EE3577 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 052BE61D181C5A1F00EE3577 /* ECSlidingViewController.m */; };
-		058F50D2181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h in Headers */ = {isa = PBXBuildFile; fileRef = 058F50D0181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h */; };
-		058F50D3181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 058F50D1181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m */; };
-		058F50D4181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 058F50D1181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m */; };
-		05C544A8181C4DF5002ED146 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C544A7181C4DF5002ED146 /* Foundation.framework */; };
 		05C544B6181C4DF5002ED146 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C544B5181C4DF5002ED146 /* XCTest.framework */; };
 		05C544B7181C4DF5002ED146 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C544A7181C4DF5002ED146 /* Foundation.framework */; };
-		05C544BC181C4DF5002ED146 /* libECSlidingViewController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C544A4181C4DF5002ED146 /* libECSlidingViewController.a */; };
-		05C544C4181C4DF5002ED146 /* ECSlidingViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C544C3181C4DF5002ED146 /* ECSlidingViewControllerTests.m */; };
+		05F0C965183F2DF100EAE0C4 /* ECSlidingViewControllerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F0C964183F2DF100EAE0C4 /* ECSlidingViewControllerSpec.m */; };
+		0F33E39ED4CA4A97A0557A6B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D317877FBB54A4AB5F60195 /* libPods.a */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		05C544BA181C4DF5002ED146 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05C5449C181C4DF5002ED146 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 05C544A3181C4DF5002ED146;
-			remoteInfo = ECSlidingViewController;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		05C544A2181C4DF5002ED146 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		050E9473182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+ECSlidingViewController.h"; path = "../ECSlidingViewController/UIViewController+ECSlidingViewController.h"; sourceTree = SOURCE_ROOT; };
-		050E9474182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+ECSlidingViewController.m"; path = "../ECSlidingViewController/UIViewController+ECSlidingViewController.m"; sourceTree = SOURCE_ROOT; };
 		052BE5C6181C544E00EE3577 /* ECSlidingViewController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ECSlidingViewController-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 		052BE60C181C55EE00EE3577 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		052BE615181C5A1F00EE3577 /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingAnimationController.h; path = ../ECSlidingViewController/ECSlidingAnimationController.h; sourceTree = SOURCE_ROOT; };
-		052BE616181C5A1F00EE3577 /* ECSlidingAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingAnimationController.m; path = ../ECSlidingViewController/ECSlidingAnimationController.m; sourceTree = SOURCE_ROOT; };
-		052BE617181C5A1F00EE3577 /* ECSlidingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingConstants.h; path = ../ECSlidingViewController/ECSlidingConstants.h; sourceTree = SOURCE_ROOT; };
-		052BE618181C5A1F00EE3577 /* ECSlidingInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingInteractiveTransition.h; path = ../ECSlidingViewController/ECSlidingInteractiveTransition.h; sourceTree = SOURCE_ROOT; };
-		052BE619181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingInteractiveTransition.m; path = ../ECSlidingViewController/ECSlidingInteractiveTransition.m; sourceTree = SOURCE_ROOT; };
-		052BE61A181C5A1F00EE3577 /* ECSlidingSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingSegue.h; path = ../ECSlidingViewController/ECSlidingSegue.h; sourceTree = SOURCE_ROOT; };
-		052BE61B181C5A1F00EE3577 /* ECSlidingSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingSegue.m; path = ../ECSlidingViewController/ECSlidingSegue.m; sourceTree = SOURCE_ROOT; };
-		052BE61C181C5A1F00EE3577 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECSlidingViewController.h; path = ../ECSlidingViewController/ECSlidingViewController.h; sourceTree = SOURCE_ROOT; };
-		052BE61D181C5A1F00EE3577 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingViewController.m; path = ../ECSlidingViewController/ECSlidingViewController.m; sourceTree = SOURCE_ROOT; };
 		052BE62B181C5C8400EE3577 /* ECSlidingViewControllerTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ECSlidingViewControllerTests-Info.plist"; sourceTree = SOURCE_ROOT; };
-		058F50D0181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ECPercentDrivenInteractiveTransition.h; path = ../ECSlidingViewController/ECPercentDrivenInteractiveTransition.h; sourceTree = SOURCE_ROOT; };
-		058F50D1181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECPercentDrivenInteractiveTransition.m; path = ../ECSlidingViewController/ECPercentDrivenInteractiveTransition.m; sourceTree = SOURCE_ROOT; };
-		05C544A4181C4DF5002ED146 /* libECSlidingViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libECSlidingViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C544A7181C4DF5002ED146 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05C544B4181C4DF5002ED146 /* ECSlidingViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ECSlidingViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05C544B5181C4DF5002ED146 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		05C544C3181C4DF5002ED146 /* ECSlidingViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewControllerTests.m; sourceTree = "<group>"; };
+		05F0C964183F2DF100EAE0C4 /* ECSlidingViewControllerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ECSlidingViewControllerSpec.m; path = ECSlidingViewControllerSpecs/ECSlidingViewControllerSpec.m; sourceTree = "<group>"; };
+		430731A33F77496BAD5F870D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		8D317877FBB54A4AB5F60195 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		05C544A1181C4DF5002ED146 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				052BE60D181C55EE00EE3577 /* UIKit.framework in Frameworks */,
-				05C544A8181C4DF5002ED146 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		05C544B1181C4DF5002ED146 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				05C544B6181C4DF5002ED146 /* XCTest.framework in Frameworks */,
 				05C544B7181C4DF5002ED146 /* Foundation.framework in Frameworks */,
-				05C544BC181C4DF5002ED146 /* libECSlidingViewController.a in Frameworks */,
+				0F33E39ED4CA4A97A0557A6B /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,17 +42,16 @@
 		05C5449B181C4DF5002ED146 = {
 			isa = PBXGroup;
 			children = (
-				05C544A9181C4DF5002ED146 /* ECSlidingViewController */,
-				05C544BD181C4DF5002ED146 /* ECSlidingViewControllerTests */,
+				05F0C961183F2C5800EAE0C4 /* ECSlidingViewControllerSpecs */,
 				05C544A6181C4DF5002ED146 /* Frameworks */,
 				05C544A5181C4DF5002ED146 /* Products */,
+				430731A33F77496BAD5F870D /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
 		05C544A5181C4DF5002ED146 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05C544A4181C4DF5002ED146 /* libECSlidingViewController.a */,
 				05C544B4181C4DF5002ED146 /* ECSlidingViewControllerTests.xctest */,
 			);
 			name = Products;
@@ -128,37 +63,9 @@
 				052BE60C181C55EE00EE3577 /* UIKit.framework */,
 				05C544A7181C4DF5002ED146 /* Foundation.framework */,
 				05C544B5181C4DF5002ED146 /* XCTest.framework */,
+				8D317877FBB54A4AB5F60195 /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		05C544A9181C4DF5002ED146 /* ECSlidingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				058F50D0181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h */,
-				058F50D1181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m */,
-				052BE615181C5A1F00EE3577 /* ECSlidingAnimationController.h */,
-				052BE616181C5A1F00EE3577 /* ECSlidingAnimationController.m */,
-				052BE617181C5A1F00EE3577 /* ECSlidingConstants.h */,
-				052BE618181C5A1F00EE3577 /* ECSlidingInteractiveTransition.h */,
-				052BE619181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m */,
-				052BE61A181C5A1F00EE3577 /* ECSlidingSegue.h */,
-				052BE61B181C5A1F00EE3577 /* ECSlidingSegue.m */,
-				052BE61C181C5A1F00EE3577 /* ECSlidingViewController.h */,
-				052BE61D181C5A1F00EE3577 /* ECSlidingViewController.m */,
-				050E9473182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h */,
-				050E9474182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m */,
-			);
-			path = ECSlidingViewController;
-			sourceTree = "<group>";
-		};
-		05C544BD181C4DF5002ED146 /* ECSlidingViewControllerTests */ = {
-			isa = PBXGroup;
-			children = (
-				05C544C3181C4DF5002ED146 /* ECSlidingViewControllerTests.m */,
-				05C544BE181C4DF5002ED146 /* Supporting Files */,
-			);
-			path = ECSlidingViewControllerTests;
 			sourceTree = "<group>";
 		};
 		05C544BE181C4DF5002ED146 /* Supporting Files */ = {
@@ -168,59 +75,34 @@
 				052BE62B181C5C8400EE3577 /* ECSlidingViewControllerTests-Info.plist */,
 			);
 			name = "Supporting Files";
+			path = ECSlidingViewControllerTests;
+			sourceTree = "<group>";
+		};
+		05F0C961183F2C5800EAE0C4 /* ECSlidingViewControllerSpecs */ = {
+			isa = PBXGroup;
+			children = (
+				05F0C964183F2DF100EAE0C4 /* ECSlidingViewControllerSpec.m */,
+				05C544BE181C4DF5002ED146 /* Supporting Files */,
+			);
+			name = ECSlidingViewControllerSpecs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		052BE60E181C591300EE3577 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				052BE625181C5A1F00EE3577 /* ECSlidingSegue.h in Headers */,
-				052BE61E181C5A1F00EE3577 /* ECSlidingAnimationController.h in Headers */,
-				058F50D2181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.h in Headers */,
-				052BE628181C5A1F00EE3577 /* ECSlidingViewController.h in Headers */,
-				052BE614181C596700EE3577 /* ECSlidingViewController-Prefix.pch in Headers */,
-				050E9475182AC89D00A7D96C /* UIViewController+ECSlidingViewController.h in Headers */,
-				052BE622181C5A1F00EE3577 /* ECSlidingInteractiveTransition.h in Headers */,
-				052BE621181C5A1F00EE3577 /* ECSlidingConstants.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		05C544A3181C4DF5002ED146 /* ECSlidingViewController */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 05C544C7181C4DF5002ED146 /* Build configuration list for PBXNativeTarget "ECSlidingViewController" */;
-			buildPhases = (
-				05C544A0181C4DF5002ED146 /* Sources */,
-				05C544A1181C4DF5002ED146 /* Frameworks */,
-				05C544A2181C4DF5002ED146 /* CopyFiles */,
-				052BE60E181C591300EE3577 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = ECSlidingViewController;
-			productName = ECSlidingViewController;
-			productReference = 05C544A4181C4DF5002ED146 /* libECSlidingViewController.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		05C544B3181C4DF5002ED146 /* ECSlidingViewControllerTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 05C544CA181C4DF5002ED146 /* Build configuration list for PBXNativeTarget "ECSlidingViewControllerTests" */;
 			buildPhases = (
+				60E773D0D8F746B68B9DF08B /* Check Pods Manifest.lock */,
 				05C544B0181C4DF5002ED146 /* Sources */,
 				05C544B1181C4DF5002ED146 /* Frameworks */,
 				05C544B2181C4DF5002ED146 /* Resources */,
+				5EA3B96B6705490C9EA1C6DB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				05C544BB181C4DF5002ED146 /* PBXTargetDependency */,
 			);
 			name = ECSlidingViewControllerTests;
 			productName = ECSlidingViewControllerTests;
@@ -248,7 +130,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				05C544A3181C4DF5002ED146 /* ECSlidingViewController */,
 				05C544B3181C4DF5002ED146 /* ECSlidingViewControllerTests */,
 			);
 		};
@@ -264,42 +145,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXSourcesBuildPhase section */
-		05C544A0181C4DF5002ED146 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXShellScriptBuildPhase section */
+		5EA3B96B6705490C9EA1C6DB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				052BE623181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m in Sources */,
-				052BE629181C5A1F00EE3577 /* ECSlidingViewController.m in Sources */,
-				050E9476182AC89D00A7D96C /* UIViewController+ECSlidingViewController.m in Sources */,
-				052BE61F181C5A1F00EE3577 /* ECSlidingAnimationController.m in Sources */,
-				058F50D3181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */,
-				052BE626181C5A1F00EE3577 /* ECSlidingSegue.m in Sources */,
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
+		60E773D0D8F746B68B9DF08B /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
 		05C544B0181C4DF5002ED146 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05C544C4181C4DF5002ED146 /* ECSlidingViewControllerTests.m in Sources */,
-				052BE62A181C5A1F00EE3577 /* ECSlidingViewController.m in Sources */,
-				052BE620181C5A1F00EE3577 /* ECSlidingAnimationController.m in Sources */,
-				052BE627181C5A1F00EE3577 /* ECSlidingSegue.m in Sources */,
-				052BE624181C5A1F00EE3577 /* ECSlidingInteractiveTransition.m in Sources */,
-				058F50D4181CF3B50081E684 /* ECPercentDrivenInteractiveTransition.m in Sources */,
+				05F0C965183F2DF100EAE0C4 /* ECSlidingViewControllerSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		05C544BB181C4DF5002ED146 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 05C544A3181C4DF5002ED146 /* ECSlidingViewController */;
-			targetProxy = 05C544BA181C4DF5002ED146 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		05C544C5181C4DF5002ED146 /* Debug */ = {
@@ -372,32 +260,9 @@
 			};
 			name = Release;
 		};
-		05C544C8181C4DF5002ED146 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/ECSlidingViewController.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ECSlidingViewController-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		05C544C9181C4DF5002ED146 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DSTROOT = /tmp/ECSlidingViewController.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ECSlidingViewController-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
 		05C544CB181C4DF5002ED146 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 430731A33F77496BAD5F870D /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -412,6 +277,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ECSlidingViewControllerTests-Info.plist";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -419,6 +285,7 @@
 		};
 		05C544CC181C4DF5002ED146 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 430731A33F77496BAD5F870D /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -429,6 +296,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECSlidingViewController-Prefix.pch";
 				INFOPLIST_FILE = "ECSlidingViewControllerTests-Info.plist";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -442,15 +310,6 @@
 			buildConfigurations = (
 				05C544C5181C4DF5002ED146 /* Debug */,
 				05C544C6181C4DF5002ED146 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		05C544C7181C4DF5002ED146 /* Build configuration list for PBXNativeTarget "ECSlidingViewController" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				05C544C8181C4DF5002ED146 /* Debug */,
-				05C544C9181C4DF5002ED146 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

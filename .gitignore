@@ -16,3 +16,6 @@ profile
 *.moved-aside
 DerivedData
 .idea/
+
+# CocoaPods
+Tests/Pods/**/*
