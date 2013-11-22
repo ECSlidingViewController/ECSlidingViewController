@@ -26,11 +26,13 @@
 
 @interface MEDynamicTransition ()
 @property (nonatomic, strong) ECSlidingAnimationController *defaultAnimationController;
+@property (nonatomic, strong) NSMutableArray *leftEdgeQueue;
 @property (nonatomic, assign) id<UIViewControllerContextTransitioning> transitionContext;
 @property (nonatomic, strong) UIDynamicAnimator *animator;
 @property (nonatomic, strong) UICollisionBehavior *collisionBehavior;
-@property (nonatomic, strong) UIAttachmentBehavior *attachmentBehavior;
+@property (nonatomic, strong) UIGravityBehavior *gravityBehavior;
 @property (nonatomic, strong) UIPushBehavior *pushBehavior;
+@property (nonatomic, strong) UIDynamicItemBehavior *topViewBehavior;
 @property (nonatomic, strong) UIDynamicBehavior *compositeBehavior;
 @property (nonatomic, assign) BOOL positiveLeftToRight;
 @property (nonatomic, assign) BOOL isPanningRight;
@@ -65,11 +67,20 @@
     return _defaultAnimationController;
 }
 
+- (NSMutableArray *)leftEdgeQueue {
+    if (_leftEdgeQueue) return _leftEdgeQueue;
+    
+    _leftEdgeQueue = [NSMutableArray arrayWithCapacity:5];
+    
+    return _leftEdgeQueue;
+}
+
 - (UIDynamicAnimator *)animator {
     if (_animator) return _animator;
     
     _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.slidingViewController.view];
     _animator.delegate = self;
+    [_animator updateItemUsingCurrentState:self.slidingViewController.topViewController.view];
     
     return _animator;
 }
@@ -89,15 +100,12 @@
     return _collisionBehavior;
 }
 
-- (UIAttachmentBehavior *)attachmentBehavior {
-    if (_attachmentBehavior) return _attachmentBehavior;
+- (UIGravityBehavior *)gravityBehavior {
+    if (_gravityBehavior) return _gravityBehavior;
     
-    _attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:self.slidingViewController.topViewController.view attachedToAnchor:CGPointZero];
-    _attachmentBehavior.damping   = 1.0;
-    _attachmentBehavior.frequency = 3.5;
-    _attachmentBehavior.length    = 0;
+    _gravityBehavior = [[UIGravityBehavior alloc] initWithItems:@[self.slidingViewController.topViewController.view]];
     
-    return _attachmentBehavior;
+    return _gravityBehavior;
 }
 
 - (UIPushBehavior *)pushBehavior {
@@ -108,13 +116,39 @@
     return _pushBehavior;
 }
 
+- (UIDynamicItemBehavior *)topViewBehavior {
+    if (_topViewBehavior) return _topViewBehavior;
+    
+    UIView *topView = self.slidingViewController.topViewController.view;
+    _topViewBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[topView]];
+    // the density ranges from 1 to 5 for iPad to iPhone
+    _topViewBehavior.density = 908800 / (topView.bounds.size.width * topView.bounds.size.height);
+    _topViewBehavior.elasticity = 0;
+    _topViewBehavior.resistance = 1;
+    
+    return _topViewBehavior;
+}
+
 - (UIDynamicBehavior *)compositeBehavior {
     if (_compositeBehavior) return _compositeBehavior;
     
     _compositeBehavior = [[UIDynamicBehavior alloc] init];
     [_compositeBehavior addChildBehavior:self.collisionBehavior];
-    [_compositeBehavior addChildBehavior:self.attachmentBehavior];
+    [_compositeBehavior addChildBehavior:self.gravityBehavior];
     [_compositeBehavior addChildBehavior:self.pushBehavior];
+    [_compositeBehavior addChildBehavior:self.topViewBehavior];
+    __weak typeof(self)weakSelf = self;
+    _compositeBehavior.action = ^{
+        // stop the dynamic animation when the value of the left edge is the same 5 times in a row.
+        NSNumber *leftEdge = [NSNumber numberWithFloat:weakSelf.slidingViewController.topViewController.view.frame.origin.x];
+        [weakSelf.leftEdgeQueue insertObject:leftEdge atIndex:0];
+        if (weakSelf.leftEdgeQueue.count == 6) [weakSelf.leftEdgeQueue removeLastObject];
+        
+        if (weakSelf.leftEdgeQueue.count == 5 &&
+            ((NSArray *)[weakSelf.leftEdgeQueue valueForKeyPath:@"@distinctUnionOfObjects.self"]).count == 1) {
+            [weakSelf.animator removeAllBehaviors];
+        }
+    };
     
     return _compositeBehavior;
 }
@@ -148,6 +182,8 @@
 #pragma mark - UIPanGestureRecognizer action
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
+    if ([self.animator isRunning]) return;
+    
     UIView *topView       = self.slidingViewController.topViewController.view;
     CGFloat translationX  = [recognizer translationInView:self.slidingViewController.view].x;
     CGFloat velocityX     = [recognizer velocityInView:self.slidingViewController.view].x;
@@ -178,17 +214,13 @@
         case UIGestureRecognizerStateChanged: {
             if (!_isInteractive) return;
             
-            _collisionBehavior = nil;
-            _attachmentBehavior = nil;
-            _pushBehavior = nil;
-            _compositeBehavior = nil;
-            _animator = nil;
-            
             CGRect topViewInitialFrame = self.initialTopViewFrame;
             CGFloat newLeftEdge = topViewInitialFrame.origin.x + translationX;
             
             if (newLeftEdge < 0) {
                 newLeftEdge = 0;
+            } else if (newLeftEdge > self.slidingViewController.anchorRightRevealAmount) {
+                newLeftEdge = self.slidingViewController.anchorRightRevealAmount;
             }
             
             topViewInitialFrame.origin.x = newLeftEdge;
@@ -209,14 +241,7 @@
             
             self.isPanningRight = velocityX > 0;
             
-            CGFloat containerWidth = self.slidingViewController.view.bounds.size.width;
-            CGFloat revealAmount   = self.slidingViewController.anchorRightRevealAmount;
-            
-            CGPoint anchorPoint = self.isPanningRight ? CGPointMake((containerWidth / 2) + revealAmount, topView.center.y) : CGPointMake((containerWidth / 2), topView.center.y);
-            
-            [self.animator updateItemUsingCurrentState:self.slidingViewController.topViewController.view];
-            
-            self.attachmentBehavior.anchorPoint = anchorPoint;
+            self.gravityBehavior.gravityDirection = self.isPanningRight ? CGVectorMake(2, 0) : CGVectorMake(-2, 0);
             
             self.pushBehavior.angle = 0; // velocity may be negative
             self.pushBehavior.magnitude = velocityX;
@@ -234,19 +259,24 @@
 #pragma mark - UIDynamicAnimatorDelegate
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator*)animator {
-    if ((self.isPanningRight && self.positiveLeftToRight) || (!self.isPanningRight && !self.positiveLeftToRight)) {
-        [self.transitionContext finishInteractiveTransition];
-    } else if ((self.isPanningRight && !self.positiveLeftToRight) || (!self.isPanningRight && self.positiveLeftToRight)) {
-        [self.transitionContext cancelInteractiveTransition];
-    }
+    [self.animator removeAllBehaviors];
     
     _collisionBehavior = nil;
-    _attachmentBehavior = nil;
+    _topViewBehavior = nil;
     _pushBehavior = nil;
+    _gravityBehavior = nil;
     _compositeBehavior = nil;
     _animator = nil;
     
     self.slidingViewController.topViewController.view.userInteractionEnabled = YES;
+    UIViewController *topViewController = [self.transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
+    if ((self.isPanningRight && self.positiveLeftToRight) || (!self.isPanningRight && !self.positiveLeftToRight)) {
+        topViewController.view.frame = [self.transitionContext finalFrameForViewController:topViewController];
+        [self.transitionContext finishInteractiveTransition];
+    } else if ((self.isPanningRight && !self.positiveLeftToRight) || (!self.isPanningRight && self.positiveLeftToRight)) {
+        topViewController.view.frame = [self.transitionContext initialFrameForViewController:topViewController];
+        [self.transitionContext cancelInteractiveTransition];
+    }
     
     [self.transitionContext completeTransition:YES];
 }
