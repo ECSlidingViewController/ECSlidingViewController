@@ -19,6 +19,3 @@ DerivedData
 
 *.xccheckout
 !ECSlidingViewController.xcworkspace
-
-# CocoaPods
-Tests/Pods/**/*
