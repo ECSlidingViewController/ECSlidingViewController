@@ -1,7 +1,7 @@
 desc "Run tests"
 task :test do
-  exit_status = system 'xctool -workspace Tests/ECSlidingViewController.xcworkspace -scheme ECSlidingViewController -sdk iphonesimulator test'
-  exit(exit_status)
+  system 'xctool -workspace Tests/ECSlidingViewController.xcworkspace -scheme ECSlidingViewController -sdk iphonesimulator test'
+  exit($?.exitstatus)
 end
 
 namespace :travis do
