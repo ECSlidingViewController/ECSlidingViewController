@@ -17,5 +17,8 @@ profile
 DerivedData
 .idea/
 
+*.xccheckout
+!ECSlidingViewController.xcworkspace
+
 # CocoaPods
 Tests/Pods/**/*
