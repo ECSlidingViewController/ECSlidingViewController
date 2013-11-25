@@ -1,0 +1,12 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    april_oneil (0.0.1)
+      rainbow (~> 1.1)
+    rainbow (1.1.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  april_oneil (~> 0.0)
