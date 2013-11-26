@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */; };
-		0526990E182F37CE00285190 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0526990D182F37CE00285190 /* Main-iPad.storyboard */; };
 		05629E92181F4DA200A88F6C /* MEFoldAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */; };
+		056599E518454CB400B9C16B /* MESettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 056599E418454CB400B9C16B /* MESettingsViewController.m */; };
+		056599E818458A1D00B9C16B /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 056599E618458A1D00B9C16B /* Main-iPad.storyboard */; };
 		057DC25C181DE6AE00D15995 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25B181DE6AE00D15995 /* Foundation.framework */; };
 		057DC25E181DE6AE00D15995 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25D181DE6AE00D15995 /* CoreGraphics.framework */; };
 		057DC260181DE6AE00D15995 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 057DC25F181DE6AE00D15995 /* UIKit.framework */; };
@@ -28,9 +29,11 @@
 /* Begin PBXFileReference section */
 		05160F561820CDF300EA3BDD /* MEZoomAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEZoomAnimationController.h; sourceTree = "<group>"; };
 		05160F571820CDF300EA3BDD /* MEZoomAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEZoomAnimationController.m; sourceTree = "<group>"; };
-		0526990D182F37CE00285190 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 		05629E90181F4DA200A88F6C /* MEFoldAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MEFoldAnimationController.h; sourceTree = "<group>"; };
 		05629E91181F4DA200A88F6C /* MEFoldAnimationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MEFoldAnimationController.m; sourceTree = "<group>"; };
+		056599E318454CB400B9C16B /* MESettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MESettingsViewController.h; sourceTree = "<group>"; };
+		056599E418454CB400B9C16B /* MESettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MESettingsViewController.m; sourceTree = "<group>"; };
+		056599E718458A1D00B9C16B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-iPad.storyboard"; sourceTree = "<group>"; };
 		057DC258181DE6AE00D15995 /* TransitionFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransitionFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		057DC25B181DE6AE00D15995 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		057DC25D181DE6AE00D15995 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -118,12 +121,14 @@
 			isa = PBXGroup;
 			children = (
 				057DC273181DE6AE00D15995 /* Images.xcassets */,
-				0526990D182F37CE00285190 /* Main-iPad.storyboard */,
+				056599E618458A1D00B9C16B /* Main-iPad.storyboard */,
 				057DC26D181DE6AE00D15995 /* Main.storyboard */,
 				057DC26A181DE6AE00D15995 /* MEAppDelegate.h */,
 				057DC26B181DE6AE00D15995 /* MEAppDelegate.m */,
 				057DC2A4181DF4F500D15995 /* MEMenuViewController.h */,
 				057DC2A5181DF4F500D15995 /* MEMenuViewController.m */,
+				056599E318454CB400B9C16B /* MESettingsViewController.h */,
+				056599E418454CB400B9C16B /* MESettingsViewController.m */,
 				05CBD180182DF3B200118119 /* METransitions.h */,
 				05CBD181182DF3B200118119 /* METransitions.m */,
 				057DC2A1181DEE4700D15995 /* METransitionsViewController.h */,
@@ -203,7 +208,7 @@
 				057DC274181DE6AE00D15995 /* Images.xcassets in Resources */,
 				057DC266181DE6AE00D15995 /* InfoPlist.strings in Resources */,
 				057DC26F181DE6AE00D15995 /* Main.storyboard in Resources */,
-				0526990E182F37CE00285190 /* Main-iPad.storyboard in Resources */,
+				056599E818458A1D00B9C16B /* Main-iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,12 +260,21 @@
 				057DC2A6181DF4F500D15995 /* MEMenuViewController.m in Sources */,
 				05160F581820CDF300EA3BDD /* MEZoomAnimationController.m in Sources */,
 				057DC2A3181DEE4700D15995 /* METransitionsViewController.m in Sources */,
+				056599E518454CB400B9C16B /* MESettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		056599E618458A1D00B9C16B /* Main-iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				056599E718458A1D00B9C16B /* Base */,
+			);
+			name = "Main-iPad.storyboard";
+			sourceTree = "<group>";
+		};
 		057DC264181DE6AE00D15995 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

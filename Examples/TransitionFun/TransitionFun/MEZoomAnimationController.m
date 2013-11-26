@@ -139,6 +139,7 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
 
 - (void)topViewAnchorRightEndState:(UIView *)topView anchoredFrame:(CGRect)anchoredFrame {
     topView.layer.transform = CATransform3DMakeScale(MEZoomAnimationScaleFactor, MEZoomAnimationScaleFactor, 1);
+    topView.frame = anchoredFrame;
     topView.layer.position  = CGPointMake(anchoredFrame.origin.x + ((topView.layer.bounds.size.width * MEZoomAnimationScaleFactor) / 2), topView.layer.position.y);
 }
 

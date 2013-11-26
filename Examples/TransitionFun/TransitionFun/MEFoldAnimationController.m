@@ -49,10 +49,13 @@
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
     UIViewController *toViewController  = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-    UIView *containerView    = [transitionContext containerView];
-    CGRect topViewFinalFrame = [transitionContext finalFrameForViewController:topViewController];
+    UIView *containerView      = [transitionContext containerView];
+    CGRect topViewInitialFrame = [transitionContext initialFrameForViewController:toViewController];
+    CGRect topViewFinalFrame   = [transitionContext finalFrameForViewController:topViewController];
     CGFloat revealWidth;
     BOOL isResetting = NO;
+    
+    topViewController.view.frame = topViewInitialFrame;
     
     CATransform3D transform = CATransform3DIdentity;
     transform.m34 = -0.002;

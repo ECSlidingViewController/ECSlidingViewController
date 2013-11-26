@@ -41,7 +41,10 @@
     UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
     UIViewController *toViewController  = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView = [transitionContext containerView];
+    CGRect topViewInitialFrame = [transitionContext initialFrameForViewController:topViewController];
     CGRect topViewFinalFrame   = [transitionContext finalFrameForViewController:topViewController];
+    
+    topViewController.view.frame = topViewInitialFrame;
     
     if (topViewController != toViewController) {
         CGRect toViewInitialFrame = [transitionContext initialFrameForViewController:toViewController];

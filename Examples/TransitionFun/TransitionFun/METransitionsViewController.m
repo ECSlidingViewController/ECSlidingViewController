@@ -36,14 +36,23 @@
 
 #pragma mark - UIViewController
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.clearsSelectionOnViewWillAppear = NO;
     
-    if (![self.tableView indexPathForSelectedRow]) {
+    self.transitions.dynamicTransition.slidingViewController = self.slidingViewController;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
         NSIndexPath *defaultIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView selectRowAtIndexPath:defaultIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        [self tableView:self.tableView didSelectRowAtIndexPath:defaultIndexPath];
-    }
+    });
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self tableView:self.tableView didSelectRowAtIndexPath:[self.tableView indexPathForSelectedRow]];
 }
 
 #pragma mark - Properties
@@ -59,10 +68,7 @@
 - (UIPanGestureRecognizer *)dynamicTransitionPanGesture {
     if (_dynamicTransitionPanGesture) return _dynamicTransitionPanGesture;
     
-    NSPredicate *namePredicate = [NSPredicate predicateWithFormat:@"name = %@", METransitionNameDynamic];
-    NSArray *transitionsData = [self.transitions.all filteredArrayUsingPredicate:namePredicate];
-    MEDynamicTransition *dynamicTransition = transitionsData[0][@"transition"];
-    _dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:dynamicTransition action:@selector(handlePanGesture:)];
+    _dynamicTransitionPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self.transitions.dynamicTransition action:@selector(handlePanGesture:)];
     
     return _dynamicTransitionPanGesture;
 }
@@ -101,9 +107,6 @@
     
     NSString *transitionName = transitionData[@"name"];
     if ([transitionName isEqualToString:METransitionNameDynamic]) {
-        MEDynamicTransition *dynamicTransition = (MEDynamicTransition *)transition;
-        dynamicTransition.slidingViewController = self.slidingViewController;
-        
         self.slidingViewController.topViewAnchoredGesture = ECSlidingViewControllerAnchoredGestureTapping | ECSlidingViewControllerAnchoredGestureCustom;
         self.slidingViewController.customAnchoredGestures = @[self.dynamicTransitionPanGesture];
         [self.navigationController.view removeGestureRecognizer:self.slidingViewController.panGesture];
