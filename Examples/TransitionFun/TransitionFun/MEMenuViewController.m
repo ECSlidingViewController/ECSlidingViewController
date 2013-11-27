@@ -27,7 +27,6 @@
 @interface MEMenuViewController ()
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) UINavigationController *transitionsNavigationController;
-@property (nonatomic, strong) UINavigationController *settingsNavigationController;
 @end
 
 @implementation MEMenuViewController
@@ -54,14 +53,6 @@
     _menuItems = @[@"Transitions", @"Settings"];
     
     return _menuItems;
-}
-
-- (UINavigationController *)settingsNavigationController {
-    if (_settingsNavigationController) return _settingsNavigationController;
-    
-    _settingsNavigationController = [self.storyboard instantiateViewControllerWithIdentifier:@"MESettingsNavigationController"];
-    
-    return _settingsNavigationController;
 }
 
 #pragma mark - UITableViewDataSource
@@ -92,11 +83,12 @@
     // dynamically so everything needs to start in a consistent state.
     self.slidingViewController.topViewController.view.layer.transform = CATransform3DMakeScale(1, 1, 1);
     
-    if ([menuItem isEqualToString:@"Transitions"] && self.slidingViewController.topViewController != self.transitionsNavigationController) {
+    if ([menuItem isEqualToString:@"Transitions"]) {
         self.slidingViewController.topViewController = self.transitionsNavigationController;
-    } else if ([menuItem isEqualToString:@"Settings"]  && self.slidingViewController.topViewController != self.settingsNavigationController) {
-        self.slidingViewController.topViewController = self.settingsNavigationController;
+    } else if ([menuItem isEqualToString:@"Settings"]) {
+        self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MESettingsNavigationController"];
     }
+    
         
     [self.slidingViewController resetTopViewAnimated:YES];
 }

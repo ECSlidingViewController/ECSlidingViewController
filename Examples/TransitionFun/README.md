@@ -8,6 +8,33 @@ Have fun with transitions with TransitionFun! This is a universal app that has a
 
 There is a lot of plumbing in the project for setting up the table and changing the sliding view controller's delegate. We'll point out some of the more interesting parts here.
 
+### Cached Top View Controllers
+
+You'll notice that the transitions view controller table will remember the previously selected transition when switching between the it and the settings view controller. This is accomplished by caching the transitions view controller in the menu.
+
+The sliding view controller is initialized in storyboards with the transitions view controller set as the `topViewController` and the menu view controller set as the `underLeftViewController`. We want to keep a reference to the transitions view controller from the menu view controller, so in `viewDidLoad:`
+
+```objc
+// self.transitionsNavigationController will keep a strong reference
+self.transitionsNavigationController = (UINavigationController *)self.slidingViewController.topViewController;
+```
+
+When the user selects "Settings", we'll change the `topViewController`. In `tableView:didSelectRowAtIndexPath:`
+
+```objc
+self.slidingViewController.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MESettingsNavigationController"];
+```
+
+The `topViewController` is now replaced with a new instance of the settings view controller. We still have a reference to the transitions view controller that we kept in `viewDidLoad:`, so we can use that instance again when the user selects "Transitions"
+
+```objc
+self.slidingViewController.topViewController = self.transitionsNavigationController;
+```
+
+This replaces the settings view controller, but since we don't care about losing its state we'll let that instance be released by the system.
+
+Re-using the same instance will prevent it from losing state. It's your responsibility to decide if a view controller should be cached or not while balancing memory usage.
+
 ### Custom Transitions
 
 The `METransitionsViewController` is a bit more complex than your view controller would need to be to customize a transition. The important thing to see is that each custom transition is implemented in its own object that conforms to `ECSlidingViewControllerDelegate`. This cleans the view controller up and is better for reusability, and for this project it makes it easy to switch between transitions by changing the delegate.
