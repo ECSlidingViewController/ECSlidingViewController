@@ -4,26 +4,11 @@ Have fun with transitions with TransitionFun! This is a universal app that has a
 
 ![gif](http://github.com/edgecase/ECSlidingViewController/wiki/readme-assets/TransitionFun.gif)
 
-# How it's Made
+## How it's Made
 
 There is a lot of plumbing in the project for setting up the table and changing the sliding view controller's delegate. We'll point out some of the more interesting parts here.
 
-## Cached Top View Controller Segue
-
-A Storyboard segue is used to transition from the menu to the transitions table. By default, `ECSlidingViewController` will create a new instance of the transitions table and set it as the `topViewController`. This would cause our transitions table to lose any state (such as the selected transition) that it had before.
-
-To fix this problem, we can customize the segue in `UIViewController`'s `prepareForSegue:` method in the view controller we are doing a sliding segueing from.
-
-```objc
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    ECSlidingSegue *slidingSegue = (ECSlidingSegue *)segue;
-    slidingSegue.skipSettingTopViewController = YES;
-}
-```
-
-With the `skipSettingTopViewController` set to `YES`, we cause the segue to do a `resetTopViewAnimated:` on the sliding view controller without setting the `topViewController` to a new instance.
-
-## Custom Transitions
+### Custom Transitions
 
 The `METransitionsViewController` is a bit more complex than your view controller would need to be to customize a transition. The important thing to see is that each custom transition is implemented in its own object that conforms to `ECSlidingViewControllerDelegate`. This cleans the view controller up and is better for reusability, and for this project it makes it easy to switch between transitions by changing the delegate.
 
@@ -51,13 +36,15 @@ if ([transitionName isEqualToString:METransitionNameDynamic]) {
 }
 ```
 
+Similar code is done in `MESettingsViewController` to add the relevant gesture to itself.
+
 The `MEDynamicTransition` is an interactive transition, so it has its own way of triggering a transition with a pan gesture. The code above switches between using the default pan gesture and the dynamic transition pan gesture.
 
 We're using the `topViewAnchoredGesture` property to select which gestures to use when the top view is anchored. For the dynamic transition we want to use the tap gesture and the dynamic panning gesture to reset the top view. The other case uses the default interactive transition pan gesture and a tap gesture for resetting.
 
 Each custom transition conforms to the `ECSlidingViewControllerDelegate`. This allows the transition to decide if it wants to customize the animation, interaction, or layout.
 
-### Default
+#### Default
 
 There is no object for the default transition.
 
@@ -67,13 +54,13 @@ self.slidingViewController.delegate = nil;
 
 Setting the delegate to `nil` will use the default transition. The default animation is implemented in the `ECSlidingAnimationController` class and the default interaction is implemented in `ECSlidingInteractiveTransition`. See those classes to see how the default transition works.
 
-### Fold
+#### Fold
 
 The Fold transition only customizes the animation, so in addition to `ECSlidingViewControllerDelegate` it also conforms to `UIViewControllerAnimatedTransitioning`.
 
 The default interactive transition is used with the Fold transition. This is done automatically by `ECSlidingViewController`, so nothing is done to make this happen. The only thing we have to do is make sure our sliding view controller's `panGesture` is on our top view somewhere. This gives our Fold animation a percent-driven interaction for free.
 
-### Zoom
+#### Zoom
 
 The Zoom transition customizes the animation and layout. It conforms to `ECSlidingViewControllerDelegate`, `UIViewControllerAnimatedTransitioning`, and `ECSlidingViewControllerLayout`.
 
@@ -81,7 +68,7 @@ Similar to the Fold transition, the Zoom transition uses the default interactive
 
 The layout needs to be customized because the animation can start or end with a top view frame that `ECSlidingViewController` doesn't expect. We are not respecting the initial/final frames the `UIViewControllerContextTransitioning` object gives us, so we may get undesired results when the container changes bounds or rotates. The Zoom transition customizes the layout for the top view in an anchored right position, and it falls back on the defaults for everything else.
 
-### UIKit Dynamics
+#### UIKit Dynamics
 
 This is an interactive transition that uses UIKit Dynamics. The top view will bounce off the sides. The amount of bouncing depends on how fast the user throws the top view.
 
@@ -137,14 +124,7 @@ case UIGestureRecognizerStateEnded:
 case UIGestureRecognizerStateCancelled: {
     self.isPanningRight = velocityX > 0;
 
-    CGFloat containerWidth = self.slidingViewController.view.bounds.size.width;
-    CGFloat revealAmount   = self.slidingViewController.anchorRightRevealAmount;
-
-    CGPoint anchorPoint = self.isPanningRight ? CGPointMake((containerWidth / 2) + revealAmount, topView.center.y) : CGPointMake((containerWidth / 2), topView.center.y);
-
-    [self.animator updateItemUsingCurrentState:self.slidingViewController.topViewController.view];
-
-    self.attachmentBehavior.anchorPoint = anchorPoint;
+    self.gravityBehavior.gravityDirection = self.isPanningRight ? CGVectorMake(2, 0) : CGVectorMake(-2, 0);
 
     self.pushBehavior.angle = 0; // velocity may be negative
     self.pushBehavior.magnitude = velocityX;
@@ -156,7 +136,7 @@ case UIGestureRecognizerStateCancelled: {
 }
 ```
 
-This guide won't get into the specifics of how to use UIKit Dynamics, but you can see that we have an attachment and push behavior that depends on the speed and direction the user throws the top view.
+This guide won't get into the specifics of how to use UIKit Dynamics, but you can see that we have a gravity and push behavior that depends on the speed and direction the user throws the top view.
 
 At this point, our `UIDynamicAnimator` object takes over and updates the top view frame. We need to know when it is done so that we can tell our transition context that we finished or cancelled the transition. We are the delegate of the `UIDynamicAnimator` so we can implement `dynamicAnimatorDidPause:` to know when the dynamic animator is done.
 
