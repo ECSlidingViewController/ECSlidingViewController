@@ -561,6 +561,8 @@
 - (void)animateOperation:(ECSlidingViewControllerOperation)operation {
     if (![self operationIsValid:operation]) return;
     if (self.transitionInProgress) return;
+
+    self.view.userInteractionEnabled = NO;
     
     self.transitionInProgress = YES;
     
@@ -731,6 +733,7 @@
     }
     
     [self.defaultInteractiveTransition updateTopViewHorizontalCenterWithRecognizer:recognizer];
+    _isInteractive = NO;
 }
 
 #pragma mark - UIViewControllerTransitionCoordinatorContext
@@ -837,6 +840,7 @@
     self.currentAnimationPercentage  = 0;
     self.currentOperation            = ECSlidingViewControllerOperationNone;
     self.transitionInProgress        = NO;
+    self.view.userInteractionEnabled = YES;
     [UIViewController attemptRotationToDeviceOrientation];
 }
 
