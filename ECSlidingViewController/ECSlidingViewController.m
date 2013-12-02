@@ -860,10 +860,10 @@
         if (key == UITransitionContextFromViewControllerKey) return self.topViewController;
         if (key == UITransitionContextToViewControllerKey)   return self.underLeftViewController;
     } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromLeft) {
-        if (key == UITransitionContextFromViewControllerKey) return self.underLeftViewController;
+        if (key == UITransitionContextFromViewControllerKey) return self.underRightViewController;
         if (key == UITransitionContextToViewControllerKey)   return self.topViewController;
     } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromRight) {
-        if (key == UITransitionContextFromViewControllerKey) return self.underRightViewController;
+        if (key == UITransitionContextFromViewControllerKey) return self.underLeftViewController;
         if (key == UITransitionContextToViewControllerKey)   return self.topViewController;
     }
     
