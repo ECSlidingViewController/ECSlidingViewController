@@ -164,12 +164,21 @@
     if (_isInteractive) {
         UIViewController *underViewController = [transitionContext viewControllerForKey:ECTransitionContextUnderLeftControllerKey];
         CGRect underViewInitialFrame = [transitionContext initialFrameForViewController:underViewController];
+        CGRect underViewFinalFrame   = [transitionContext finalFrameForViewController:underViewController];
         UIView *containerView = [transitionContext containerView];
         CGFloat finalLeftEdge = CGRectGetMinX([transitionContext finalFrameForViewController:topViewController]);
         CGFloat initialLeftEdge = CGRectGetMinX([transitionContext initialFrameForViewController:topViewController]);
         CGFloat fullWidth = fabsf(finalLeftEdge - initialLeftEdge);
         
-        underViewController.view.frame = underViewInitialFrame;
+        CGRect underViewFrame;
+        if (CGRectIsEmpty(underViewInitialFrame)) {
+            underViewFrame = underViewFinalFrame;
+        } else {
+            underViewFrame = underViewInitialFrame;
+        }
+        
+        underViewController.view.frame = underViewFrame;
+        
         [containerView insertSubview:underViewController.view belowSubview:topViewController.view];
         
         self.positiveLeftToRight = initialLeftEdge < finalLeftEdge;

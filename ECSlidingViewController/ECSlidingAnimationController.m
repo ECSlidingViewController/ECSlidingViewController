@@ -47,8 +47,8 @@
     topViewController.view.frame = topViewInitialFrame;
     
     if (topViewController != toViewController) {
-        CGRect toViewInitialFrame = [transitionContext initialFrameForViewController:toViewController];
-        toViewController.view.frame = toViewInitialFrame;
+        CGRect toViewFinalFrame = [transitionContext finalFrameForViewController:toViewController];
+        toViewController.view.frame = toViewFinalFrame;
         [containerView insertSubview:toViewController.view belowSubview:topViewController.view];
     }
     

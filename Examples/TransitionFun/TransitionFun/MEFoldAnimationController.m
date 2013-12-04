@@ -50,7 +50,7 @@
     UIViewController *topViewController = [transitionContext viewControllerForKey:ECTransitionContextTopViewControllerKey];
     UIViewController *toViewController  = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIView *containerView      = [transitionContext containerView];
-    CGRect topViewInitialFrame = [transitionContext initialFrameForViewController:toViewController];
+    CGRect topViewInitialFrame = [transitionContext initialFrameForViewController:topViewController];
     CGRect topViewFinalFrame   = [transitionContext finalFrameForViewController:topViewController];
     CGFloat revealWidth;
     BOOL isResetting = NO;
@@ -73,10 +73,20 @@
         isResetting = NO;
     }
 
+    CGRect underViewFrame;
+    
     CGRect underViewInitialFrame = [transitionContext initialFrameForViewController:underViewController];
+    CGRect underViewFinalFrame   = [transitionContext finalFrameForViewController:underViewController];
+    
+    if (CGRectIsEmpty(underViewInitialFrame)) {
+        underViewFrame = underViewFinalFrame;
+    } else {
+        underViewFrame = underViewInitialFrame;
+    }
+    
     UIView *underView = underViewController.view;
     
-    underView.frame = underViewInitialFrame;
+    underView.frame = underViewFrame;
     [underView removeFromSuperview];
 
     CGFloat underViewHalfwayPoint = revealWidth / 2;

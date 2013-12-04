@@ -247,7 +247,7 @@ describe(@"ECSlidingViewController", ^{
             
             it(@"starts the under left view visible", ^{
                 [[theValue([slidingViewController initialFrameForViewController:underLeftViewController])
-                  should] equal:theValue(CGRectMake(0, 0, 320, 480))];
+                  should] equal:theValue(CGRectZero)];
             });
             
             it(@"starts the under right view hidden", ^{
@@ -274,7 +274,7 @@ describe(@"ECSlidingViewController", ^{
             
             it(@"starts the under right view visible", ^{
                 [[theValue([slidingViewController initialFrameForViewController:underRightViewController])
-                  should] equal:theValue(CGRectMake(0, 0, 320, 480))];
+                  should] equal:theValue(CGRectZero)];
             });
         });
     });

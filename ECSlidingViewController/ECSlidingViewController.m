@@ -873,10 +873,8 @@
 - (CGRect)initialFrameForViewController:(UIViewController *)vc {
     if (self.currentOperation == ECSlidingViewControllerOperationAnchorLeft) {
         if ([vc isEqual:self.topViewController]) return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionCentered];
-        if ([vc isEqual:self.underRightViewController]) return [self underRightViewCalculatedFrame];
     } else if (self.currentOperation == ECSlidingViewControllerOperationAnchorRight) {
         if ([vc isEqual:self.topViewController]) return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionCentered];
-        if ([vc isEqual:self.underLeftViewController])  return [self underLeftViewCalculatedFrame];
     } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromLeft) {
         if ([vc isEqual:self.topViewController])        return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft];
         if ([vc isEqual:self.underRightViewController]) return [self underRightViewCalculatedFrame];
