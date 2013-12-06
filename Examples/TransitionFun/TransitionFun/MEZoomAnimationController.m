@@ -74,6 +74,7 @@ static CGFloat const MEZoomAnimationScaleFactor = 0.75;
     UIView *containerView = [transitionContext containerView];
     
     UIView *topView = topViewController.view;
+    topView.bounds = [UIScreen mainScreen].bounds;
     
     underLeftViewController.view.layer.transform = CATransform3DIdentity;
     
