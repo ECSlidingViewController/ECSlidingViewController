@@ -559,9 +559,12 @@
 }
 
 - (void)animateOperation:(ECSlidingViewControllerOperation)operation {
-    if (![self operationIsValid:operation]) return;
+    if (![self operationIsValid:operation]){
+        _isInteractive = NO;
+        return;
+    }
     if (self.transitionInProgress) return;
-
+    
     self.view.userInteractionEnabled = NO;
     
     self.transitionInProgress = YES;
@@ -672,15 +675,15 @@
 
 - (void)updateTopViewGestures {
     BOOL topViewIsAnchored = self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredLeft ||
-                             self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight;
+    self.currentTopViewPosition == ECSlidingViewControllerTopViewPositionAnchoredRight;
     UIView *topView = self.topViewController.view;
-
+    
     if (topViewIsAnchored) {
         if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGestureDisabled) {
             topView.userInteractionEnabled = NO;
         } else {
             self.gestureView.frame = topView.frame;
-
+            
             if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGesturePanning &&
                 ![self.customAnchoredGesturesViewMap objectForKey:self.panGesture]) {
                 [self.customAnchoredGesturesViewMap setObject:self.panGesture.view forKey:self.panGesture];
@@ -688,7 +691,7 @@
                 [self.gestureView addGestureRecognizer:self.panGesture];
                 if (!self.gestureView.superview) [self.view insertSubview:self.gestureView aboveSubview:topView];
             }
-
+            
             if (self.topViewAnchoredGesture & ECSlidingViewControllerAnchoredGestureTapping &&
                 ![self.customAnchoredGesturesViewMap objectForKey:self.resetTapGesture]) {
                 [self.gestureView addGestureRecognizer:self.resetTapGesture];
