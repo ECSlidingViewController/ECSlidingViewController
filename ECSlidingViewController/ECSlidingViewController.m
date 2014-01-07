@@ -49,8 +49,8 @@
 - (void)setup;
 
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position;
-- (CGRect)underLeftViewCalculatedFrame;
-- (CGRect)underRightViewCalculatedFrame;
+- (CGRect)underLeftViewCalculatedFrameForTopViewPosition:(ECSlidingViewControllerTopViewPosition)position;
+- (CGRect)underRightViewCalculatedFrameTopViewPosition:(ECSlidingViewControllerTopViewPosition)position;
 - (CGRect)frameFromDelegateForViewController:(UIViewController *)viewController
                              topViewPosition:(ECSlidingViewControllerTopViewPosition)topViewPosition;
 - (ECSlidingViewControllerOperation)operationFromPosition:(ECSlidingViewControllerTopViewPosition)fromPosition
@@ -178,8 +178,8 @@
     if (self.currentOperation == ECSlidingViewControllerOperationNone) {
         self.gestureView.frame = [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
         self.topViewController.view.frame = [self topViewCalculatedFrameForPosition:self.currentTopViewPosition];
-        self.underLeftViewController.view.frame = [self underLeftViewCalculatedFrame];
-        self.underRightViewController.view.frame = [self underRightViewCalculatedFrame];
+        self.underLeftViewController.view.frame = [self underLeftViewCalculatedFrameTopViewPosition:self.currentTopViewPosition];
+        self.underRightViewController.view.frame = [self underRightViewCalculatedFrameTopViewPosition:self.currentTopViewPosition];
     }
 }
 
@@ -470,9 +470,9 @@
     }
 }
 
-- (CGRect)underLeftViewCalculatedFrame {
+- (CGRect)underLeftViewCalculatedFrameTopViewPosition:(ECSlidingViewControllerTopViewPosition)position {
     CGRect frameFromDelegate = [self frameFromDelegateForViewController:self.underLeftViewController
-                                                        topViewPosition:self.currentTopViewPosition];
+                                                        topViewPosition:position];
     if (!CGRectIsInfinite(frameFromDelegate)) return frameFromDelegate;
     
     CGRect containerViewFrame = self.view.bounds;
@@ -495,9 +495,9 @@
     return containerViewFrame;
 }
 
-- (CGRect)underRightViewCalculatedFrame {
+- (CGRect)underRightViewCalculatedFrameTopViewPosition:(ECSlidingViewControllerTopViewPosition)position {
     CGRect frameFromDelegate = [self frameFromDelegateForViewController:self.underRightViewController
-                                                        topViewPosition:self.currentTopViewPosition];
+                                                        topViewPosition:position];
     if (!CGRectIsInfinite(frameFromDelegate)) return frameFromDelegate;
     
     CGRect containerViewFrame = self.view.bounds;
@@ -880,10 +880,10 @@
         if ([vc isEqual:self.topViewController]) return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionCentered];
     } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromLeft) {
         if ([vc isEqual:self.topViewController])        return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft];
-        if ([vc isEqual:self.underRightViewController]) return [self underRightViewCalculatedFrame];
+        if ([vc isEqual:self.underRightViewController]) return [self underRightViewCalculatedFrameTopViewPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft];
     } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromRight) {
         if ([vc isEqual:self.topViewController])        return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionAnchoredRight];
-        if ([vc isEqual:self.underLeftViewController])  return [self underLeftViewCalculatedFrame];
+        if ([vc isEqual:self.underLeftViewController])  return [self underLeftViewCalculatedFrameTopViewPosition:ECSlidingViewControllerTopViewPositionAnchoredRight];
     }
     
     return CGRectZero;
@@ -892,10 +892,10 @@
 - (CGRect)finalFrameForViewController:(UIViewController *)vc {
     if (self.currentOperation == ECSlidingViewControllerOperationAnchorLeft) {
         if (vc == self.topViewController)        return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft];
-        if (vc == self.underRightViewController) return [self underRightViewCalculatedFrame];
+        if (vc == self.underRightViewController) return [self underRightViewCalculatedFrameTopViewPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft];
     } else if (self.currentOperation == ECSlidingViewControllerOperationAnchorRight) {
         if (vc == self.topViewController) return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionAnchoredRight];
-        if (vc == self.underLeftViewController)  return [self underLeftViewCalculatedFrame];
+        if (vc == self.underLeftViewController)  return [self underLeftViewCalculatedFrameTopViewPosition:ECSlidingViewControllerTopViewPositionAnchoredRight];
     } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromLeft) {
         if (vc == self.topViewController) return [self topViewCalculatedFrameForPosition:ECSlidingViewControllerTopViewPositionCentered];
     } else if (self.currentOperation == ECSlidingViewControllerOperationResetFromRight) {
