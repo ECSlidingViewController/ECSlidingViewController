@@ -41,7 +41,7 @@ Install with [CocoaPods](http://cocoapods.org) by adding the following to your P
 
 ``` ruby
 platform :ios, '7.0'
-pod 'ECSlidingViewController', '~> 2.0.0-beta'
+pod 'ECSlidingViewController', '~> 2.0.0'
 ```
 
 **Note**: We follow http://semver.org for versioning the public API.
@@ -54,7 +54,7 @@ Or copy the `ECSlidingViewController/` directory from this repo into your projec
 
 The public API is documented in the header files. It will automatically show up in Xcode 5's quick help, or you can view it online:
 
-[ECSlidingViewController Reference at cocoadocs.org](http://cocoadocs.org/docsets/ECSlidingViewController/2.0.0-beta1/)
+[ECSlidingViewController Reference at cocoadocs.org](http://cocoadocs.org/docsets/ECSlidingViewController/)
 
 ### Sample Code
 
