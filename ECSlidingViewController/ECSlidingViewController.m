@@ -200,6 +200,9 @@
 }
 
 - (UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(NSString *)identifier {
+    if (!([self.underLeftViewController isMemberOfClass:[toViewController class]] || [self.underRightViewController isMemberOfClass:[toViewController class]])) {
+        return [super segueForUnwindingToViewController:toViewController fromViewController:fromViewController identifier:identifier];
+    }
     ECSlidingSegue *unwindSegue = [[ECSlidingSegue alloc] initWithIdentifier:identifier source:fromViewController destination:toViewController];
     [unwindSegue setValue:@YES forKey:@"isUnwinding"];
     return unwindSegue;
