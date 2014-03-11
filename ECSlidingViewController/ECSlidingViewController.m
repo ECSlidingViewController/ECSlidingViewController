@@ -424,27 +424,26 @@
 }
 
 - (void)anchorTopViewToRightAnimated:(BOOL)animated onComplete:(void (^)())complete {
-    self.isAnimated = animated;
-    self.animationComplete = complete;
-    ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionAnchoredRight];
-    [self animateOperation:operation];
+    [self resetViewAnimated:animated toPosition:ECSlidingViewControllerTopViewPositionAnchoredRight onComplete:complete];
 }
 
 - (void)anchorTopViewToLeftAnimated:(BOOL)animated onComplete:(void (^)())complete {
-    self.isAnimated = animated;
-    self.animationComplete = complete;
-    ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft];
-    [self animateOperation:operation];
+    [self resetViewAnimated:animated toPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft onComplete:complete];
 }
 
 - (void)resetTopViewAnimated:(BOOL)animated onComplete:(void(^)())complete {
-    self.isAnimated = animated;
-    self.animationComplete = complete;
-    ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:ECSlidingViewControllerTopViewPositionCentered];
-    [self animateOperation:operation];
+    [self resetViewAnimated:animated toPosition:ECSlidingViewControllerTopViewPositionCentered onComplete:complete];
 }
 
 #pragma mark - Private
+
+- (void)resetViewAnimated:(BOOL)animated toPosition:(ECSlidingViewControllerTopViewPosition)position onComplete:(void(^)())complete {
+    self.isAnimated = animated;
+    self.animationComplete = complete;
+    [self.view endEditing:YES];
+    ECSlidingViewControllerOperation operation = [self operationFromPosition:self.currentTopViewPosition toPosition:position];
+    [self animateOperation:operation];
+}
 
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position {
     CGRect frameFromDelegate = [self frameFromDelegateForViewController:self.topViewController
@@ -740,6 +739,7 @@
 
 - (void)detectPanGestureRecognizer:(UIPanGestureRecognizer *)recognizer {
     if (recognizer.state == UIGestureRecognizerStateBegan) {
+        [self.view endEditing:YES];
         _isInteractive = YES;
     }
     
