@@ -321,6 +321,10 @@
     self.preserveRightPeekAmount = NO;
 }
 
+- (void)setDefaultTransitionDuration:(NSTimeInterval)defaultTransitionDuration {
+    self.defaultAnimationController.defaultTransitionDuration = defaultTransitionDuration;
+}
+
 - (CGFloat)anchorLeftPeekAmount {
     if (_anchorLeftPeekAmount == CGFLOAT_MAX && _anchorLeftRevealAmount != CGFLOAT_MAX) {
         return CGRectGetWidth(self.view.bounds) - _anchorLeftRevealAmount;
