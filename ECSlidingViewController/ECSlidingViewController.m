@@ -747,8 +747,9 @@
         [self.view endEditing:YES];
         _isInteractive = YES;
     }
-    
-    [self.defaultInteractiveTransition updateTopViewHorizontalCenterWithRecognizer:recognizer];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.defaultInteractiveTransition updateTopViewHorizontalCenterWithRecognizer:recognizer];
+    });
     _isInteractive = NO;
 }
 
