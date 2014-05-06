@@ -48,6 +48,7 @@
 @property (nonatomic, copy) void (^coordinatorInteractionEnded)(id<UIViewControllerTransitionCoordinatorContext>context);
 - (void)setup;
 
+- (void)moveTopViewToPosition:(ECSlidingViewControllerTopViewPosition)position animated:(BOOL)animated onComplete:(void(^)())complete;
 - (CGRect)topViewCalculatedFrameForPosition:(ECSlidingViewControllerTopViewPosition)position;
 - (CGRect)underLeftViewCalculatedFrameForTopViewPosition:(ECSlidingViewControllerTopViewPosition)position;
 - (CGRect)underRightViewCalculatedFrameForTopViewPosition:(ECSlidingViewControllerTopViewPosition)position;
@@ -424,20 +425,20 @@
 }
 
 - (void)anchorTopViewToRightAnimated:(BOOL)animated onComplete:(void (^)())complete {
-    [self resetViewAnimated:animated toPosition:ECSlidingViewControllerTopViewPositionAnchoredRight onComplete:complete];
+    [self moveTopViewToPosition:ECSlidingViewControllerTopViewPositionAnchoredRight animated:animated onComplete:complete];
 }
 
 - (void)anchorTopViewToLeftAnimated:(BOOL)animated onComplete:(void (^)())complete {
-    [self resetViewAnimated:animated toPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft onComplete:complete];
+    [self moveTopViewToPosition:ECSlidingViewControllerTopViewPositionAnchoredLeft animated:animated onComplete:complete];
 }
 
 - (void)resetTopViewAnimated:(BOOL)animated onComplete:(void(^)())complete {
-    [self resetViewAnimated:animated toPosition:ECSlidingViewControllerTopViewPositionCentered onComplete:complete];
+    [self moveTopViewToPosition:ECSlidingViewControllerTopViewPositionCentered animated:animated onComplete:complete];
 }
 
 #pragma mark - Private
 
-- (void)resetViewAnimated:(BOOL)animated toPosition:(ECSlidingViewControllerTopViewPosition)position onComplete:(void(^)())complete {
+- (void)moveTopViewToPosition:(ECSlidingViewControllerTopViewPosition)position animated:(BOOL)animated onComplete:(void(^)())complete {
     self.isAnimated = animated;
     self.animationComplete = complete;
     [self.view endEditing:YES];
