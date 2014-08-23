@@ -2,7 +2,7 @@
 
 `ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu", "Slide Out", "Hamburger Menu/Drawer/Sidebar", etc...
 
-![iPhone and iPad Mini screenshots](http://github.com/ECSlidingViewController/ECSlidingViewController/wiki/readme-assets/readme-hero.png)
+![iPhone and iPad Mini screenshots](http://i.imgur.com/WBHYZUf.png)
 
 Supports all screen sizes and orientations.
 
@@ -41,7 +41,7 @@ Install with [CocoaPods](http://cocoapods.org) by adding the following to your P
 
 ``` ruby
 platform :ios, '7.0'
-pod 'ECSlidingViewController', '~> 2.0.2'
+pod 'ECSlidingViewController', '~> 2.0.3'
 ```
 
 **Note**: We follow http://semver.org for versioning the public API.
