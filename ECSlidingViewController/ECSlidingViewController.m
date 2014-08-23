@@ -235,7 +235,7 @@
 }
 
 - (id<UIViewControllerTransitionCoordinator>)transitionCoordinator {
-    if (!_transitionInProgress){
+    if (!self.transitionInProgress){
         return [super transitionCoordinator];
     }
     return self;
