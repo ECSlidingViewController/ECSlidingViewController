@@ -1,3 +1,5 @@
+Note:  This project is no longer maintained.
+
 # ECSlidingViewController 2
 
 `ECSlidingViewController` is a view controller container that manages a layered interface. The top layer anchors to the left or right side of the container while revealing the layer underneath it. This is most commonly known as the "Side Menu", "Slide Out", "Hamburger Menu/Drawer/Sidebar", etc...
